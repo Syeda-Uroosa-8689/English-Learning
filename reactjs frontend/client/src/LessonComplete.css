@@ -1,0 +1,296 @@
+/* ==========================================
+   LESSON COMPLETE POPUP
+========================================== */
+
+.lesson-complete-container {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background-image: url("./assets/chatbg.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+}
+
+
+/* ==========================================
+   DARK BLUR OVERLAY
+========================================== */
+
+.lesson-complete-container::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, .30);
+
+    backdrop-filter: blur(8px);
+
+}
+
+
+/* ==========================================
+   POPUP CARD
+========================================== */
+
+.lesson-complete-popup {
+
+    width: 1000px;
+
+    height: 480px;
+
+    background: #D8B48A;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    position: relative;
+
+    z-index: 2;
+
+    padding: 40px 70px;
+
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .30);
+
+    clip-path: polygon(
+
+        8% 0%,
+
+        92% 0%,
+
+        100% 18%,
+
+        100% 82%,
+
+        92% 100%,
+
+        8% 100%,
+
+        0% 82%,
+
+        0% 18%
+
+    );
+
+    transform: scale(.5);
+
+    opacity: 0;
+
+    transition: .5s ease;
+
+}
+
+
+/* ==========================================
+   SHOW POPUP
+========================================== */
+
+.lesson-complete-popup.show {
+
+    transform: scale(1);
+
+    opacity: 1;
+
+}
+
+
+/* ==========================================
+   ICON
+========================================== */
+
+.lesson-complete-icon {
+
+    font-size: 70px;
+
+    margin-bottom: 18px;
+
+    animation: lessonTrophyBounce .8s infinite alternate;
+
+}
+
+
+@keyframes lessonTrophyBounce {
+
+    from {
+
+        transform: translateY(0);
+
+    }
+
+    to {
+
+        transform: translateY(-8px);
+
+    }
+
+}
+
+
+/* ==========================================
+   MAIN TITLE
+========================================== */
+
+.lesson-complete-popup h1 {
+
+    margin: 0;
+
+    font-size: 56px;
+
+    font-weight: 800;
+
+    color: #5A3620;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* ==========================================
+   CONGRATULATIONS
+========================================== */
+
+.lesson-complete-popup h2 {
+
+    margin: 12px 0 0;
+
+    font-size: 30px;
+
+    font-weight: 800;
+
+    color: #7A4C2C;
+
+}
+
+
+/* ==========================================
+   DESCRIPTION
+========================================== */
+
+.lesson-complete-popup p {
+
+    margin: 22px 0 0;
+
+    max-width: 760px;
+
+    font-size: 24px;
+
+    line-height: 1.6;
+
+    color: #4D3523;
+
+    font-weight: 500;
+
+}
+
+
+/* ==========================================
+   SMALL SUCCESS MESSAGE
+========================================== */
+
+.lesson-complete-message {
+
+    margin-top: 20px;
+
+    padding: 10px 24px;
+
+    border-radius: 20px;
+
+    background: rgba(255, 248, 239, .65);
+
+    color: #6D472B;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+    .lesson-complete-popup {
+
+        width: 90%;
+
+        height: 360px;
+
+        padding: 30px;
+
+    }
+
+
+    .lesson-complete-icon {
+
+        font-size: 48px;
+
+        margin-bottom: 12px;
+
+    }
+
+
+    .lesson-complete-popup h1 {
+
+        font-size: 36px;
+
+        letter-spacing: 1px;
+
+    }
+
+
+    .lesson-complete-popup h2 {
+
+        font-size: 24px;
+
+    }
+
+
+    .lesson-complete-popup p {
+
+        font-size: 18px;
+
+        line-height: 1.5;
+
+        margin-top: 15px;
+
+    }
+
+
+    .lesson-complete-message {
+
+        font-size: 15px;
+
+        margin-top: 15px;
+
+        padding: 8px 15px;
+
+    }
+
+}
