@@ -1,36 +1,57 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 
 function ListenRepeatIntro({ onNext }) {
 
-  useEffect(() => {
+    const [show, setShow] = useState(false);
 
-    const timer = setTimeout(() => {
-      onNext();
-    }, 4000);
+    useEffect(() => {
 
-    return () => clearTimeout(timer);
+        // Popup enter animation
+        const enterTimer = setTimeout(() => {
+            setShow(true);
+        }, 100);
 
-  }, [onNext]);
+        // Popup exit
+        const exitTimer = setTimeout(() => {
 
-  return (
+            setShow(false);
 
-    <div className="listen-screen">
+            // Exit animation ke baad next page
+            setTimeout(() => {
+                onNext();
+            }, 500);
 
-      <div className="listen-card">
+        }, 4000);
 
-        <h1>
-          Listen & Repeat
-        </h1>
+        return () => {
+            clearTimeout(enterTimer);
+            clearTimeout(exitTimer);
+        };
 
-        
+    }, [onNext]);
 
-      </div>
+    return (
 
-    </div>
+        <div className="listen-intro-container">
 
-  );
+            <div
+                className={
+                    show
+                        ? "listen-intro-popup show"
+                        : "listen-intro-popup"
+                }
+            >
 
+                <h1>
+                    Listen &amp; Repeat
+                </h1>
+
+            </div>
+
+        </div>
+
+    );
 }
 
 export default ListenRepeatIntro;

@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
 import teacher from "./assets/teacher1.png";
 
-
-function ListenRepeatTeacherIntro({ onNext }) {
+function PracticeExerciseTeacherIntro({ onNext }) {
 
     const intros = [
+        "Wonderful! You did a great job in the Listen and Repeat activity. Now let's practice using restaurant sentences. You'll see a sentence with a missing word. Simply drag the correct word into the blank. Let's begin!",
 
-        "Hello! I'm your English teacher, Miss Uroosa. Today we'll practice Listen and Repeat together. We'll learn useful restaurant English sentences. Listen carefully and repeat after me. Are you ready to begin?",
+        "Excellent work! Now it's time for some practice. Read the waiter's question carefully, then drag the correct word to complete the sentence. Let's get started!",
 
-        "Hi! I'm Miss Uroosa. Today we'll practice some useful restaurant conversations. Listen carefully, repeat after me and improve your pronunciation. Let's get started!",
-
-        "Hello! Welcome back. I'm Miss Uroosa. Today we're going to learn common restaurant sentences that you'll use in real conversations. Listen first and then repeat after me."
-
+        "Amazing! Now we'll practice restaurant English. Complete each sentence by dragging the correct word into the blank. Ready? Let's begin!"
     ];
 
     const [randomIntro] = useState(
@@ -19,7 +16,6 @@ function ListenRepeatTeacherIntro({ onNext }) {
     );
 
     const [teacherText, setTeacherText] = useState("");
-
     const [isSpeaking, setIsSpeaking] = useState(false);
 
 
@@ -28,13 +24,12 @@ function ListenRepeatTeacherIntro({ onNext }) {
         window.speechSynthesis.cancel();
 
         setTeacherText("");
-
         setIsSpeaking(true);
 
 
-        /* ===============================
-           TEXT TYPING EFFECT
-        =============================== */
+        // =========================
+        // TYPING EFFECT
+        // =========================
 
         let index = 0;
 
@@ -55,26 +50,22 @@ function ListenRepeatTeacherIntro({ onNext }) {
         }, 35);
 
 
-        /* ===============================
-           TEACHER VOICE
-        =============================== */
+        // =========================
+        // TEACHER VOICE
+        // =========================
 
         const speech =
             new SpeechSynthesisUtterance(randomIntro);
 
         speech.rate = 0.9;
-
         speech.pitch = 1.05;
-
         speech.volume = 1;
 
 
         const voices =
             window.speechSynthesis.getVoices();
 
-
         speech.voice =
-
             voices.find(v =>
                 v.name.includes("Zira")
             ) ||
@@ -97,12 +88,6 @@ function ListenRepeatTeacherIntro({ onNext }) {
         speech.onend = () => {
 
             setIsSpeaking(false);
-
-
-            /*
-               Voice khatam hone ke baad
-               thoda wait
-            */
 
             setTimeout(() => {
 
@@ -129,24 +114,24 @@ function ListenRepeatTeacherIntro({ onNext }) {
 
     return (
 
-        <div className="listen-teacher-intro-container">
+        <div className="practice-teacher-intro-container">
 
-            <div className="listen-teacher-intro-card">
+            <div className="practice-teacher-intro-card">
 
 
                 {/* =========================
                     TEACHER
                 ========================= */}
 
-                <div className="listen-teacher-image-area">
+                <div className="practice-teacher-image-area">
 
                     <img
                         src={teacher}
                         alt="Miss Uroosa"
                         className={
                             isSpeaking
-                                ? "listen-teacher-image speaking"
-                                : "listen-teacher-image"
+                                ? "practice-teacher-image speaking"
+                                : "practice-teacher-image"
                         }
                     />
 
@@ -157,9 +142,9 @@ function ListenRepeatTeacherIntro({ onNext }) {
                     SPEECH BUBBLE
                 ========================= */}
 
-                <div className="listen-teacher-speech-bubble">
+                <div className="practice-teacher-speech-bubble">
 
-                    <div className="listen-teacher-name">
+                    <div className="practice-teacher-name">
 
                         Miss Uroosa 👩‍🏫
 
@@ -170,15 +155,16 @@ function ListenRepeatTeacherIntro({ onNext }) {
                         {teacherText}
 
                         {isSpeaking && (
-                            <span className="typing-dots">
+
+                            <span className="practice-typing-dots">
                                 ...
                             </span>
+
                         )}
 
                     </p>
 
                 </div>
-
 
             </div>
 
@@ -188,4 +174,4 @@ function ListenRepeatTeacherIntro({ onNext }) {
 
 }
 
-export default ListenRepeatTeacherIntro;
+export default PracticeExerciseTeacherIntro;

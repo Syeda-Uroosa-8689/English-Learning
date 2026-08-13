@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./LessonComplete.css";
-function LessonComplete({ onFinish }) {
+
+function LessonComplete({
+    onFinish,
+    lessonName = "Lesson"
+}) {
 
     const [show, setShow] = useState(false);
 
@@ -22,7 +26,9 @@ function LessonComplete({ onFinish }) {
             // Wait for exit animation
             setTimeout(() => {
 
-                onFinish();
+                if (onFinish) {
+                    onFinish();
+                }
 
             }, 500);
 
@@ -32,7 +38,6 @@ function LessonComplete({ onFinish }) {
         return () => {
 
             clearTimeout(enterTimer);
-
             clearTimeout(exitTimer);
 
         };
@@ -52,61 +57,54 @@ function LessonComplete({ onFinish }) {
                 }
             >
 
-                {/* ==================================
-                            ICON
-                ================================== */}
+                {/* ===============================
+                    ICON
+                =============================== */}
 
                 <div className="lesson-complete-icon">
-
                     🎉🏆
-
                 </div>
 
 
-                {/* ==================================
-                            TITLE
-                ================================== */}
+                {/* ===============================
+                    TITLE
+                =============================== */}
 
                 <h1>
-
                     Lesson Completed!
-
                 </h1>
 
 
-                {/* ==================================
-                            CONGRATULATIONS
-                ================================== */}
+                {/* ===============================
+                    CONGRATULATIONS
+                =============================== */}
 
                 <h2>
-
                     Congratulations! 🌟
-
                 </h2>
 
 
-                {/* ==================================
-                            MESSAGE
-                ================================== */}
+                {/* ===============================
+                    MESSAGE
+                =============================== */}
 
                 <p>
-
                     Amazing work!
+                    <br />
                     You have successfully completed
-                    the Restaurant Conversation lesson.
-
+                    the {lessonName} lesson.
                 </p>
 
 
-                {/* ==================================
-                            SMALL MESSAGE
-                ================================== */}
+                {/* ===============================
+                    SMALL MESSAGE
+                =============================== */}
 
                 <div className="lesson-complete-message">
 
-                    🍽️ Great job!
-                    You are now ready to use
-                    restaurant conversations in English.
+                    🌟 Great job!
+                    <br />
+                    You are ready for the next lesson.
 
                 </div>
 

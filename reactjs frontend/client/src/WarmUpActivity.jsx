@@ -365,7 +365,7 @@ function WarmUpActivity({
 
                     >
 
-                        {loading ? "..." : "🎤"}
+                        {loading ? "..." : "🎙️"}
 
                     </button>
 

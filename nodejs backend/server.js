@@ -10,103 +10,294 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-/* ===================================
-   MongoDB Connection
-=================================== */
-/*
-mongoose
-  .connect(
-    "mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/myLearningApp"
-  )
-  .then(() => console.log("✅ MongoDB Connected"))
-  .catch((err) => console.log(err));
-*/
+/* =========================================================
+   MONGODB CONNECTION
+========================================================= */
 
-/* ===================================
-   Models
-=================================== */
+if (process.env.MONGODB_URI) {
+  mongoose
+    .connect(process.env.MONGODB_URI)
+    .then(() => {
+      console.log("=================================");
+      console.log("✅ MongoDB Connected Successfully");
+      console.log("=================================");
+    })
+    .catch((err) => {
+      console.log("❌ MongoDB Connection Error:", err.message);
+    });
+} else {
+  console.log(
+    "⚠️ MONGODB_URI not found. MongoDB features are disabled."
+  );
+}
+
+/* =========================================================
+   MONGODB CONNECTION STATUS HELPER
+========================================================= */
+
+function isMongoConnected() {
+  return mongoose.connection.readyState === 1;
+}
+
+/* =========================================================
+   EXISTING CONVERSATION MODEL
+========================================================= */
 
 const ConversationSchema = new mongoose.Schema({
+  user_name: {
+    type: String,
+    default: "Student",
+  },
 
-  user_name: String,
+  topic_id: {
+    type: Number,
+  },
 
-  topic_id: Number,
+  lesson_id: {
+    type: Number,
+  },
 
-  lesson_id: Number,
+  user_message: {
+    type: String,
+  },
 
-  user_message: String,
+  ai_response: {
+    type: String,
+  },
 
-  ai_response: String,
-
-  activity: String,
+  activity: {
+    type: String,
+    default: "normal",
+  },
 
   created_at: {
-
     type: Date,
-
-    default: Date.now
-
-  }
-
+    default: Date.now,
+  },
 });
 
 const Conversation = mongoose.model(
-
   "Conversation",
-
   ConversationSchema
-
 );
 
-/* ===================================
-   Groq
-=================================== */
+/* =========================================================
+   FINAL CHALLENGE ANSWER SCHEMA
+========================================================= */
 
-const groq = new Groq({
-    apiKey: process.env.GROQ_API_KEY
+const FinalChallengeAnswerSchema = new mongoose.Schema(
+  {
+    question_id: {
+      type: Number,
+      required: true,
+    },
+
+    question: {
+      type: String,
+      required: true,
+    },
+
+    user_answer: {
+      type: String,
+      default: "",
+    },
+
+    marks: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+
+    max_marks: {
+      type: Number,
+      default: 5,
+      min: 0,
+    },
+
+    grammar_correct: {
+      type: Boolean,
+      default: true,
+    },
+
+    answer_correct: {
+      type: Boolean,
+      default: false,
+    },
+
+    mistake: {
+      type: String,
+      default: "",
+    },
+
+    correction: {
+      type: String,
+      default: "",
+    },
+
+    urdu_explanation: {
+      type: String,
+      default: "",
+    },
+
+    feedback: {
+      type: String,
+      default: "",
+    },
+
+    /* Store all mistakes also */
+    mistakes: {
+      type: [
+        {
+          mistake: {
+            type: String,
+            default: "",
+          },
+
+          correction: {
+            type: String,
+            default: "",
+          },
+
+          urduExplanation: {
+            type: String,
+            default: "",
+          },
+        },
+      ],
+      default: [],
+    },
+  },
+  {
+    _id: false,
+  }
+);
+
+/* =========================================================
+   FINAL CHALLENGE RESULT SCHEMA
+========================================================= */
+
+const FinalChallengeResultSchema = new mongoose.Schema({
+  user_name: {
+    type: String,
+    default: "Student",
+  },
+
+  topic_id: {
+    type: Number,
+    default: 3,
+  },
+
+  lesson_id: {
+    type: Number,
+    default: 4,
+  },
+
+  /* FINAL CHALLENGE = 25 MARKS */
+  total_marks: {
+    type: Number,
+    default: 25,
+  },
+
+  obtained_marks: {
+    type: Number,
+    default: 0,
+  },
+
+  percentage: {
+    type: Number,
+    default: 0,
+  },
+
+  grade: {
+    type: String,
+    default: "",
+  },
+
+  answers: {
+    type: [FinalChallengeAnswerSchema],
+    default: [],
+  },
+
+  grammar_mistakes: {
+    type: [
+      {
+        question_id: {
+          type: Number,
+        },
+
+        mistake: {
+          type: String,
+          default: "",
+        },
+
+        correction: {
+          type: String,
+          default: "",
+        },
+
+        urdu_explanation: {
+          type: String,
+          default: "",
+        },
+      },
+    ],
+    default: [],
+  },
+
+  created_at: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-/* ===================================
-   Topic Prompt
-=================================== */
+const FinalChallengeResult = mongoose.model(
+  "FinalChallengeResult",
+  FinalChallengeResultSchema
+);
+
+/* =========================================================
+   GROQ
+========================================================= */
+
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY,
+});
+
+/* =========================================================
+   TOPIC PROMPTS
+========================================================= */
 
 const TOPIC_PROMPTS = {
-
   1: {
     title: "My Favourite Things",
-
     prompt:
-      "Teach primary school children to talk about favourite things."
+      "Teach primary school children to talk about favourite things.",
   },
 
   2: {
     title: "All About My Partner",
-
     prompt:
-      "Teach children to describe their friends."
+      "Teach children to describe their friends.",
   },
 
   3: {
     title: "Let's Order",
-
     prompt:
-      "Teach restaurant English. Focus on food vocabulary, likes, dislikes, ordering food and restaurant conversations."
+      "Teach restaurant English. Focus on food vocabulary, likes, dislikes, ordering food and restaurant conversations.",
   },
 
   4: {
     title: "On My Calendar",
-
     prompt:
-      "Teach days, months, routines and calendar."
-  }
-
+      "Teach days, months, routines and calendar.",
+  },
 };
 
-/* ===================================
-   Normal Conversation Teacher
-=================================== */
-function createTeacherPrompt(topicId) {
+/* =========================================================
+   NORMAL CONVERSATION TEACHER
+========================================================= */
 
+function createTeacherPrompt(topicId) {
   const topic =
     TOPIC_PROMPTS[topicId] || TOPIC_PROMPTS[1];
 
@@ -179,10 +370,6 @@ or
 
 6. If vocabulary is wrong, explain the word meaning in Roman English.
 
-Example:
-
-"Healthy ka matlab hai body ke liye achha aur hume strong rakhne wala."
-
 7. If pronunciation is wrong, explain the pronunciation simply.
 
 8. ALWAYS ask the student to repeat ONLY the corrected sentence.
@@ -248,6 +435,7 @@ The student is speaking through a microphone.
 Treat every student response as part of a real conversation.
 
 If the student makes a mistake:
+
 1. Appreciate.
 2. Correct.
 3. Explain the mistake in Roman English.
@@ -255,68 +443,13 @@ If the student makes a mistake:
 5. Do NOT immediately move to another topic.
 
 If the student's sentence is correct:
+
 1. Say "Excellent!"
 2. Respond naturally.
 3. Ask ONE short follow-up question.
 
 Do NOT always say "Better sentence".
 Make the conversation sound natural.
-
-==================================================
-EXAMPLE
-==================================================
-
-Student:
-"I like pizza very."
-
-Teacher:
-
-"Good try! Tumne bola: I like pizza very.
-
-Sahi sentence hai:
-I like pizza very much.
-
-Explanation:
-Yahan "very" ke baad "much" lagta hai jab hum kisi cheez ko bahut pasand karne ki baat karte hain.
-
-Ab bolo:
-I like pizza very much."
-
-==================================================
-ANOTHER EXAMPLE
-==================================================
-
-Student:
-"I see a pizza."
-
-Teacher:
-
-"Good try!
-
-Picture describe karte waqt hum bol sakte hain:
-I can see a pizza.
-
-Explanation:
-Picture me jo cheez hum dekh rahe hain uske liye "I can see" natural sentence hai.
-
-Ab bolo:
-I can see a pizza."
-
-==================================================
-NEVER DO THIS
-==================================================
-
-Do NOT say:
-
-"Your grammar is incorrect because..."
-
-Do NOT give a long English grammar lesson.
-
-Do NOT explain mistakes completely in English.
-
-Do NOT use Hindi/Urdu script.
-
-Do NOT ask a new unrelated question after correcting the student.
 
 ==================================================
 FINAL RULE
@@ -333,12 +466,14 @@ Every grammar correction MUST contain:
 `;
 }
 
-/* ===================================
-   Picture Description Prompt
-=================================== */
+/* =========================================================
+   PICTURE DESCRIPTION PROMPT
+========================================================= */
 
-function createPicturePrompt(currentQuestion, pictureName) {
-
+function createPicturePrompt(
+  currentQuestion,
+  pictureName
+) {
   return `
 
 You are Miss Uroosa.
@@ -346,19 +481,13 @@ You are Miss Uroosa.
 You are a friendly English teacher helping a primary school student.
 
 ACTIVITY:
-
 Picture Description
 
-
 CURRENT PICTURE:
-
 ${pictureName}
 
-
 CURRENT TEACHER QUESTION:
-
 ${currentQuestion}
-
 
 IMPORTANT:
 
@@ -366,35 +495,21 @@ The student is currently looking at ONLY this picture.
 
 The conversation must stay connected to this picture and the current question.
 
-
 STRICT RULES:
 
 1. Talk ONLY about the current picture.
-
 2. Respond ONLY to the student's answer to the current teacher question.
-
 3. NEVER start a completely new topic.
-
-4. NEVER ask about the student's favourite food.
-
-5. NEVER ask about the student's favourite colour.
-
+4. NEVER ask about favourite food.
+5. NEVER ask about favourite colour.
 6. NEVER ask about hobbies.
-
 7. NEVER ask about family.
-
 8. NEVER ask about school.
-
 9. NEVER ask about pets.
-
 10. NEVER ask unrelated personal questions.
-
 11. Do not turn the conversation into a general chat.
-
 12. Keep the discussion short and natural.
-
 13. Maximum 60 words.
-
 
 GRAMMAR CORRECTION:
 
@@ -402,47 +517,23 @@ If the student's English has a mistake:
 
 First appreciate the student's effort.
 
-Example:
-
-"Good try!"
-
-
 Then give ONE corrected sentence.
 
-
 Then explain the mistake in very simple Roman English.
-
-Example:
-
-Tumne bola:
-"I see pizza."
-
-Better sentence:
-"I can see a pizza."
-
-Explanation:
-Picture describe karte waqt hum "I can see" bol sakte hain.
-
 
 IMPORTANT:
 
 All explanations MUST be in Roman English only.
 
 NEVER use Hindi script.
-
 NEVER use Devanagari.
-
-Do not use Urdu script.
-
-Use simple Roman English that a primary school child can understand.
-
+NEVER use Urdu script.
 
 REPEAT RULE:
 
 After correcting the student:
 
 Ask the student to repeat ONLY the corrected sentence.
-
 
 UNRELATED ANSWER:
 
@@ -452,16 +543,7 @@ Say:
 
 "Let's talk only about this picture."
 
-
-Then briefly guide the student back to the current picture.
-
-
-If the student continues saying unrelated things:
-
-Say:
-
-"I couldn't understand. Please describe only what you can see in this picture."
-
+Then guide the student back to the current picture.
 
 QUESTION RULE:
 
@@ -471,82 +553,32 @@ NEVER ask a different topic-related question.
 
 NEVER answer the teacher's own question.
 
-The frontend will provide the next teacher question.
+The frontend will provide the next question.
 
+The picture activity has a fixed sequence.
 
-CONVERSATION RULE:
-
-The student may give a short answer.
-
-You may briefly respond naturally about the picture.
-
-You may correct the student's English.
-
-You may encourage the student.
-
-But DO NOT let the conversation become a long discussion.
-
-
-IMPORTANT:
-
-The picture activity has a fixed sequence of questions.
-
-Do NOT change the question sequence.
-
+Do NOT change the sequence.
 Do NOT skip the current question.
-
 Do NOT create additional questions.
 
-Wait for the frontend to provide the next question.
-
-
-EXAMPLE:
-
-Teacher:
-"What can you see in this picture?"
-
-
-Student:
-"I see pizza."
-
-
-Teacher:
-"Good try! A better sentence is: 'I can see a pizza.'
-
-Picture describe karte waqt hum 'I can see' use kar sakte hain.
-
-Please repeat:
-'I can see a pizza.'"
-
-
-FINAL RULE:
-
-Stay focused on the current picture.
-
-Stay focused on the current question.
-
-Keep the conversation short.
-
-Use Roman English for explanations only.
-
 `;
-
 }
 
-/* ===================================
-   Restaurant AI Waiter Prompt
-=================================== */
+/* =========================================================
+   RESTAURANT AI WAITER PROMPT
+========================================================= */
 
 function createRestaurantPrompt() {
-
-return `
+  return `
 
 You are Alex, a friendly AI waiter.
 
 You are inside a restaurant.
 
 IMPORTANT:
+
 You are NOT an English teacher.
+
 You are a waiter having a natural restaurant conversation
 with a primary school student.
 
@@ -554,7 +586,7 @@ STRICT RULES:
 
 1. Stay ONLY inside the restaurant conversation.
 
-2. Allowed topics are ONLY:
+2. Allowed topics:
 
 - greeting
 - table
@@ -587,33 +619,24 @@ STRICT RULES:
 
 6. Do NOT start a new topic.
 
-7. If the student says something unrelated to the restaurant, say:
+7. If the student says something unrelated:
 
 "Let's continue our restaurant conversation."
-
-Then continue with the previous restaurant question.
 
 8. If the student's English has a grammar mistake:
 
 First appreciate naturally.
 
-Example:
-
-"Good try!"
-
 Then give ONE better sentence.
 
 9. Explain the mistake ONLY in simple Roman English.
-
-Example:
-
-"Yahan 'a' use karna better hai kyunki hum ek food item ki baat kar rahe hain."
 
 10. NEVER use Hindi script.
 
 11. NEVER give a long grammar explanation.
 
-12. If the student's sentence is already correct, simply respond naturally like a real waiter.
+12. If the student's sentence is already correct,
+simply respond naturally like a real waiter.
 
 13. Do NOT behave like a classroom English teacher.
 
@@ -623,284 +646,1293 @@ Example:
 
 16. Never answer your own question.
 
-17. Continue the restaurant conversation naturally based on the student's answer.
+17. Continue the restaurant conversation naturally.
 
 18. When the customer's order is completely finished, say exactly:
 
 "Thank you for visiting our restaurant. Your order is complete."
 
 `;
-
 }
 
+/* =========================================================
+   FINAL CHALLENGE PROMPT
+========================================================= */
 
+function createFinalChallengePrompt() {
+  return `
 
-/* ===================================
-   Chat API
-=================================== */
+You are an English assessment evaluator for a primary school English learning application.
 
-app.post("/api/chat", async (req, res) => {
+The student is completing the FINAL CHALLENGE of Topic 3:
+"Let's Order".
 
-  try {
+The student has already learned:
 
-    const {
+1. Describing Foods We Like And Don't Like
+2. Restaurant Conversations
+3. Describing Food & Giving Feedback
 
-      message,
-      history,
-      topicId,
-      lessonId,
-      userName,
-      activity,
-      pictureName,
-      currentQuestion
+==================================================
+ASSESSMENT
+==================================================
 
-    } = req.body;
+Evaluate ONLY the student's current answer.
 
+Do NOT behave like a normal conversation teacher.
 
-    /* ===================================
-       Empty Message Check
-    =================================== */
+Do NOT ask another question.
 
-    if (!message || message.trim() === "") {
+Do NOT continue the conversation.
 
-      return res.json({
+Evaluate:
 
-        response: "Please say something."
+- Answer relevance
+- Grammar
+- Sentence structure
+- Vocabulary
+- Restaurant communication
+- Food description
+- Giving reasons
+- Politeness when appropriate
 
-      });
+==================================================
+SCORING
+==================================================
 
+The frontend sends the maximum marks for each question.
+
+Give a score from 0 to the provided maximum.
+
+IMPORTANT:
+
+Never give more marks than the question maximum.
+
+A completely correct and complete answer:
+Give full marks.
+
+Correct meaning with small grammar mistakes:
+Give partial marks.
+
+Short but relevant answer:
+Give reasonable partial marks.
+
+Unclear answer:
+Give low marks.
+
+Completely unrelated answer:
+Give 0 marks.
+
+Do NOT invent requirements that are not present in the question.
+
+==================================================
+GRAMMAR
+==================================================
+
+Check:
+
+- subject and verb agreement
+- articles
+- singular/plural
+- verb tense
+- word order
+- prepositions
+- sentence structure
+- incorrect word usage
+
+==================================================
+ROMAN ENGLISH
+==================================================
+
+All grammar explanations MUST be in Roman English.
+
+NEVER use:
+
+- Urdu script
+- Hindi script
+- Devanagari
+
+Example:
+
+Mistake:
+"I like pizza because it is taste good."
+
+Correction:
+"I like pizza because it tastes good."
+
+Explanation:
+"Yahan 'it is taste' nahi bolte. Food ka taste batane ke liye 'it tastes good' bolna sahi hai."
+
+==================================================
+OUTPUT
+==================================================
+
+Return ONLY valid JSON.
+
+Do NOT use markdown.
+
+Use exactly:
+
+{
+  "marks": 5,
+  "maxMarks": 5,
+  "answerCorrect": true,
+  "grammarCorrect": true,
+  "mistakes": [],
+  "correction": "",
+  "feedback": "Excellent work!"
+}
+
+If there is a mistake:
+
+{
+  "marks": 4,
+  "maxMarks": 5,
+  "answerCorrect": true,
+  "grammarCorrect": false,
+  "mistakes": [
+    {
+      "mistake": "it is taste good",
+      "correction": "it tastes good",
+      "urduExplanation": "Yahan food ka taste batane ke liye 'it tastes good' bolna sahi hai."
     }
+  ],
+  "correction": "I like pizza because it tastes good.",
+  "feedback": "Good try! Your idea is clear, but there is a small grammar mistake."
+}
 
+IMPORTANT:
 
-    /* ===================================
-       Select Correct AI Prompt
-    =================================== */
+Do not invent mistakes.
 
-    let systemPrompt;
+If answer is correct:
 
+"mistakes": []
 
-    /*
-       Picture Description Activity
-    */
+"correction": ""
 
-    if (activity === "picture") {
+"answerCorrect": true
 
-      systemPrompt = createPicturePrompt(
+"grammarCorrect": true
 
-        currentQuestion,
-        pictureName
+`;
+}
 
-      );
+/* =========================================================
+   FINAL CHALLENGE - CHECK ANSWER
+========================================================= */
 
-    }
+app.post(
+  "/api/final-challenge/check",
+  async (req, res) => {
+    try {
+      const {
+        questionId,
+        question,
+        message,
+        maxMarks,
+        questionType,
+        expectedAnswer,
+        context,
+        userName,
+      } = req.body;
 
+      /* ---------------------------------------------
+         VALIDATION
+      --------------------------------------------- */
 
-    /*
-       Restaurant AI Activity
-    */
-
-    else if (activity === "restaurant-ai") {
-
-      systemPrompt = createRestaurantPrompt();
-
-    }
-
-
-    /*
-       Normal English Learning Activity
-    */
-
-    else {
-
-      systemPrompt = createTeacherPrompt(topicId);
-
-    }
-
-
-    /* ===================================
-       Build Conversation Messages
-    =================================== */
-
-    const messages = [
-
-      {
-
-        role: "system",
-
-        content: systemPrompt
-
+      if (
+        !question ||
+        !String(question).trim()
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "Question is required.",
+        });
       }
 
-    ];
+      if (
+        !message ||
+        !String(message).trim()
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Student answer is required.",
+        });
+      }
 
+      /* ---------------------------------------------
+         QUESTION MAX MARKS
 
-    /* ===================================
-       Add Previous Conversation
-    =================================== */
+         Frontend should send:
+         5, 5, 5, 5, 5
 
-    if (history && Array.isArray(history)) {
+         Total = 25
+      --------------------------------------------- */
 
-      history
-        .slice(-6)
-        .forEach((chat) => {
+      const marksLimit =
+        Number(maxMarks) > 0
+          ? Number(maxMarks)
+          : 5;
 
-          messages.push({
+      /* ---------------------------------------------
+         PROMPT
+      --------------------------------------------- */
 
-            role:
-              chat.sender === "user"
-                ? "user"
-                : "assistant",
+      const systemPrompt =
+        createFinalChallengePrompt();
 
-            content: chat.text
+      const assessmentPrompt = `
 
-          });
+QUESTION:
 
+${question}
+
+QUESTION ID:
+
+${questionId ?? ""}
+
+QUESTION TYPE:
+
+${questionType || "speaking"}
+
+EXPECTED ANSWER / GUIDANCE:
+
+${
+  expectedAnswer ||
+  "Evaluate the answer based on the question."
+}
+
+ADDITIONAL CONTEXT:
+
+${
+  context ||
+  "Topic 3 restaurant English assessment."
+}
+
+STUDENT NAME:
+
+${userName || "Student"}
+
+MAXIMUM MARKS FOR THIS QUESTION:
+
+${marksLimit}
+
+STUDENT ANSWER:
+
+${message}
+
+IMPORTANT:
+
+The maximum possible score for this question is ${marksLimit}.
+
+Never give more than ${marksLimit}.
+
+Evaluate now.
+
+Return ONLY valid JSON.
+
+`;
+
+      /* ---------------------------------------------
+         GROQ
+      --------------------------------------------- */
+
+      const completion =
+        await groq.chat.completions.create({
+          model:
+            "llama-3.3-70b-versatile",
+
+          messages: [
+            {
+              role: "system",
+              content: systemPrompt,
+            },
+
+            {
+              role: "user",
+              content: assessmentPrompt,
+            },
+          ],
+
+          temperature: 0.1,
+
+          max_tokens: 600,
         });
 
+      let aiReply =
+        completion
+          ?.choices?.[0]
+          ?.message
+          ?.content
+          ?.trim();
+
+      if (!aiReply) {
+        return res.status(500).json({
+          success: false,
+          message:
+            "AI did not return an evaluation.",
+        });
+      }
+
+      /* ---------------------------------------------
+         REMOVE MARKDOWN JSON
+      --------------------------------------------- */
+
+      aiReply = aiReply
+        .replace(/^```json\s*/i, "")
+        .replace(/^```\s*/i, "")
+        .replace(/\s*```$/i, "")
+        .trim();
+
+      /* ---------------------------------------------
+         PARSE JSON
+      --------------------------------------------- */
+
+      let evaluation;
+
+      try {
+        evaluation = JSON.parse(aiReply);
+      } catch (jsonError) {
+        console.log(
+          "❌ Final Challenge JSON Error:",
+          jsonError
+        );
+
+        console.log(
+          "AI Reply:",
+          aiReply
+        );
+
+        return res.status(500).json({
+          success: false,
+          message:
+            "AI evaluation format error.",
+        });
+      }
+
+      /* ---------------------------------------------
+         SAFE MARKS
+      --------------------------------------------- */
+
+      let marks =
+        Number(evaluation.marks);
+
+      if (Number.isNaN(marks)) {
+        marks = 0;
+      }
+
+      marks = Math.max(
+        0,
+        Math.min(
+          marks,
+          marksLimit
+        )
+      );
+
+      /* ---------------------------------------------
+         SAFE MISTAKES
+      --------------------------------------------- */
+
+      const mistakes =
+        Array.isArray(
+          evaluation.mistakes
+        )
+          ? evaluation.mistakes
+              .map((item) => ({
+                mistake:
+                  item?.mistake || "",
+
+                correction:
+                  item?.correction || "",
+
+                urduExplanation:
+                  item?.urduExplanation || "",
+              }))
+              .filter(
+                (item) =>
+                  item.mistake ||
+                  item.correction ||
+                  item.urduExplanation
+              )
+          : [];
+
+      /* ---------------------------------------------
+         GRAMMAR CORRECT
+      --------------------------------------------- */
+
+      const grammarCorrect =
+        mistakes.length === 0
+          ? true
+          : Boolean(
+              evaluation.grammarCorrect
+            );
+
+      /* ---------------------------------------------
+         ANSWER CORRECT
+      --------------------------------------------- */
+
+      const answerCorrect =
+        Boolean(
+          evaluation.answerCorrect
+        );
+
+      /* ---------------------------------------------
+         RESPONSE
+      --------------------------------------------- */
+
+      return res.json({
+        success: true,
+
+        questionId:
+          questionId ?? null,
+
+        marks,
+
+        maxMarks:
+          marksLimit,
+
+        answerCorrect,
+
+        grammarCorrect,
+
+        mistakes,
+
+        correction:
+          evaluation.correction || "",
+
+        feedback:
+          evaluation.feedback ||
+          "",
+
+        userAnswer:
+          String(message),
+      });
+    } catch (err) {
+      console.log(
+        "❌ Final Challenge Check Error:",
+        err
+      );
+
+      return res.status(500).json({
+        success: false,
+        message:
+          "Unable to evaluate the answer right now.",
+      });
     }
+  }
+);
 
+/* =========================================================
+   SAVE FINAL CHALLENGE RESULT
+========================================================= */
 
-    /* ===================================
-       Current Student Message
-    =================================== */
+app.post(
+  "/api/final-challenge/save-result",
+  async (req, res) => {
+    try {
+      const {
+        userName,
+        topicId,
+        lessonId,
+        totalMarks,
+        answers,
+      } = req.body;
 
-    messages.push({
+      /* ---------------------------------------------
+         MONGODB CHECK
+      --------------------------------------------- */
 
-      role: "user",
+      if (!isMongoConnected()) {
+        return res.status(503).json({
+          success: false,
+          message:
+            "MongoDB is not connected.",
+        });
+      }
 
-      content: message
+      /* ---------------------------------------------
+         ANSWERS VALIDATION
+      --------------------------------------------- */
 
-    });
+      if (
+        !Array.isArray(answers) ||
+        answers.length === 0
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Final Challenge answers are required.",
+        });
+      }
 
+      /* ---------------------------------------------
+         TOTAL MAXIMUM MARKS
 
-    /* ===================================
-       Groq Request
-    =================================== */
+         If frontend sends totalMarks,
+         use it.
 
-    const completion =
-      await groq.chat.completions.create({
+         Otherwise calculate from questions.
 
-        model: "llama-3.3-70b-versatile",
+         For your current challenge:
+         5 + 5 + 5 + 5 + 5 = 25
+      --------------------------------------------- */
 
-        messages,
+      let calculatedTotalMarks =
+        Number(totalMarks);
 
-        temperature: 0.5,
+      if (
+        !calculatedTotalMarks ||
+        calculatedTotalMarks <= 0
+      ) {
+        calculatedTotalMarks =
+          answers.reduce(
+            (total, answer) => {
+              const max =
+                Number(
+                  answer.max_marks
+                ) || 0;
 
-        max_tokens: 150
+              return total + max;
+            },
+            0
+          );
+      }
 
+      /* ---------------------------------------------
+         SAFETY DEFAULT
+
+         FINAL CHALLENGE = 25 MARKS
+      --------------------------------------------- */
+
+      if (
+        calculatedTotalMarks <= 0
+      ) {
+        calculatedTotalMarks = 25;
+      }
+
+      /* ---------------------------------------------
+         OBTAINED MARKS
+      --------------------------------------------- */
+
+      let obtainedMarks = 0;
+
+      answers.forEach((answer) => {
+        const questionMax =
+          Number(
+            answer.max_marks
+          ) || 0;
+
+        let questionMarks =
+          Number(answer.marks);
+
+        if (
+          Number.isNaN(questionMarks)
+        ) {
+          questionMarks = 0;
+        }
+
+        /* Never allow negative */
+        questionMarks = Math.max(
+          0,
+          questionMarks
+        );
+
+        /* Never allow more than question max */
+        questionMarks = Math.min(
+          questionMarks,
+          questionMax
+        );
+
+        obtainedMarks +=
+          questionMarks;
       });
 
+      /* ---------------------------------------------
+         SAFETY: NEVER EXCEED TOTAL
+      --------------------------------------------- */
 
-    /* ===================================
-       AI Response
-    =================================== */
+      obtainedMarks = Math.min(
+        obtainedMarks,
+        calculatedTotalMarks
+      );
 
-    const aiReply =
+      /* ---------------------------------------------
+         PERCENTAGE
+      --------------------------------------------- */
 
-      completion
-        ?.choices
-        ?.[0]
-        ?.message
-        ?.content
-        ?.trim()
+      const percentage =
+        calculatedTotalMarks > 0
+          ? Number(
+              (
+                (obtainedMarks /
+                  calculatedTotalMarks) *
+                100
+              ).toFixed(2)
+            )
+          : 0;
 
-      ||
+      /* ---------------------------------------------
+         GRADE
+      --------------------------------------------- */
 
-      "Sorry, I couldn't understand. Please try again.";
+      let grade = "";
 
+      if (percentage >= 90) {
+        grade = "Excellent";
+      } else if (percentage >= 80) {
+        grade = "Very Good";
+      } else if (percentage >= 70) {
+        grade = "Good";
+      } else if (percentage >= 60) {
+        grade = "Keep Practicing";
+      } else {
+        grade = "Needs Improvement";
+      }
 
-    /* ===================================
-       Save Conversation
-       Enable when MongoDB is ready
-    =================================== */
+      /* ---------------------------------------------
+         GRAMMAR MISTAKES
+      --------------------------------------------- */
 
-    /*
-    await Conversation.create({
+      const grammarMistakes = [];
 
-      user_name: userName || "Student",
+      answers.forEach((answer) => {
+        const questionId =
+          Number(
+            answer.question_id
+          ) || 0;
 
-      topic_id: topicId,
+        /* New mistakes array */
+        if (
+          Array.isArray(
+            answer.mistakes
+          )
+        ) {
+          answer.mistakes.forEach(
+            (mistake) => {
+              if (
+                mistake &&
+                (
+                  mistake.mistake ||
+                  mistake.correction ||
+                  mistake.urduExplanation
+                )
+              ) {
+                grammarMistakes.push({
+                  question_id:
+                    questionId,
 
-      lesson_id: lessonId,
+                  mistake:
+                    mistake.mistake ||
+                    "",
 
-      activity: activity || "normal",
+                  correction:
+                    mistake.correction ||
+                    "",
 
-      user_message: message,
+                  urdu_explanation:
+                    mistake.urduExplanation ||
+                    "",
+                });
+              }
+            }
+          );
+        }
 
-      ai_response: aiReply
+        /* Also support old single mistake format */
+        if (
+          answer.mistake &&
+          !Array.isArray(
+            answer.mistakes
+          )
+        ) {
+          grammarMistakes.push({
+            question_id:
+              questionId,
 
-    });
-    */
+            mistake:
+              answer.mistake,
 
+            correction:
+              answer.correction ||
+              "",
 
-    /* ===================================
-       Send Response
-    =================================== */
+            urdu_explanation:
+              answer.urdu_explanation ||
+              "",
+          });
+        }
+      });
 
-    res.json({
+      /* ---------------------------------------------
+         PREPARE ANSWER DATA
+      --------------------------------------------- */
 
-      response: aiReply
+      const answerData =
+        answers.map((answer) => {
+          const maxMarks =
+            Number(
+              answer.max_marks
+            ) || 0;
 
-    });
+          let marks =
+            Number(answer.marks);
 
+          if (
+            Number.isNaN(marks)
+          ) {
+            marks = 0;
+          }
+
+          marks = Math.max(
+            0,
+            Math.min(
+              marks,
+              maxMarks
+            )
+          );
+
+          const mistakes =
+            Array.isArray(
+              answer.mistakes
+            )
+              ? answer.mistakes.map(
+                  (mistake) => ({
+                    mistake:
+                      mistake?.mistake ||
+                      "",
+
+                    correction:
+                      mistake?.correction ||
+                      "",
+
+                    urduExplanation:
+                      mistake?.urduExplanation ||
+                      "",
+                  })
+                )
+              : [];
+
+          return {
+            question_id:
+              Number(
+                answer.question_id
+              ) || 0,
+
+            question:
+              answer.question || "",
+
+            user_answer:
+              answer.user_answer || "",
+
+            marks,
+
+            max_marks:
+              maxMarks,
+
+            grammar_correct:
+              answer.grammar_correct !==
+              false,
+
+            answer_correct:
+              answer.answer_correct ===
+              true,
+
+            mistake:
+              answer.mistake || "",
+
+            correction:
+              answer.correction || "",
+
+            urdu_explanation:
+              answer.urdu_explanation ||
+              "",
+
+            feedback:
+              answer.feedback || "",
+
+            mistakes,
+          };
+        });
+
+      /* ---------------------------------------------
+         SAVE TO MONGODB
+      --------------------------------------------- */
+
+      const result =
+        await FinalChallengeResult.create({
+          user_name:
+            userName || "Student",
+
+          topic_id:
+            Number(topicId) || 3,
+
+          lesson_id:
+            Number(lessonId) || 4,
+
+          total_marks:
+            calculatedTotalMarks,
+
+          obtained_marks:
+            obtainedMarks,
+
+          percentage,
+
+          grade,
+
+          answers:
+            answerData,
+
+          grammar_mistakes:
+            grammarMistakes,
+        });
+
+      console.log(
+        "================================="
+      );
+
+      console.log(
+        "✅ FINAL CHALLENGE SAVED TO MONGODB"
+      );
+
+      console.log(
+        "Result ID:",
+        result._id.toString()
+      );
+
+      console.log(
+        "Student:",
+        userName || "Student"
+      );
+
+      console.log(
+        "Marks:",
+        `${obtainedMarks}/${calculatedTotalMarks}`
+      );
+
+      console.log(
+        "Percentage:",
+        `${percentage}%`
+      );
+
+      console.log(
+        "Grade:",
+        grade
+      );
+
+      console.log(
+        "================================="
+      );
+
+      /* ---------------------------------------------
+         RESPONSE
+      --------------------------------------------- */
+
+      return res.json({
+        success: true,
+
+        resultId:
+          result._id,
+
+        totalMarks:
+          calculatedTotalMarks,
+
+        obtainedMarks,
+
+        percentage,
+
+        grade,
+
+        grammarMistakes,
+
+        message:
+          "Final Challenge result saved successfully.",
+      });
+    } catch (err) {
+      console.log(
+        "❌ Final Challenge Save Error:",
+        err
+      );
+
+      return res.status(500).json({
+        success: false,
+        message:
+          "Unable to save final challenge result.",
+      });
+    }
   }
+);
 
-  catch (err) {
+/* =========================================================
+   GET FINAL CHALLENGE RESULT BY ID
+========================================================= */
 
-    console.log("❌ Chat API Error:", err);
+app.get(
+  "/api/final-challenge/result/:id",
+  async (req, res) => {
+    try {
+      if (!isMongoConnected()) {
+        return res.status(503).json({
+          success: false,
+          message:
+            "MongoDB is not connected.",
+        });
+      }
 
+      const result =
+        await FinalChallengeResult.findById(
+          req.params.id
+        );
 
-    res.status(500).json({
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message:
+            "Final Challenge result not found.",
+        });
+      }
 
-      response:
-        "Sorry. I couldn't understand. Please try again."
+      return res.json({
+        success: true,
+        result,
+      });
+    } catch (err) {
+      console.log(
+        "❌ Final Challenge Result Error:",
+        err
+      );
 
-    });
-
+      return res.status(500).json({
+        success: false,
+        message:
+          "Unable to load final challenge result.",
+      });
+    }
   }
+);
 
-});
+/* =========================================================
+   GET LATEST FINAL CHALLENGE RESULT
+========================================================= */
 
+app.get(
+  "/api/final-challenge/latest/:userName",
+  async (req, res) => {
+    try {
+      if (!isMongoConnected()) {
+        return res.status(503).json({
+          success: false,
+          message:
+            "MongoDB is not connected.",
+        });
+      }
 
-/* ===================================
-   Home Route
-=================================== */
+      const result =
+        await FinalChallengeResult
+          .findOne({
+            user_name:
+              req.params.userName,
+          })
+          .sort({
+            created_at: -1,
+          });
+
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message:
+            "No final challenge result found.",
+        });
+      }
+
+      return res.json({
+        success: true,
+        result,
+      });
+    } catch (err) {
+      console.log(
+        "❌ Latest Result Error:",
+        err
+      );
+
+      return res.status(500).json({
+        success: false,
+        message:
+          "Unable to load latest result.",
+      });
+    }
+  }
+);
+
+/* =========================================================
+   CHAT API
+========================================================= */
+
+app.post(
+  "/api/chat",
+  async (req, res) => {
+    try {
+      const {
+        message,
+        history,
+        topicId,
+        lessonId,
+        userName,
+        activity,
+        pictureName,
+        currentQuestion,
+      } = req.body;
+
+      /* ---------------------------------------------
+         EMPTY MESSAGE
+      --------------------------------------------- */
+
+      if (
+        !message ||
+        message.trim() === ""
+      ) {
+        return res.json({
+          response:
+            "Please say something.",
+        });
+      }
+
+      /* ---------------------------------------------
+         SELECT PROMPT
+      --------------------------------------------- */
+
+      let systemPrompt;
+
+      if (
+        activity === "picture"
+      ) {
+        systemPrompt =
+          createPicturePrompt(
+            currentQuestion,
+            pictureName
+          );
+      } else if (
+        activity ===
+        "restaurant-ai"
+      ) {
+        systemPrompt =
+          createRestaurantPrompt();
+      } else {
+        systemPrompt =
+          createTeacherPrompt(
+            topicId
+          );
+      }
+
+      /* ---------------------------------------------
+         BUILD MESSAGES
+      --------------------------------------------- */
+
+      const messages = [
+        {
+          role: "system",
+          content: systemPrompt,
+        },
+      ];
+
+      /* ---------------------------------------------
+         HISTORY
+      --------------------------------------------- */
+
+      if (
+        history &&
+        Array.isArray(history)
+      ) {
+        history
+          .slice(-6)
+          .forEach((chat) => {
+            messages.push({
+              role:
+                chat.sender === "user"
+                  ? "user"
+                  : "assistant",
+
+              content:
+                chat.text,
+            });
+          });
+      }
+
+      /* ---------------------------------------------
+         CURRENT MESSAGE
+      --------------------------------------------- */
+
+      messages.push({
+        role: "user",
+        content: message,
+      });
+
+      /* ---------------------------------------------
+         GROQ
+      --------------------------------------------- */
+
+      const completion =
+        await groq.chat.completions.create({
+          model:
+            "llama-3.3-70b-versatile",
+
+          messages,
+
+          temperature: 0.5,
+
+          max_tokens: 150,
+        });
+
+      /* ---------------------------------------------
+         AI RESPONSE
+      --------------------------------------------- */
+
+      const aiReply =
+        completion
+          ?.choices?.[0]
+          ?.message
+          ?.content
+          ?.trim() ||
+        "Sorry, I couldn't understand. Please try again.";
+
+      /* ---------------------------------------------
+         SAVE CONVERSATION TO MONGODB
+         
+         IMPORTANT:
+         Previously this was commented out.
+         Now it will actually save.
+      --------------------------------------------- */
+
+      if (isMongoConnected()) {
+        try {
+          await Conversation.create({
+            user_name:
+              userName || "Student",
+
+            topic_id:
+              Number(topicId) || 0,
+
+            lesson_id:
+              Number(lessonId) || 0,
+
+            activity:
+              activity || "normal",
+
+            user_message:
+              message,
+
+            ai_response:
+              aiReply,
+          });
+        } catch (dbError) {
+          console.log(
+            "⚠️ Conversation save failed:",
+            dbError.message
+          );
+        }
+      }
+
+      /* ---------------------------------------------
+         RESPONSE
+      --------------------------------------------- */
+
+      return res.json({
+        response: aiReply,
+      });
+    } catch (err) {
+      console.log(
+        "❌ Chat API Error:",
+        err
+      );
+
+      return res.status(500).json({
+        response:
+          "Sorry. I couldn't understand. Please try again.",
+      });
+    }
+  }
+);
+
+/* =========================================================
+   HOME ROUTE
+========================================================= */
 
 app.get("/", (req, res) => {
-
-  res.send("✅ English Learning API Running");
-
-});
-
-
-/* ===================================
-   Health Check Route
-=================================== */
-
-app.get("/api/health", (req, res) => {
-
-  res.json({
-
-    status: "ok",
-
-    message: "AI English Learning Server is running."
-
-  });
-
-});
-
-
-/* ===================================
-   Start Server
-=================================== */
-
-const PORT = process.env.PORT || 5000;
-
-
-app.listen(PORT, () => {
-
-  console.log(
-    `🚀 Server Running On Port ${PORT}`
+  res.send(
+    "✅ English Learning API Running"
   );
-
 });
+
+/* =========================================================
+   HEALTH CHECK
+========================================================= */
+
+app.get(
+  "/api/health",
+  (req, res) => {
+    return res.json({
+      status: "ok",
+
+      mongoConnected:
+        isMongoConnected(),
+
+      message:
+        "AI English Learning Server is running.",
+    });
+  }
+);
+
+/* =========================================================
+   MONGODB STATUS ROUTE
+========================================================= */
+
+app.get(
+  "/api/mongodb-status",
+  (req, res) => {
+    const connected =
+      isMongoConnected();
+
+    return res.json({
+      success: true,
+
+      mongoConnected:
+        connected,
+
+      readyState:
+        mongoose.connection.readyState,
+
+      message: connected
+        ? "MongoDB is connected."
+        : "MongoDB is not connected.",
+    });
+  }
+);
+
+/* =========================================================
+   START SERVER
+========================================================= */
+
+const PORT =
+  process.env.PORT || 5000;
+
+app.listen(
+  PORT,
+  () => {
+    console.log(
+      "================================="
+    );
+
+    console.log(
+      `🚀 Server Running On Port ${PORT}`
+    );
+
+    console.log(
+      "Final Challenge Total: 25 Marks"
+    );
+
+    console.log(
+      "================================="
+    );
+  }
+);

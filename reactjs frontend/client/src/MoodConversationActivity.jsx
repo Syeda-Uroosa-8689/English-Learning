@@ -1424,7 +1424,7 @@ function MoodConversationActivity({
                         onClick={handleListenAgain}
                     >
 
-                        🔊 Listen Again
+                         Listen Again
 
                     </button>
 
@@ -1443,7 +1443,7 @@ function MoodConversationActivity({
 
                             <h3>
 
-                                🎧 Listen Carefully
+                                 Listen Carefully
 
                             </h3>
 

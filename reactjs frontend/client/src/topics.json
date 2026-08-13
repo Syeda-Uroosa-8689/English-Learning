@@ -4,10 +4,22 @@
       "id": 1,
       "title": "My Favourite Things",
       "subtopics": [
-        { "id": 1, "title": "Talking About Hobbies" },
-        { "id": 2, "title": "Favourite Food" },
-        { "id": 3, "title": "Favourite Place" },
-        { "id": 4, "title": "Favourite Person" }
+        {
+          "id": 1,
+          "title": "Talking About Hobbies"
+        },
+        {
+          "id": 2,
+          "title": "Favourite Food"
+        },
+        {
+          "id": 3,
+          "title": "Favourite Place"
+        },
+        {
+          "id": 4,
+          "title": "Favourite Person"
+        }
       ]
     },
 
@@ -15,10 +27,22 @@
       "id": 2,
       "title": "All About My Partner",
       "subtopics": [
-        { "id": 1, "title": "Physical Appearance" },
-        { "id": 2, "title": "Personality Traits" },
-        { "id": 3, "title": "Likes And Dislikes" },
-        { "id": 4, "title": "Final Challenge" }
+        {
+          "id": 1,
+          "title": "Physical Appearance"
+        },
+        {
+          "id": 2,
+          "title": "Personality Traits"
+        },
+        {
+          "id": 3,
+          "title": "Likes And Dislikes"
+        },
+        {
+          "id": 4,
+          "title": "Final Challenge"
+        }
       ]
     },
 
@@ -71,7 +95,6 @@
                   "Why do you like it?",
                   "What food don't you like?",
                   "Why don't you like it?"
-                 
                 ]
               },
               {
@@ -83,144 +106,148 @@
           }
         },
 
-       {
-  "id": 2,
-  "title": "Restaurant Conversations",
-  "type": "restaurantConversation",
-  "content": {
-    "activities": [
-      {
-        "id": 1,
-        "type": "aiWaiter",
-        "title": "AI Waiter Chat",
-        "intro": {
-          "title": "Meet The AI Waiter",
-          "description": "Practice greeting the waiter and ordering food politely."
-        },
-        "conversation": [
-          {
-            "teacher": "Welcome to our restaurant! May I take your order?"
-          },
-          {
-            "expected": [
-              "I would like a pizza, please.",
-              "I would like a burger, please.",
-              "Can I have a pizza, please?"
+        {
+          "id": 2,
+          "title": "Restaurant Conversations",
+          "type": "restaurantConversation",
+          "content": {
+            "activities": [
+              {
+                "id": 1,
+                "type": "aiWaiter",
+                "title": "AI Waiter Chat",
+                "intro": {
+                  "title": "Meet The AI Waiter",
+                  "description": "Practice greeting the waiter and ordering food politely."
+                },
+                "conversation": [
+                  {
+                    "teacher": "Welcome to our restaurant! May I take your order?"
+                  },
+                  {
+                    "expected": [
+                      "I would like a pizza, please.",
+                      "I would like a burger, please.",
+                      "Can I have a pizza, please?"
+                    ]
+                  },
+                  {
+                    "teacher": "What would you like to drink?"
+                  },
+                  {
+                    "expected": [
+                      "Orange juice, please.",
+                      "Water, please.",
+                      "Coke, please."
+                    ]
+                  },
+                  {
+                    "teacher": "Thank you. Your order will be ready soon."
+                  }
+                ]
+              },
+
+              {
+                "id": 2,
+                "type": "menuMatching",
+                "title": "Menu Matching",
+                "intro": {
+                  "title": "Match The Menu",
+                  "description": "Match every food picture with its correct name."
+                },
+                "foods": [
+                  {
+                    "image": "pizza.jpg",
+                    "answer": "Pizza"
+                  },
+                  {
+                    "image": "burger.jpg",
+                    "answer": "Burger"
+                  },
+                  {
+                    "image": "juice.jpg",
+                    "answer": "Juice"
+                  },
+                  {
+                    "image": "icecream.jpg",
+                    "answer": "Ice Cream"
+                  }
+                ]
+              },
+
+              {
+                "id": 3,
+                "type": "arrangeConversation",
+                "title": "Arrange The Conversation",
+                "intro": {
+                  "title": "Build The Conversation",
+                  "description": "Arrange the restaurant conversation in the correct order."
+                },
+                "lines": [
+                  "Welcome to our restaurant.",
+                  "I would like a pizza, please.",
+                  "Anything to drink?",
+                  "Orange juice, please.",
+                  "Thank you."
+                ]
+              },
+
+              {
+                "id": 4,
+                "type": "moodConversation",
+                "title": "Mood Conversation",
+                "intro": {
+                  "title": "Different Waiters",
+                  "description": "Talk politely with different waiters."
+                },
+                "scenarios": [
+                  {
+                    "mood": "Friendly",
+                    "waiter": "Good evening! What would you like today?"
+                  },
+                  {
+                    "mood": "Busy",
+                    "waiter": "Hello! Please order quickly."
+                  },
+                  {
+                    "mood": "Happy",
+                    "waiter": "Welcome! Today's special is pasta."
+                  }
+                ]
+              },
+
+              {
+                "id": 5,
+                "type": "quiz",
+                "title": "Restaurant Quiz",
+                "intro": {
+                  "title": "Final Challenge",
+                  "description": "Answer the restaurant questions."
+                },
+                "questions": [
+                  {
+                    "question": "How do you politely order food?",
+                    "options": [
+                      "Give me pizza.",
+                      "I would like a pizza, please.",
+                      "Pizza."
+                    ],
+                    "correct": 1
+                  },
+                  {
+                    "question": "What should you say after receiving food?",
+                    "options": [
+                      "Thank you.",
+                      "Move.",
+                      "Nothing."
+                    ],
+                    "correct": 0
+                  }
+                ]
+              }
             ]
-          },
-          {
-            "teacher": "What would you like to drink?"
-          },
-          {
-            "expected": [
-              "Orange juice, please.",
-              "Water, please.",
-              "Coke, please."
-            ]
-          },
-          {
-            "teacher": "Thank you. Your order will be ready soon."
           }
-        ]
-      },
-      {
-        "id": 2,
-        "type": "menuMatching",
-        "title": "Menu Matching",
-        "intro": {
-          "title": "Match The Menu",
-          "description": "Match every food picture with its correct name."
         },
-        "foods": [
-          {
-            "image": "pizza.jpg",
-            "answer": "Pizza"
-          },
-          {
-            "image": "burger.jpg",
-            "answer": "Burger"
-          },
-          {
-            "image": "juice.jpg",
-            "answer": "Juice"
-          },
-          {
-            "image": "icecream.jpg",
-            "answer": "Ice Cream"
-          }
-        ]
-      },
-      {
-        "id": 3,
-        "type": "arrangeConversation",
-        "title": "Arrange The Conversation",
-        "intro": {
-          "title": "Build The Conversation",
-          "description": "Arrange the restaurant conversation in the correct order."
-        },
-        "lines": [
-          "Welcome to our restaurant.",
-          "I would like a pizza, please.",
-          "Anything to drink?",
-          "Orange juice, please.",
-          "Thank you."
-        ]
-      },
-      {
-        "id": 4,
-        "type": "moodConversation",
-        "title": "Mood Conversation",
-        "intro": {
-          "title": "Different Waiters",
-          "description": "Talk politely with different waiters."
-        },
-        "scenarios": [
-          {
-            "mood": "Friendly",
-            "waiter": "Good evening! What would you like today?"
-          },
-          {
-            "mood": "Busy",
-            "waiter": "Hello! Please order quickly."
-          },
-          {
-            "mood": "Happy",
-            "waiter": "Welcome! Today's special is pasta."
-          }
-        ]
-      },
-      {
-        "id": 5,
-        "type": "quiz",
-        "title": "Restaurant Quiz",
-        "intro": {
-          "title": "Final Challenge",
-          "description": "Answer the restaurant questions."
-        },
-        "questions": [
-          {
-            "question": "How do you politely order food?",
-            "options": [
-              "Give me pizza.",
-              "I would like a pizza, please.",
-              "Pizza."
-            ],
-            "correct": 1
-          },
-          {
-            "question": "What should you say after receiving food?",
-            "options": [
-              "Thank you.",
-              "Move.",
-              "Nothing."
-            ],
-            "correct": 0
-          }
-        ]
-      }
-    ]
-  }
-},
 
         {
           "id": 3,
@@ -262,7 +289,13 @@
                 "question": "Pick And Make The Word",
                 "wordBuilder": {
                   "answer": "SPICY",
-                  "letters": ["Y", "P", "I", "C", "S"]
+                  "letters": [
+                    "Y",
+                    "P",
+                    "I",
+                    "C",
+                    "S"
+                  ]
                 }
               }
             ],
@@ -273,9 +306,18 @@
                 "Hello! Miss Uroosa here. In today's Listen and Repeat exercise, you'll learn common restaurant sentences. Listen carefully to my pronunciation, then repeat each sentence after me. Are you ready?"
               ],
               "sentences": [
-                { "id": 1, "text": "The soup is very hot." },
-                { "id": 2, "text": "I would like a bowl of soup, please." },
-                { "id": 3, "text": "The food tastes delicious." }
+                {
+                  "id": 1,
+                  "text": "The soup is very hot."
+                },
+                {
+                  "id": 2,
+                  "text": "I would like a bowl of soup, please."
+                },
+                {
+                  "id": 3,
+                  "text": "The food tastes delicious."
+                }
               ]
             }
           }
@@ -283,7 +325,8 @@
 
         {
           "id": 4,
-          "title": "Paying The Bill"
+          "title": "Final Challenge",
+          "type": "finalChallenge"
         }
       ]
     },
@@ -292,10 +335,22 @@
       "id": 4,
       "title": "On My Calendar",
       "subtopics": [
-        { "id": 1, "title": "Days And Months" },
-        { "id": 2, "title": "My Daily Routine" },
-        { "id": 3, "title": "Making Plans" },
-        { "id": 4, "title": "Final Challenge" }
+        {
+          "id": 1,
+          "title": "Days And Months"
+        },
+        {
+          "id": 2,
+          "title": "My Daily Routine"
+        },
+        {
+          "id": 3,
+          "title": "Making Plans"
+        },
+        {
+          "id": 4,
+          "title": "Final Challenge"
+        }
       ]
     }
   ]

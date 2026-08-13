@@ -11,268 +11,486 @@ import FoodFlow from "./FoodFlow";
 import VocabularyFlow from "./VocabularyFlow";
 import ListenRepeatFlow from "./ListenRepeatFlow";
 import RestaurantConversationFlow from "./RestaurantConversationFlow";
+import FinalChallengeFlow from "./FinalChallengeFlow";
+
+import LessonComplete from "./LessonComplete";
 
 import "./App.css";
 
 function App() {
 
-  const [userName, setUserName] = useState("");
-  const [currentPage, setCurrentPage] = useState("home");
+    const [userName, setUserName] = useState("");
 
-  const [selectedTopic, setSelectedTopic] = useState(null);
-  const [selectedLesson, setSelectedLesson] = useState(null);
+    const [currentPage, setCurrentPage] =
+        useState("home");
 
-  return (
+    const [selectedTopic, setSelectedTopic] =
+        useState(null);
 
-    <div className="app-main-wrapper">
+    const [selectedLesson, setSelectedLesson] =
+        useState(null);
 
-      {/* HOME */}
 
-      {currentPage === "home" && (
+    return (
 
-        <HomePage
-          onStart={() => setCurrentPage("login")}
-        />
+        <div className="app-main-wrapper">
 
-      )}
 
-      {/* LOGIN */}
+            {/* =========================================
+                HOME
+            ========================================= */}
 
-      {currentPage === "login" && (
+            {currentPage === "home" && (
 
-        <LoginPage
-          onLogin={() => setCurrentPage("pathway")}
-          onBack={() => setCurrentPage("home")}
-        />
+                <HomePage
 
-      )}
+                    onStart={() =>
+                        setCurrentPage("login")
+                    }
 
-      {/* PATHWAY */}
+                />
 
-      {currentPage === "pathway" && (
+            )}
 
-        <PathwayPage
-          onBack={() => setCurrentPage("home")}
-          onSelectMode={() => setCurrentPage("topics")}
-        />
 
-      )}
+            {/* =========================================
+                LOGIN
+            ========================================= */}
 
-      {/* TOPICS */}
+            {currentPage === "login" && (
 
-      {currentPage === "topics" && (
+                <LoginPage
 
-        <TopicPage
+                    onLogin={() =>
+                        setCurrentPage("pathway")
+                    }
 
-          onBack={() => setCurrentPage("pathway")}
+                    onBack={() =>
+                        setCurrentPage("home")
+                    }
 
-          onSelectTopic={(topic) => {
+                />
 
-            setSelectedTopic(topic);
+            )}
 
-            setCurrentPage("subtopics");
 
-          }}
+            {/* =========================================
+                PATHWAY
+            ========================================= */}
 
-        />
+            {currentPage === "pathway" && (
 
-      )}
+                <PathwayPage
 
-      {/* SUBTOPICS */}
+                    onBack={() =>
+                        setCurrentPage("home")
+                    }
 
-      {currentPage === "subtopics" && (
+                    onSelectMode={() =>
+                        setCurrentPage("topics")
+                    }
 
-        <SubtopicPage
+                />
 
-          selectedTopic={selectedTopic}
+            )}
 
-          onBack={() => setCurrentPage("topics")}
 
-          onSelectTopic={(lesson) => {
+            {/* =========================================
+                TOPICS
+            ========================================= */}
 
-            setSelectedLesson(lesson);
+            {currentPage === "topics" && (
 
-            setCurrentPage("chat");
+                <TopicPage
 
-          }}
+                    onBack={() =>
+                        setCurrentPage("pathway")
+                    }
 
-        />
+                    onSelectTopic={(topic) => {
 
-      )}
+                        setSelectedTopic(topic);
 
-      {/* CHAT PAGE */}
+                        setCurrentPage("subtopics");
 
-      {currentPage === "chat" && (
+                    }}
 
-        <ChatPage
+                />
 
-          userName={userName}
+            )}
 
-          setUserName={setUserName}
 
-          onBack={() => setCurrentPage("subtopics")}
+            {/* =========================================
+                SUBTOPICS
+            ========================================= */}
 
-          onStartLesson={() => {
+            {currentPage === "subtopics" && (
 
-            if (selectedLesson?.type === "lesson") {
+                <SubtopicPage
 
-              setCurrentPage("foodFlow");
+                    selectedTopic={selectedTopic}
 
-            }
+                    onBack={() =>
+                        setCurrentPage("topics")
+                    }
 
-            else if (selectedLesson?.type === "restaurantConversation") {
+                    onSelectTopic={(lesson) => {
 
-              setCurrentPage("restaurantConversation");
+                        setSelectedLesson(lesson);
 
-            }
+                        setCurrentPage("chat");
 
-            else if (selectedLesson?.type === "vocabulary") {
+                    }}
 
-              setCurrentPage("vocabulary");
+                />
 
-            }
+            )}
 
-            else if (selectedLesson?.type === "restaurant") {
 
-              setCurrentPage("restaurant");
+            {/* =========================================
+                CHAT PAGE
+            ========================================= */}
 
-            }
+            {currentPage === "chat" && (
 
-          }}
+                <ChatPage
 
-        />
+                    userName={userName}
 
-      )}
+                    setUserName={setUserName}
 
-      {/* ================= FOOD FLOW ================= */}
+                    onBack={() =>
+                        setCurrentPage("subtopics")
+                    }
 
-      {currentPage === "foodFlow" && (
+                    onStartLesson={() => {
 
-        <FoodFlow
 
-          content={selectedLesson?.content}
+                        /* =========================
+                           FOOD LESSON
+                        ========================= */
 
-          topicId={selectedTopic?.id}
+                        if (
+                            selectedLesson?.type ===
+                            "lesson"
+                        ) {
 
-          lessonId={selectedLesson?.id}
+                            setCurrentPage(
+                                "foodFlow"
+                            );
 
-          userName={userName}
+                        }
 
-          onFinish={() => setCurrentPage("lessonComplete")}
 
-          onBack={() => setCurrentPage("chat")}
+                        /* =========================
+                           RESTAURANT CONVERSATION
+                        ========================= */
 
-        />
+                        else if (
+                            selectedLesson?.type ===
+                            "restaurantConversation"
+                        ) {
 
-      )}
+                            setCurrentPage(
+                                "restaurantConversation"
+                            );
 
-      
+                        }
 
-      {/* ================= RESTAURANT CONVERSATION FLOW ================= */}
 
-{currentPage === "restaurantConversation" && (
+                        /* =========================
+                           FINAL CHALLENGE
+                        ========================= */
 
-  <RestaurantConversationFlow
+                        else if (
+                            selectedLesson?.type ===
+                            "finalChallenge"
+                        ) {
 
-    content={selectedLesson?.content}
+                            setCurrentPage(
+                                "finalChallenge"
+                            );
 
-    topicId={selectedTopic?.id}
+                        }
 
-    lessonId={selectedLesson?.id}
 
-    userName={userName}
+                        /* =========================
+                           VOCABULARY
+                        ========================= */
 
-    onFinish={() => {
+                        else if (
+                            selectedLesson?.type ===
+                            "vocabulary"
+                        ) {
 
-      // Lesson Complete popup ke baad
-      // directly SubtopicPage par wapas
+                            setCurrentPage(
+                                "vocabulary"
+                            );
 
-      setCurrentPage("subtopics");
+                        }
 
-    }}
 
-    onBack={() => setCurrentPage("chat")}
+                        /* =========================
+                           OLD RESTAURANT
+                        ========================= */
 
-  />
+                        else if (
+                            selectedLesson?.type ===
+                            "restaurant"
+                        ) {
 
-)}
-      {/* ================= VOCABULARY FLOW ================= */}
+                            setCurrentPage(
+                                "restaurant"
+                            );
 
-      {currentPage === "vocabulary" && (
+                        }
 
-        <VocabularyFlow
+                    }}
 
-          content={selectedLesson?.content}
+                />
 
-          onFinish={() => {
+            )}
 
-            setCurrentPage("listenRepeat");
 
-          }}
+            {/* =========================================
+                FOOD FLOW
+            ========================================= */}
 
-        />
+            {currentPage === "foodFlow" && (
 
-      )}
+                <FoodFlow
 
-      {/* ================= LISTEN & REPEAT ================= */}
+                    content={
+                        selectedLesson?.content
+                    }
 
-      {currentPage === "listenRepeat" && (
+                    topicId={
+                        selectedTopic?.id
+                    }
 
-        <ListenRepeatFlow
+                    lessonId={
+                        selectedLesson?.id
+                    }
 
-          onFinish={() => {
+                    userName={
+                        userName
+                    }
 
-            setCurrentPage("lessonComplete");
 
-          }}
+                    onFinish={() => {
 
-        />
+                        setCurrentPage(
+                            "lessonComplete"
+                        );
 
-      )}
+                    }}
 
-      {/* ================= OLD RESTAURANT PAGE ================= */}
 
-      {currentPage === "restaurant" && (
+                    onBack={() => {
 
-        <div className="lesson-page">
+                        setCurrentPage("chat");
 
-          <h2>Restaurant Flow Coming Soon...</h2>
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =========================================
+                RESTAURANT CONVERSATION FLOW
+            ========================================= */}
+
+            {currentPage ===
+                "restaurantConversation" && (
+
+                <RestaurantConversationFlow
+
+                    content={
+                        selectedLesson?.content
+                    }
+
+                    topicId={
+                        selectedTopic?.id
+                    }
+
+                    lessonId={
+                        selectedLesson?.id
+                    }
+
+                    userName={
+                        userName
+                    }
+
+
+                    onFinish={() => {
+
+                        setCurrentPage(
+                            "lessonComplete"
+                        );
+
+                    }}
+
+
+                    onBack={() => {
+
+                        setCurrentPage("chat");
+
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =========================================
+                FINAL CHALLENGE FLOW
+            ========================================= */}
+
+            {currentPage === "finalChallenge" && (
+
+                <FinalChallengeFlow
+
+                    content={
+                        selectedLesson?.content
+                    }
+
+                    topicId={
+                        selectedTopic?.id
+                    }
+
+                    lessonId={
+                        selectedLesson?.id
+                    }
+
+                    userName={
+                        userName
+                    }
+
+
+                    onFinish={() => {
+
+                        setCurrentPage(
+                            "lessonComplete"
+                        );
+
+                    }}
+
+
+                    onBack={() => {
+
+                        setCurrentPage("chat");
+
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =========================================
+                VOCABULARY FLOW
+            ========================================= */}
+
+            {currentPage === "vocabulary" && (
+
+                <VocabularyFlow
+
+                    content={
+                        selectedLesson?.content
+                    }
+
+                    onFinish={() => {
+
+                        setCurrentPage(
+                            "listenRepeat"
+                        );
+
+                    }}
+
+                    onBack={() => {
+
+                        setCurrentPage("chat");
+
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =========================================
+                LISTEN & REPEAT
+            ========================================= */}
+
+            {currentPage === "listenRepeat" && (
+
+                <ListenRepeatFlow
+
+                    onFinish={() => {
+
+                        setCurrentPage(
+                            "lessonComplete"
+                        );
+
+                    }}
+
+                    onBack={() => {
+
+                        console.log(
+                            "APP BACK FUNCTION CALLED"
+                        );
+
+                        setCurrentPage("chat");
+
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =========================================
+                OLD RESTAURANT PAGE
+            ========================================= */}
+
+            {currentPage === "restaurant" && (
+
+                <div className="lesson-page">
+
+                    <h2>
+                        Restaurant Flow Coming Soon...
+                    </h2>
+
+                </div>
+
+            )}
+
+
+            {/* =========================================
+                COMMON LESSON COMPLETE
+            ========================================= */}
+
+            {currentPage ===
+                "lessonComplete" && (
+
+                <LessonComplete
+
+                    onFinish={() => {
+
+                        setCurrentPage(
+                            "subtopics"
+                        );
+
+                    }}
+
+                />
+
+            )}
 
         </div>
 
-      )}
-
-      {/* ================= LESSON COMPLETE ================= */}
-
-      {currentPage === "lessonComplete" && (
-
-        <div className="lesson-page">
-
-          <h1>🎉 Lesson Completed</h1>
-
-          <button
-
-            className="next-btn"
-
-            onClick={() => {
-
-              setCurrentPage("subtopics");
-
-            }}
-
-          >
-
-            Back To Subtopics
-
-          </button>
-
-        </div>
-
-      )}
-
-    </div>
-
-  );
+    );
 
 }
 

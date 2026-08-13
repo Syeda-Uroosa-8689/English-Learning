@@ -491,7 +491,7 @@ function ConversationActivity({
 
                             :
 
-                            "🎤 Tap to Speak"
+                            " 🎙️ Tap to Speak"
 
                         }
 

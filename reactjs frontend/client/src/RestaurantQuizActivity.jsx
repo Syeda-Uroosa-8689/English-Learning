@@ -616,7 +616,7 @@ function RestaurantQuizActivity({
 
                             <h3>
 
-                                🎧 Listen Carefully
+                                 Listen Carefully
 
                             </h3>
 
@@ -637,7 +637,7 @@ function RestaurantQuizActivity({
                                 onClick={handleListenAgain}
                             >
 
-                                🔊 Listen Again
+                                 Listen Again
 
                             </button>
 

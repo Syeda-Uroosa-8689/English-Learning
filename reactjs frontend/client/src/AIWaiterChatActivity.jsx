@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import waiter from "./assets/waiter.jpeg";
+import waiter from "./assets/waiter.png";
 
 
 import chatBg from "./assets/chatbg.jpeg";
@@ -512,9 +512,10 @@ AI WAITER
 <div className="assistant-info">
 
 <div className="assistant-avatar">
-
-👨🏻‍🍳
-
+    <img
+        src={waiter}
+        alt="AI Waiter"
+    />
 </div>
 
 <div>
@@ -601,7 +602,7 @@ onClick={startListening}
 
 >
 
-🎤
+   🎙️
 
 </button>
 

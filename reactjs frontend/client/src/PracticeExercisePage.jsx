@@ -1,141 +1,537 @@
 import React, { useEffect, useState } from "react";
 import teacher from "./assets/teacher1.png";
-import waiterImg from "./assets/waiter.jpeg"; 
+import waiterImg from "./assets/waiter.png";
 
-function PracticeExercisePage({ data, current, total, onNext, onSkip }) {
-  const [teacherText, setTeacherText] = useState("");
-  const [words, setWords] = useState([]);
-  const [filledSentence, setFilledSentence] = useState([...data.sentenceStructure]);
+function PracticeExercisePage({
+    data,
+    current,
+    total,
+    onNext,
+    onSkip,
+    onBack
+}) {
 
-  // Male waiter voice
-  const speakWaiter = (text) => {
-    window.speechSynthesis.cancel();
-    const speech = new SpeechSynthesisUtterance(text);
-    speech.rate = 0.9;
-    speech.pitch = 1.0;
-    speech.volume = 1;
+    const [teacherText, setTeacherText] = useState("");
+    const [words, setWords] = useState([]);
+    const [filledSentence, setFilledSentence] = useState(
+        [...data.sentenceStructure]
+    );
 
-    const voices = window.speechSynthesis.getVoices();
-    speech.voice =
-      voices.find((v) => v.name.includes("Google UK English Male")) ||
-      voices.find((v) => v.name.includes("Daniel")) ||
-      voices[0];
+    // ==========================================
+    // WAITER VOICE
+    // ==========================================
 
-    window.speechSynthesis.speak(speech);
-  };
+    const speakWaiter = (text) => {
 
-  // Teacher feedback voice
-  const speakTeacher = (text) => {
-    window.speechSynthesis.cancel();
-    const speech = new SpeechSynthesisUtterance(text);
-    speech.rate = 0.95;
-    speech.pitch = 1.05;
-    speech.volume = 1;
-    const voices = window.speechSynthesis.getVoices();
-    speech.voice =
-      voices.find((v) => v.name.includes("Zira")) ||
-      voices.find((v) => v.name.includes("Samantha")) ||
-      voices[0];
-    window.speechSynthesis.speak(speech);
-  };
+        window.speechSynthesis.cancel();
 
-  useEffect(() => {
-    setTeacherText("");
-    setWords([...data.options]);
-    setFilledSentence([...data.sentenceStructure]);
-    speakWaiter(data.waiter);
-  }, [data]);
+        const speech =
+            new SpeechSynthesisUtterance(text);
 
-  const handleDrop = (word, index) => {
-    const newSentence = [...filledSentence];
-    newSentence[index] = word;
-    setFilledSentence(newSentence);
+        speech.rate = 0.9;
+        speech.pitch = 1;
+        speech.volume = 1;
 
-    const remaining = words.filter((w) => w !== word);
-    setWords(remaining);
+        const voices =
+            window.speechSynthesis.getVoices();
 
-    // Check if all blanks filled
-    if (!newSentence.includes("____")) {
-      const userSentence = newSentence.join(" ");
-      const correctSentence = data.sentenceStructure.map((part, i) =>
-        part === "____" ? data.correctWords[i] : part
-      ).join(" ");
+        speech.voice =
+            voices.find(v =>
+                v.name.includes("Google UK English Male")
+            ) ||
+            voices.find(v =>
+                v.name.includes("Daniel")
+            ) ||
+            voices.find(v =>
+                /male/i.test(v.name)
+            ) ||
+            voices[0];
 
-      const isCorrect = data.correctWords.every((w) =>
-        userSentence.toLowerCase().includes(w.toLowerCase())
-      );
+        window.speechSynthesis.speak(speech);
+    };
 
-      if (isCorrect) {
-        setTeacherText("✅ Excellent! Correct sentence.");
-        speakTeacher("Excellent! Correct sentence.");
-        setTimeout(() => onNext(), 1200);
-      } else {
-        setTeacherText(`❌ Oops! Try again. The correct sentence is: ${correctSentence}`);
-        speakTeacher(`Oops! Try again. The correct sentence is: ${correctSentence}`);
-        // Reset for retry
+
+    // ==========================================
+    // TEACHER VOICE
+    // ==========================================
+
+    const speakTeacher = (text) => {
+
+        window.speechSynthesis.cancel();
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
+        speech.rate = 0.95;
+        speech.pitch = 1.05;
+        speech.volume = 1;
+
+        const voices =
+            window.speechSynthesis.getVoices();
+
+        speech.voice =
+            voices.find(v =>
+                v.name.includes("Zira")
+            ) ||
+            voices.find(v =>
+                v.name.includes("Samantha")
+            ) ||
+            voices.find(v =>
+                /female/i.test(v.name)
+            ) ||
+            voices[0];
+
+        window.speechSynthesis.speak(speech);
+    };
+
+
+    // ==========================================
+    // LOAD EXERCISE
+    // ==========================================
+
+    useEffect(() => {
+
+        setTeacherText("");
+
         setWords([...data.options]);
-        setFilledSentence([...data.sentenceStructure]);
-      }
-    }
-  };
 
-  return (
-    <div className="practice-page">
-      {/* Header bar */}
-      <div className="practice-header">
-        <h2>Practice Exercise</h2>
-        <div className="practice-progress">{current}/{total}</div>
-        <button className="skip-btn" onClick={onSkip}>Skip ➡</button>
-      </div>
+        setFilledSentence(
+            [...data.sentenceStructure]
+        );
 
-      {/* Characters row */}
-      <div className="characters-row">
-        {/* Waiter left */}
-        <div className="waiter-side">
-          <img src={waiterImg} alt="Waiter" className="waiter-avatar" />
-          <div className="waiter-bubble">{data.waiter}</div>
-        </div>
+        speakWaiter(data.waiter);
 
-        {/* Teacher right */}
-        <div className="teacher-side">
-          <img src={teacher} alt="Teacher" className="teacher-avatar" />
-          <div className="teacher-bubble">{teacherText}</div>
-        </div>
-      </div>
+        return () => {
+            window.speechSynthesis.cancel();
+        };
 
-      {/* Sentence */}
-      <div className="sentence-drop-box">
-        {filledSentence.map((part, index) =>
-          part === "____" ? (
-            <span
-              key={index}
-              className="blank"
-              onDragOver={(e) => e.preventDefault()}
-              onDrop={(e) => handleDrop(e.dataTransfer.getData("word"), index)}
+    }, [data]);
+
+
+    // ==========================================
+    // DRAG & DROP
+    // ==========================================
+
+    const handleDragStart = (e, word) => {
+
+        e.dataTransfer.setData(
+            "word",
+            word
+        );
+
+    };
+
+
+    const handleDrop = (e, index) => {
+
+        e.preventDefault();
+
+        const word =
+            e.dataTransfer.getData("word");
+
+        if (!word) return;
+
+
+        const newSentence =
+            [...filledSentence];
+
+        newSentence[index] = word;
+
+        setFilledSentence(newSentence);
+
+
+        // Remove selected word
+        const remaining =
+            words.filter(
+                w => w !== word
+            );
+
+        setWords(remaining);
+
+
+        // ======================================
+        // CHECK ANSWER
+        // ======================================
+
+        if (!newSentence.includes("____")) {
+
+            const userSentence =
+                newSentence.join(" ");
+
+
+            const correctSentence =
+                data.sentenceStructure
+                    .map((part, i) => {
+
+                        if (part === "____") {
+
+                            const blankIndex =
+                                data.sentenceStructure
+                                    .slice(0, i)
+                                    .filter(
+                                        x => x === "____"
+                                    ).length;
+
+                            return data.correctWords[
+                                blankIndex
+                            ];
+                        }
+
+                        return part;
+
+                    })
+                    .join(" ");
+
+
+            const isCorrect =
+                data.correctWords.every(
+                    word =>
+                        userSentence
+                            .toLowerCase()
+                            .includes(
+                                word.toLowerCase()
+                            )
+                );
+
+
+            if (isCorrect) {
+
+                setTeacherText(
+                    "Excellent! Correct sentence. ✨"
+                );
+
+                speakTeacher(
+                    "Excellent! Correct sentence."
+                );
+
+
+                setTimeout(() => {
+
+                    onNext();
+
+                }, 1200);
+
+            } else {
+
+                setTeacherText(
+                    `Oops! Try again. The correct sentence is: ${correctSentence}`
+                );
+
+                speakTeacher(
+                    `Oops! Try again. The correct sentence is: ${correctSentence}`
+                );
+
+
+                setTimeout(() => {
+
+                    setTeacherText("");
+
+                    setWords(
+                        [...data.options]
+                    );
+
+                    setFilledSentence(
+                        [...data.sentenceStructure]
+                    );
+
+                }, 1800);
+
+            }
+
+        }
+
+    };
+
+
+    // ==========================================
+    // PROGRESS
+    // ==========================================
+
+    const progress =
+        (current / total) * 100;
+
+
+    // ==========================================
+    // PAGE
+    // ==========================================
+
+    return (
+
+        <div className="practice-exercise-page">
+
+
+            {/* =================================
+                BACK BUTTON
+            ================================= */}
+
+            <button
+                className="practice-back-btn"
+                onClick={onBack}
             >
-              ___
-            </span>
-          ) : (
-            <span key={index}>{part} </span>
-          )
-        )}
-      </div>
+                ← Back
+            </button>
 
-      {/* Words */}
-      <div className="word-container">
-        {words.map((word, index) => (
-          <div
-            key={index}
-            className="drag-word"
-            draggable
-            onDragStart={(e) => e.dataTransfer.setData("word", word)}
-          >
-            {word}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+
+            {/* =================================
+                SKIP BUTTON
+            ================================= */}
+
+            <button
+                className="practice-skip-btn"
+                onClick={onSkip}
+            >
+                Skip →
+            </button>
+
+
+            {/* =================================
+                HEADER
+            ================================= */}
+
+            <div className="practice-title-box">
+
+                <h1>
+                    Practice Exercise
+                </h1>
+
+            </div>
+
+
+            {/* =================================
+                PROGRESS
+            ================================= */}
+
+            <div className="practice-progress-area">
+
+                <div className="practice-progress-count">
+
+                    {current} / {total}
+
+                </div>
+
+
+                <div className="practice-progress-track">
+
+                    <div
+                        className="practice-progress-fill"
+                        style={{
+                            width: `${progress}%`
+                        }}
+                    />
+
+                </div>
+
+            </div>
+
+
+            {/* =================================
+                MAIN CONTENT
+            ================================= */}
+
+            <div className="practice-main-layout">
+
+
+                {/* =================================
+                    WAITER
+                ================================= */}
+
+                <div className="practice-waiter-section">
+
+                    <img
+                        src={waiterImg}
+                        alt="Waiter"
+                        className="practice-waiter-image"
+                    />
+
+
+                    <div className="practice-waiter-bubble">
+
+                        <div className="character-name">
+
+                            Waiter 🧑‍🍳
+
+                        </div>
+
+
+                        <p>
+                            {data.waiter}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                {/* =================================
+                    CENTER EXERCISE CARD
+                ================================= */}
+
+                <div className="practice-card">
+
+
+                    <h2>
+                        Complete the sentence
+                    </h2>
+
+
+                    <div className="practice-divider">
+
+                        <span></span>
+
+                        <b>✦</b>
+
+                        <span></span>
+
+                    </div>
+
+
+                    <p className="practice-instruction">
+
+                        Drag the correct words into the blanks.
+
+                    </p>
+
+
+                    {/* SENTENCE */}
+
+                    <div className="sentence-box">
+
+                        {filledSentence.map(
+                            (part, index) => {
+
+                                if (
+                                    part === "____"
+                                ) {
+
+                                    return (
+
+                                        <span
+                                            key={index}
+                                            className="sentence-blank"
+                                            onDragOver={
+                                                e =>
+                                                    e.preventDefault()
+                                            }
+                                            onDrop={
+                                                e =>
+                                                    handleDrop(
+                                                        e,
+                                                        index
+                                                    )
+                                            }
+                                        >
+                                            ______
+                                        </span>
+
+                                    );
+
+                                }
+
+
+                                return (
+
+                                    <span
+                                        key={index}
+                                        className="sentence-word"
+                                    >
+                                        {part}
+                                    </span>
+
+                                );
+
+                            }
+                        )}
+
+                    </div>
+
+
+                    {/* WORD OPTIONS */}
+
+                    <div className="practice-word-container">
+
+                        {words.map(
+                            (word, index) => (
+
+                                <div
+                                    key={index}
+                                    className="practice-word"
+                                    draggable
+                                    onDragStart={
+                                        e =>
+                                            handleDragStart(
+                                                e,
+                                                word
+                                            )
+                                    }
+                                >
+                                    {word}
+                                </div>
+
+                            )
+                        )}
+
+                    </div>
+
+
+                </div>
+
+
+                {/* =================================
+                    TEACHER
+                ================================= */}
+
+                <div className="practice-teacher-section">
+
+                    <div className="practice-teacher-bubble">
+
+                        <div className="character-name">
+
+                            Miss Uroosa 👩‍🏫
+
+                        </div>
+
+
+                        <p>
+
+                            {teacherText ||
+                                "Drag the correct words into the blanks. You can do it! ✨"
+                            }
+
+                        </p>
+
+                    </div>
+
+
+                    <img
+                        src={teacher}
+                        alt="Miss Uroosa"
+                        className="practice-teacher-image"
+                    />
+
+                </div>
+
+            </div>
+
+
+            {/* =================================
+                BOTTOM TIP
+            ================================= */}
+
+            <div className="practice-tip">
+
+                💡
+
+                <span>
+                    Listen carefully and speak clearly.
+                </span>
+
+            </div>
+
+
+        </div>
+
+    );
+
 }
 
 export default PracticeExercisePage;

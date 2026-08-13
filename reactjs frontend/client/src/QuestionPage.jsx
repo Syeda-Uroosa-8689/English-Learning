@@ -5,517 +5,665 @@ import laddu from "./assets/laddu.jpg";
 import panipuri from "./assets/panipuri.jpg";
 
 function QuestionPage({
+    question,
+    onNext,
+    onSkip,
+    onBack,
+    currentQuestion,
+    totalQuestions
+}) {
 
-question,
+    const [feedback, setFeedback] = useState("");
+    const [builtWord, setBuiltWord] = useState("");
+    const [usedLetters, setUsedLetters] = useState([]);
+    const [teacherText, setTeacherText] = useState("");
+    const [showRibbon, setShowRibbon] = useState(false);
 
-onNext,
+    useEffect(() => {
 
-onSkip,
+        setFeedback("");
+        setBuiltWord("");
+        setUsedLetters([]);
+        setTeacherText("");
+        setShowRibbon(false);
 
-currentQuestion,
+    }, [question]);
 
-totalQuestions
+    /* =========================
+       IMAGES
+    ========================= */
 
-}){
+    const images = {
+        "laddu.jpg": laddu,
+        "panipuri.jpg": panipuri
+    };
 
-const [feedback,setFeedback]=useState("");
+    /* =========================
+       TEACHER VOICE
+    ========================= */
 
-const [builtWord,setBuiltWord]=useState("");
+    const speak = (text) => {
 
-const [usedLetters,setUsedLetters]=useState([]);
+        window.speechSynthesis.cancel();
 
-const [teacherText,setTeacherText]=useState("");
+        const speech = new SpeechSynthesisUtterance(text);
 
-const [showRibbon,setShowRibbon]=useState(false);
+        speech.rate = 0.9;
+        speech.pitch = 1.15;
+        speech.volume = 1;
 
-useEffect(()=>{
+        const voices = window.speechSynthesis.getVoices();
 
-setFeedback("");
+        speech.voice =
+            voices.find(v =>
+                v.name.includes("Zira")
+            ) ||
+            voices.find(v =>
+                v.name.includes("Google UK English Female")
+            ) ||
+            voices.find(v =>
+                v.name.includes("Samantha")
+            ) ||
+            voices.find(v =>
+                v.name.toLowerCase().includes("female")
+            ) ||
+            voices[0];
 
-setBuiltWord("");
+        window.speechSynthesis.speak(speech);
+    };
 
-setUsedLetters([]);
+    /* =========================
+       CORRECT
+    ========================= */
 
-setTeacherText("");
+    const correctReaction = () => {
 
-setShowRibbon(false);
+        const reactions = [
+            "Amazing!",
+            "Excellent!",
+            "Wonderful!"
+        ];
 
-},[question]);
+        const random =
+            reactions[
+                Math.floor(
+                    Math.random() * reactions.length
+                )
+            ];
 
-const images={
+        setTeacherText(random);
+        setFeedback("correct");
+        setShowRibbon(true);
 
-"laddu.jpg":laddu,
+        speak(random);
 
-"panipuri.jpg":panipuri
+        setTimeout(() => {
 
-};
+            setShowRibbon(false);
 
-const speak=(text)=>{
+            onNext();
 
-window.speechSynthesis.cancel();
+        }, 2200);
+    };
 
-const speech=new SpeechSynthesisUtterance(text);
+    /* =========================
+       WRONG
+    ========================= */
 
-speech.rate=0.9;
+    const wrongReaction = () => {
 
-speech.pitch=1.15;
+        setTeacherText("No... Try again!");
+        setFeedback("wrong");
 
-speech.volume=1;
+        speak("No... Try again!");
 
-const voices=window.speechSynthesis.getVoices();
+    };
 
-speech.voice=
+    /* =========================
+       OPTION CLICK
+    ========================= */
 
-voices.find(v=>v.name.includes("Zira"))||
+    const handleOptionClick = (option) => {
 
-voices.find(v=>v.name.includes("Google UK English Female"))||
+        if (feedback === "correct") return;
 
-voices.find(v=>v.name.includes("Samantha"))||
+        if (option.isCorrect) {
 
-voices.find(v=>v.name.toLowerCase().includes("female"))||
+            correctReaction();
 
-voices[0];
+        } else {
 
-window.speechSynthesis.speak(speech);
+            wrongReaction();
 
-};
+        }
 
-const correctReaction=()=>{
+    };
 
-const reactions=[
+    /* =========================
+       SPEECH PRACTICE
+    ========================= */
 
-"Amazing!",
+    const startPractice = () => {
 
-"Excellent!",
+        const SpeechRecognition =
+            window.SpeechRecognition ||
+            window.webkitSpeechRecognition;
 
-"Wonderful!"
+        if (!SpeechRecognition) {
 
-];
+            alert(
+                "Speech Recognition Not Supported"
+            );
 
-const random=
+            return;
 
-reactions[Math.floor(Math.random()*reactions.length)];
+        }
 
-setTeacherText(random);
+        const recognition =
+            new SpeechRecognition();
 
-setFeedback("correct");
+        recognition.lang = "en-US";
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
 
-setShowRibbon(true);
+        recognition.start();
 
-speak(random);
+        recognition.onresult = (event) => {
 
-setTimeout(()=>{
+            const spokenWord =
+                event.results[0][0]
+                    .transcript
+                    .toLowerCase()
+                    .trim();
 
-setShowRibbon(false);
+            const correctWord =
+                question.practice.expectedAnswer
+                    .toLowerCase()
+                    .trim();
 
-onNext();
+            if (
+                spokenWord.includes(correctWord)
+            ) {
 
-},2200);
+                correctReaction();
 
-};
+            } else {
 
-const wrongReaction=()=>{
+                wrongReaction();
 
-setTeacherText("No... Try again!");
+            }
 
-setFeedback("wrong");
+        };
 
-speak("No...Try again!");
+    };
 
-};
+    /* =========================
+       WORD BUILDER
+    ========================= */
 
-const handleOptionClick=(option)=>{
+    const handleLetterClick = (
+        letter,
+        index
+    ) => {
 
-if(option.isCorrect){
+        if (
+            usedLetters.includes(index)
+        ) {
 
-correctReaction();
+            return;
 
-}
+        }
 
-else{
+        const newWord =
+            builtWord + letter;
 
-wrongReaction();
+        setBuiltWord(newWord);
 
-}
+        setUsedLetters([
+            ...usedLetters,
+            index
+        ]);
 
-};
-const startPractice=()=>{
+        if (
+            newWord ===
+            question.wordBuilder.answer
+        ) {
 
-const SpeechRecognition=
+            correctReaction();
 
-window.SpeechRecognition||
+        }
 
-window.webkitSpeechRecognition;
+    };
 
-if(!SpeechRecognition){
+    const resetWord = () => {
 
-alert("Speech Recognition Not Supported");
+        setBuiltWord("");
+        setUsedLetters([]);
 
-return;
+    };
 
-}
+    /* =========================
+       PROGRESS
+    ========================= */
 
-const recognition=new SpeechRecognition();
+    const progress =
+        (currentQuestion / totalQuestions) * 100;
 
-recognition.lang="en-US";
+    return (
 
-recognition.interimResults=false;
+        <div className="qv-page">
 
-recognition.maxAlternatives=1;
+            {/* DARK OVERLAY */}
 
-recognition.start();
+            <div className="qv-overlay"></div>
 
-recognition.onresult=(event)=>{
+            {/* MAIN CARD */}
 
-const spokenWord=
+            <div className="qv-main-card">
 
-event.results[0][0].transcript
+                {/* =========================
+                   TOP HEADER
+                ========================= */}
 
-.toLowerCase()
+                <div className="qv-header">
 
-.trim();
-
-const correctWord=
-
-question.practice.expectedAnswer
-
-.toLowerCase()
-
-.trim();
-
-if(spokenWord.includes(correctWord)){
-
-correctReaction();
-
-}
-
-else{
-
-wrongReaction();
-
-}
-
-};
-
-};
-
-const handleLetterClick=(letter,index)=>{
-
-if(usedLetters.includes(index)){
-
-return;
-
-}
-
-const newWord=builtWord+letter;
-
-setBuiltWord(newWord);
-
-setUsedLetters([...usedLetters,index]);
-
-if(newWord===question.wordBuilder.answer){
-
-correctReaction();
-
-}
-
-};
-
-const resetWord=()=>{
-
-setBuiltWord("");
-
-setUsedLetters([]);
-
-};
-
-const progress=
-
-(currentQuestion/totalQuestions)*100;
-
-return(
-
-<div className="quiz-container">
-
-
-<button
-className="skip-btn"
-onClick={onSkip}
+     <button
+    className="qv-back-btn"
+    onClick={() => {
+        console.log("QuestionPage → BACK");
+        onBack();
+    }}
 >
-Skip →
+    ← Back
 </button>
 
+                    <div className="qv-progress-area">
 
-{showRibbon&&(
+                        <div className="qv-question-count">
 
-<div className="ribbon-container">
+                            Question {currentQuestion} of {totalQuestions}
 
-<div className="ribbon red"></div>
+                        </div>
 
-<div className="ribbon blue"></div>
+                        <div className="qv-progress-bar">
 
-<div className="ribbon yellow"></div>
+                            <div
+                                className="qv-progress-fill"
+                                style={{
+                                    width: `${progress}%`
+                                }}
+                            ></div>
 
-<div className="ribbon green"></div>
+                        </div>
 
-<div className="ribbon pink"></div>
+                    </div>
 
-<div className="ribbon purple"></div>
+                    <button
+                        className="qv-skip-btn"
+                        onClick={onSkip}
+                    >
+                        Skip →
+                    </button>
 
-</div>
+                </div>
 
-)}
 
+                {/* =========================
+                   MAIN CONTENT
+                ========================= */}
 
+                <div className="qv-content">
 
-<div className="quiz-header">
 
-<h2 className="question-text">
+                    {/* =====================
+                       TEACHER SECTION
+                    ===================== */}
 
-{question.question}
+                    <div className="qv-teacher-section">
 
-</h2>
+                        <div className="qv-teacher-image-wrap">
 
-<div className="progress-section">
+                            <img
+                                src={teacher}
+                                alt="Miss Uroosa"
+                                className={
+                                    feedback === "correct"
+                                        ? "qv-teacher-img qv-happy"
+                                        : "qv-teacher-img"
+                                }
+                            />
 
-<div className="progress-bar">
+                        </div>
 
-<div
 
-className="progress-fill"
+                        {/* TEACHER SPEECH */}
 
-style={{
+                        <div className="qv-teacher-bubble">
 
-width:`${progress}%`
+                            <span>
+                                {teacherText ||
+                                    question.question}
+                            </span>
 
-}}
+                        </div>
 
-></div>
 
-</div>
+                        <div className="qv-teacher-name">
 
-<span>
+                            🌿 Miss Uroosa 🌿
 
-{currentQuestion}/{totalQuestions}
+                        </div>
 
-</span>
+                    </div>
 
-</div>
 
-</div>
+                    {/* =====================
+                       ACTIVITY SECTION
+                    ===================== */}
 
-<img
+                    <div className="qv-activity">
 
-src={teacher}
 
-alt=""
+                        {/* =====================
+                           QUESTION / PROMPT
+                        ===================== */}
 
-className="teacher-avatar"
+                        {question.options && (
 
-/>
+                            <>
 
-{teacherText&&(
+                                <div className="qv-question-panel">
 
-<div className="teacher-bubble">
+                                    <div className="qv-panel-decoration">
+                                        ❧
+                                    </div>
 
-{teacherText}
+                                    <div className="qv-question-label">
 
-</div>
+                                        {question.question}
 
-)}
-{/* ---------------- QUESTION 1 ---------------- */}
+                                    </div>
 
-{question.options && (
+                                    <div className="qv-prompt">
 
-<>
+                                        {question.prompt}
 
-<div className="word-card">
+                                    </div>
 
-{question.prompt}
+                                    <div className="qv-panel-line">
 
-</div>
+                                        ✦
 
-<div className="image-options">
+                                    </div>
 
-{question.options.map((option,index)=>(
+                                </div>
 
-<div
 
-key={index}
+                                {/* =================
+                                   FOOD OPTIONS
+                                ================= */}
 
-className="food-card"
+                                <div className="qv-food-options">
 
-onClick={()=>handleOptionClick(option)}
+                                    {question.options.map(
+                                        (option, index) => (
 
->
+                                            <div
+                                                key={index}
+                                                className={
+                                                    feedback === "correct" &&
+                                                    option.isCorrect
+                                                        ? "qv-food-card qv-correct-card"
+                                                        : "qv-food-card"
+                                                }
+                                                onClick={() =>
+                                                    handleOptionClick(
+                                                        option
+                                                    )
+                                                }
+                                            >
 
-<img
+                                                <div className="qv-food-image-wrap">
 
-src={images[option.image]}
+                                                    <img
+                                                        src={
+                                                            images[
+                                                                option.image
+                                                            ]
+                                                        }
+                                                        alt={
+                                                            option.text
+                                                        }
+                                                        className="qv-food-image"
+                                                    />
 
-alt={option.text}
+                                                </div>
 
-/>
+                                                <div className="qv-food-name">
 
-<p>{option.text}</p>
+                                                    <span>🌿</span>
 
-</div>
+                                                    {option.text}
 
-))}
+                                                    <span>🌿</span>
 
-</div>
+                                                </div>
 
-</>
+                                            </div>
 
-)}
+                                        )
+                                    )}
 
-{/* ---------------- QUESTION 2 ---------------- */}
+                                </div>
 
-{question.practice && (
 
-<div className="practice-container">
+                                {/* BOTTOM TIP */}
 
-<div className="practice-card">
+                                <div className="qv-tip-box">
 
-<img
+                                    <span className="qv-tip-icon">
+                                        💡
+                                    </span>
 
-src={panipuri}
+                                    <span>
+                                        Listen carefully and choose the correct answer.
+                                    </span>
 
-alt=""
+                                    <span className="qv-tip-star">
+                                        
+                                    </span>
 
-className="practice-image"
+                                </div>
 
-/>
+                            </>
 
-<div className="practice-word">
+                        )}
 
-{question.practice.expectedAnswer}
 
-</div>
+                        {/* =====================
+                           SPEAKING PRACTICE
+                        ===================== */}
 
-</div>
+                        {question.practice && (
 
-<p className="practice-text">
+                            <div className="qv-practice-section">
 
-Tap the mic and say the word
+                                <div className="qv-practice-title">
 
-</p>
+                                    Speak the word
 
-<button
+                                </div>
 
-className="mic-btn"
+                                <div className="qv-practice-card">
 
-onClick={startPractice}
+                                    <img
+                                        src={panipuri}
+                                        alt=""
+                                        className="qv-practice-image"
+                                    />
 
->
+                                    <div className="qv-practice-word">
 
-🎤
+                                        {question.practice.expectedAnswer}
 
-</button>
+                                    </div>
 
-</div>
+                                </div>
 
-)}
+                                <p className="qv-practice-text">
 
-{/* ---------------- QUESTION 3 ---------------- */}
+                                    Tap the microphone and say the word
 
-{question.wordBuilder && (
+                                </p>
 
-<div className="word-builder">
+                                <button
+                                    className="qv-mic-btn"
+                                    onClick={startPractice}
+                                >
 
-<h2 className="builder-title">
+                                    🎙️
 
-Pick And Make The Word
+                                </button>
 
-</h2>
+                            </div>
 
-<div className="blank-word">
+                        )}
 
-{question.wordBuilder.answer
 
-.split("")
+                        {/* =====================
+                           WORD BUILDER
+                        ===================== */}
 
-.map((_,index)=>(
+                        {question.wordBuilder && (
 
-<div
+                            <div className="qv-builder-section">
 
-key={index}
+                                <h2>
 
-className="blank-box"
+                                    Pick & Make the Word
 
->
+                                </h2>
 
-{builtWord[index] || ""}
+                                <div className="qv-blank-word">
 
-</div>
+                                    {question.wordBuilder.answer
+                                        .split("")
+                                        .map((_, index) => (
 
-))}
+                                            <div
+                                                key={index}
+                                                className="qv-blank-box"
+                                            >
 
-</div>
+                                                {builtWord[index] || ""}
 
-<div className="letter-container">
+                                            </div>
 
-{question.wordBuilder.letters.map((letter,index)=>(
+                                        ))}
 
-<button
+                                </div>
 
-key={index}
 
-className={`letter-btn ${usedLetters.includes(index) ? "used" : ""}`}
+                                <div className="qv-letter-container">
 
-disabled={usedLetters.includes(index)}
+                                    {question.wordBuilder.letters.map(
+                                        (letter, index) => (
 
-onClick={()=>handleLetterClick(letter,index)}
+                                            <button
+                                                key={index}
+                                                className={
+                                                    usedLetters.includes(index)
+                                                        ? "qv-letter-btn qv-used"
+                                                        : "qv-letter-btn"
+                                                }
+                                                disabled={
+                                                    usedLetters.includes(index)
+                                                }
+                                                onClick={() =>
+                                                    handleLetterClick(
+                                                        letter,
+                                                        index
+                                                    )
+                                                }
+                                            >
 
->
+                                                {letter}
 
-{letter}
+                                            </button>
 
-</button>
+                                        )
+                                    )}
 
-))}
+                                </div>
 
-</div>
 
-<button
+                                <button
+                                    className="qv-reset-btn"
+                                    onClick={resetWord}
+                                >
 
-className="reset-btn"
+                                    Reset
 
-onClick={resetWord}
+                                </button>
 
->
+                            </div>
 
-Reset
+                        )}
 
-</button>
+                    </div>
 
-</div>
+                </div>
 
-)}
 
-{feedback==="correct" && (
+                {/* =========================
+                   FEEDBACK
+                ========================= */}
 
-<div className="correct-msg">
+                {feedback === "correct" && (
 
-✨ {teacherText}
+                    <div className="qv-feedback qv-correct">
 
-</div>
+                         {teacherText}
 
-)}
+                    </div>
 
-{feedback==="wrong" && (
+                )}
 
-<div className="wrong-msg">
+                {feedback === "wrong" && (
 
-💙 {teacherText}
+                    <div className="qv-feedback qv-wrong">
 
-</div>
+                         {teacherText}
 
-)}
+                    </div>
 
-</div>
+                )}
 
-);
+            </div>
+
+
+            {/* =========================
+               RIBBON
+            ========================= */}
+
+            {showRibbon && (
+
+                <div className="qv-ribbon-container">
+
+                    <div className="qv-ribbon qv-red"></div>
+                    <div className="qv-ribbon qv-blue"></div>
+                    <div className="qv-ribbon qv-yellow"></div>
+                    <div className="qv-ribbon qv-green"></div>
+                    <div className="qv-ribbon qv-pink"></div>
+                    <div className="qv-ribbon qv-purple"></div>
+
+                </div>
+
+            )}
+
+        </div>
+
+    );
 
 }
 

@@ -396,11 +396,7 @@ const speak = (text) => {
                     ← Back
                 </button>
 
-                <div className="arrange-header-logo">
-
-                    💬
-
-                </div>
+                
 
                 <button
                     className="arrange-skip-btn"

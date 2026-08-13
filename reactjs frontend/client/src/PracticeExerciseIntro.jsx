@@ -1,48 +1,56 @@
 import React, { useEffect, useState } from "react";
-import teacher from "./assets/teacher1.png";
 
 function PracticeExerciseIntro({ onNext }) {
-  const intros = [
-    "Wonderful! You did a great job in the Listen and Repeat activity. Now let's practice using restaurant sentences. You'll see a sentence with a missing word. Simply drag the correct word into the blank. Let's begin!",
-    "Excellent work! Now it's time for some practice. Read the waiter's question carefully, then drag the correct word to complete the sentence. Let's get started!",
-    "Amazing! Now we'll practice restaurant English. Complete each sentence by dragging the correct word into the blank. Ready? Let's begin!"
-  ];
 
-  const [intro] = useState(intros[Math.floor(Math.random() * intros.length)]);
+    const [show, setShow] = useState(false);
 
-  useEffect(() => {
-    window.speechSynthesis.cancel();
-    const speech = new SpeechSynthesisUtterance(intro);
-    speech.rate = 0.9;
-    speech.pitch = 1.05;
-    speech.volume = 1;
+    useEffect(() => {
 
-    const voices = window.speechSynthesis.getVoices();
-    speech.voice =
-      voices.find((v) => v.name.includes("Zira")) ||
-      voices.find((v) => v.name.includes("Google UK English Female")) ||
-      voices.find((v) => v.name.includes("Samantha")) ||
-      voices[0];
+        // Popup enter animation
+        const enterTimer = setTimeout(() => {
+            setShow(true);
+        }, 100);
 
-    speech.onend = () => {
-      setTimeout(() => {
-        onNext();
-      }, 700);
-    };
+        // Popup exit
+        const exitTimer = setTimeout(() => {
 
-    window.speechSynthesis.speak(speech);
+            setShow(false);
 
-    return () => {
-      window.speechSynthesis.cancel();
-    };
-  }, [intro, onNext]);
+            // Exit animation ke baad Teacher Intro
+            setTimeout(() => {
+                onNext();
+            }, 500);
 
-  return (
-    <div className="practice-intro-screen">
-      <img src={teacher} alt="Teacher" className="teacher-big" />
-      
-    </div>
-  );
+        }, 4000);
+
+        return () => {
+            clearTimeout(enterTimer);
+            clearTimeout(exitTimer);
+        };
+
+    }, [onNext]);
+
+    return (
+
+        <div className="practice-intro-container">
+
+            <div
+                className={
+                    show
+                        ? "practice-intro-popup show"
+                        : "practice-intro-popup"
+                }
+            >
+
+                <h1>
+                    Practice Exercise
+                </h1>
+
+            </div>
+
+        </div>
+
+    );
 }
 
 export default PracticeExerciseIntro;

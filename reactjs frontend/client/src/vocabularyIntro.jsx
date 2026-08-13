@@ -1,43 +1,66 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-function VocabularyIntro({ onNext, lesson }) {
+function VocabularyIntro({ onNext }) {
 
-  useEffect(() => {
+    const [show, setShow] = useState(false);
 
-    const timer = setTimeout(() => {
-      onNext();
-    }, 4000);
+    useEffect(() => {
 
-    return () => clearTimeout(timer);
+        const enterTimer = setTimeout(() => {
 
-  }, [onNext]);
+            setShow(true);
 
-  return (
+        }, 100);
 
-    <div className="vocab-screen">
 
-      <div className="blue-card">
+        const exitTimer = setTimeout(() => {
 
-        <h1>
-          Practice Vocabulary &
-          <br />
-          Pronunciation
-        </h1>
+            setShow(false);
 
-        <h2>
-          Describing Food &
-          Giving Feedback
-        </h2>
+            setTimeout(() => {
 
-        <h3>
-          with Miss Uroosa
-        </h3>
+                onNext();
 
-      </div>
+            }, 500);
 
-    </div>
+        }, 4000);
 
-  );
+
+        return () => {
+
+            clearTimeout(enterTimer);
+            clearTimeout(exitTimer);
+
+        };
+
+    }, [onNext]);
+
+
+    return (
+
+        <div className="vocab-intro-container">
+
+            <div
+                className={
+                    show
+                        ? "vocab-intro-popup show"
+                        : "vocab-intro-popup"
+                }
+            >
+
+                <h1>
+
+                    Practice Vocabulary
+                    <br />
+                    & Pronunciation
+
+                </h1>
+
+            </div>
+
+        </div>
+
+    );
 
 }
 

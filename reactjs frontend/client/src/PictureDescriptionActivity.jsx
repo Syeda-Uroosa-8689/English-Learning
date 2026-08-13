@@ -1,4 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+    useEffect,
+    useRef,
+    useState
+} from "react";
 
 import teacher1 from "./assets/teacher1.png";
 import teacher2 from "./assets/teacher2.png";
@@ -9,15 +13,12 @@ import pizza from "./assets/pizza.jpg";
 import burger from "./assets/burger.jpg";
 import apple from "./assets/apple.jpg";
 
-
 function PictureDescriptionActivity({
-
     topicId,
     lessonId,
     userName,
     onNext,
     onBack
-
 }) {
 
     /* =========================================
@@ -25,12 +26,10 @@ function PictureDescriptionActivity({
     ========================================= */
 
     const teacherFrames = [
-
         teacher1,
         teacher2,
         teacher3,
         teacher4
-
     ];
 
 
@@ -41,7 +40,6 @@ function PictureDescriptionActivity({
     const pictureActivities = [
 
         {
-
             title: "Pizza",
 
             image: pizza,
@@ -53,11 +51,9 @@ function PictureDescriptionActivity({
                 "What colour is the pizza?"
 
             ]
-
         },
 
         {
-
             title: "Burger",
 
             image: burger,
@@ -69,11 +65,9 @@ function PictureDescriptionActivity({
                 "What ingredients can you see in the burger?"
 
             ]
-
         },
 
         {
-
             title: "Apple",
 
             image: apple,
@@ -85,7 +79,6 @@ function PictureDescriptionActivity({
                 "Why is an apple healthy?"
 
             ]
-
         }
 
     ];
@@ -115,22 +108,17 @@ function PictureDescriptionActivity({
     const [history, setHistory] =
         useState([]);
 
-    const [showFinish, setShowFinish] =
-        useState(false);
-
     const [waitingForRepeat, setWaitingForRepeat] =
         useState(false);
 
     const [correctSentence, setCorrectSentence] =
         useState("");
 
+    const [showLessonComplete, setShowLessonComplete] =
+        useState(false);
+
     const recognitionRef =
         useRef(null);
-
-
-    /* =========================================
-       CURRENT PICTURE / QUESTION
-    ========================================= */
 
     const currentPicture =
         pictureActivities[pictureIndex];
@@ -153,18 +141,19 @@ function PictureDescriptionActivity({
 
         }
 
-
         const timer = setInterval(() => {
 
             setFrame(prev =>
-                (prev + 1) %
-                teacherFrames.length
+                (prev + 1) % teacherFrames.length
             );
 
         }, 250);
 
+        return () => {
 
-        return () => clearInterval(timer);
+            clearInterval(timer);
+
+        };
 
     }, [isSpeaking]);
 
@@ -199,185 +188,12 @@ function PictureDescriptionActivity({
 
 
     /* =========================================
-       REST OF CODE COMES IN NEXT PART
+       STOP EVERYTHING
     ========================================= */
 
-        /* =========================================
-       TEACHER SPEAK
-    ========================================= */
-
-    const speak = (text, onFinish = null) => {
+    const stopActivity = () => {
 
         window.speechSynthesis.cancel();
-
-        setTeacherMessage("");
-
-        setIsSpeaking(true);
-
-
-        let index = 0;
-
-        const typing = setInterval(() => {
-
-            index++;
-
-            setTeacherMessage(
-                text.substring(0, index)
-            );
-
-            if (index >= text.length) {
-
-                clearInterval(typing);
-
-            }
-
-        }, 30);
-
-
-        const speech =
-            new SpeechSynthesisUtterance(text);
-
-
-        speech.lang = "en-US";
-
-        speech.rate = 0.9;
-
-        speech.pitch = 1.1;
-
-        speech.volume = 1;
-
-
-        /*
-           Female voice prefer karenge.
-        */
-
-        const voices =
-            window.speechSynthesis.getVoices();
-
-
-        const femaleVoice =
-            voices.find(v =>
-                /female|zira|samantha|susan|karen|hazel/i
-                    .test(v.name)
-            );
-
-
-        if (femaleVoice) {
-
-            speech.voice = femaleVoice;
-
-        }
-
-
-        speech.onend = () => {
-
-            setIsSpeaking(false);
-
-
-            if (onFinish) {
-
-                onFinish();
-
-            }
-
-        };
-
-
-        window.speechSynthesis.speak(speech);
-
-    };
-
-
-    /* =========================================
-       FIRST QUESTION
-    ========================================= */
-
-    useEffect(() => {
-
-        const timer = setTimeout(() => {
-
-            speak(currentQuestion);
-
-        }, 500);
-
-
-        return () => clearTimeout(timer);
-
-    }, []);
-
-
-    /* =========================================
-       FEMALE VOICE LOAD FIX
-    ========================================= */
-
-    useEffect(() => {
-
-        const loadVoices = () => {
-
-            window.speechSynthesis.getVoices();
-
-        };
-
-
-        loadVoices();
-
-
-        window.speechSynthesis
-            .addEventListener(
-                "voiceschanged",
-                loadVoices
-            );
-
-
-        return () => {
-
-            window.speechSynthesis
-                .removeEventListener(
-                    "voiceschanged",
-                    loadVoices
-                );
-
-        };
-
-    }, []);
-
-
-        /* =========================================
-       MICROPHONE
-    ========================================= */
-
-    const startListening = () => {
-
-        /*
-           Teacher bol rahi hai to mic start nahi hoga.
-        */
-
-        if (isSpeaking || loading) {
-
-            return;
-
-        }
-
-
-        const SpeechRecognition =
-            window.SpeechRecognition ||
-            window.webkitSpeechRecognition;
-
-
-        if (!SpeechRecognition) {
-
-            alert(
-                "Speech Recognition is not supported. Please use Google Chrome."
-            );
-
-            return;
-
-        }
-
-
-        /*
-           Previous microphone stop karo.
-        */
 
         if (recognitionRef.current) {
 
@@ -391,548 +207,754 @@ function PictureDescriptionActivity({
 
             }
 
+            recognitionRef.current = null;
+
         }
 
+        setLoading(false);
 
-        const recognition =
-            new SpeechRecognition();
+        setIsSpeaking(false);
+
+    };
+
+    /* =========================================
+   TEACHER SPEAK
+========================================= */
+
+const speak = (text, onFinish = null) => {
+
+    window.speechSynthesis.cancel();
+
+    setTeacherMessage("");
+
+    setIsSpeaking(true);
 
 
-        recognition.lang = "en-US";
+    let index = 0;
 
-        recognition.interimResults = false;
+    const typing = setInterval(() => {
 
-        recognition.maxAlternatives = 1;
+        index++;
 
-        recognition.continuous = false;
+        setTeacherMessage(
+            text.substring(0, index)
+        );
+
+        if (index >= text.length) {
+
+            clearInterval(typing);
+
+        }
+
+    }, 30);
 
 
-        recognitionRef.current =
-            recognition;
+    const speech =
+        new SpeechSynthesisUtterance(text);
 
 
-        setLoading(true);
+    /* =====================================
+       FEMALE ENGLISH VOICE
+    ===================================== */
 
+    speech.lang = "en-US";
+
+    speech.rate = 0.9;
+
+    speech.pitch = 1.1;
+
+    speech.volume = 1;
+
+
+    const voices =
+        window.speechSynthesis.getVoices();
+
+
+    const femaleVoice =
+        voices.find(v =>
+            /zira|samantha|susan|karen|hazel|female/i
+                .test(v.name)
+        );
+
+
+    if (femaleVoice) {
+
+        speech.voice = femaleVoice;
+
+    }
+
+
+    speech.onend = () => {
+
+        setIsSpeaking(false);
+
+        if (onFinish) {
+
+            onFinish();
+
+        }
+
+    };
+
+
+    speech.onerror = () => {
+
+        setIsSpeaking(false);
+
+    };
+
+
+    window.speechSynthesis.speak(speech);
+
+};
+
+
+/* =========================================
+   LOAD AVAILABLE VOICES
+========================================= */
+
+useEffect(() => {
+
+    const loadVoices = () => {
+
+        window.speechSynthesis.getVoices();
+
+    };
+
+
+    loadVoices();
+
+
+    window.speechSynthesis.addEventListener(
+        "voiceschanged",
+        loadVoices
+    );
+
+
+    return () => {
+
+        window.speechSynthesis.removeEventListener(
+            "voiceschanged",
+            loadVoices
+        );
+
+    };
+
+}, []);
+
+
+/* =========================================
+   ASK FIRST QUESTION
+========================================= */
+
+useEffect(() => {
+
+    const timer = setTimeout(() => {
+
+        speak(currentQuestion);
+
+    }, 700);
+
+
+    return () => {
+
+        clearTimeout(timer);
+
+    };
+
+}, []);
+
+
+/* =========================================
+   MICROPHONE
+========================================= */
+
+const startListening = () => {
+
+    /* -------------------------------------
+       Don't start while teacher is speaking
+    ------------------------------------- */
+
+    if (isSpeaking || loading || showLessonComplete) {
+
+        return;
+
+    }
+
+
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+
+    if (!SpeechRecognition) {
+
+        alert(
+            "Speech Recognition is not supported. Please use Google Chrome."
+        );
+
+        return;
+
+    }
+
+
+    /* -------------------------------------
+       Stop previous recognition
+    ------------------------------------- */
+
+    if (recognitionRef.current) {
 
         try {
 
-            recognition.start();
+            recognitionRef.current.stop();
 
         } catch (error) {
 
             console.log(error);
 
-            setLoading(false);
-
-            return;
-
         }
 
+    }
 
-        /* =====================================
-           STUDENT SPOKE
-        ===================================== */
 
-        recognition.onresult = (event) => {
+    const recognition =
+        new SpeechRecognition();
 
-            const spokenText =
-                event.results[0][0]
-                    .transcript
-                    .trim();
 
+    recognition.lang = "en-US";
 
-            setLoading(false);
+    recognition.interimResults = false;
 
-            recognitionRef.current = null;
+    recognition.maxAlternatives = 1;
 
+    recognition.continuous = false;
 
-            if (!spokenText) {
 
-                speak(
-                    "I couldn't hear you. Please try again."
-                );
+    recognitionRef.current =
+        recognition;
 
-                return;
 
-            }
+    setLoading(true);
 
 
-            /*
-               IMPORTANT:
+    try {
 
-               Agar correction ke baad repeat
-               karna hai to handleRepeat chalega.
+        recognition.start();
 
-               Otherwise normal answer AI ko jayega.
-            */
+    } catch (error) {
 
-            if (waitingForRepeat) {
+        console.log(error);
 
-                handleRepeat(spokenText);
+        setLoading(false);
 
-            } else {
+        return;
 
-                handleSubmit(spokenText);
+    }
 
-            }
 
-        };
+    /* =====================================
+       STUDENT ANSWER RECEIVED
+    ===================================== */
 
+    recognition.onresult = (event) => {
 
-        /* =====================================
-           NO MATCH
-        ===================================== */
-
-        recognition.onnomatch = () => {
-
-            setLoading(false);
-
-            recognitionRef.current = null;
-
-
-            speak(
-                "I couldn't understand you. Please try again."
-            );
-
-        };
-
-
-        /* =====================================
-           ERROR
-        ===================================== */
-
-        recognition.onerror = (event) => {
-
-            setLoading(false);
-
-            recognitionRef.current = null;
-
-
-            console.log(
-                "Microphone error:",
-                event.error
-            );
-
-
-            if (event.error === "no-speech") {
-
-                speak(
-                    "I couldn't hear you. Please tap the microphone and answer the same question."
-                );
-
-                return;
-
-            }
-
-
-            if (event.error === "aborted") {
-
-                return;
-
-            }
-
-
-            speak(
-                "Sorry, something went wrong. Please try again."
-            );
-
-        };
-
-
-        /* =====================================
-           MICROPHONE ENDED
-        ===================================== */
-
-        recognition.onend = () => {
-
-            setLoading(false);
-
-            /*
-               VERY IMPORTANT:
-
-               onend sirf microphone listening
-               stop hone ka signal hai.
-
-               YAHAN moveNext() NAHI HAI.
-
-               Isliye mic automatically next
-               question par nahi jayega.
-            */
-
-        };
-
-    };
-
-        /* =========================================
-       SUBMIT STUDENT ANSWER TO AI
-    ========================================= */
-
-    const handleSubmit = async (spokenText) => {
-
-        if (!spokenText || loading) {
-
-            return;
-
-        }
-
-
-        setLoading(true);
-
-
-        try {
-
-            const response = await fetch(
-                "http://localhost:5000/api/chat",
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-
-                    body: JSON.stringify({
-
-                        message: spokenText,
-
-                        history: history,
-
-                        topicId: topicId,
-
-                        lessonId: lessonId,
-
-                        userName: userName,
-
-                        activity: "picture",
-
-                        pictureName:
-                            currentPicture.title,
-
-                        currentQuestion:
-                            currentQuestion
-
-                    })
-
-                }
-            );
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    "Backend request failed"
-                );
-
-            }
-
-
-            const data =
-                await response.json();
-
-
-            const aiReply =
-                data.response ||
-                "Good try! Please try again.";
-
-
-            /* =================================
-               SAVE CONVERSATION
-            ================================= */
-
-            setHistory(prev => [
-
-                ...prev,
-
-                {
-                    sender: "user",
-                    text: spokenText
-                },
-
-                {
-                    sender: "teacher",
-                    text: aiReply
-                }
-
-            ]);
-
-
-            /* =================================
-               CHECK FOR CORRECTION
-            ================================= */
-
-            const betterMatch =
-                aiReply.match(
-                    /better sentence\s*:\s*["“]?([^"”\n]+)["”]?/i
-                );
-
-
-            const correctMatch =
-                aiReply.match(
-                    /correct sentence\s*:\s*["“]?([^"”\n]+)["”]?/i
-                );
-
-
-            let sentence = "";
-
-
-            if (betterMatch) {
-
-                sentence =
-                    betterMatch[1].trim();
-
-            }
-
-            else if (correctMatch) {
-
-                sentence =
-                    correctMatch[1].trim();
-
-            }
-
-
-            /* =================================
-               CORRECTION FOUND
-            ================================= */
-
-            if (sentence) {
-
-                setCorrectSentence(sentence);
-
-                setWaitingForRepeat(true);
-
-            }
-
-            else {
-
-                setWaitingForRepeat(false);
-
-                setCorrectSentence("");
-
-            }
-
-
-            /* =================================
-               TEACHER SPEAKS
-            ================================= */
-
-            speak(aiReply);
-
-
-        }
-
-        catch (error) {
-
-            console.log(
-                "Picture activity error:",
-                error
-            );
-
-
-            speak(
-                "Sorry, I could not connect. Please try again."
-            );
-
-        }
-
-        finally {
-
-            setLoading(false);
-
-        }
-
-    };
-
-        /* =========================================
-       REPEAT CORRECTED SENTENCE
-    ========================================= */
-
-    const handleRepeat = (spokenText) => {
-
-        if (!spokenText || loading) {
-
-            return;
-
-        }
-
-
-        const normalize = (text) => {
-
-            return text
-                .toLowerCase()
-                .replace(/[.,!?'"“”]/g, "")
-                .replace(/\s+/g, " ")
+        const spokenText =
+            event.results[0][0]
+                .transcript
                 .trim();
 
-        };
+
+        setLoading(false);
+
+        recognitionRef.current = null;
 
 
-        const studentAnswer =
-            normalize(spokenText);
-
-        const expectedAnswer =
-            normalize(correctSentence);
-
-
-        /*
-           Student ne corrected sentence
-           sahi repeat kiya.
-        */
-
-        if (
-            expectedAnswer &&
-            (
-                studentAnswer === expectedAnswer ||
-                studentAnswer.includes(expectedAnswer) ||
-                expectedAnswer.includes(studentAnswer)
-            )
-        ) {
-
-            setWaitingForRepeat(false);
-
-            setCorrectSentence("");
-
-            setHistory([]);
-
+        if (!spokenText) {
 
             speak(
-                "Excellent! That's correct.",
-                () => {
-
-                    setTimeout(() => {
-
-                        moveNext();
-
-                    }, 1000);
-
-                }
+                "I couldn't hear you. Please try again."
             );
-
 
             return;
 
         }
 
 
-        /*
-           Repeat galat hai.
-           Next question NAHI aayega.
-        */
+        /* ---------------------------------
+           CORRECTION REPEAT MODE
+        --------------------------------- */
+
+        if (waitingForRepeat) {
+
+            handleRepeat(spokenText);
+
+            return;
+
+        }
+
+
+        /* ---------------------------------
+           NORMAL ANSWER
+        --------------------------------- */
+
+        handleSubmit(spokenText);
+
+    };
+
+
+    /* =====================================
+       NO MATCH
+    ===================================== */
+
+    recognition.onnomatch = () => {
+
+        setLoading(false);
+
+        recognitionRef.current = null;
+
 
         speak(
-
-            `Good try! Please repeat: ${correctSentence}`
-
+            "I couldn't understand you. Please try again."
         );
 
     };
 
 
-    /* =========================================
-       MOVE TO NEXT QUESTION / PICTURE
-    ========================================= */
+    /* =====================================
+       MICROPHONE ERROR
+    ===================================== */
 
-    const moveNext = () => {
+    recognition.onerror = (event) => {
 
-        window.speechSynthesis.cancel();
+        setLoading(false);
 
-
-        /* =====================================
-           NEXT QUESTION — SAME PICTURE
-        ===================================== */
-
-        if (
-            questionIndex <
-            currentPicture.questions.length - 1
-        ) {
-
-            const nextQuestion =
-                questionIndex + 1;
+        recognitionRef.current = null;
 
 
-            setQuestionIndex(nextQuestion);
-
-            setWaitingForRepeat(false);
-
-            setCorrectSentence("");
-
-            setHistory([]);
+        console.log(
+            "Microphone error:",
+            event.error
+        );
 
 
-            setTimeout(() => {
+        if (event.error === "no-speech") {
 
-                speak(
-                    currentPicture
-                        .questions[nextQuestion]
-                );
-
-            }, 500);
-
+            speak(
+                "I couldn't hear you. Please tap the microphone and answer the same question."
+            );
 
             return;
 
         }
 
 
-        /* =====================================
-           NEXT PICTURE
-        ===================================== */
-
-        if (
-            pictureIndex <
-            pictureActivities.length - 1
-        ) {
-
-            const nextPicture =
-                pictureIndex + 1;
-
-
-            setPictureIndex(nextPicture);
-
-            setQuestionIndex(0);
-
-            setWaitingForRepeat(false);
-
-            setCorrectSentence("");
-
-            setHistory([]);
-
-
-            setTimeout(() => {
-
-                speak(
-                    pictureActivities[
-                        nextPicture
-                    ].questions[0]
-                );
-
-            }, 500);
-
+        if (event.error === "aborted") {
 
             return;
 
         }
 
 
-        /* =====================================
-           ALL PICTURES COMPLETE
-        ===================================== */
-
-        setShowFinish(true);
+        speak(
+            "Sorry, something went wrong. Please try again."
+        );
 
     };
 
-        /* =========================================
-       SKIP CURRENT QUESTION
-    ========================================= */
+
+    /* =====================================
+       MICROPHONE ENDED
+       
+       IMPORTANT:
+       YAHAN moveNext() NAHI HAI.
+    ===================================== */
+
+    recognition.onend = () => {
+
+        setLoading(false);
+
+    };
+
+};
+
+
 /* =========================================
-   SKIP ENTIRE ACTIVITY
+   SUBMIT ANSWER TO BACKEND / AI
 ========================================= */
 
-const handleSkip = () => {
+const handleSubmit = async (spokenText) => {
 
-    // Stop teacher voice
+    if (!spokenText || loading) {
+
+        return;
+
+    }
+
+
+    setLoading(true);
+
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:5000/api/chat",
+            {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    message: spokenText,
+
+                    history: history,
+
+                    topicId: topicId,
+
+                    lessonId: lessonId,
+
+                    userName: userName,
+
+                    activity: "picture",
+
+                    pictureName:
+                        currentPicture.title,
+
+                    currentQuestion:
+                        currentQuestion
+
+                })
+
+            }
+        );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Backend request failed"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const aiReply =
+            data.response ||
+            "Good try! Please try again.";
+
+
+        /* =================================
+           SAVE CHAT HISTORY
+        ================================= */
+
+        setHistory(prev => [
+
+            ...prev,
+
+            {
+                sender: "user",
+                text: spokenText
+            },
+
+            {
+                sender: "teacher",
+                text: aiReply
+            }
+
+        ]);
+
+
+        /* =================================
+           FIND CORRECTED SENTENCE
+        ================================= */
+
+        const betterMatch =
+            aiReply.match(
+                /better sentence\s*:\s*["“]?([^"”\n]+)["”]?/i
+            );
+
+
+        const correctMatch =
+            aiReply.match(
+                /correct sentence\s*:\s*["“]?([^"”\n]+)["”]?/i
+            );
+
+
+        let sentence = "";
+
+
+        if (betterMatch) {
+
+            sentence =
+                betterMatch[1].trim();
+
+        }
+
+        else if (correctMatch) {
+
+            sentence =
+                correctMatch[1].trim();
+
+        }
+
+
+        /* =================================
+           CORRECTION FOUND
+        ================================= */
+
+        if (sentence) {
+
+            setCorrectSentence(sentence);
+
+            setWaitingForRepeat(true);
+
+        }
+
+        else {
+
+            setCorrectSentence("");
+
+            setWaitingForRepeat(false);
+
+        }
+
+
+        /* =================================
+           TEACHER REPLY
+           
+           IMPORTANT:
+           YAHAN moveNext() NAHI HAI.
+        ================================= */
+
+        speak(aiReply);
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Picture activity error:",
+            error
+        );
+
+
+        speak(
+            "Sorry, I could not connect. Please try again."
+        );
+
+    }
+
+    finally {
+
+        setLoading(false);
+
+    }
+
+};
+
+/* =========================================
+   REPEAT CORRECTED SENTENCE
+========================================= */
+
+const handleRepeat = (spokenText) => {
+
+    if (!spokenText || loading) {
+
+        return;
+
+    }
+
+
+    const normalize = (text) => {
+
+        return text
+            .toLowerCase()
+            .replace(/[.,!?'"“”]/g, "")
+            .replace(/\s+/g, " ")
+            .trim();
+
+    };
+
+
+    const studentAnswer =
+        normalize(spokenText);
+
+
+    const expectedAnswer =
+        normalize(correctSentence);
+
+
+    /* =====================================
+       CORRECT REPEAT
+    ===================================== */
+
+    if (
+        expectedAnswer &&
+        (
+            studentAnswer === expectedAnswer ||
+            studentAnswer.includes(expectedAnswer) ||
+            expectedAnswer.includes(studentAnswer)
+        )
+    ) {
+
+        setWaitingForRepeat(false);
+
+        setCorrectSentence("");
+
+        setHistory([]);
+
+
+        speak(
+            "Excellent! That's correct.",
+            () => {
+
+                setTimeout(() => {
+
+                    moveNext();
+
+                }, 1000);
+
+            }
+        );
+
+
+        return;
+
+    }
+
+
+    /* =====================================
+       WRONG REPEAT
+
+       SAME QUESTION RAHEGA.
+       NEXT QUESTION NAHI AAYEGA.
+    ===================================== */
+
+    speak(
+        `Good try! Please repeat: ${correctSentence}`
+    );
+
+};
+
+
+/* =========================================
+   MOVE NEXT
+========================================= */
+
+const moveNext = () => {
+
     window.speechSynthesis.cancel();
 
-    // Stop microphone
+
+    /* =====================================
+       NEXT QUESTION — SAME PICTURE
+    ===================================== */
+
+    if (
+        questionIndex <
+        currentPicture.questions.length - 1
+    ) {
+
+        const nextQuestion =
+            questionIndex + 1;
+
+
+        setQuestionIndex(nextQuestion);
+
+        setWaitingForRepeat(false);
+
+        setCorrectSentence("");
+
+        setHistory([]);
+
+
+        setTimeout(() => {
+
+            speak(
+                currentPicture.questions[nextQuestion]
+            );
+
+        }, 600);
+
+
+        return;
+
+    }
+
+
+    /* =====================================
+       NEXT PICTURE
+    ===================================== */
+
+    if (
+        pictureIndex <
+        pictureActivities.length - 1
+    ) {
+
+        const nextPicture =
+            pictureIndex + 1;
+
+
+        setPictureIndex(nextPicture);
+
+        setQuestionIndex(0);
+
+        setWaitingForRepeat(false);
+
+        setCorrectSentence("");
+
+        setHistory([]);
+
+
+        setTimeout(() => {
+
+            speak(
+                pictureActivities[
+                    nextPicture
+                ].questions[0]
+            );
+
+        }, 600);
+
+
+        return;
+
+    }
+
+
+    /* =====================================
+       ALL PICTURES COMPLETE
+       
+       IMPORTANT:
+       Yahan activity complete hogi.
+       LessonComplete parent se handle hoga.
+    ===================================== */
+
+    completeActivity();
+
+};
+
+
+/* =========================================
+   COMPLETE ACTIVITY
+========================================= */
+
+const completeActivity = () => {
+
+    window.speechSynthesis.cancel();
+
+
+    /* -------------------------------------
+       Stop microphone
+    ------------------------------------- */
+
     if (recognitionRef.current) {
 
         try {
@@ -949,6 +971,7 @@ const handleSkip = () => {
 
     }
 
+
     setLoading(false);
 
     setIsSpeaking(false);
@@ -957,299 +980,315 @@ const handleSkip = () => {
 
     setCorrectSentence("");
 
-    /*
-       IMPORTANT:
 
-       Skip means SKIP THE WHOLE ACTIVITY.
-       It does NOT call moveNext().
-    */
+    /* -------------------------------------
+       Tell parent that activity is complete
+    ------------------------------------- */
 
-    setShowFinish(true);
+    if (onNext) {
 
-    /*
-       After showing the lesson completion popup,
-       automatically return to Subtopic page.
-    */
+        onNext();
 
-    setTimeout(() => {
-
-        window.speechSynthesis.cancel();
-
-        if (onNext) {
-
-            onNext();
-
-        }
-
-    }, 3500);
+    }
 
 };
 
 
-    /* =========================================
-       FINISH -> NEXT LESSON
-    ========================================= */
+/* =========================================
+   SKIP WHOLE ACTIVITY
+========================================= */
 
-    const handleNextLesson = () => {
+const handleSkip = () => {
 
-        window.speechSynthesis.cancel();
-
-        setShowFinish(false);
-
-        if (onNext) {
-
-            onNext();
-
-        }
-
-    };
+    window.speechSynthesis.cancel();
 
 
-    /* =========================================
-       BACK BUTTON
-    ========================================= */
+    /* -------------------------------------
+       Stop microphone
+    ------------------------------------- */
 
-    const handleBack = () => {
+    if (recognitionRef.current) {
 
-        window.speechSynthesis.cancel();
+        try {
 
-        if (recognitionRef.current) {
+            recognitionRef.current.stop();
 
-            try {
+        } catch (error) {
 
-                recognitionRef.current.stop();
-
-            } catch (error) {
-
-                console.log(error);
-
-            }
+            console.log(error);
 
         }
 
-        if (onBack) {
+        recognitionRef.current = null;
 
-            onBack();
+    }
+
+
+    setLoading(false);
+
+    setIsSpeaking(false);
+
+    setWaitingForRepeat(false);
+
+    setCorrectSentence("");
+
+
+    /*
+       IMPORTANT:
+
+       Skip ka matlab:
+
+       ❌ next question nahi
+       ❌ next picture nahi
+
+       ✅ poori Picture Description activity skip
+       ✅ parent ko completion signal
+    */
+
+    if (onNext) {
+
+        onNext();
+
+    }
+
+};
+
+
+/* =========================================
+   BACK BUTTON
+========================================= */
+
+const handleBack = () => {
+
+    window.speechSynthesis.cancel();
+
+
+    if (recognitionRef.current) {
+
+        try {
+
+            recognitionRef.current.stop();
+
+        } catch (error) {
+
+            console.log(error);
 
         }
 
-    };
+        recognitionRef.current = null;
 
-        /* =========================================
-       MAIN UI
-    ========================================= */
-
-    return (
-
-        <div className="picture-container">
-
-            <div className="picture-card">
+    }
 
 
-                {/* ================= HEADER ================= */}
+    setLoading(false);
 
-                <div className="picture-header">
-
-                    <button
-                        className="picture-back-btn"
-                        onClick={handleBack}
-                    >
-                        ← Back
-                    </button>
+    setIsSpeaking(false);
 
 
-                    <h1>
-                        Picture Description
-                    </h1>
+    if (onBack) {
+
+        onBack();
+
+    }
+
+};
+
+/* =========================================
+   MAIN UI
+========================================= */
+
+return (
+
+    <div className="picture-container">
+
+        <div className="picture-card">
 
 
-                    <button
-                        className="picture-skip-btn"
-                        onClick={handleSkip}
-                        disabled={loading}
-                    >
-                        Skip →
-                    </button>
+            {/* =================================
+                HEADER
+            ================================= */}
+
+            <div className="picture-header">
+
+                <button
+                    className="picture-back-btn"
+                    onClick={handleBack}
+                    disabled={loading}
+                >
+                    ← Back
+                </button>
+
+
+                <h1>
+                    Picture Description
+                </h1>
+
+
+                <button
+                    className="picture-skip-btn"
+                    onClick={handleSkip}
+                    disabled={loading}
+                >
+                    Skip →
+                </button>
+
+            </div>
+
+
+            {/* =================================
+                PROGRESS
+            ================================= */}
+
+            <div className="picture-progress">
+
+                <span>
+                    Picture {pictureIndex + 1} of{" "}
+                    {pictureActivities.length}
+                </span>
+
+
+                <span>
+                    Question {questionIndex + 1} of{" "}
+                    {currentPicture.questions.length}
+                </span>
+
+            </div>
+
+
+            {/* =================================
+                MAIN CONTENT
+            ================================= */}
+
+            <div className="picture-main">
+
+
+                {/* =================================
+                    TEACHER SIDE
+                ================================= */}
+
+                <div className="picture-left">
+
+                    <img
+                        src={teacherFrames[frame]}
+                        alt="Miss Uroosa"
+                        className={
+                            isSpeaking
+                                ? "teacher-img speaking"
+                                : "teacher-img"
+                        }
+                    />
+
+
+                    <div className="picture-bubble">
+
+                        <p>
+
+                            {teacherMessage ||
+                                currentQuestion}
+
+                        </p>
+
+                    </div>
 
                 </div>
 
 
-                {!showFinish && (
+                {/* =================================
+                    PICTURE SIDE
+                ================================= */}
 
-                    <>
+                <div className="picture-right">
 
-                        {/* ================= PROGRESS ================= */}
+                    <div className="picture-image-card">
 
-                        <div className="picture-progress">
-
-                            <span>
-                                Picture {pictureIndex + 1} of{" "}
-                                {pictureActivities.length}
-                            </span>
-
-                            <span>
-                                Question {questionIndex + 1} of{" "}
-                                {currentPicture.questions.length}
-                            </span>
-
-                        </div>
-
-
-                        {/* ================= MAIN ================= */}
-
-                        <div className="picture-main">
-
-
-                            {/* ================= TEACHER ================= */}
-
-                            <div className="picture-left">
-
-                                <img
-                                    src={teacherFrames[frame]}
-                                    alt="Miss Uroosa"
-                                    className={
-                                        isSpeaking
-                                            ? "teacher-img speaking"
-                                            : "teacher-img"
-                                    }
-                                />
-
-
-                                <div className="picture-bubble">
-
-                                    <p>
-                                        {
-                                            teacherMessage ||
-                                            currentQuestion
-                                        }
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-
-                            {/* ================= PICTURE ================= */}
-
-                            <div className="picture-right">
-
-                                <div className="picture-image-card">
-
-                                    <img
-                                        src={currentPicture.image}
-                                        alt={currentPicture.title}
-                                        className="activity-picture"
-                                    />
-
-                                </div>
-
-
-                                <h3>
-                                    {currentPicture.title}
-                                </h3>
-
-                            </div>
-
-                        </div>
-
-
-                        {/* ================= STATUS ================= */}
-
-                        <div className="picture-status">
-
-                            {waitingForRepeat ? (
-
-                                <span>
-                                    🔁 Please repeat the corrected sentence
-                                </span>
-
-                            ) : loading ? (
-
-                                <span>
-                                    🎙 Listening...
-                                </span>
-
-                            ) : isSpeaking ? (
-
-                                <span>
-                                    🔊 Miss Uroosa is speaking...
-                                </span>
-
-                            ) : (
-
-                                <span>
-                                    🎤 Tap the microphone and answer
-                                </span>
-
-                            )}
-
-                        </div>
-
-
-                        {/* ================= MIC ================= */}
-
-                        <div className="picture-buttons">
-
-                            <button
-                                className="picture-mic-btn"
-                                onClick={startListening}
-                                disabled={
-                                    loading ||
-                                    isSpeaking
-                                }
-                            >
-
-                                {loading
-                                    ? "🎙 Listening..."
-                                    : "🎤 Tap to Speak"}
-
-                            </button>
-
-                        </div>
-
-                    </>
-
-                )}
-
-
-                {/* ================= FINISH ================= */}
-
-                {showFinish && (
-
-                    <div className="picture-finish">
-
-                        <div className="picture-remark">
-
-                            <h2>
-                                🎉 Excellent!
-                            </h2>
-
-                            <p>
-                                You completed all the
-                                Picture Description activities.
-                            </p>
-
-                        </div>
-
-
-                        <button
-                            className="picture-next-btn"
-                            onClick={handleNextLesson}
-                        >
-                            Next Lesson →
-                        </button>
+                        <img
+                            src={currentPicture.image}
+                            alt={currentPicture.title}
+                            className="activity-picture"
+                        />
 
                     </div>
+
+
+                    <h3>
+                        {currentPicture.title}
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            {/* =================================
+                STATUS
+            ================================= */}
+
+            <div className="picture-status">
+
+                {waitingForRepeat ? (
+
+                    <span>
+                        🔁 Please repeat the corrected sentence
+                    </span>
+
+                ) : loading ? (
+
+                    <span>
+                        🎙 Listening...
+                    </span>
+
+                ) : isSpeaking ? (
+
+                    <span>
+                         Miss Uroosa is speaking...
+                    </span>
+
+                ) : (
+
+                    <span>
+                         🎙️Tap the microphone and answer
+                    </span>
 
                 )}
 
             </div>
 
+
+            {/* =================================
+                MICROPHONE BUTTON
+            ================================= */}
+
+            <div className="picture-buttons">
+
+                <button
+                    className="picture-mic-btn"
+                    onClick={startListening}
+                    disabled={
+                        loading ||
+                        isSpeaking
+                    }
+                >
+
+                    {loading
+                        ? "🎙 Listening..."
+                        : "🎙️ Tap to Speak"}
+
+                </button>
+
+            </div>
+
+
         </div>
 
-    );
+    </div>
+
+);
+
+
+/* =========================================
+   END COMPONENT
+========================================= */
 
 }
-
 
 export default PictureDescriptionActivity;

@@ -286,11 +286,7 @@ function MenuMatchingActivity({
 
                     </button>
 
-                    <div className="menu-header-logo">
-
-                        🍴
-
-                    </div>
+                   
 
                     <button
 
@@ -344,7 +340,7 @@ function MenuMatchingActivity({
 
                         <h3>
 
-                            👩🏻‍🏫 Miss Uroosa
+                             Miss Uroosa
 
                         </h3>
 
