@@ -13,19 +13,50 @@ import ListenRepeatFlow from "./ListenRepeatFlow";
 import RestaurantConversationFlow from "./RestaurantConversationFlow";
 import FinalChallengeFlow from "./FinalChallengeFlow";
 
+/* =========================================
+   TOPIC 1
+========================================= */
+
+/* Subtopic 1 - Talking About Hobbies */
+import HobbiesFlow from "./Topic 1/Subtopic 1/HobbiesFlow";
+
+/* Subtopic 2 - Favourite Person */
+import FavouritePersonFlow from "./Topic 1/subtopic 2/FavouritePersonFlow.jsx";
+
+
 import LessonComplete from "./LessonComplete";
 
 import "./App.css";
 
+
 function App() {
 
+    /* =========================================
+       USER NAME
+    ========================================= */
+
     const [userName, setUserName] = useState("");
+
+
+    /* =========================================
+       CURRENT PAGE
+    ========================================= */
 
     const [currentPage, setCurrentPage] =
         useState("home");
 
+
+    /* =========================================
+       SELECTED TOPIC
+    ========================================= */
+
     const [selectedTopic, setSelectedTopic] =
         useState(null);
+
+
+    /* =========================================
+       SELECTED LESSON
+    ========================================= */
 
     const [selectedLesson, setSelectedLesson] =
         useState(null);
@@ -37,7 +68,7 @@ function App() {
 
 
             {/* =========================================
-                HOME
+                HOME PAGE
             ========================================= */}
 
             {currentPage === "home" && (
@@ -54,7 +85,7 @@ function App() {
 
 
             {/* =========================================
-                LOGIN
+                LOGIN PAGE
             ========================================= */}
 
             {currentPage === "login" && (
@@ -75,7 +106,7 @@ function App() {
 
 
             {/* =========================================
-                PATHWAY
+                PATHWAY PAGE
             ========================================= */}
 
             {currentPage === "pathway" && (
@@ -96,7 +127,7 @@ function App() {
 
 
             {/* =========================================
-                TOPICS
+                TOPICS PAGE
             ========================================= */}
 
             {currentPage === "topics" && (
@@ -121,14 +152,16 @@ function App() {
 
 
             {/* =========================================
-                SUBTOPICS
+                SUBTOPICS PAGE
             ========================================= */}
 
             {currentPage === "subtopics" && (
 
                 <SubtopicPage
 
-                    selectedTopic={selectedTopic}
+                    selectedTopic={
+                        selectedTopic
+                    }
 
                     onBack={() =>
                         setCurrentPage("topics")
@@ -159,9 +192,11 @@ function App() {
 
                     setUserName={setUserName}
 
+
                     onBack={() =>
                         setCurrentPage("subtopics")
                     }
+
 
                     onStartLesson={() => {
 
@@ -245,6 +280,42 @@ function App() {
 
                         }
 
+
+                        /* =========================
+                           TOPIC 1
+                           SUBTOPIC 1
+                           TALKING ABOUT HOBBIES
+                        ========================= */
+
+                        else if (
+                            selectedLesson?.type ===
+                            "hobbies"
+                        ) {
+
+                            setCurrentPage(
+                                "hobbiesFlow"
+                            );
+
+                        }
+
+
+                        /* =========================
+                           TOPIC 1
+                           SUBTOPIC 2
+                           FAVOURITE PERSON
+                        ========================= */
+
+                        else if (
+                            selectedLesson?.type ===
+                            "favouritePerson"
+                        ) {
+
+                            setCurrentPage(
+                                "favouritePersonFlow"
+                            );
+
+                        }
+
                     }}
 
                 />
@@ -288,7 +359,9 @@ function App() {
 
                     onBack={() => {
 
-                        setCurrentPage("chat");
+                        setCurrentPage(
+                            "chat"
+                        );
 
                     }}
 
@@ -334,7 +407,9 @@ function App() {
 
                     onBack={() => {
 
-                        setCurrentPage("chat");
+                        setCurrentPage(
+                            "chat"
+                        );
 
                     }}
 
@@ -347,7 +422,8 @@ function App() {
                 FINAL CHALLENGE FLOW
             ========================================= */}
 
-            {currentPage === "finalChallenge" && (
+            {currentPage ===
+                "finalChallenge" && (
 
                 <FinalChallengeFlow
 
@@ -379,7 +455,9 @@ function App() {
 
                     onBack={() => {
 
-                        setCurrentPage("chat");
+                        setCurrentPage(
+                            "chat"
+                        );
 
                     }}
 
@@ -400,6 +478,7 @@ function App() {
                         selectedLesson?.content
                     }
 
+
                     onFinish={() => {
 
                         setCurrentPage(
@@ -408,9 +487,12 @@ function App() {
 
                     }}
 
+
                     onBack={() => {
 
-                        setCurrentPage("chat");
+                        setCurrentPage(
+                            "chat"
+                        );
 
                     }}
 
@@ -435,13 +517,121 @@ function App() {
 
                     }}
 
+
                     onBack={() => {
 
                         console.log(
                             "APP BACK FUNCTION CALLED"
                         );
 
-                        setCurrentPage("chat");
+                        setCurrentPage(
+                            "chat"
+                        );
+
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =========================================
+                TOPIC 1
+                SUBTOPIC 1
+                TALKING ABOUT HOBBIES
+            ========================================= */}
+
+            {currentPage === "hobbiesFlow" && (
+
+                <HobbiesFlow
+
+                    content={
+                        selectedLesson?.content
+                    }
+
+
+                    topicId={
+                        selectedTopic?.id
+                    }
+
+
+                    lessonId={
+                        selectedLesson?.id
+                    }
+
+
+                    userName={
+                        userName
+                    }
+
+
+                    onFinish={() => {
+
+                        setCurrentPage(
+                            "lessonComplete"
+                        );
+
+                    }}
+
+
+                    onBack={() => {
+
+                        setCurrentPage(
+                            "chat"
+                        );
+
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =========================================
+                TOPIC 1
+                SUBTOPIC 2
+                FAVOURITE PERSON
+            ========================================= */}
+
+            {currentPage ===
+                "favouritePersonFlow" && (
+
+                <FavouritePersonFlow
+
+                    content={
+                        selectedLesson?.content
+                    }
+
+
+                    topicId={
+                        selectedTopic?.id
+                    }
+
+
+                    lessonId={
+                        selectedLesson?.id
+                    }
+
+
+                    userName={
+                        userName
+                    }
+
+
+                    onFinish={() => {
+
+                        setCurrentPage(
+                            "lessonComplete"
+                        );
+
+                    }}
+
+
+                    onBack={() => {
+
+                        setCurrentPage(
+                            "chat"
+                        );
 
                     }}
 
@@ -468,7 +658,7 @@ function App() {
 
 
             {/* =========================================
-                COMMON LESSON COMPLETE
+                COMMON LESSON COMPLETE PAGE
             ========================================= */}
 
             {currentPage ===
@@ -493,5 +683,6 @@ function App() {
     );
 
 }
+
 
 export default App;

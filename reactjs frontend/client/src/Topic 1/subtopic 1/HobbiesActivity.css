@@ -1,0 +1,951 @@
+/* =====================================================
+            HOBBIES ACTIVITY
+===================================================== */
+
+.hobbies-activity-page {
+    width: 100%;
+    min-height: 100vh;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+                    OVERLAY
+===================================================== */
+
+.hobbies-activity-overlay {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, .25);
+    backdrop-filter: blur(5px);
+}
+
+
+/* =====================================================
+                    MAIN CARD
+===================================================== */
+
+.hobbies-activity-card {
+    width: min(1400px, 94vw);
+    min-height: 760px;
+    max-height: 90vh;
+
+    background-image:
+        url("../../assets/favourite.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border-radius: 30px;
+
+    position: relative;
+    z-index: 5;
+
+    padding: 28px 38px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, .25);
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+                    HEADER
+===================================================== */
+
+.hobbies-activity-header {
+    display: grid;
+
+    grid-template-columns:
+        130px 1fr 130px;
+
+    align-items: center;
+
+    gap: 20px;
+
+    flex-shrink: 0;
+}
+
+
+.hobbies-activity-header h1 {
+    margin: 0;
+
+    text-align: center;
+
+    font-size: 36px;
+
+    color: #5A3620;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+                    HEADER BUTTONS
+===================================================== */
+
+.hobbies-back-btn,
+.hobbies-skip-btn {
+    width: 120px;
+    height: 46px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #8B5E3C;
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+
+.hobbies-back-btn:hover,
+.hobbies-skip-btn:hover {
+    background: #6C452A;
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+                    PROGRESS
+===================================================== */
+
+.hobbies-progress {
+    width: 210px;
+    height: 40px;
+
+    margin: 15px auto 5px;
+
+    border-radius: 30px;
+
+    background: #FFF3E6;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #7A4C2C;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+                    MAIN CONTENT
+===================================================== */
+
+.hobbies-activity-content {
+
+    flex: 1;
+
+    display: grid;
+
+    grid-template-columns:
+        350px minmax(520px, 760px);
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 55px;
+
+    margin-top: 10px;
+
+    min-height: 0;
+}
+
+
+/* =====================================================
+                    LEFT TEACHER AREA
+===================================================== */
+
+.hobbies-activity-left {
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-start;
+
+    align-items: center;
+
+    padding-top: 15px;
+
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+                    TEACHER STAGE
+===================================================== */
+
+.teacher-stage {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    position: relative;
+}
+
+
+/* =====================================================
+                    TEACHER IMAGE
+===================================================== */
+
+.hobbies-activity-teacher {
+
+    width: 270px;
+
+    height: auto;
+
+    max-height: 430px;
+
+    object-fit: contain;
+
+    display: block;
+
+    transition: .3s ease;
+}
+
+
+.hobbies-activity-teacher.speaking {
+
+    transform:
+        translateY(-4px)
+        scale(1.035);
+
+    filter:
+        drop-shadow(
+            0 10px 18px
+            rgba(139, 94, 60, .25)
+        );
+}
+
+
+/* =====================================================
+                    TEACHER SPEECH BUBBLE
+===================================================== */
+
+.teacher-speech-bubble {
+
+    width: 285px;
+
+    max-width: 100%;
+
+    margin-top: 8px;
+
+    padding: 14px 18px;
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    border: 2px solid #E4CDB5;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, .12);
+
+    position: relative;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    color: #5A3620;
+
+    font-size: 16px;
+
+    line-height: 1.5;
+
+    font-weight: 600;
+
+    animation:
+        teacherBubbleIn
+        .3s ease;
+}
+
+
+/* =====================================================
+                SPEECH BUBBLE TAIL
+===================================================== */
+
+.teacher-speech-bubble::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -9px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+
+    width: 16px;
+    height: 16px;
+
+    background: #ffffff;
+
+    border-left: 2px solid #E4CDB5;
+    border-top: 2px solid #E4CDB5;
+}
+
+
+/* =====================================================
+                    TEACHER NAME
+===================================================== */
+
+.teacher-speech-name {
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    color: #8B5E3C;
+
+    margin-bottom: 6px;
+}
+
+
+/* =====================================================
+                    SPEECH TEXT
+===================================================== */
+
+.teacher-speech-text {
+
+    font-size: 16px;
+
+    line-height: 1.5;
+
+    font-weight: 600;
+
+    color: #5A3620;
+}
+
+
+/* =====================================================
+                    RIGHT SIDE
+===================================================== */
+
+.hobbies-activity-right {
+    width: 100%;
+    max-width: 760px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    margin: 0 auto;
+
+    transform: translateY(-35px);
+}
+
+/* =====================================================
+                    SITUATION BOX
+===================================================== */
+
+.hobbies-situation-box {
+
+    width: 100%;
+
+    background: #FFF8EF;
+
+    border: 2px solid #E7D4BF;
+
+    border-radius: 22px;
+
+    padding: 18px 22px;
+
+    margin-bottom: 15px;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0, 0, 0, .07);
+
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+                    SITUATION TITLE
+===================================================== */
+
+.situation-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #8B5E3C;
+
+    font-size: 17px;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+                    SITUATION TEXT
+===================================================== */
+
+.hobbies-situation-box p {
+
+    margin: 10px 0 14px;
+
+    color: #5A3620;
+
+    font-size: 21px;
+
+    line-height: 1.4;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+                    LISTEN BUTTON
+===================================================== */
+
+.hobbies-listen-btn {
+
+    width: 160px;
+
+    height: 40px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #8B5E3C;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+
+.hobbies-listen-btn:hover:not(:disabled) {
+
+    background: #6C452A;
+
+    transform: translateY(-2px);
+}
+
+
+.hobbies-listen-btn:disabled {
+
+    opacity: .55;
+
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+                    QUESTION TITLE
+===================================================== */
+
+.hobbies-question-title {
+
+    width: 100%;
+
+    background: #D8B48A;
+
+    color: #5A3620;
+
+    border-radius: 15px;
+
+    padding: 13px 18px;
+
+    font-size: 19px;
+
+    font-weight: 800;
+
+    margin-bottom: 13px;
+
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+                    OPTIONS
+===================================================== */
+
+.hobbies-options {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+}
+
+
+/* =====================================================
+                    OPTION
+===================================================== */
+
+.hobbies-option {
+
+    width: 100%;
+
+    min-height: 62px;
+
+    padding: 12px 18px;
+
+    border-radius: 15px;
+
+    border: 2px solid #DFC7A7;
+
+    background: #FFFFFF;
+
+    color: #5A3620;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    text-align: left;
+
+    transition: .25s;
+
+    box-sizing: border-box;
+}
+
+
+.hobbies-option:hover:not(:disabled) {
+
+    background: #FFF4E8;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px
+        rgba(0, 0, 0, .08);
+}
+
+
+.hobbies-option:disabled {
+
+    cursor: default;
+}
+
+
+/* =====================================================
+                    OPTION NUMBER
+===================================================== */
+
+.option-number {
+
+    width: 36px;
+
+    height: 36px;
+
+    min-width: 36px;
+
+    border-radius: 50%;
+
+    background: #8B5E3C;
+
+    color: white;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+                    OPTION TEXT
+===================================================== */
+
+.option-text {
+
+    flex: 1;
+
+    line-height: 1.35;
+}
+
+
+/* =====================================================
+                    CORRECT
+===================================================== */
+
+.hobbies-option.correct {
+
+    background: #DDF6E3;
+
+    border-color: #2E9B52;
+
+    color: #206D39;
+}
+
+
+/* =====================================================
+                    WRONG
+===================================================== */
+
+.hobbies-option.wrong {
+
+    background: #FFE4E4;
+
+    border-color: #E74C3C;
+
+    color: #B71C1C;
+}
+
+
+/* =====================================================
+                    FEEDBACK
+===================================================== */
+
+.hobbies-feedback {
+
+    margin-top: 12px;
+
+    padding: 11px 16px;
+
+    border-radius: 14px;
+
+    text-align: center;
+}
+
+
+.hobbies-feedback.success {
+
+    background: #DFF6E5;
+
+    border: 2px solid #2E9B52;
+
+    color: #206D39;
+}
+
+
+.hobbies-feedback.error {
+
+    background: #FFE5E5;
+
+    border: 2px solid #E74C3C;
+
+    color: #B71C1C;
+}
+
+
+.feedback-title {
+
+    font-size: 17px;
+
+    font-weight: 800;
+}
+
+
+.feedback-small {
+
+    margin-top: 4px;
+
+    font-size: 13px;
+
+    opacity: .8;
+}
+
+
+/* =====================================================
+                    NO DATA
+===================================================== */
+
+.hobbies-no-data {
+
+    min-height: 650px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+
+.hobbies-no-data h2 {
+
+    font-size: 38px;
+
+    color: #5A3620;
+}
+
+
+.hobbies-no-data p {
+
+    font-size: 20px;
+
+    color: #555;
+}
+
+
+/* =====================================================
+                    NEXT BUTTON
+===================================================== */
+
+.hobbies-next-btn {
+
+    margin-top: 25px;
+
+    width: 230px;
+
+    height: 56px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background: #8B5E3C;
+
+    color: white;
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.hobbies-next-btn:hover {
+
+    background: #6C452A;
+}
+
+
+/* =====================================================
+                    ANIMATION
+===================================================== */
+
+@keyframes teacherBubbleIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(8px)
+            scale(.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+}
+
+
+/* =====================================================
+                    RESPONSIVE
+===================================================== */
+
+@media(max-width:1100px) {
+
+    .hobbies-activity-card {
+
+        max-height: none;
+
+        overflow-y: auto;
+    }
+
+
+    .hobbies-activity-content {
+
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+
+        overflow: visible;
+    }
+
+
+    .hobbies-activity-left {
+
+        height: auto;
+
+        min-height: 300px;
+
+        padding-top: 10px;
+    }
+
+
+    .hobbies-activity-teacher {
+
+        width: 220px;
+
+        max-height: 320px;
+    }
+
+
+    .hobbies-activity-right {
+
+        max-width: 700px;
+
+        width: 100%;
+    }
+
+}
+
+
+@media(max-width:768px) {
+
+    .hobbies-activity-page {
+
+        padding: 12px;
+    }
+
+
+    .hobbies-activity-card {
+
+        width: 96vw;
+
+        min-height: 95vh;
+
+        padding: 18px;
+
+        border-radius: 22px;
+    }
+
+
+    .hobbies-activity-header {
+
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+
+    .hobbies-activity-header h1 {
+
+        order: -1;
+
+        font-size: 27px;
+    }
+
+
+    .hobbies-back-btn,
+    .hobbies-skip-btn {
+
+        width: 100%;
+    }
+
+
+    .hobbies-activity-content {
+
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
+
+    .hobbies-activity-teacher {
+
+        width: 190px;
+
+        max-height: 270px;
+    }
+
+
+    .teacher-speech-bubble {
+
+        width: 90%;
+
+        max-width: 320px;
+    }
+
+
+    .hobbies-situation-box p {
+
+        font-size: 18px;
+    }
+
+
+    .hobbies-question-title {
+
+        font-size: 17px;
+    }
+
+
+    .hobbies-option {
+
+        font-size: 15px;
+
+        min-height: 58px;
+    }
+
+}

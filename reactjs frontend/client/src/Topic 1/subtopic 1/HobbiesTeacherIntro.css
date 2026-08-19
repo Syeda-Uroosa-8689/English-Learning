@@ -1,0 +1,434 @@
+/* =========================================
+   HOBBIES TEACHER INTRO
+========================================= */
+
+.hobbies-teacher-intro-container {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9998;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background-image: url("../../assets/chatbg.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+}
+
+
+/* =========================================
+   OVERLAY
+========================================= */
+
+.hobbies-teacher-intro-container::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.30);
+
+    backdrop-filter: blur(8px);
+
+}
+
+
+/* =========================================
+   MAIN CARD
+========================================= */
+
+.hobbies-teacher-intro-card {
+
+    width: 1000px;
+
+    min-height: 560px;
+
+    background: #D8B48A;
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 45px;
+
+    padding: 50px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.30);
+
+    clip-path: polygon(
+        7% 0%,
+        93% 0%,
+        100% 12%,
+        100% 88%,
+        93% 100%,
+        7% 100%,
+        0% 88%,
+        0% 12%
+    );
+
+    animation: hobbiesTeacherCardIn 0.6s ease;
+
+}
+
+
+/* =========================================
+   TEACHER AREA
+========================================= */
+
+.hobbies-teacher-image-area {
+
+    width: 380px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+/* =========================================
+   TEACHER IMAGE
+========================================= */
+
+.hobbies-teacher-image {
+
+    width: 330px;
+
+    height: 330px;
+
+    object-fit: contain;
+
+    filter: drop-shadow(
+        0 15px 20px rgba(0, 0, 0, 0.22)
+    );
+
+    animation: hobbiesTeacherFloat
+        2.5s ease-in-out infinite;
+
+}
+
+
+/* =========================================
+   SPEAKING ANIMATION
+========================================= */
+
+.hobbies-teacher-image.speaking {
+
+    animation:
+        hobbiesTeacherFloat
+        2.5s ease-in-out infinite,
+
+        hobbiesTeacherSpeak
+        .35s ease-in-out infinite alternate;
+
+}
+
+
+/* =========================================
+   SPEECH BUBBLE
+========================================= */
+
+.hobbies-teacher-speech-bubble {
+
+    width: 470px;
+
+    min-height: 230px;
+
+    background: #FFF8EE;
+
+    border-radius: 30px;
+
+    padding: 28px 32px;
+
+    box-sizing: border-box;
+
+    position: relative;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.16);
+
+    animation:
+        hobbiesBubbleIn
+        .5s ease;
+
+}
+
+
+/* =========================================
+   BUBBLE TAIL
+========================================= */
+
+.hobbies-teacher-speech-bubble::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: -25px;
+
+    top: 80px;
+
+    width: 0;
+
+    height: 0;
+
+    border-top: 18px solid transparent;
+
+    border-bottom: 18px solid transparent;
+
+    border-right: 30px solid #FFF8EE;
+
+}
+
+
+/* =========================================
+   TEACHER NAME
+========================================= */
+
+.hobbies-teacher-name {
+
+    display: inline-block;
+
+    background: #5A3620;
+
+    color: white;
+
+    padding: 8px 20px;
+
+    border-radius: 25px;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    margin-bottom: 18px;
+
+}
+
+
+/* =========================================
+   SPEECH TEXT
+========================================= */
+
+.hobbies-teacher-speech-bubble p {
+
+    margin: 0;
+
+    color: #49382B;
+
+    font-family: Poppins, sans-serif;
+
+    font-size: 23px;
+
+    line-height: 1.65;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================
+   TYPING DOTS
+========================================= */
+
+.hobbies-typing-dots {
+
+    display: inline-block;
+
+    margin-left: 4px;
+
+    animation:
+        hobbiesDotsBlink
+        1s infinite;
+
+}
+
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes hobbiesTeacherCardIn {
+
+    from {
+
+        transform: scale(.65);
+
+        opacity: 0;
+
+    }
+
+    to {
+
+        transform: scale(1);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+@keyframes hobbiesBubbleIn {
+
+    from {
+
+        transform: scale(.8);
+
+        opacity: 0;
+
+    }
+
+    to {
+
+        transform: scale(1);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+@keyframes hobbiesTeacherFloat {
+
+    0% {
+
+        transform: translateY(0);
+
+    }
+
+    50% {
+
+        transform: translateY(-8px);
+
+    }
+
+    100% {
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+@keyframes hobbiesTeacherSpeak {
+
+    from {
+
+        transform: scale(1);
+
+    }
+
+    to {
+
+        transform: scale(1.025);
+
+    }
+
+}
+
+
+@keyframes hobbiesDotsBlink {
+
+    0%,
+    100% {
+
+        opacity: 1;
+
+    }
+
+    50% {
+
+        opacity: .25;
+
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .hobbies-teacher-intro-card {
+
+        width: 88%;
+
+        min-height: 600px;
+
+        flex-direction: column;
+
+        gap: 15px;
+
+        padding: 30px;
+
+    }
+
+
+    .hobbies-teacher-image-area {
+
+        width: 100%;
+
+    }
+
+
+    .hobbies-teacher-image {
+
+        width: 220px;
+
+        height: 220px;
+
+    }
+
+
+    .hobbies-teacher-speech-bubble {
+
+        width: 100%;
+
+        min-height: 220px;
+
+    }
+
+
+    .hobbies-teacher-speech-bubble::before {
+
+        display: none;
+
+    }
+
+
+    .hobbies-teacher-speech-bubble p {
+
+        font-size: 18px;
+
+    }
+
+}

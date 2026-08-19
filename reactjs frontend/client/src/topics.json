@@ -6,23 +6,233 @@
       "subtopics": [
         {
           "id": 1,
-          "title": "Talking About Hobbies"
+          "title": "Talking About Hobbies",
+          "type": "hobbies",
+          "content": {
+            "activities": [
+              {
+                "id": 1,
+                "type": "whichSentence",
+                "title": "Which Sentence Is Correct?",
+                "rounds": [
+                  {
+  "round": 1,
+  "situation": "Sara loves drawing. She does it every weekend.",
+  "options": [
+    "Sara like drawing because it are fun.",
+    "Sara likes drawing because it is fun."
+  ],
+  "correctAnswer": 1
+},
+                {
+  "round": 2,
+  "situation": "Ali enjoys playing football after school.",
+  "options": [
+    "Ali enjoy playing football because it makes him happy.",
+    "Ali enjoys playing football because it makes him happy."
+  ],
+  "correctAnswer": 1
+},
+                 {
+  "round": 3,
+  "situation": "Ryan loves swimming. He goes to the pool twice a week.",
+  "options": [
+    "Ryan goes swimming twice a week because it helps him stay healthy.",
+    "Ryan go swimming twice a week because it help him stay healthy."
+  ],
+  "correctAnswer": 0
+}
+                ]
+              }
+            ]
+          }
         },
-        {
-          "id": 2,
-          "title": "Favourite Food"
+       {
+  "id": 2,
+  "title": "Favourite Person",
+  "type": "favouritePerson",
+  "content": {
+    "activities": [
+      {
+        "id": 1,
+        "type": "guessFavouritePerson",
+        "title": "Guess The Favourite Person",
+        "intro": {
+          "title": "Guess The Favourite Person",
+          "description": "Read the clues carefully and guess who the special person is."
         },
+        "rounds": [
+          {
+            "round": 1,
+            "clue": "This person takes care of me, helps me every day, and loves me very much.",
+            "options": [
+              "My mother",
+              "My teacher",
+              "My friend"
+            ],
+            "correctAnswer": 0,
+            "feedback": "Excellent! Your mother is someone very special who takes care of you."
+          },
+          {
+            "round": 2,
+            "clue": "This person teaches me new things, helps me learn, and is kind to me at school.",
+            "options": [
+              "My brother",
+              "My teacher",
+              "My neighbour"
+            ],
+            "correctAnswer": 1,
+            "feedback": "Correct! A teacher helps us learn new things."
+          },
+          {
+            "round": 3,
+            "clue": "This person plays with me, makes me laugh, and is always there when I need a friend.",
+            "options": [
+              "My friend",
+              "My doctor",
+              "My teacher"
+            ],
+            "correctAnswer": 0,
+            "feedback": "Great job! A good friend makes us happy and supports us."
+          }
+        ]
+      },
+
+      {
+        "id": 2,
+        "type": "WhyFavouritePerson",
+        "title": "Why Is This Person Special?",
+        "intro": {
+          "title": "Why Is This Person Special?",
+          "description": "Choose the best sentence to explain why your favourite person is special."
+        },
+        "rounds": [
+          {
+            "round": 1,
+            "question": "Why is your mother special to you?",
+            "options": [
+              "She always helps and cares for me.",
+              "She never talks to me.",
+              "She does not help me."
+            ],
+            "correctAnswer": 0,
+            "feedback": "Excellent! That is a good reason."
+          },
+          {
+            "round": 2,
+            "question": "Why is your teacher special to you?",
+            "options": [
+              "My teacher helps me learn new things.",
+              "My teacher never teaches me.",
+              "My teacher does not help me."
+            ],
+            "correctAnswer": 0,
+            "feedback": "Correct! Teachers help us learn and grow."
+          },
+          {
+            "round": 3,
+            "question": "Why is your friend special to you?",
+            "options": [
+              "My friend plays with me and makes me happy.",
+              "My friend never talks to me.",
+              "My friend always ignores me."
+            ],
+            "correctAnswer": 0,
+            "feedback": "Wonderful! Friends can make us happy and support us."
+          }
+        ]
+      },
+
+      {
+        "id": 3,
+        "type": "CompleteTheSentence",
+        "title": "Complete The Sentence",
+        "intro": {
+          "title": "Complete The Sentence",
+          "description": "Choose the words that make a correct sentence about your favourite person."
+        },
+        "rounds": [
+          {
+            "round": 1,
+            "sentence": "My favourite person is my ____.",
+            "options": [
+              "mother",
+              "table",
+              "school"
+            ],
+            "correctAnswer": 0,
+            "feedback": "Great! You completed the sentence correctly."
+          },
+          {
+            "round": 2,
+            "sentence": "She always ____ me when I need help.",
+            "options": [
+              "helps",
+              "helping",
+              "help"
+            ],
+            "correctAnswer": 0,
+            "feedback": "Excellent! 'She always helps me' is correct."
+          },
+          {
+            "round": 3,
+            "sentence": "I love my favourite person because she is very ____.",
+            "options": [
+              "kind",
+              "angry",
+              "late"
+            ],
+            "correctAnswer": 0,
+            "feedback": "Perfect! 'Kind' is a good word to describe someone special."
+          }
+        ]
+      },
+
+      {
+        "id": 4,
+        "type": "SpeakAboutFavouritePerson",
+        "title": "Talk About Your Favourite Person",
+        "intro": {
+          "title": "Talk About Your Favourite Person",
+          "description": "Think about your favourite person and answer the questions in complete English sentences."
+        },
+        "questions": [
+          "Who is your favourite person?",
+          "What is this person's name?",
+          "Why do you like this person?"
+        ]
+      },
+
+      {
+        "id": 5,
+        "type": "FavouritePersonEssay",
+        "title": "My Favourite Person",
+        "intro": {
+          "title": "My Favourite Person",
+          "description": "Speak or write a short paragraph about your favourite person."
+        },
+        "prompt": "Talk about your favourite person in 4 or 5 simple English sentences.",
+        "sentenceHelp": [
+          "My favourite person is ____.",
+          "His/Her name is ____.",
+          "He/She is very ____.",
+          "He/She always helps me.",
+          "I love my favourite person because ____."
+        ]
+      }
+    ]
+  }
+},
         {
           "id": 3,
           "title": "Favourite Place"
         },
         {
           "id": 4,
-          "title": "Favourite Person"
+          "title": "Final Challenge"
         }
       ]
     },
-
     {
       "id": 2,
       "title": "All About My Partner",
@@ -45,7 +255,6 @@
         }
       ]
     },
-
     {
       "id": 3,
       "title": "Let's Order",
@@ -105,7 +314,6 @@
             ]
           }
         },
-
         {
           "id": 2,
           "title": "Restaurant Conversations",
@@ -146,7 +354,6 @@
                   }
                 ]
               },
-
               {
                 "id": 2,
                 "type": "menuMatching",
@@ -174,7 +381,6 @@
                   }
                 ]
               },
-
               {
                 "id": 3,
                 "type": "arrangeConversation",
@@ -191,7 +397,6 @@
                   "Thank you."
                 ]
               },
-
               {
                 "id": 4,
                 "type": "moodConversation",
@@ -215,7 +420,6 @@
                   }
                 ]
               },
-
               {
                 "id": 5,
                 "type": "quiz",
@@ -248,7 +452,6 @@
             ]
           }
         },
-
         {
           "id": 3,
           "title": "Describing Food & Giving Feedback",
@@ -322,7 +525,6 @@
             }
           }
         },
-
         {
           "id": 4,
           "title": "Final Challenge",
@@ -330,7 +532,6 @@
         }
       ]
     },
-
     {
       "id": 4,
       "title": "On My Calendar",

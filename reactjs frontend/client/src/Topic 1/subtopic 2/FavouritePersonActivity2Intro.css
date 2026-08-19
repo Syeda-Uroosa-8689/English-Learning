@@ -1,0 +1,332 @@
+/* ===================================
+      FAVOURITE PERSON ACTIVITY 2 INTRO
+=================================== */
+
+.favourite-person-intro-container {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background-image: url("../../assets/chatbg.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+}
+
+
+/* ===================================
+              OVERLAY
+=================================== */
+
+.favourite-person-intro-container::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.30);
+
+    backdrop-filter: blur(8px);
+
+}
+
+
+/* ===================================
+              MAIN POPUP
+=================================== */
+
+.favourite-person-intro-popup {
+
+    width: 1000px;
+
+    min-height: 420px;
+
+    background: #D8B48A;
+
+    position: relative;
+
+    z-index: 5;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding: 50px 70px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.30);
+
+    clip-path: polygon(
+        8% 0%,
+        92% 0%,
+        100% 18%,
+        100% 82%,
+        92% 100%,
+        8% 100%,
+        0% 82%,
+        0% 18%
+    );
+
+    transform: scale(0.5);
+
+    opacity: 0;
+
+    transition: 0.5s ease;
+
+}
+
+
+/* ===================================
+              SHOW POPUP
+=================================== */
+
+.favourite-person-intro-popup.show {
+
+    transform: scale(1);
+
+    opacity: 1;
+
+}
+
+
+/* ===================================
+                ICON
+=================================== */
+
+.favourite-person-intro-icon {
+
+    width: 82px;
+
+    height: 82px;
+
+    border-radius: 50%;
+
+    background: #FFF3E6;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 44px;
+
+    margin-bottom: 18px;
+
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.10);
+
+}
+
+
+/* ===================================
+                TITLE
+=================================== */
+
+.favourite-person-intro-popup h1 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 52px;
+
+    font-weight: 800;
+
+    line-height: 1.2;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* ===================================
+              DESCRIPTION
+=================================== */
+
+.favourite-person-intro-popup p {
+
+    width: 700px;
+
+    max-width: 90%;
+
+    margin: 18px 0 0;
+
+    color: #5A3620;
+
+    font-family: Poppins, sans-serif;
+
+    font-size: 19px;
+
+    line-height: 1.6;
+
+    font-weight: 600;
+
+}
+
+
+/* ===================================
+              RESPONSIVE
+=================================== */
+
+@media (max-width: 900px) {
+
+    .favourite-person-intro-popup {
+
+        width: 92vw;
+
+        min-height: 400px;
+
+        padding: 45px 50px;
+
+    }
+
+
+    .favourite-person-intro-popup h1 {
+
+        font-size: 42px;
+
+    }
+
+}
+
+
+/* ===================================
+            TABLET / MOBILE
+=================================== */
+
+@media (max-width: 768px) {
+
+    .favourite-person-intro-container {
+
+        padding: 15px;
+
+        box-sizing: border-box;
+
+    }
+
+
+    .favourite-person-intro-popup {
+
+        width: 90vw;
+
+        min-height: 360px;
+
+        padding: 40px 25px;
+
+        clip-path: polygon(
+            6% 0%,
+            94% 0%,
+            100% 10%,
+            100% 90%,
+            94% 100%,
+            6% 100%,
+            0% 90%,
+            0% 10%
+        );
+
+    }
+
+
+    .favourite-person-intro-icon {
+
+        width: 70px;
+
+        height: 70px;
+
+        font-size: 38px;
+
+        margin-bottom: 14px;
+
+    }
+
+
+    .favourite-person-intro-popup h1 {
+
+        font-size: 32px;
+
+    }
+
+
+    .favourite-person-intro-popup p {
+
+        width: 100%;
+
+        max-width: 95%;
+
+        font-size: 16px;
+
+        line-height: 1.5;
+
+        margin-top: 14px;
+
+    }
+
+}
+
+
+/* ===================================
+            SMALL MOBILE
+=================================== */
+
+@media (max-width: 480px) {
+
+    .favourite-person-intro-popup {
+
+        width: 92vw;
+
+        min-height: 330px;
+
+        padding: 35px 20px;
+
+    }
+
+
+    .favourite-person-intro-icon {
+
+        width: 62px;
+
+        height: 62px;
+
+        font-size: 32px;
+
+    }
+
+
+    .favourite-person-intro-popup h1 {
+
+        font-size: 27px;
+
+    }
+
+
+    .favourite-person-intro-popup p {
+
+        font-size: 14px;
+
+    }
+
+}
