@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./MenuMatchingIntro.css";
 
 function MenuMatchingIntro({ onFinish }) {
 
@@ -7,9 +8,7 @@ function MenuMatchingIntro({ onFinish }) {
     useEffect(() => {
 
         const showTimer = setTimeout(() => {
-
             setShow(true);
-
         }, 100);
 
         const hideTimer = setTimeout(() => {
@@ -17,18 +16,14 @@ function MenuMatchingIntro({ onFinish }) {
             setShow(false);
 
             setTimeout(() => {
+                onFinish?.();
+            }, 300);
 
-                onFinish();
-
-            }, 500);
-
-        }, 4000);
+        }, 1500);
 
         return () => {
-
             clearTimeout(showTimer);
             clearTimeout(hideTimer);
-
         };
 
     }, [onFinish]);
@@ -37,32 +32,29 @@ function MenuMatchingIntro({ onFinish }) {
 
         <div className="menu-intro-container">
 
-            <div className={show ? "menu-intro-popup show" : "menu-intro-popup"}>
+            <div
+                className={
+                    show
+                        ? "menu-intro-popup show"
+                        : "menu-intro-popup"
+                }
+            >
 
                 <div className="menu-intro-icon">
-
                     🍽️
-
                 </div>
 
                 <h1>
-
-                    Menu Matching
-
+                    Menu
+                    <br />
+                    Matching
                 </h1>
-
-                <p>
-
-                    Match each food item with its correct picture and build your restaurant vocabulary.
-
-                </p>
 
             </div>
 
         </div>
 
     );
-
 }
 
 export default MenuMatchingIntro;

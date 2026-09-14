@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-
-
+import React, { useEffect, useState, useRef } from "react";
 
 import teacher from "./assets/teacher1.png";
 import bg from "./assets/chatbg.jpeg";
+import yaySound from "./assets/yay.mp3";
+
+import confetti from "canvas-confetti";
 
 
 function RestaurantQuizActivity({
@@ -110,32 +111,98 @@ function RestaurantQuizActivity({
 
     const [isSpeaking, setIsSpeaking] = useState(false);
 
+    /*
+        CELEBRATING = correct answer ke baad
+        poora celebration sequence chal raha hai.
+    */
+    const [celebrating, setCelebrating] = useState(false);
+
+
+    /* ==========================================
+                    REFS
+    ========================================== */
+
+    const speechTimerRef = useRef(null);
+
+    const confettiFrameRef = useRef(null);
+
+    const isMountedRef = useRef(true);
+
+
+    /* ==========================================
+                    MOUNT / UNMOUNT
+    ========================================== */
+
+    useEffect(() => {
+
+        isMountedRef.current = true;
+
+        return () => {
+
+            isMountedRef.current = false;
+
+            window.speechSynthesis.cancel();
+
+            if (speechTimerRef.current) {
+
+                clearTimeout(
+                    speechTimerRef.current
+                );
+
+            }
+
+            if (confettiFrameRef.current) {
+
+                cancelAnimationFrame(
+                    confettiFrameRef.current
+                );
+
+            }
+
+        };
+
+    }, []);
+
+
+    /* ==========================================
+                BROWSER VOICES LOAD
+    ========================================== */
+
+    useEffect(() => {
+
+        if (!window.speechSynthesis) return;
+
+        const loadVoices = () => {
+
+            window.speechSynthesis.getVoices();
+
+        };
+
+        loadVoices();
+
+        window.speechSynthesis.onvoiceschanged =
+            loadVoices;
+
+        return () => {
+
+            window.speechSynthesis.onvoiceschanged =
+                null;
+
+        };
+
+    }, []);
+
 
     /* ==========================================
                     FEMALE VOICE
     ========================================== */
 
-    const speakQuestion = (text) => {
-
-        if (!window.speechSynthesis) return;
-
-        window.speechSynthesis.cancel();
-
-        const speech =
-            new SpeechSynthesisUtterance(text);
-
-        speech.lang = "en-US";
-
-        speech.rate = 0.88;
-
-        speech.pitch = 1.05;
-
-        speech.volume = 1;
+    const getFemaleVoice = () => {
 
         const voices =
             window.speechSynthesis.getVoices();
 
-        const femaleVoice =
+        return (
 
             voices.find((voice) =>
                 /Google UK English Female/i.test(
@@ -181,14 +248,54 @@ function RestaurantQuizActivity({
                 /Microsoft.*Aria/i.test(
                     voice.name
                 )
-            );
+            )
+
+            ||
+
+            null
+
+        );
+
+    };
 
 
-        /*
-            IMPORTANT:
-            voices[0] fallback nahi hai.
-            Isliye male voice randomly select nahi hogi.
-        */
+    /* ==========================================
+                    TEACHER SPEAK
+    ========================================== */
+
+    const speakTeacher = (
+        text,
+        callback
+    ) => {
+
+        if (!window.speechSynthesis) {
+
+            if (callback) callback();
+
+            return;
+
+        }
+
+
+        window.speechSynthesis.cancel();
+
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
+
+        speech.lang = "en-US";
+
+        speech.rate = 0.88;
+
+        speech.pitch = 1.05;
+
+        speech.volume = 1;
+
+
+        const femaleVoice =
+            getFemaleVoice();
+
 
         if (femaleVoice) {
 
@@ -199,6 +306,8 @@ function RestaurantQuizActivity({
 
         speech.onstart = () => {
 
+            if (!isMountedRef.current) return;
+
             setIsSpeaking(true);
 
         };
@@ -206,12 +315,96 @@ function RestaurantQuizActivity({
 
         speech.onend = () => {
 
+            if (!isMountedRef.current) return;
+
+            setIsSpeaking(false);
+
+            if (callback) {
+
+                callback();
+
+            }
+
+        };
+
+
+        speech.onerror = () => {
+
+            if (!isMountedRef.current) return;
+
+            setIsSpeaking(false);
+
+            if (callback) {
+
+                callback();
+
+            }
+
+        };
+
+
+        window.speechSynthesis.speak(speech);
+
+    };
+
+
+    /* ==========================================
+                    QUESTION SPEAK
+    ========================================== */
+
+    const speakQuestion = (text) => {
+
+        if (!window.speechSynthesis) return;
+
+
+        window.speechSynthesis.cancel();
+
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
+
+        speech.lang = "en-US";
+
+        speech.rate = 0.88;
+
+        speech.pitch = 1.05;
+
+        speech.volume = 1;
+
+
+        const femaleVoice =
+            getFemaleVoice();
+
+
+        if (femaleVoice) {
+
+            speech.voice = femaleVoice;
+
+        }
+
+
+        speech.onstart = () => {
+
+            if (!isMountedRef.current) return;
+
+            setIsSpeaking(true);
+
+        };
+
+
+        speech.onend = () => {
+
+            if (!isMountedRef.current) return;
+
             setIsSpeaking(false);
 
         };
 
 
         speech.onerror = () => {
+
+            if (!isMountedRef.current) return;
 
             setIsSpeaking(false);
 
@@ -222,22 +415,117 @@ function RestaurantQuizActivity({
 
     };
 
-        /* ==========================================
-            LOAD VOICES + FIRST QUESTION
+
+    /* ==========================================
+                    CONFETTI
     ========================================== */
 
-    useEffect(() => {
+    const playConfetti = (onComplete) => {
 
-        const loadVoices = () => {
+        if (!isMountedRef.current) return;
 
-            const voices =
-                window.speechSynthesis.getVoices();
 
-            if (voices.length > 0) {
+        const duration = 1800;
 
-                speakQuestion(
-                    quizQuestions[current].question
-                );
+        const end = Date.now() + duration;
+
+
+        const frame = () => {
+
+            if (!isMountedRef.current) return;
+
+
+            confetti({
+
+                particleCount: 5,
+
+                spread: 70,
+
+                startVelocity: 35,
+
+                origin: {
+
+                    x: Math.random(),
+
+                    y: Math.random() * 0.5
+
+                }
+
+            });
+
+
+            if (Date.now() < end) {
+
+                confettiFrameRef.current =
+                    requestAnimationFrame(frame);
+
+            }
+
+            else {
+
+                confettiFrameRef.current =
+                    null;
+
+
+                if (
+                    isMountedRef.current &&
+                    onComplete
+                ) {
+
+                    onComplete();
+
+                }
+
+            }
+
+        };
+
+
+        frame();
+
+    };
+
+
+    /* ==========================================
+                PLAY YAY SOUND
+                SOUND COMPLETE HONE KA WAIT
+    ========================================== */
+
+    const playYaySound = (callback) => {
+
+        if (!isMountedRef.current) return;
+
+
+        const audio =
+            new Audio(yaySound);
+
+
+        audio.volume = 1;
+
+
+        let finished = false;
+
+
+        const finishSound = () => {
+
+            if (finished) return;
+
+            finished = true;
+
+
+            audio.onended = null;
+
+            audio.onerror = null;
+
+            audio.onpause = null;
+
+
+            if (
+                isMountedRef.current &&
+                callback
+            ) {
+
+                callback();
 
             }
 
@@ -245,44 +533,198 @@ function RestaurantQuizActivity({
 
 
         /*
-            Browser voices kabhi immediately
-            load nahi hoti, isliye dono cases
-            handle kar rahe hain.
+            IMPORTANT:
+            Sirf onended par teacher voice
+            start hogi.
+
+            Matlab yay.mp3 completely finish
+            hone ke baad hi teacher bolegi.
         */
 
-        const voices =
-            window.speechSynthesis.getVoices();
+        audio.onended = finishSound;
 
-        if (voices.length > 0) {
+        audio.onerror = finishSound;
 
-            speakQuestion(
-                quizQuestions[current].question
+
+        audio.play().catch(() => {
+
+            finishSound();
+
+        });
+
+    };
+
+
+    /* ==========================================
+            CORRECT ANSWER CELEBRATION
+    ========================================== */
+
+    const celebrateCorrectAnswer = () => {
+
+        if (!isMountedRef.current) return;
+
+
+        const isLast =
+            current === quizQuestions.length - 1;
+
+
+        setCelebrating(true);
+
+
+        /*
+            =====================================
+            STEP 1
+            CONFETTI START
+            =====================================
+        */
+
+        playConfetti();
+
+
+        /*
+            =====================================
+            STEP 2
+            YAY SOUND START
+            =====================================
+
+            Teacher voice abhi START nahi hogi.
+
+            Yay sound completely finish hone ke
+            baad hi teacher feedback chalega.
+        */
+
+        playYaySound(() => {
+
+            if (!isMountedRef.current) return;
+
+
+            /*
+                =================================
+                STEP 3
+                TEACHER EXCELLENT VOICE
+                =================================
+            */
+
+            speakTeacher(
+
+                "Excellent! That's correct.",
+
+                () => {
+
+                    if (!isMountedRef.current)
+                        return;
+
+
+                    /*
+                        =================================
+                        STEP 4
+                        TEACHER VOICE COMPLETE
+                        =================================
+                    */
+
+                    speechTimerRef.current =
+                        setTimeout(() => {
+
+                            if (
+                                !isMountedRef.current
+                            ) return;
+
+
+                            setCelebrating(false);
+
+
+                            /*
+                                =================================
+                                LAST QUESTION
+                                =================================
+                            */
+
+                            if (isLast) {
+
+                                setCompleted(true);
+
+                                return;
+
+                            }
+
+
+                            /*
+                                =================================
+                                NEXT QUESTION
+                                =================================
+                            */
+
+                            setCurrent(
+                                prev => prev + 1
+                            );
+
+                            setSelected("");
+
+                            setFeedback("");
+
+                        }, 200);
+
+                }
+
             );
 
-        }
+        });
+
+    };
 
 
-        window.speechSynthesis.onvoiceschanged =
-            loadVoices;
+    /* ==========================================
+                FIRST QUESTION / NEXT QUESTION
+    ========================================== */
+
+    useEffect(() => {
+
+        if (completed) return;
+
+
+        setSelected("");
+
+        setFeedback("");
+
+        setCelebrating(false);
+
+
+        speakQuestion(
+            quizQuestions[current].question
+        );
 
 
         return () => {
 
-            window.speechSynthesis.onvoiceschanged =
-                null;
-
             window.speechSynthesis.cancel();
+
+
+            if (speechTimerRef.current) {
+
+                clearTimeout(
+                    speechTimerRef.current
+                );
+
+            }
 
         };
 
-    }, [current]);
+    }, [current, completed]);
 
 
     /* ==========================================
-                LISTEN AGAIN
+                    LISTEN AGAIN
     ========================================== */
 
     const handleListenAgain = () => {
+
+        /*
+            Celebration ke waqt
+            Listen Again allowed nahi.
+        */
+
+        if (celebrating) return;
+
 
         speakQuestion(
             quizQuestions[current].question
@@ -292,96 +734,169 @@ function RestaurantQuizActivity({
 
 
     /* ==========================================
-                HANDLE ANSWER
+                    HANDLE ANSWER
     ========================================== */
 
-  const handleAnswer = (option) => {
+    const handleAnswer = (option) => {
 
-    if (selected) return;
+        /*
+            Important:
 
-    setSelected(option);
+            Agar:
+            - already selected hai
+            - celebration chal rahi hai
+
+            to kuch bhi nahi hoga.
+        */
+
+        if (
+            selected !== "" ||
+            celebrating
+        ) {
+
+            return;
+
+        }
+
+
+        setSelected(option);
+
+
+        /* ==========================================
+                    CORRECT ANSWER
+        ========================================== */
+
+        if (
+            option ===
+            quizQuestions[current].answer
+        ) {
+
+            setFeedback("correct");
+
+
+            /*
+                Ab complete sequence:
+
+                Correct
+                  ↓
+                Confetti + YAY
+                  ↓
+                YAY COMPLETE
+                  ↓
+                Teacher: Excellent
+                  ↓
+                Teacher voice COMPLETE
+                  ↓
+                Next Question
+            */
+
+            celebrateCorrectAnswer();
+
+        }
+
+
+        /* ==========================================
+                    WRONG ANSWER
+        ========================================== */
+
+        else {
+
+            setFeedback("wrong");
+
+
+            /*
+                Wrong answer par
+                sirf teacher bolegi.
+            */
+
+            speakTeacher(
+
+                "Not quite! Try again.",
+
+                () => {
+
+                    if (
+                        !isMountedRef.current
+                    ) return;
+
+
+                    speechTimerRef.current =
+                        setTimeout(() => {
+
+                            if (
+                                !isMountedRef.current
+                            ) return;
+
+
+                            setSelected("");
+
+                            setFeedback("");
+
+                        }, 200);
+
+                }
+
+            );
+
+        }
+
+    };
+
 
     /* ==========================================
-                CORRECT ANSWER
+                STOP EVERYTHING
     ========================================== */
 
-    if (option === quizQuestions[current].answer) {
+    const stopEverything = () => {
 
-        setFeedback("correct");
+        window.speechSynthesis.cancel();
 
-        // Teacher speaks feedback
-        speakQuestion("Excellent! That's correct.");
 
-        setTimeout(() => {
+        if (speechTimerRef.current) {
 
-            if (current === quizQuestions.length - 1) {
+            clearTimeout(
+                speechTimerRef.current
+            );
 
-                setCompleted(true);
+            speechTimerRef.current = null;
 
-                window.speechSynthesis.cancel();
+        }
 
-            } else {
 
-                setCurrent((prev) => prev + 1);
+        if (confettiFrameRef.current) {
 
-                setSelected("");
+            cancelAnimationFrame(
+                confettiFrameRef.current
+            );
 
-                setFeedback("");
+            confettiFrameRef.current = null;
 
-            }
+        }
 
-        }, 2000);
 
-    }
+        setCelebrating(false);
 
-    /* ==========================================
-                WRONG ANSWER
-    ========================================== */
+        setIsSpeaking(false);
 
-    else {
+    };
 
-        setFeedback("wrong");
-
-        // Teacher speaks feedback
-        speakQuestion("Not quite! Try again.");
-
-        setTimeout(() => {
-
-            setSelected("");
-
-            setFeedback("");
-
-        }, 1800);
-
-    }
-
-};
 
     /* ==========================================
-                OPTION CLASS
+                    OPTION CLASS
     ========================================== */
 
     const getOptionClass = (option) => {
 
-        let className = "quiz-option";
+        let className =
+            "quiz-option";
 
 
-        /*
-            Jab tak answer select nahi hua
-            normal button.
-        */
-
-        if (!selected) {
+        if (selected === "") {
 
             return className;
 
         }
 
-
-        /*
-            Correct answer hamesha green
-            dikhega jab answer submit hua.
-        */
 
         if (
             option ===
@@ -391,12 +906,6 @@ function RestaurantQuizActivity({
             className += " correct";
 
         }
-
-
-        /*
-            User ne wrong option choose kiya
-            to woh red hoga.
-        */
 
         else if (option === selected) {
 
@@ -409,7 +918,41 @@ function RestaurantQuizActivity({
 
     };
 
-        /* ==========================================
+
+    /* ==========================================
+                    BACK
+    ========================================== */
+
+    const handleBack = () => {
+
+        stopEverything();
+
+        onBack();
+
+    };
+
+
+    /* ==========================================
+                    SKIP
+    ========================================== */
+
+    const handleSkip = () => {
+
+        /*
+            Celebration ke beech Skip nahi chalega.
+        */
+
+        if (celebrating) return;
+
+
+        stopEverything();
+
+        onSkip();
+
+    };
+
+
+    /* ==========================================
                 COMPLETION SCREEN
     ========================================== */
 
@@ -420,7 +963,8 @@ function RestaurantQuizActivity({
             <div
                 className="quiz-page"
                 style={{
-                    backgroundImage: `url(${bg})`
+                    backgroundImage:
+                        `url(${bg})`
                 }}
             >
 
@@ -433,10 +977,6 @@ function RestaurantQuizActivity({
                     <div className="quiz-complete">
 
 
-                        {/* ==================================
-                                COMPLETION ICON
-                        ================================== */}
-
                         <div className="quiz-complete-icon">
 
                             🎉
@@ -444,20 +984,12 @@ function RestaurantQuizActivity({
                         </div>
 
 
-                        {/* ==================================
-                                COMPLETION TITLE
-                        ================================== */}
-
                         <h2>
 
                             Restaurant Quiz Completed!
 
                         </h2>
 
-
-                        {/* ==================================
-                                COMPLETION MESSAGE
-                        ================================== */}
 
                         <p>
 
@@ -470,13 +1002,15 @@ function RestaurantQuizActivity({
                         </p>
 
 
-                        {/* ==================================
-                                NEXT ACTIVITY
-                        ================================== */}
-
                         <button
                             className="quiz-next-btn"
-                            onClick={onNext}
+                            onClick={() => {
+
+                                stopEverything();
+
+                                onNext();
+
+                            }}
                         >
 
                             Next Activity →
@@ -504,7 +1038,8 @@ function RestaurantQuizActivity({
         <div
             className="quiz-page"
             style={{
-                backgroundImage: `url(${bg})`
+                backgroundImage:
+                    `url(${bg})`
             }}
         >
 
@@ -523,13 +1058,8 @@ function RestaurantQuizActivity({
 
                     <button
                         className="quiz-back-btn"
-                        onClick={() => {
-
-                            window.speechSynthesis.cancel();
-
-                            onBack();
-
-                        }}
+                        onClick={handleBack}
+                        disabled={celebrating}
                     >
 
                         ← Back
@@ -546,13 +1076,8 @@ function RestaurantQuizActivity({
 
                     <button
                         className="quiz-skip-btn"
-                        onClick={() => {
-
-                            window.speechSynthesis.cancel();
-
-                            onSkip();
-
-                        }}
+                        onClick={handleSkip}
+                        disabled={celebrating}
                     >
 
                         Skip →
@@ -569,7 +1094,8 @@ function RestaurantQuizActivity({
 
                 <div className="quiz-progress">
 
-                    Question {current + 1} / {quizQuestions.length}
+                    Question {current + 1} /{" "}
+                    {quizQuestions.length}
 
                 </div>
 
@@ -616,14 +1142,17 @@ function RestaurantQuizActivity({
 
                             <h3>
 
-                                 Listen Carefully
+                                Listen Carefully
 
                             </h3>
 
 
                             <h2>
 
-                                {quizQuestions[current].question}
+                                {
+                                    quizQuestions[current]
+                                        .question
+                                }
 
                             </h2>
 
@@ -635,9 +1164,13 @@ function RestaurantQuizActivity({
                             <button
                                 className="quiz-listen-btn"
                                 onClick={handleListenAgain}
+                                disabled={
+                                    isSpeaking ||
+                                    celebrating
+                                }
                             >
 
-                                 Listen Again
+                                🔊 Listen Again
 
                             </button>
 
@@ -652,28 +1185,38 @@ function RestaurantQuizActivity({
                         <div className="quiz-options">
 
 
-                            {quizQuestions[current].options.map(
-                                (option, index) => (
+                            {
+                                quizQuestions[
+                                    current
+                                ].options.map(
 
-                                    <button
-                                        key={index}
-                                        className={
-                                            getOptionClass(option)
-                                        }
-                                        onClick={() =>
-                                            handleAnswer(option)
-                                        }
-                                        disabled={
-                                            selected !== ""
-                                        }
-                                    >
+                                    (option, index) => (
 
-                                        {option}
+                                        <button
+                                            key={index}
+                                            className={
+                                                getOptionClass(
+                                                    option
+                                                )
+                                            }
+                                            onClick={() =>
+                                                handleAnswer(
+                                                    option
+                                                )
+                                            }
+                                            disabled={
+                                                selected !== "" ||
+                                                celebrating
+                                            }
+                                        >
 
-                                    </button>
+                                            {option}
 
-                                )
-                            )}
+                                        </button>
+
+                                    )
+
+                                )}
 
 
                         </div>
@@ -721,5 +1264,6 @@ function RestaurantQuizActivity({
     );
 
 }
+
 
 export default RestaurantQuizActivity;

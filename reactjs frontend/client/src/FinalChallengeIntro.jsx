@@ -13,9 +13,9 @@ function FinalChallengeIntro({ onFinish }) {
 
             setTimeout(() => {
                 onFinish();
-            }, 500);
+            }, 300);
 
-        }, 5000);
+        }, 1500);
 
         return () => {
             clearTimeout(showTimer);

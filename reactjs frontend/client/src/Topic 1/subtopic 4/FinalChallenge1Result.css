@@ -1,0 +1,1025 @@
+/* =========================================
+   FINAL CHALLENGE 1 RESULT PAGE
+========================================= */
+
+.finalchallenge1-result-container {
+
+    width: 100%;
+    height: 100vh;
+
+    background: url("../../assets/chatbg.jpeg")
+        center center / cover no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   BACKGROUND OVERLAY
+========================================= */
+
+.finalchallenge1-result-container::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(7px);
+}
+
+
+/* =========================================
+   MAIN CARD
+========================================= */
+
+.finalchallenge1-result-card {
+
+    position: relative;
+
+    z-index: 10;
+
+    width: 92%;
+
+    max-width: 1450px;
+
+    height: 90vh;
+
+    background-image: url("../../assets/favourite.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    border-radius: 35px;
+
+    padding: 30px 45px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+.finalchallenge1-result-card::-webkit-scrollbar {
+
+    width: 8px;
+}
+
+.finalchallenge1-result-card::-webkit-scrollbar-track {
+
+    background: transparent;
+}
+
+.finalchallenge1-result-card::-webkit-scrollbar-thumb {
+
+    background: #B89A70;
+
+    border-radius: 20px;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.finalchallenge1-result-header {
+
+    text-align: center;
+
+    flex-shrink: 0;
+
+    margin-bottom: 18px;
+}
+
+
+.finalchallenge1-result-trophy {
+
+    font-size: 48px;
+
+    margin-bottom: 5px;
+}
+
+
+.finalchallenge1-result-header h1 {
+
+    margin: 0;
+
+    color: #5C3B24;
+
+    font-size: 40px;
+
+    font-weight: 800;
+}
+
+
+.finalchallenge1-result-header p {
+
+    margin: 8px 0 0;
+
+    color: #6B5A4A;
+
+    font-size: 18px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================
+   SCORE SECTION
+========================================= */
+
+.finalchallenge1-score-section {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 35px;
+
+    margin: 5px 0 18px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================
+   SCORE CIRCLE
+========================================= */
+
+.finalchallenge1-score-circle {
+
+    width: 145px;
+
+    height: 145px;
+
+    border-radius: 50%;
+
+    background: #6B5720;
+
+    color: white;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-direction: column;
+
+    box-shadow:
+        0 12px 28px rgba(107, 87, 32, 0.30);
+}
+
+
+.finalchallenge1-score-number {
+
+    font-size: 48px;
+
+    font-weight: 800;
+
+    line-height: 1;
+}
+
+
+.finalchallenge1-score-total {
+
+    font-size: 18px;
+
+    margin-top: 5px;
+
+    opacity: 0.9;
+}
+
+
+/* =========================================
+   SCORE INFO
+========================================= */
+
+.finalchallenge1-score-info {
+
+    max-width: 420px;
+}
+
+
+.finalchallenge1-score-info h2 {
+
+    margin: 0;
+
+    color: #6B5720;
+
+    font-size: 38px;
+
+    font-weight: 800;
+}
+
+
+.finalchallenge1-score-info p {
+
+    margin: 8px 0 0;
+
+    color: #5C4B3B;
+
+    font-size: 19px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   CHALLENGE SUMMARY
+========================================= */
+
+.finalchallenge1-summary-card {
+
+    width: 90%;
+
+    max-width: 850px;
+
+    margin: 0 auto 20px;
+
+    background: #F7E8D4;
+
+    border: 2px solid #DEC29D;
+
+    border-radius: 20px;
+
+    padding: 14px 22px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    color: #5C3B24;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    box-sizing: border-box;
+}
+
+
+.finalchallenge1-summary-card div {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.finalchallenge1-summary-icon {
+
+    font-size: 23px;
+}
+
+
+.finalchallenge1-summary-card > span {
+
+    background: #6B5720;
+
+    color: white;
+
+    padding: 7px 15px;
+
+    border-radius: 20px;
+
+    font-size: 15px;
+}
+
+
+/* =========================================
+   TEACHER FEEDBACK
+========================================= */
+
+.finalchallenge1-feedback-card {
+
+    width: 90%;
+
+    max-width: 850px;
+
+    margin: 0 auto 20px;
+
+    background: #F1DEC5;
+
+    border: 2px solid #D8B37C;
+
+    border-radius: 22px;
+
+    padding: 18px 25px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+.finalchallenge1-feedback-card h2 {
+
+    margin: 0 0 8px;
+
+    color: #6B5720;
+
+    font-size: 23px;
+}
+
+
+.finalchallenge1-feedback-card p {
+
+    margin: 0;
+
+    color: #5C4B3B;
+
+    font-size: 17px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   MISTAKES SECTION
+========================================= */
+
+.finalchallenge1-mistakes-section {
+
+    width: 100%;
+
+    max-width: 1050px;
+
+    margin: 0 auto;
+
+    flex-shrink: 0;
+}
+
+
+.finalchallenge1-mistakes-title {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 14px;
+}
+
+
+.finalchallenge1-mistakes-title h2 {
+
+    margin: 0;
+
+    color: #5C3B24;
+
+    font-size: 27px;
+}
+
+
+.finalchallenge1-mistakes-title span {
+
+    background: #6B5720;
+
+    color: white;
+
+    padding: 7px 16px;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   MISTAKE LIST
+========================================= */
+
+.finalchallenge1-mistakes-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+/* =========================================
+   MISTAKE CARD
+========================================= */
+
+.finalchallenge1-mistake-card {
+
+    display: flex;
+
+    gap: 16px;
+
+    background: #F7E8D4;
+
+    border: 2px solid #DEC29D;
+
+    border-radius: 20px;
+
+    padding: 16px 20px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 7px 18px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================================
+   MISTAKE NUMBER
+========================================= */
+
+.finalchallenge1-mistake-number {
+
+    width: 38px;
+
+    height: 38px;
+
+    min-width: 38px;
+
+    border-radius: 50%;
+
+    background: #6B5720;
+
+    color: white;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 17px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================
+   MISTAKE CONTENT
+========================================= */
+
+.finalchallenge1-mistake-content {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.finalchallenge1-mistake-row {
+
+    border-radius: 13px;
+
+    padding: 10px 14px;
+
+    box-sizing: border-box;
+}
+
+
+.finalchallenge1-mistake-label {
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    margin-bottom: 4px;
+}
+
+
+.finalchallenge1-mistake-row p {
+
+    margin: 0;
+
+    font-size: 17px;
+
+    line-height: 1.5;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   WRONG ANSWER
+========================================= */
+
+.finalchallenge1-wrong-row {
+
+    background: #FBE4DE;
+
+    border-left: 5px solid #B94A3A;
+}
+
+
+.finalchallenge1-wrong-row
+.finalchallenge1-mistake-label {
+
+    color: #A33B2D;
+}
+
+
+.finalchallenge1-wrong-row p {
+
+    color: #71372F;
+}
+
+
+/* =========================================
+   CORRECT ANSWER
+========================================= */
+
+.finalchallenge1-correct-row {
+
+    background: #E8F1E4;
+
+    border-left: 5px solid #6B8E5A;
+}
+
+
+.finalchallenge1-correct-row
+.finalchallenge1-mistake-label {
+
+    color: #557646;
+}
+
+
+.finalchallenge1-correct-row p {
+
+    color: #405B36;
+}
+
+
+/* =========================================
+   URDU EXPLANATION
+========================================= */
+
+.finalchallenge1-urdu-row {
+
+    background: #F1DEC5;
+
+    border-left: 5px solid #9A7748;
+}
+
+
+.finalchallenge1-urdu-row
+.finalchallenge1-mistake-label {
+
+    color: #76552F;
+}
+
+
+.finalchallenge1-urdu-row p {
+
+    color: #5C4630;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    direction: rtl;
+
+    text-align: right;
+}
+
+
+/* =========================================
+   NO MISTAKES
+========================================= */
+
+.finalchallenge1-no-mistakes {
+
+    background: #E8F1E4;
+
+    border: 2px solid #A9C59D;
+
+    border-radius: 22px;
+
+    padding: 25px;
+
+    text-align: center;
+}
+
+
+.finalchallenge1-perfect-icon {
+
+    font-size: 42px;
+
+    margin-bottom: 5px;
+}
+
+
+.finalchallenge1-no-mistakes h3 {
+
+    margin: 0 0 7px;
+
+    color: #557646;
+
+    font-size: 25px;
+}
+
+
+.finalchallenge1-no-mistakes p {
+
+    margin: 0;
+
+    color: #50634A;
+
+    font-size: 17px;
+}
+
+
+/* =========================================
+   FINAL MESSAGE
+========================================= */
+
+.finalchallenge1-result-message {
+
+    width: 90%;
+
+    max-width: 850px;
+
+    margin: 18px auto;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    text-align: center;
+}
+
+
+.finalchallenge1-result-message span {
+
+    font-size: 25px;
+}
+
+
+.finalchallenge1-result-message p {
+
+    margin: 0;
+
+    color: #6B5720;
+
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.finalchallenge1-result-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-top: 5px;
+
+    padding-bottom: 10px;
+
+    flex-shrink: 0;
+}
+
+
+.finalchallenge1-retry-btn,
+.finalchallenge1-back-btn,
+.finalchallenge1-next-btn {
+
+    border: none;
+
+    min-width: 150px;
+
+    padding: 13px 28px;
+
+    border-radius: 30px;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+
+.finalchallenge1-retry-btn {
+
+    background: #D6B78A;
+
+    color: #5C3B24;
+}
+
+
+.finalchallenge1-back-btn {
+
+    background: #F1DEC5;
+
+    color: #6B5720;
+
+    border: 2px solid #D8B37C;
+}
+
+
+.finalchallenge1-next-btn {
+
+    background: #6B5720;
+
+    color: white;
+}
+
+
+.finalchallenge1-retry-btn:hover {
+
+    background: #C8A675;
+
+    transform: translateY(-2px);
+}
+
+
+.finalchallenge1-back-btn:hover {
+
+    background: #E8D2B2;
+
+    transform: translateY(-2px);
+}
+
+
+.finalchallenge1-next-btn:hover {
+
+    background: #4F4017;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .finalchallenge1-result-card {
+
+        width: 95%;
+
+        height: 94vh;
+
+        padding: 25px;
+    }
+
+
+    .finalchallenge1-result-header h1 {
+
+        font-size: 34px;
+    }
+
+
+    .finalchallenge1-score-section {
+
+        gap: 25px;
+    }
+
+
+    .finalchallenge1-score-circle {
+
+        width: 125px;
+
+        height: 125px;
+    }
+
+
+    .finalchallenge1-score-number {
+
+        font-size: 40px;
+    }
+
+
+    .finalchallenge1-score-info h2 {
+
+        font-size: 32px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .finalchallenge1-result-card {
+
+        width: 96%;
+
+        height: 96vh;
+
+        border-radius: 25px;
+
+        padding: 20px 15px;
+    }
+
+
+    .finalchallenge1-result-trophy {
+
+        font-size: 38px;
+    }
+
+
+    .finalchallenge1-result-header h1 {
+
+        font-size: 27px;
+    }
+
+
+    .finalchallenge1-result-header p {
+
+        font-size: 14px;
+    }
+
+
+    .finalchallenge1-score-section {
+
+        flex-direction: column;
+
+        gap: 12px;
+
+        margin-bottom: 18px;
+    }
+
+
+    .finalchallenge1-score-circle {
+
+        width: 105px;
+
+        height: 105px;
+    }
+
+
+    .finalchallenge1-score-number {
+
+        font-size: 34px;
+    }
+
+
+    .finalchallenge1-score-info {
+
+        text-align: center;
+    }
+
+
+    .finalchallenge1-score-info h2 {
+
+        font-size: 27px;
+    }
+
+
+    .finalchallenge1-score-info p {
+
+        font-size: 15px;
+    }
+
+
+    .finalchallenge1-summary-card {
+
+        width: 100%;
+
+        font-size: 14px;
+
+        padding: 12px 15px;
+    }
+
+
+    .finalchallenge1-feedback-card {
+
+        width: 100%;
+
+        padding: 15px;
+    }
+
+
+    .finalchallenge1-feedback-card h2 {
+
+        font-size: 20px;
+    }
+
+
+    .finalchallenge1-mistakes-title h2 {
+
+        font-size: 21px;
+    }
+
+
+    .finalchallenge1-mistakes-title span {
+
+        font-size: 12px;
+
+        padding: 6px 10px;
+    }
+
+
+    .finalchallenge1-mistake-card {
+
+        padding: 12px;
+
+        gap: 10px;
+    }
+
+
+    .finalchallenge1-mistake-number {
+
+        width: 30px;
+
+        height: 30px;
+
+        min-width: 30px;
+
+        font-size: 14px;
+    }
+
+
+    .finalchallenge1-mistake-row p {
+
+        font-size: 14px;
+    }
+
+
+    .finalchallenge1-mistake-label {
+
+        font-size: 12px;
+    }
+
+
+    .finalchallenge1-result-buttons {
+
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+
+    .finalchallenge1-retry-btn,
+    .finalchallenge1-back-btn,
+    .finalchallenge1-next-btn {
+
+        width: 90%;
+
+        min-width: unset;
+    }
+
+}

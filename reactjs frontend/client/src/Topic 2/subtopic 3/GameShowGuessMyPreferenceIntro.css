@@ -1,0 +1,177 @@
+/* ===================================
+      GAME SHOW
+      GUESS MY PREFERENCE
+      ACTIVITY 4 INTRO
+=================================== */
+
+.game-show-preference-intro-container {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background-image: url("../../assets/chatbg.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+}
+
+
+/* ===================================
+      DARK OVERLAY
+=================================== */
+
+.game-show-preference-intro-container::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.30);
+
+    backdrop-filter: blur(8px);
+
+}
+
+
+/* ===================================
+      INTRO POPUP
+=================================== */
+
+.game-show-preference-intro-popup {
+
+    width: 1000px;
+
+    height: 420px;
+
+    background: #D8B48A;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+
+    z-index: 2;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.30);
+
+    clip-path: polygon(
+        8% 0%,
+        92% 0%,
+        100% 18%,
+        100% 82%,
+        92% 100%,
+        8% 100%,
+        0% 82%,
+        0% 18%
+    );
+
+    transform: scale(0.5);
+
+    opacity: 0;
+
+    transition: 0.5s ease;
+
+}
+
+
+/* ===================================
+      SHOW ANIMATION
+=================================== */
+
+.game-show-preference-intro-popup.show {
+
+    transform: scale(1);
+
+    opacity: 1;
+
+}
+
+
+/* ===================================
+      ICON
+=================================== */
+
+.game-show-preference-intro-icon {
+
+    font-size: 82px;
+
+    margin-bottom: 18px;
+
+}
+
+
+/* ===================================
+      TITLE
+=================================== */
+
+.game-show-preference-intro-popup h1 {
+
+    margin: 0;
+
+    font-size: 64px;
+
+    font-weight: 800;
+
+    color: #5A3620;
+
+    letter-spacing: 2px;
+
+    text-align: center;
+
+    line-height: 1.15;
+
+}
+
+
+/* ===================================
+      RESPONSIVE
+=================================== */
+
+@media (max-width: 768px) {
+
+    .game-show-preference-intro-popup {
+
+        width: 90%;
+
+        height: 260px;
+
+    }
+
+
+    .game-show-preference-intro-icon {
+
+        font-size: 48px;
+
+    }
+
+
+    .game-show-preference-intro-popup h1 {
+
+        font-size: 36px;
+
+        letter-spacing: 1px;
+
+    }
+
+}

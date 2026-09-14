@@ -1,0 +1,1571 @@
+/* =====================================================
+        HOBBY ROLEPLAY ACTIVITY
+        SAME STYLE AS HOBBY RANKING SAMPLE
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+
+/* =====================================================
+                    PAGE
+===================================================== */
+
+.hobby-roleplay-activity-page {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+
+    padding: 24px;
+
+}
+
+
+/* =====================================================
+                    OVERLAY
+===================================================== */
+
+.hobby-roleplay-activity-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(5px);
+
+}
+
+
+/* =====================================================
+                    MAIN CARD
+===================================================== */
+
+.hobby-roleplay-activity-card {
+
+    width: min(1250px, 94vw);
+
+    min-height: 720px;
+
+    max-height: 92vh;
+
+    background-image:
+        url("../../assets/favourite.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    border-radius: 30px;
+
+    position: relative;
+
+    z-index: 5;
+
+    padding: 28px 38px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.25);
+
+    overflow: hidden;
+
+}
+
+
+/* =====================================================
+                    HEADER
+                    BACK LEFT
+                    TITLE CENTER
+                    SKIP RIGHT
+===================================================== */
+
+.roleplay-activity-header {
+
+    width: 100%;
+
+    height: 72px;
+
+    min-height: 72px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+}
+
+
+/* =====================================================
+                    CENTER TITLE
+===================================================== */
+
+.roleplay-header-center {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+}
+
+
+.roleplay-header-center h1 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 34px;
+
+    line-height: 1.1;
+
+    font-weight: 800;
+
+}
+
+
+.roleplay-header-center span {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color: #8B5E3C;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+}
+
+
+/* =====================================================
+                    BACK BUTTON
+                    LEFT
+===================================================== */
+
+.roleplay-back-btn {
+
+    position: absolute;
+
+    left: 0;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    width: 120px;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #8B5E3C;
+
+    color: #FFFFFF;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+
+}
+
+
+.roleplay-back-btn:hover:not(:disabled) {
+
+    background: #6C452A;
+
+    transform:
+        translateY(-50%)
+        translateY(-2px);
+
+}
+
+
+.roleplay-back-btn:disabled {
+
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =====================================================
+                    SKIP BUTTON
+                    RIGHT
+===================================================== */
+
+.roleplay-skip-btn {
+
+    position: absolute;
+
+    right: 0;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    width: 120px;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #8B5E3C;
+
+    color: #FFFFFF;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+
+}
+
+
+.roleplay-skip-btn:hover:not(:disabled) {
+
+    background: #6C452A;
+
+    transform:
+        translateY(-50%)
+        translateY(-2px);
+
+}
+
+
+.roleplay-skip-btn:disabled {
+
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =====================================================
+                    MAIN CONTENT
+===================================================== */
+
+.roleplay-main {
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        34% 66%;
+
+    column-gap: 25px;
+
+    padding:
+        18px 25px 10px;
+
+    align-items: center;
+
+}
+
+
+/* =====================================================
+                    TEACHER SECTION
+===================================================== */
+
+.roleplay-teacher-section {
+
+    width: 100%;
+
+    height: 100%;
+
+    min-height: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+/* =====================================================
+                    TEACHER STAGE
+===================================================== */
+
+.roleplay-teacher-stage {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-end;
+
+    width: 100%;
+
+}
+
+
+/* =====================================================
+                    TEACHER IMAGE
+===================================================== */
+
+.roleplay-teacher {
+
+    width: 245px;
+
+    max-width: 100%;
+
+    height: auto;
+
+    object-fit: contain;
+
+    display: block;
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+
+}
+
+
+/* =====================================================
+                    TEACHER SPEAKING
+===================================================== */
+
+.roleplay-teacher.speaking {
+
+    animation:
+        roleplayTeacherSpeaking
+        0.8s
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes roleplayTeacherSpeaking {
+
+    0% {
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-6px)
+            scale(1.02);
+
+    }
+
+    100% {
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =====================================================
+                    TEACHER BUBBLE
+===================================================== */
+
+.roleplay-teacher-bubble {
+
+    position: relative;
+
+    width: 90%;
+
+    max-width: 330px;
+
+    margin-top: -5px;
+
+    padding: 16px 18px;
+
+    background: #FFFFFF;
+
+    border-radius: 18px;
+
+    border:
+        2px solid #E8EEF8;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.12);
+
+    animation:
+        roleplayBubbleAppear
+        0.35s
+        ease;
+
+}
+
+
+.roleplay-teacher-bubble::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -11px;
+
+    left: 50%;
+
+    width: 20px;
+
+    height: 20px;
+
+    background: #FFFFFF;
+
+    border-left:
+        2px solid #E8EEF8;
+
+    border-top:
+        2px solid #E8EEF8;
+
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+
+}
+
+
+.roleplay-teacher-name {
+
+    position: relative;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    color: #FCBE23;
+
+    margin-bottom: 6px;
+
+    text-align: center;
+
+}
+
+
+.roleplay-teacher-text {
+
+    position: relative;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+
+    color: #374151;
+
+    text-align: center;
+
+    font-weight: 600;
+
+}
+
+
+@keyframes roleplayBubbleAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(8px)
+            scale(0.96);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =====================================================
+                    QUESTION SECTION
+===================================================== */
+
+.roleplay-question-section {
+
+    width: 100%;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+/* =====================================================
+                    SCENE BADGE
+===================================================== */
+
+.roleplay-scene-badge {
+
+    padding:
+        8px 18px;
+
+    border-radius: 25px;
+
+    background: #FFF3E6;
+
+    border:
+        2px solid #E7D4BF;
+
+    color: #8B5E3C;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    margin-bottom: 8px;
+
+    text-align: center;
+
+}
+
+
+/* =====================================================
+                    PROGRESS
+===================================================== */
+
+.roleplay-progress {
+
+    color: #7A4C2C;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    margin-bottom: 10px;
+
+}
+
+
+/* =====================================================
+                    QUESTION CARD
+===================================================== */
+
+.roleplay-question-card {
+
+    width: min(650px, 100%);
+
+    background:
+        rgba(255, 248, 239, 0.96);
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 24px;
+
+    padding:
+        25px 28px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0, 0, 0, 0.08);
+
+}
+
+
+/* =====================================================
+                    QUESTION LABEL
+===================================================== */
+
+.roleplay-question-label {
+
+    color: #8B5E3C;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    margin-bottom: 8px;
+
+}
+
+
+/* =====================================================
+                    QUESTION
+===================================================== */
+
+.roleplay-question-card h2 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 25px;
+
+    line-height: 1.4;
+
+    font-weight: 800;
+
+}
+
+
+/* =====================================================
+                    INSTRUCTION
+===================================================== */
+
+.roleplay-question-card p {
+
+    margin:
+        12px 0 18px;
+
+    color: #7A4C2C;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    line-height: 1.5;
+
+}
+
+
+/* =====================================================
+                    MICROPHONE BUTTON
+===================================================== */
+
+.roleplay-speak-btn {
+
+    width: 270px;
+
+    height: 56px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    background: #8B5E3C;
+
+    color: #FFFFFF;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+
+    box-shadow:
+        0 7px 18px
+        rgba(139, 94, 60, 0.25);
+
+}
+
+
+.roleplay-speak-btn:hover:not(:disabled) {
+
+    background: #6C452A;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.roleplay-speak-btn:disabled {
+
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =====================================================
+                    LISTENING
+===================================================== */
+
+.roleplay-speak-btn.listening {
+
+    background: #C47742;
+
+    animation:
+        roleplayListeningPulse
+        1.2s
+        infinite;
+
+}
+
+
+@keyframes roleplayListeningPulse {
+
+    0% {
+
+        transform:
+            scale(1);
+
+    }
+
+    50% {
+
+        transform:
+            scale(1.035);
+
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+
+    }
+
+}
+
+
+/* =====================================================
+                    USER ANSWER
+===================================================== */
+
+.roleplay-user-answer {
+
+    margin-top: 15px;
+
+    padding:
+        12px 15px;
+
+    background: #FFFFFF;
+
+    border:
+        1px solid #E7D4BF;
+
+    border-radius: 13px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    text-align: left;
+
+}
+
+
+.roleplay-user-answer strong {
+
+    color: #8B5E3C;
+
+    font-size: 13px;
+
+}
+
+
+.roleplay-user-answer span {
+
+    color: #5A3620;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+}
+
+
+/* =====================================================
+                    ANSWER STATUS
+===================================================== */
+
+.roleplay-answer-status {
+
+    margin-top: 14px;
+
+    padding:
+        10px 15px;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    line-height: 1.4;
+
+}
+
+
+/* =====================================================
+                    RETRY
+===================================================== */
+
+.retry-status {
+
+    background: #FFF4E5;
+
+    border:
+        2px solid #D8AD78;
+
+    color: #754727;
+
+}
+
+
+/* =====================================================
+                    CORRECT
+===================================================== */
+
+.correct-status {
+
+    background: #DFF6E5;
+
+    border:
+        2px solid #2E9B52;
+
+    color: #206D39;
+
+}
+
+
+/* =====================================================
+                    ERROR
+===================================================== */
+
+.error-status {
+
+    background: #FFE5E5;
+
+    border:
+        2px solid #E74C3C;
+
+    color: #B71C1C;
+
+}
+
+
+/* =====================================================
+                    ACTION BUTTONS
+===================================================== */
+
+.roleplay-action-buttons {
+
+    width: 100%;
+
+    min-height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-top: 14px;
+
+}
+
+
+/* =====================================================
+                    REPEAT BUTTON
+===================================================== */
+
+.roleplay-repeat-btn {
+
+    min-width: 220px;
+
+    min-height: 46px;
+
+    padding:
+        0 20px;
+
+    border:
+        2px solid #8B5E3C;
+
+    border-radius: 13px;
+
+    background: #FFF9F2;
+
+    color: #754727;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+
+}
+
+
+.roleplay-repeat-btn:hover:not(:disabled) {
+
+    background: #8B5E3C;
+
+    color: #FFFFFF;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.roleplay-repeat-btn:disabled {
+
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =====================================================
+                    NEXT BUTTON
+===================================================== */
+
+.roleplay-next-btn {
+
+    min-width: 220px;
+
+    min-height: 48px;
+
+    padding:
+        0 22px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: #8B5E3C;
+
+    color: #FFFFFF;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px
+        rgba(139, 94, 60, 0.25);
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+
+}
+
+
+.roleplay-next-btn:hover:not(:disabled) {
+
+    background: #6C452A;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.roleplay-next-btn:disabled {
+
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =====================================================
+                    EXAMPLE BUTTON
+===================================================== */
+
+.roleplay-example-btn {
+
+    margin-top: 11px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #8B5E3C;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.roleplay-example-btn:hover:not(:disabled) {
+
+    color: #5A3620;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+.roleplay-example-btn:disabled {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =====================================================
+                    EXAMPLE
+===================================================== */
+
+.roleplay-example {
+
+    margin-top: 8px;
+
+    padding:
+        10px 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+
+    border-radius: 12px;
+
+    background: #FFF3E6;
+
+    border:
+        1px dashed #D6A36A;
+
+    color: #754727;
+
+    font-size: 13px;
+
+    line-height: 1.4;
+
+}
+
+
+.roleplay-example strong {
+
+    color: #87502E;
+
+}
+
+
+/* =====================================================
+                    TIP
+===================================================== */
+
+.roleplay-tip {
+
+    max-width: 650px;
+
+    margin-top: 10px;
+
+    padding:
+        9px 14px;
+
+    color: #7A4C2C;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    line-height: 1.45;
+
+    text-align: center;
+
+}
+
+
+/* =====================================================
+                    TABLET
+===================================================== */
+
+@media (max-width: 1050px) {
+
+    .hobby-roleplay-activity-card {
+
+        max-height: none;
+
+    }
+
+
+    .roleplay-main {
+
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+
+        overflow-y: auto;
+
+        padding:
+            15px 20px 20px;
+
+    }
+
+
+    .roleplay-teacher-section {
+
+        height: auto;
+
+        min-height: auto;
+
+    }
+
+
+    .roleplay-teacher {
+
+        width: 190px;
+
+        max-height: 270px;
+
+    }
+
+
+    .roleplay-teacher-bubble {
+
+        width: 400px;
+
+        max-width: 90%;
+
+    }
+
+}
+
+
+/* =====================================================
+                    MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .hobby-roleplay-activity-page {
+
+        padding: 12px;
+
+        align-items: flex-start;
+
+    }
+
+
+    .hobby-roleplay-activity-card {
+
+        width: 96vw;
+
+        min-height: 94vh;
+
+        padding: 18px;
+
+        border-radius: 22px;
+
+        overflow: hidden;
+
+    }
+
+
+    /* =================================================
+                    HEADER
+                    SAME ROW
+    ================================================= */
+
+    .roleplay-activity-header {
+
+        height: 95px;
+
+        min-height: 95px;
+
+        padding:
+            0 55px;
+
+    }
+
+
+    .roleplay-header-center {
+
+        width: 100%;
+
+    }
+
+
+    .roleplay-header-center h1 {
+
+        font-size: 25px;
+
+    }
+
+
+    .roleplay-header-center span {
+
+        font-size: 13px;
+
+        margin-top: 4px;
+
+    }
+
+
+    .roleplay-back-btn {
+
+        left: 0;
+
+        width: 92px;
+
+        height: 42px;
+
+        font-size: 13px;
+
+    }
+
+
+    .roleplay-skip-btn {
+
+        right: 0;
+
+        width: 92px;
+
+        height: 42px;
+
+        font-size: 13px;
+
+    }
+
+
+    /* =================================================
+                        MAIN
+    ================================================= */
+
+    .roleplay-main {
+
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+
+        padding:
+            10px 0 15px;
+
+        overflow-y: auto;
+
+    }
+
+
+    /* =================================================
+                        TEACHER
+    ================================================= */
+
+    .roleplay-teacher {
+
+        width: 170px;
+
+        max-height: 240px;
+
+    }
+
+
+    .roleplay-teacher-bubble {
+
+        width: 100%;
+
+        max-width: 360px;
+
+    }
+
+
+    /* =================================================
+                        QUESTION
+    ================================================= */
+
+    .roleplay-scene-badge {
+
+        font-size: 13px;
+
+        padding:
+            7px 15px;
+
+    }
+
+
+    .roleplay-progress {
+
+        font-size: 14px;
+
+    }
+
+
+    .roleplay-question-card {
+
+        padding:
+            20px 16px;
+
+    }
+
+
+    .roleplay-question-card h2 {
+
+        font-size: 20px;
+
+    }
+
+
+    .roleplay-question-card p {
+
+        font-size: 14px;
+
+    }
+
+
+    .roleplay-speak-btn {
+
+        width: 100%;
+
+    }
+
+
+    .roleplay-tip {
+
+        font-size: 12px;
+
+    }
+
+}
+
+
+/* =====================================================
+                    SMALL MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .hobby-roleplay-activity-page {
+
+        padding: 8px;
+
+    }
+
+
+    .hobby-roleplay-activity-card {
+
+        width: 98vw;
+
+        padding: 14px;
+
+        border-radius: 19px;
+
+    }
+
+
+    .roleplay-activity-header {
+
+        height: 90px;
+
+        min-height: 90px;
+
+        padding:
+            0 48px;
+
+    }
+
+
+    .roleplay-header-center h1 {
+
+        font-size: 21px;
+
+    }
+
+
+    .roleplay-header-center span {
+
+        font-size: 11px;
+
+    }
+
+
+    .roleplay-back-btn,
+    .roleplay-skip-btn {
+
+        width: 82px;
+
+        height: 38px;
+
+        font-size: 12px;
+
+        border-radius: 10px;
+
+    }
+
+
+    .roleplay-teacher {
+
+        width: 145px;
+
+    }
+
+
+    .roleplay-teacher-bubble {
+
+        max-width: 330px;
+
+        padding:
+            12px 13px;
+
+    }
+
+
+    .roleplay-teacher-text {
+
+        font-size: 12px;
+
+    }
+
+
+    .roleplay-question-card {
+
+        padding:
+            18px 13px;
+
+    }
+
+
+    .roleplay-question-card h2 {
+
+        font-size: 19px;
+
+    }
+
+
+    .roleplay-question-card p {
+
+        font-size: 12px;
+
+    }
+
+
+    .roleplay-repeat-btn,
+    .roleplay-next-btn {
+
+        width: 100%;
+
+    }
+
+}

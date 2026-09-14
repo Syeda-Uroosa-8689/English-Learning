@@ -5,24 +5,30 @@
 .hobby-ranking-intro-page {
 
     position: fixed;
+
     inset: 0;
 
     z-index: 9999;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
     background-image: url("../../assets/chatbg.jpeg");
+
     background-size: cover;
+
     background-position: center;
+
     background-repeat: no-repeat;
 
 }
 
 
 /* ===================================
-              OVERLAY
+      DARK OVERLAY
 =================================== */
 
 .hobby-ranking-intro-page::before {
@@ -30,6 +36,7 @@
     content: "";
 
     position: absolute;
+
     inset: 0;
 
     background: rgba(0, 0, 0, 0.30);
@@ -40,24 +47,28 @@
 
 
 /* ===================================
-              MAIN POPUP
+      INTRO POPUP
 =================================== */
 
 .hobby-ranking-popup {
 
     width: 1000px;
+
     height: 420px;
 
     background: #D8B48A;
 
     display: flex;
 
+    flex-direction: column;
+
     justify-content: center;
+
     align-items: center;
 
     position: relative;
 
-    z-index: 5;
+    z-index: 2;
 
     box-shadow:
         0 30px 80px rgba(0, 0, 0, 0.30);
@@ -83,7 +94,7 @@
 
 
 /* ===================================
-              SHOW POPUP
+      SHOW ANIMATION
 =================================== */
 
 .hobby-ranking-popup.show {
@@ -96,70 +107,68 @@
 
 
 /* ===================================
-                TITLE
+      ICON
+=================================== */
+
+.hobby-ranking-intro-icon {
+
+    font-size: 82px;
+
+    margin-bottom: 18px;
+
+}
+
+
+/* ===================================
+      TITLE
 =================================== */
 
 .hobby-ranking-popup h1 {
 
     margin: 0;
 
-    color: #5A3620;
-
-    font-size: 82px;
+    font-size: 64px;
 
     font-weight: 800;
 
-    letter-spacing: 3px;
+    color: #5A3620;
+
+    letter-spacing: 2px;
 
     text-align: center;
+
+    line-height: 1.15;
 
 }
 
 
 /* ===================================
-              RESPONSIVE
+      RESPONSIVE
 =================================== */
 
 @media (max-width: 768px) {
 
     .hobby-ranking-popup {
 
-        width: 85%;
+        width: 90%;
 
-        height: 150px;
+        height: 260px;
+
+    }
+
+
+    .hobby-ranking-intro-icon {
+
+        font-size: 48px;
 
     }
 
 
     .hobby-ranking-popup h1 {
 
-        font-size: 34px;
+        font-size: 36px;
 
         letter-spacing: 1px;
-
-    }
-
-}
-
-
-/* ===================================
-            SMALL MOBILE
-=================================== */
-
-@media (max-width: 480px) {
-
-    .hobby-ranking-popup {
-
-        width: 88%;
-
-        height: 140px;
-
-    }
-
-
-    .hobby-ranking-popup h1 {
-
-        font-size: 28px;
 
     }
 

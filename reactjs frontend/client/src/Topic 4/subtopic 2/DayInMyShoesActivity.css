@@ -1,0 +1,2232 @@
+/* =====================================================
+   DAY IN MY SHOES
+   FIXED STORY ACTIVITY
+===================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+.day-story-page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 15px;
+
+  background-image: url("../../assets/chatbg.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  font-family: "Poppins", "Nunito", sans-serif;
+  color: #4b3028;
+}
+
+.day-story-page::before {
+  content: "";
+  position: absolute;
+  inset: -25px;
+
+  background-image: url("../../assets/chatbg.jpeg");
+  background-size: cover;
+  background-position: center;
+
+  filter: blur(10px);
+  transform: scale(1.05);
+
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.day-story-card {
+  position: relative;
+  z-index: 2;
+
+  width: min(1400px, 96vw);
+  height: calc(100vh - 30px);
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #fff8ed;
+
+  border: 3px solid #d6a66b;
+  border-radius: 28px;
+
+  box-shadow:
+    0 20px 50px rgba(30, 18, 40, 0.35),
+    0 4px 0 rgba(255, 255, 255, 0.5) inset;
+
+  padding: 20px 25px;
+
+  animation: dayCardEnter 0.6s ease both;
+}
+
+@keyframes dayCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.day-story-header {
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.day-header-button {
+  border: none;
+
+  background: #f3dfc3;
+  color: #6b4537;
+
+  border-radius: 13px;
+
+  padding: 10px 16px;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.day-header-button:hover {
+  background: #e9c89e;
+  transform: translateY(-2px);
+}
+
+.day-header-title {
+  flex: 1;
+  text-align: center;
+}
+
+.day-header-title h1 {
+  margin: 0;
+
+  font-size: clamp(18px, 2vw, 27px);
+
+  font-weight: 900;
+
+  letter-spacing: 1px;
+
+  color: #704332;
+}
+
+.day-header-title span {
+  display: block;
+
+  margin-top: 2px;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  color: #b77b4d;
+}
+
+/* =====================================================
+   JOURNEY
+===================================================== */
+
+.day-journey-section {
+  flex: 0 0 auto;
+
+  padding: 9px 15px;
+
+  margin-bottom: 10px;
+
+  background: #f9ead7;
+
+  border: 2px solid #edc99e;
+  border-radius: 17px;
+}
+
+.day-journey-label {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 7px;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  color: #704332;
+}
+
+.day-journey-track {
+  position: relative;
+
+  height: 31px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.day-journey-track::before {
+  content: "";
+
+  position: absolute;
+
+  left: 16px;
+  right: 16px;
+
+  top: 50%;
+
+  height: 4px;
+
+  background: #e4c8a6;
+
+  border-radius: 10px;
+
+  transform: translateY(-50%);
+}
+
+.day-journey-fill {
+  position: absolute;
+
+  left: 16px;
+
+  top: 50%;
+
+  height: 4px;
+
+  background: linear-gradient(
+    90deg,
+    #d99b5c,
+    #f0bd6b
+  );
+
+  border-radius: 10px;
+
+  transform: translateY(-50%);
+
+  z-index: 1;
+
+  transition: width 0.6s ease;
+}
+
+.day-journey-stop {
+  position: relative;
+  z-index: 2;
+
+  width: 31px;
+  height: 31px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f1dfc5;
+
+  border: 2px solid #e0bd91;
+
+  font-size: 14px;
+
+  opacity: 0.5;
+
+  filter: grayscale(0.8);
+
+  transition: 0.4s ease;
+}
+
+.day-journey-stop.active {
+  opacity: 1;
+
+  filter: none;
+
+  background: #fff3d6;
+
+  border-color: #e5a34f;
+
+  transform: scale(1.15);
+
+  box-shadow:
+    0 0 0 5px rgba(229, 163, 79, 0.15);
+
+  animation: journeyPulse 1.8s infinite;
+}
+
+.day-journey-stop.completed {
+  opacity: 1;
+
+  filter: none;
+
+  background: #f7c96d;
+
+  border-color: #d8953c;
+}
+
+@keyframes journeyPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px rgba(229, 163, 79, 0.12);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(229, 163, 79, 0.22);
+  }
+}
+
+/* =====================================================
+   SCENE
+===================================================== */
+
+.day-scene-area {
+  position: relative;
+
+  flex: 1 1 auto;
+
+  min-height: 0;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  border-radius: 21px;
+
+  border: 3px solid #d6a66b;
+
+  background: #e7c9a4;
+
+  isolation: isolate;
+}
+
+.day-scene-background {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  z-index: 0;
+
+  pointer-events: none;
+}
+
+.day-scene-area::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.04),
+      rgba(73, 39, 29, 0.08)
+    );
+
+  pointer-events: none;
+}
+
+/* =====================================================
+   SCENE HEADING
+===================================================== */
+
+.day-scene-heading {
+  position: absolute;
+
+  top: 15px;
+  left: 15px;
+
+  z-index: 8;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 9px 13px;
+
+  background: rgba(255, 248, 237, 0.94);
+
+  border: 2px solid #e4bd8d;
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 5px 14px rgba(65, 38, 28, 0.14);
+
+  animation: headingEnter 0.5s ease both;
+}
+
+.day-scene-heading > span {
+  font-size: 25px;
+}
+
+.day-scene-heading h2 {
+  margin: 0;
+
+  font-size: clamp(14px, 1.5vw, 20px);
+
+  font-weight: 900;
+
+  color: #704332;
+}
+
+.day-scene-heading p {
+  margin: 2px 0 0;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  color: #b77b4d;
+}
+
+@keyframes headingEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =====================================================
+   MORNING
+===================================================== */
+
+.day-morning-darkness {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(30, 27, 59, 0.82),
+      rgba(65, 42, 75, 0.35)
+    );
+
+  animation: morningFade 3s ease forwards;
+
+  pointer-events: none;
+}
+
+@keyframes morningFade {
+  0% {
+    opacity: 0.95;
+  }
+
+  60% {
+    opacity: 0.45;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.day-morning-sunlight {
+  position: absolute;
+
+  z-index: 3;
+
+  top: -10%;
+  right: 0;
+
+  width: 65%;
+  height: 110%;
+
+  object-fit: contain;
+
+  opacity: 0;
+
+  mix-blend-mode: screen;
+
+  pointer-events: none;
+
+  animation: sunlightEnter 3.5s ease forwards;
+}
+
+@keyframes sunlightEnter {
+  from {
+    opacity: 0;
+
+    transform:
+      translateX(40px)
+      scale(0.9);
+  }
+
+  60% {
+    opacity: 0.4;
+  }
+
+  to {
+    opacity: 0.7;
+
+    transform:
+      translateX(0)
+      scale(1);
+  }
+}
+
+/* =====================================================
+   NIGHT
+===================================================== */
+
+.day-moon-stars {
+  position: absolute;
+
+  z-index: 3;
+
+  top: 0;
+  right: 0;
+
+  width: 42%;
+  max-width: 320px;
+
+  opacity: 0.85;
+
+  pointer-events: none;
+
+  animation: starsTwinkle 2.5s infinite;
+}
+
+@keyframes starsTwinkle {
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* =====================================================
+   CHARACTER
+===================================================== */
+
+.day-story-character {
+  position: absolute;
+
+  z-index: 6;
+
+  bottom: 5%;
+
+  left: 50%;
+
+  width: clamp(120px, 18vw, 225px);
+
+  max-height: 78%;
+
+  object-fit: contain;
+
+  object-position: center bottom;
+
+  transform: translateX(-50%);
+
+  filter:
+    drop-shadow(
+      0 9px 8px rgba(50, 30, 25, 0.16)
+    );
+
+  animation: characterAppear 0.7s ease both;
+}
+
+@keyframes characterAppear {
+  from {
+    opacity: 0;
+
+    transform:
+      translateX(-50%)
+      translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateX(-50%)
+      translateY(0);
+  }
+}
+
+.day-phase-intro .day-story-character {
+  animation:
+    characterIntro 1.4s ease both;
+}
+
+@keyframes characterIntro {
+  from {
+    opacity: 0;
+
+    transform:
+      translateX(-130%)
+      translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateX(-50%)
+      translateY(0);
+  }
+}
+
+.day-story-character.character-action {
+  animation:
+    characterAction 0.85s ease-in-out 2;
+}
+
+@keyframes characterAction {
+  0%,
+  100% {
+    transform:
+      translateX(-50%)
+      translateY(0)
+      scale(1);
+  }
+
+  40% {
+    transform:
+      translateX(-50%)
+      translateY(-9px)
+      scale(1.04);
+  }
+
+  70% {
+    transform:
+      translateX(-50%)
+      translateY(0)
+      scale(1);
+  }
+}
+
+/* =====================================================
+   OBJECTS
+===================================================== */
+
+.day-scene-object {
+  position: absolute;
+
+  z-index: 5;
+
+  object-fit: contain;
+
+  pointer-events: none;
+
+  filter:
+    drop-shadow(
+      0 7px 6px rgba(50, 30, 25, 0.13)
+    );
+}
+
+.day-alarm {
+  top: 27%;
+  left: 24%;
+
+  width: clamp(55px, 8vw, 95px);
+
+  animation:
+    objectPop 0.7s ease both,
+    alarmRing 1.2s ease-in-out 1s 3;
+}
+
+@keyframes alarmRing {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+
+  20% {
+    transform: rotate(-8deg);
+  }
+
+  40% {
+    transform: rotate(8deg);
+  }
+
+  60% {
+    transform: rotate(-6deg);
+  }
+
+  80% {
+    transform: rotate(6deg);
+  }
+}
+
+.day-toothbrush {
+  top: 35%;
+  right: 22%;
+
+  width: clamp(60px, 9vw, 105px);
+
+  animation:
+    objectPop 0.7s ease both,
+    toothbrushMove 1.4s ease-in-out 1s 2;
+}
+
+@keyframes toothbrushMove {
+  0%,
+  100% {
+    transform: rotate(-10deg);
+  }
+
+  50% {
+    transform: rotate(10deg) translateY(-5px);
+  }
+}
+
+.day-breakfast {
+  top: 43%;
+  left: 25%;
+
+  width: clamp(70px, 11vw, 130px);
+
+  animation:
+    objectPop 0.7s ease both,
+    breakfastBounce 1.8s infinite;
+}
+
+@keyframes breakfastBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.day-bus {
+  bottom: 10%;
+  left: 10%;
+
+  width: clamp(180px, 28vw, 360px);
+
+  animation: busArrive 1.8s ease both;
+}
+
+@keyframes busArrive {
+  from {
+    opacity: 0;
+    transform: translateX(-90px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.day-books {
+  top: 30%;
+  right: 19%;
+
+  width: clamp(75px, 12vw, 140px);
+
+  animation:
+    objectPop 0.7s ease both,
+    objectFloat 2s infinite;
+}
+
+.day-lunch {
+  top: 40%;
+  left: 26%;
+
+  width: clamp(75px, 11vw, 125px);
+
+  animation:
+    objectPop 0.7s ease both,
+    objectFloat 2s infinite;
+}
+
+.day-football {
+  bottom: 20%;
+  right: 25%;
+
+  width: clamp(55px, 8vw, 90px);
+
+  animation:
+    objectPop 0.7s ease both,
+    footballBounce 1.5s infinite;
+}
+
+@keyframes footballBounce {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(180deg);
+  }
+}
+
+.day-school-bag {
+  bottom: 24%;
+  left: 22%;
+
+  width: clamp(70px, 10vw, 115px);
+
+  animation:
+    objectPop 0.7s ease both,
+    objectFloat 2s infinite;
+}
+
+.day-homework {
+  top: 42%;
+  right: 22%;
+
+  width: clamp(75px, 11vw, 130px);
+
+  animation:
+    objectPop 0.7s ease both,
+    objectFloat 2s infinite;
+}
+
+.day-dinner {
+  top: 43%;
+  left: 26%;
+
+  width: clamp(75px, 11vw, 125px);
+
+  animation:
+    objectPop 0.7s ease both,
+    objectFloat 2s infinite;
+}
+
+.day-pajamas {
+  top: 32%;
+  right: 22%;
+
+  width: clamp(70px, 10vw, 110px);
+
+  animation:
+    objectPop 0.7s ease both,
+    objectFloat 2s infinite;
+}
+
+@keyframes objectPop {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes objectFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* =====================================================
+   CORRECT BURST
+===================================================== */
+
+.day-correct-burst {
+  position: absolute;
+
+  z-index: 15;
+
+  top: 50%;
+  left: 50%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 4px;
+
+  transform: translate(-50%, -50%);
+
+  padding: 15px 22px;
+
+  background: rgba(255, 248, 237, 0.96);
+
+  border: 3px solid #e5a34f;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 30px rgba(100, 60, 30, 0.2);
+
+  animation: correctBurst 0.65s ease both;
+}
+
+.day-correct-burst span {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f7c96d;
+
+  color: #704332;
+
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.day-correct-burst strong {
+  font-size: 17px;
+
+  color: #704332;
+}
+
+@keyframes correctBurst {
+  from {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.5);
+  }
+
+  70% {
+    transform:
+      translate(-50%, -50%)
+      scale(1.08);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+}
+
+/* =====================================================
+   WALKING
+===================================================== */
+
+.day-walking-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 20;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  background:
+    rgba(255, 248, 237, 0.86);
+
+  backdrop-filter: blur(5px);
+
+  animation: overlayIn 0.4s ease both;
+}
+
+.day-walking-overlay span {
+  font-size: 65px;
+
+  animation: walkingBounce 0.7s infinite;
+}
+
+.day-walking-overlay p {
+  margin: 0;
+
+  font-size: 17px;
+
+  font-weight: 900;
+
+  color: #704332;
+}
+
+@keyframes walkingBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* =====================================================
+   TRANSITION
+===================================================== */
+
+.day-scene-transition {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 30;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fff8ed;
+
+  animation: sceneTransition 0.7s ease both;
+}
+
+.day-scene-transition span {
+  font-size: 65px;
+
+  animation:
+    transitionSparkle 0.8s infinite;
+}
+
+@keyframes sceneTransition {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes transitionSparkle {
+  0%,
+  100% {
+    transform: scale(1) rotate(0);
+  }
+
+  50% {
+    transform: scale(1.25) rotate(15deg);
+  }
+}
+
+/* =====================================================
+   TEACHER
+===================================================== */
+
+.day-teacher-section {
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 9px;
+}
+
+.day-teacher-avatar {
+  width: 57px;
+  height: 57px;
+
+  min-width: 57px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f4dfc3;
+
+  border: 3px solid #d6a66b;
+
+  font-size: 29px;
+
+  transition: 0.3s ease;
+}
+
+.day-teacher-avatar.teacher-speaking {
+  animation: teacherPulse 0.8s infinite;
+}
+
+@keyframes teacherPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.07);
+  }
+}
+
+.day-teacher-bubble {
+  position: relative;
+
+  flex: 1;
+
+  min-width: 0;
+
+  padding: 9px 14px;
+
+  background: #fff;
+
+  border: 2px solid #e2bd8e;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 4px 10px rgba(80, 45, 30, 0.08);
+}
+
+.day-teacher-bubble::before {
+  content: "";
+
+  position: absolute;
+
+  left: -8px;
+  top: 20px;
+
+  width: 14px;
+  height: 14px;
+
+  background: #fff;
+
+  border-left: 2px solid #e2bd8e;
+  border-bottom: 2px solid #e2bd8e;
+
+  transform: rotate(45deg);
+}
+
+.day-teacher-name {
+  margin-bottom: 2px;
+
+  font-size: 11px;
+
+  font-weight: 900;
+
+  color: #b47747;
+}
+
+.teacher-voice-bars {
+  margin-left: 8px;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+
+  animation: voiceBars 0.7s infinite;
+}
+
+@keyframes voiceBars {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.day-teacher-bubble p {
+  margin: 0;
+
+  font-size: 13px;
+
+  line-height: 1.35;
+
+  font-weight: 700;
+
+  color: #704332;
+}
+
+.day-teacher-repeat {
+  margin-top: 5px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #b47747;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  padding: 2px 0;
+}
+
+/* =====================================================
+   SPEAKING
+===================================================== */
+
+.day-speaking-section {
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-top: 8px;
+
+  padding: 9px 13px;
+
+  background: #fff4dd;
+
+  border: 2px solid #e8c48e;
+
+  border-radius: 14px;
+
+  animation: speakingEnter 0.4s ease both;
+}
+
+.day-speaking-text {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  min-width: 0;
+}
+
+.day-speaking-text span {
+  font-size: 21px;
+}
+
+.day-speaking-text p {
+  margin: 0;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  color: #704332;
+}
+
+.day-speak-button {
+  flex-shrink: 0;
+
+  border: none;
+
+  background: #d9954d;
+
+  color: #fff;
+
+  border-radius: 11px;
+
+  padding: 9px 15px;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.day-speak-button:hover {
+  transform: translateY(-2px);
+
+  background: #c67d38;
+}
+
+.day-speak-button.speaking {
+  background: #8e5a3c;
+
+  animation: speakPulse 1s infinite;
+}
+
+@keyframes speakPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(142, 90, 60, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 0 7px rgba(142, 90, 60, 0.12);
+  }
+}
+
+@keyframes speakingEnter {
+  from {
+    opacity: 0;
+
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+/* =====================================================
+   OPTIONS
+===================================================== */
+
+.day-options-section {
+  flex: 0 0 auto;
+
+  margin-top: 8px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.day-options-title {
+  text-align: center;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  color: #a66f46;
+}
+
+.day-choice-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+}
+
+.day-choice-button {
+  width: 100%;
+
+  min-height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  border: 2px solid #dcb27d;
+
+  background: #fff;
+
+  color: #704332;
+
+  border-radius: 13px;
+
+  padding: 9px 13px;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.day-choice-button:hover {
+  background: #fff1d8;
+
+  border-color: #d4954c;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 4px 10px rgba(150, 90, 40, 0.1);
+}
+
+.day-choice-button.selected {
+  border-color: #d4954c;
+
+  background: #fff1d8;
+}
+
+.choice-number {
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f3dfc3;
+
+  font-size: 11px;
+}
+
+/* =====================================================
+   WRONG FEEDBACK
+===================================================== */
+
+.day-feedback {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: auto 1fr auto;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 9px 13px;
+
+  border-radius: 14px;
+
+  animation: feedbackEnter 0.35s ease both;
+}
+
+.day-feedback.wrong {
+  background: #fff0e8;
+
+  border: 2px solid #e8b49b;
+
+  color: #9f513e;
+}
+
+.feedback-icon {
+  font-size: 27px;
+}
+
+.feedback-content {
+  min-width: 0;
+}
+
+.feedback-content strong {
+  display: block;
+
+  font-size: 13px;
+
+  margin-bottom: 2px;
+}
+
+.feedback-content p {
+  margin: 0;
+
+  font-size: 11px;
+
+  line-height: 1.3;
+}
+
+.feedback-content > span {
+  display: block;
+
+  margin-top: 2px;
+
+  font-size: 10px;
+
+  font-weight: 600;
+}
+
+.day-try-again-button {
+  border: none;
+
+  background: #d9954d;
+
+  color: #fff;
+
+  border-radius: 11px;
+
+  padding: 9px 15px;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+}
+
+.day-try-again-button:hover {
+  background: #c67d38;
+
+  transform: translateY(-2px);
+}
+
+@keyframes feedbackEnter {
+  from {
+    opacity: 0;
+
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+/* =====================================================
+   NEXT BUTTON
+===================================================== */
+
+.day-next-button {
+  align-self: center;
+
+  border: none;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d9954d,
+      #e6b55e
+    );
+
+  color: #fff;
+
+  border-radius: 13px;
+
+  padding: 10px 23px;
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 0 #b87938;
+
+  transition: 0.2s ease;
+}
+
+.day-next-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 0 #b87938;
+}
+
+.day-next-button:active {
+  transform: translateY(2px);
+
+  box-shadow:
+    0 2px 0 #b87938;
+}
+
+/* =====================================================
+   CONFETTI
+===================================================== */
+
+.day-confetti-layer {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 100;
+
+  pointer-events: none;
+
+  overflow: hidden;
+}
+
+.day-confetti {
+  position: absolute;
+
+  top: -50px;
+
+  font-size: 23px;
+
+  animation-name: confettiFall;
+
+  animation-timing-function: linear;
+
+  animation-fill-mode: forwards;
+}
+
+@keyframes confettiFall {
+  from {
+    transform:
+      translateY(0)
+      rotate(0deg);
+
+    opacity: 1;
+  }
+
+  to {
+    transform:
+      translateY(110vh)
+      rotate(360deg);
+
+    opacity: 0;
+  }
+}
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.day-intro-page {
+  padding: 15px;
+}
+
+.day-intro-card {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(1150px, 94vw);
+
+  max-height: calc(100vh - 30px);
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 20px 50px rgba(30, 18, 40, 0.35);
+
+  animation: dayCardEnter 0.7s ease both;
+}
+
+.day-intro-image {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  max-height: calc(100vh - 30px);
+
+  object-fit: contain;
+
+  border-radius: 24px;
+
+  user-select: none;
+
+  -webkit-user-drag: none;
+}
+
+/* =====================================================
+   INVISIBLE START BUTTON
+===================================================== */
+
+.day-intro-start-button {
+  position: absolute;
+
+  left: 26%;
+  bottom: 5.5%;
+
+  width: 48%;
+  height: 10.5%;
+
+  border: none;
+
+  border-radius: 60px;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  padding: 0;
+
+  z-index: 5;
+}
+
+/* =====================================================
+   COMPLETION
+===================================================== */
+
+.day-completion-card {
+  height: calc(100vh - 30px);
+
+  min-height: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 30px;
+}
+
+.day-completion-stars {
+  font-size: 28px;
+
+  margin-bottom: 10px;
+
+  animation:
+    celebrationStars 1.4s infinite;
+}
+
+@keyframes celebrationStars {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+.day-completion-icon {
+  font-size: 72px;
+
+  margin-bottom: 10px;
+
+  animation:
+    completionMoon 2s infinite;
+}
+
+@keyframes completionMoon {
+  0%,
+  100% {
+    transform:
+      translateY(0)
+      rotate(-5deg);
+  }
+
+  50% {
+    transform:
+      translateY(-8px)
+      rotate(5deg);
+  }
+}
+
+.day-completion-card h1 {
+  margin: 0 0 8px;
+
+  font-size: clamp(25px, 3vw, 38px);
+
+  font-weight: 900;
+
+  color: #704332;
+}
+
+.day-completion-card > p {
+  max-width: 500px;
+
+  margin: 0 auto 13px;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+
+  font-weight: 600;
+
+  color: #9a6b4b;
+}
+
+.day-final-score {
+  display: flex;
+  align-items: baseline;
+
+  gap: 5px;
+
+  margin-bottom: 15px;
+
+  color: #704332;
+}
+
+.day-final-score span {
+  font-size: 24px;
+}
+
+.day-final-score strong {
+  font-size: 34px;
+
+  color: #d9954d;
+}
+
+.day-final-score small {
+  font-size: 15px;
+
+  color: #a66f46;
+}
+
+.day-completion-journey {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 6px;
+
+  max-width: 700px;
+
+  margin-bottom: 20px;
+
+  padding: 10px 14px;
+
+  background: #f9ead7;
+
+  border: 2px solid #edc99e;
+
+  border-radius: 16px;
+}
+
+.day-completion-journey span {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f7c96d;
+
+  border: 2px solid #d8953c;
+
+  font-size: 16px;
+
+  animation: completedStop 0.5s ease both;
+}
+
+@keyframes completedStop {
+  from {
+    opacity: 0;
+
+    transform: scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+  .day-story-card {
+    padding: 14px 16px;
+  }
+
+  .day-story-character {
+    width: clamp(110px, 23vw, 180px);
+  }
+
+  .day-scene-heading {
+    top: 10px;
+    left: 10px;
+  }
+
+  .day-teacher-bubble p {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .day-story-page {
+    min-height: 100vh;
+
+    height: 100vh;
+
+    padding: 7px;
+  }
+
+  .day-story-card {
+    width: 100%;
+
+    height: calc(100vh - 14px);
+
+    padding: 9px;
+
+    border-width: 2px;
+
+    border-radius: 17px;
+  }
+
+  .day-story-header {
+    gap: 6px;
+
+    margin-bottom: 6px;
+  }
+
+  .day-header-button {
+    padding: 7px 9px;
+
+    font-size: 10px;
+  }
+
+  .day-header-title h1 {
+    font-size: 13px;
+  }
+
+  .day-header-title span {
+    font-size: 9px;
+  }
+
+  .day-journey-section {
+    padding: 6px 8px;
+
+    margin-bottom: 6px;
+  }
+
+  .day-journey-label {
+    font-size: 9px;
+  }
+
+  .day-journey-track {
+    height: 25px;
+  }
+
+  .day-journey-stop {
+    width: 23px;
+    height: 23px;
+
+    min-width: 23px;
+
+    font-size: 10px;
+  }
+
+  .day-journey-track::before {
+    left: 11px;
+    right: 11px;
+
+    height: 3px;
+  }
+
+  .day-journey-fill {
+    left: 11px;
+
+    height: 3px;
+  }
+
+  .day-scene-area {
+    border-radius: 13px;
+
+    border-width: 2px;
+  }
+
+  .day-scene-heading {
+    top: 6px;
+    left: 6px;
+
+    padding: 5px 7px;
+
+    gap: 5px;
+
+    border-radius: 9px;
+  }
+
+  .day-scene-heading > span {
+    font-size: 17px;
+  }
+
+  .day-scene-heading h2 {
+    font-size: 11px;
+  }
+
+  .day-scene-heading p {
+    font-size: 8px;
+  }
+
+  .day-story-character {
+    width: clamp(95px, 28vw, 145px);
+
+    bottom: 4%;
+  }
+
+  .day-teacher-section {
+    gap: 7px;
+
+    margin-top: 6px;
+  }
+
+  .day-teacher-avatar {
+    width: 42px;
+    height: 42px;
+
+    min-width: 42px;
+
+    font-size: 22px;
+
+    border-width: 2px;
+  }
+
+  .day-teacher-bubble {
+    padding: 6px 9px;
+
+    border-radius: 10px;
+  }
+
+  .day-teacher-bubble::before {
+    top: 13px;
+  }
+
+  .day-teacher-name {
+    font-size: 8px;
+  }
+
+  .day-teacher-bubble p {
+    font-size: 10px;
+
+    line-height: 1.25;
+  }
+
+  .day-teacher-repeat {
+    font-size: 8px;
+  }
+
+  .day-speaking-section {
+    margin-top: 6px;
+
+    padding: 7px 9px;
+
+    gap: 7px;
+  }
+
+  .day-speaking-text span {
+    font-size: 17px;
+  }
+
+  .day-speaking-text p {
+    font-size: 9px;
+  }
+
+  .day-speak-button {
+    padding: 7px 10px;
+
+    font-size: 9px;
+  }
+
+  .day-options-section {
+    margin-top: 6px;
+
+    gap: 5px;
+  }
+
+  .day-options-title {
+    font-size: 9px;
+  }
+
+  .day-choice-grid {
+    gap: 6px;
+  }
+
+  .day-choice-button {
+    min-height: 34px;
+
+    padding: 6px 8px;
+
+    font-size: 10px;
+
+    border-radius: 9px;
+  }
+
+  .choice-number {
+    width: 19px;
+    height: 19px;
+
+    font-size: 8px;
+  }
+
+  .day-next-button {
+    width: 100%;
+
+    padding: 8px;
+
+    font-size: 10px;
+  }
+
+  .day-feedback {
+    grid-template-columns: auto 1fr;
+
+    gap: 7px;
+
+    padding: 7px 9px;
+  }
+
+  .feedback-icon {
+    font-size: 20px;
+  }
+
+  .feedback-content strong {
+    font-size: 10px;
+  }
+
+  .feedback-content p {
+    font-size: 8px;
+  }
+
+  .feedback-content > span {
+    font-size: 7px;
+  }
+
+  .day-try-again-button {
+    grid-column: 1 / -1;
+
+    width: 100%;
+
+    padding: 7px;
+
+    font-size: 9px;
+  }
+
+  .day-correct-burst {
+    padding: 9px 13px;
+  }
+
+  .day-correct-burst span {
+    width: 34px;
+    height: 34px;
+
+    font-size: 21px;
+  }
+
+  .day-correct-burst strong {
+    font-size: 12px;
+  }
+
+  .day-walking-overlay span,
+  .day-scene-transition span {
+    font-size: 48px;
+  }
+
+  .day-walking-overlay p {
+    font-size: 12px;
+  }
+
+  .day-intro-card {
+    width: 100%;
+
+    max-height: calc(100vh - 14px);
+
+    border-radius: 17px;
+  }
+
+  .day-intro-image {
+    max-height: calc(100vh - 14px);
+
+    border-radius: 17px;
+  }
+
+  .day-completion-card {
+    height: calc(100vh - 14px);
+
+    padding: 20px 12px;
+  }
+
+  .day-completion-stars {
+    font-size: 22px;
+  }
+
+  .day-completion-icon {
+    font-size: 58px;
+  }
+
+  .day-completion-card h1 {
+    font-size: 24px;
+  }
+
+  .day-completion-card > p {
+    font-size: 11px;
+  }
+
+  .day-final-score strong {
+    font-size: 28px;
+  }
+
+  .day-completion-journey {
+    gap: 4px;
+
+    padding: 8px;
+
+    margin-bottom: 14px;
+  }
+
+  .day-completion-journey span {
+    width: 27px;
+    height: 27px;
+
+    font-size: 12px;
+  }
+}
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -11,19 +11,19 @@ function HobbiesIntro({ onFinish }) {
             setShow(true);
         }, 100);
 
-        const timer = setTimeout(() => {
+        const hideTimer = setTimeout(() => {
 
             setShow(false);
 
             setTimeout(() => {
-                onFinish();
-            }, 500);
+                onFinish?.();
+            }, 300);
 
-        }, 4000);
+        }, 1500);
 
         return () => {
             clearTimeout(showTimer);
-            clearTimeout(timer);
+            clearTimeout(hideTimer);
         };
 
     }, [onFinish]);
@@ -40,8 +40,12 @@ function HobbiesIntro({ onFinish }) {
                 }
             >
 
+                
+
                 <h1>
-                    Which Sentence Sounds Better?
+                    Which Sentence
+                    <br />
+                    Sounds Better?
                 </h1>
 
             </div>

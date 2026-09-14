@@ -1,0 +1,2062 @@
+/* =====================================================
+   MAIN PAGE
+===================================================== */
+
+.gmp-page {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    font-family: "Poppins", sans-serif;
+
+    background: #5f4637;
+}
+
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+.gmp-background {
+    position: absolute;
+    inset: -20px;
+
+    background-image: url("../../assets/chatbg.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    filter: blur(8px);
+
+    transform: scale(1.08);
+}
+
+.gmp-background::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(48, 30, 20, 0.28);
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+
+.gmp-main-container {
+    position: relative;
+    z-index: 2;
+
+    width: min(1420px, 92vw);
+    height: min(900px, 92vh);
+
+    margin: 4vh auto;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background-image: url("../../assets/partner.jpeg");
+
+    background-size: cover;
+    background-position: center;
+
+    border: 2px solid rgba(255, 255, 255, 0.75);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.4);
+}
+
+
+/* =====================================================
+   TOP BUTTONS
+===================================================== */
+
+.gmp-top-button {
+    position: absolute;
+
+    top: 30px;
+
+    z-index: 50;
+
+    border: none;
+
+    border-radius: 16px;
+
+    padding: 15px 25px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #704927,
+            #54321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.18),
+        0 6px 0 rgba(58,31,13,.3);
+
+    transition: .2s ease;
+}
+
+.gmp-top-button:hover {
+    transform: translateY(-2px);
+}
+
+.gmp-back-button {
+    left: 38px;
+}
+
+.gmp-skip-button {
+    right: 38px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.gmp-header {
+    position: relative;
+
+    z-index: 10;
+
+    text-align: center;
+
+    padding-top: 42px;
+}
+
+.gmp-header h1 {
+    margin: 0;
+
+    color: #382113;
+
+    font-size: clamp(30px, 3.2vw, 52px);
+
+    font-weight: 900;
+
+    letter-spacing: -1px;
+}
+
+.gmp-header h1 span {
+    margin-right: 12px;
+}
+
+.gmp-header p {
+    margin: 8px 0 0;
+
+    color: #5d4637;
+
+    font-size: clamp(15px, 1.45vw, 23px);
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.gmp-intro-layout {
+    position: absolute;
+
+    top: 145px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 91%;
+
+    height: calc(100% - 175px);
+
+    display: grid;
+
+    grid-template-columns: 38% 62%;
+
+    gap: 18px;
+}
+
+
+/* =====================================================
+   INTRO TEACHER SIDE
+===================================================== */
+
+.gmp-intro-teacher-side {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.gmp-intro-teacher-row {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =====================================================
+   TEACHER
+===================================================== */
+
+.gmp-teacher-box {
+    position: relative;
+
+    z-index: 3;
+
+    width: 47%;
+
+    padding-bottom: 32px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+}
+
+.gmp-teacher-image {
+    width: 100%;
+
+    max-height: 480px;
+
+    object-fit: contain;
+
+    object-position: bottom;
+
+    display: block;
+}
+
+.gmp-teacher-name {
+    position: absolute;
+
+    z-index: 10;
+
+    left: 50%;
+
+    bottom: 0;
+
+    transform: translateX(-50%);
+
+    width: 215px;
+
+    padding: 13px 18px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321c
+        );
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 7px 18px rgba(72,41,20,.28);
+}
+
+
+/* =====================================================
+   SPEECH BUBBLE
+===================================================== */
+
+.gmp-speech-bubble {
+    position: relative;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7ecdc
+        );
+
+    border: 2px solid rgba(154,113,72,.35);
+
+    border-radius: 28px;
+
+    color: #3f2a1c;
+
+    box-shadow:
+        0 10px 30px rgba(88,51,24,.15);
+}
+
+.gmp-speech-bubble::before {
+    content: "";
+
+    position: absolute;
+
+    left: -18px;
+
+    bottom: 45px;
+
+    width: 34px;
+
+    height: 34px;
+
+    background: #fbf4e8;
+
+    border-left:
+        2px solid rgba(154,113,72,.35);
+
+    border-bottom:
+        2px solid rgba(154,113,72,.35);
+
+    transform: rotate(45deg);
+
+    z-index: -1;
+}
+
+.gmp-intro-bubble {
+    width: 48%;
+
+    min-width: 240px;
+
+    margin-left: -10px;
+
+    padding: 28px 25px;
+}
+
+.gmp-intro-bubble p {
+    margin: 0 0 15px;
+
+    text-align: center;
+
+    font-size: clamp(14px,1.15vw,20px);
+
+    line-height: 1.55;
+
+    font-weight: 700;
+}
+
+.gmp-intro-bubble p:last-child {
+    margin-bottom: 0;
+}
+
+.gmp-highlight {
+    color: #9b6638;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   REPEAT BUTTON
+===================================================== */
+
+.gmp-repeat-button {
+    position: absolute;
+
+    top: 10px;
+
+    right: 12px;
+
+    border: none;
+
+    background: #f4dfbf;
+
+    width: 34px;
+
+    height: 34px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+
+/* =====================================================
+   INTRO STATS
+===================================================== */
+
+.gmp-intro-stats {
+    width: min(370px,92%);
+
+    margin-top: 22px;
+
+    padding: 20px 25px;
+
+    display: flex;
+
+    justify-content: space-around;
+
+    align-items: center;
+
+    background: rgba(255,252,245,.85);
+
+    border: 2px solid rgba(159,116,69,.24);
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 8px 25px rgba(101,61,31,.1);
+}
+
+.gmp-stat {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+.gmp-stat-icon {
+    width: 60px;
+
+    height: 60px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 30px;
+
+    background: #ffe3a0;
+
+    box-shadow:
+        inset 0 0 0 2px #e2ad42;
+}
+
+.gmp-stat strong {
+    color: #3f291b;
+
+    font-size: 27px;
+}
+
+.gmp-stat span {
+    color: #745846;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.gmp-stat-divider {
+    width: 1px;
+
+    height: 85px;
+
+    background: #d9c7b2;
+}
+
+
+/* =====================================================
+   INTRO STAGE
+===================================================== */
+
+.gmp-intro-stage-side {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.gmp-stage-image-wrap {
+    width: 100%;
+
+    height: calc(100% - 105px);
+
+    padding: 10px;
+
+    box-sizing: border-box;
+
+    border-radius: 28px;
+
+    background: #fffaf1;
+
+    border: 2px solid rgba(166,120,75,.28);
+
+    box-shadow:
+        0 12px 30px rgba(87,52,29,.15);
+}
+
+.gmp-stage-image {
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 20px;
+}
+
+
+/* =====================================================
+   START BUTTON
+===================================================== */
+
+.gmp-start-button {
+    position: absolute;
+
+    bottom: 10px;
+
+    border: none;
+
+    min-width: 390px;
+
+    padding: 20px 42px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: clamp(18px,2vw,31px);
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 16px;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.25),
+        0 8px 0 rgba(67,36,17,.55);
+
+    transition: .2s ease;
+}
+
+.gmp-start-button:hover {
+    transform: translateY(-3px);
+}
+
+.gmp-start-button span {
+    font-size: 35px;
+}
+
+
+/* =====================================================
+   GAME LAYOUT
+===================================================== */
+
+.gmp-game-layout {
+    position: absolute;
+
+    top: 140px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 94%;
+
+    height: calc(100% - 155px);
+}
+
+
+/* =====================================================
+   GAME STAGE
+===================================================== */
+
+.gmp-game-stage {
+    position: relative;
+
+    width: 100%;
+
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background: #4e3020;
+
+    box-shadow:
+        0 18px 45px rgba(64,35,16,.3);
+}
+
+.gmp-game-stage-image {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    display: block;
+}
+
+
+/* =====================================================
+   CONTESTANTS
+===================================================== */
+
+.gmp-contestants {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 8;
+
+    pointer-events: none;
+}
+
+.gmp-contestant {
+    position: absolute;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: flex-start;
+}
+
+
+/* =====================================================
+   CONTESTANT POSITIONS
+===================================================== */
+
+.gmp-contestant-1 {
+    left: 20.5%;
+
+    bottom: 20%;
+
+    width: 21%;
+
+    height: 62%;
+}
+
+.gmp-contestant-2 {
+    left: 39.5%;
+
+    bottom: 20%;
+
+    width: 21%;
+
+    height: 64%;
+}
+
+.gmp-contestant-3 {
+    right: 19.5%;
+
+    bottom: 20%;
+
+    width: 21%;
+
+    height: 62%;
+}
+
+
+/* =====================================================
+   CONTESTANT IMAGE
+===================================================== */
+
+.gmp-contestant-image-wrap {
+    width: 100%;
+
+    height: 47%;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+}
+
+.gmp-contestant-image {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    object-position: bottom;
+
+    display: block;
+
+    filter:
+        drop-shadow(
+            0 12px 15px rgba(0,0,0,.35)
+        );
+}
+
+
+/* =====================================================
+   CONTESTANT NAME
+===================================================== */
+
+.gmp-contestant-name {
+    position: relative;
+
+    z-index: 20;
+
+    margin-top: 2px;
+
+    min-width: 105px;
+
+    padding: 7px 18px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff8e9,
+            #efd8ae
+        );
+
+    color: #56351f;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 5px 10px rgba(0,0,0,.25);
+}
+
+
+/* =====================================================
+   ⭐ PREFERENCES
+   RED BOX AREA
+===================================================== */
+
+.gmp-preferences {
+    width: 100%;
+
+    margin-top: 7px;
+
+    padding: 5px;
+
+    box-sizing: border-box;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 5px;
+
+    background: rgba(255, 249, 235, 0.90);
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(125, 88, 49, .16);
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.12);
+}
+
+
+/* Individual preference */
+
+.gmp-preference-chip {
+    min-height: 25px;
+
+    padding: 4px 5px;
+
+    box-sizing: border-box;
+
+    border-radius: 7px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    text-align: center;
+
+    font-size: clamp(7px, .65vw, 11px);
+
+    font-weight: 800;
+
+    line-height: 1.1;
+}
+
+
+/* Likes */
+
+.gmp-preference-like {
+    background: #e1f1d5;
+
+    color: #4d7839;
+}
+
+
+/* Dislikes */
+
+.gmp-preference-dislike {
+    background: #ffe0dc;
+
+    color: #a4473c;
+}
+
+
+/* Preference emoji */
+
+.gmp-preference-icon {
+    font-size: clamp(8px, .7vw, 12px);
+
+    line-height: 1;
+}
+
+
+/* =====================================================
+   ROUND BADGE
+===================================================== */
+
+.gmp-round-badge {
+    position: absolute;
+
+    z-index: 30;
+
+    top: 20px;
+
+    left: 22px;
+
+    min-width: 125px;
+
+    padding: 12px 16px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f4e4cb
+        );
+
+    color: #543620;
+
+    text-align: center;
+
+    box-shadow:
+        0 7px 20px rgba(0,0,0,.2);
+}
+
+.gmp-round-badge span {
+    display: block;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.5px;
+}
+
+.gmp-round-badge strong {
+    font-size: 28px;
+
+    font-weight: 900;
+}
+
+.gmp-round-badge small {
+    font-size: 14px;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   SCORE
+===================================================== */
+
+.gmp-score-panel {
+    position: absolute;
+
+    z-index: 30;
+
+    top: 20px;
+
+    right: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    background: rgba(255,252,245,.95);
+
+    box-shadow:
+        0 7px 20px rgba(0,0,0,.2);
+}
+
+.gmp-score-item {
+    min-width: 70px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.gmp-score-item span {
+    font-size: 21px;
+}
+
+.gmp-score-item strong {
+    color: #4d301d;
+
+    font-size: 23px;
+
+    line-height: 1;
+}
+
+.gmp-score-item small {
+    color: #80654f;
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+.gmp-score-divider {
+    width: 1px;
+
+    height: 48px;
+
+    background: #d7c1a5;
+}
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+.gmp-timer {
+    position: absolute;
+
+    z-index: 30;
+
+    top: 115px;
+
+    right: 24px;
+
+    width: 85px;
+
+    height: 85px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff7e7,
+            #e8d0a8
+        );
+
+    border: 4px solid #9b6a3c;
+
+    color: #573720;
+
+    box-shadow:
+        0 8px 18px rgba(0,0,0,.25);
+}
+
+.gmp-timer span {
+    font-size: 19px;
+
+    line-height: 1;
+}
+
+.gmp-timer strong {
+    font-size: 25px;
+
+    line-height: 1.1;
+}
+
+.gmp-timer small {
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+.gmp-timer-danger {
+    animation: gmpTimerPulse .6s infinite alternate;
+}
+
+@keyframes gmpTimerPulse {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.08);
+    }
+}
+
+
+/* =====================================================
+   TEACHER — LEFT SIDE
+===================================================== */
+
+.gmp-game-teacher {
+    position: absolute;
+
+    z-index: 35;
+
+    left: -50px;
+
+    bottom: 4px;
+
+    width: 35%;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    pointer-events: none;
+}
+
+.gmp-game-teacher-image {
+    width: 34%;
+
+    max-height: 280px;
+
+    object-fit: contain;
+
+    object-position: bottom;
+}
+
+.gmp-game-bubble {
+    position: relative;
+
+    width: 40%;
+
+    margin-left: -28px;
+
+    margin-bottom: 42px;
+
+    padding: 10px 12px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7ecdc
+        );
+
+    border: 2px solid rgba(154,113,72,.35);
+
+    box-shadow:
+        0 8px 22px rgba(0,0,0,.2);
+}
+
+.gmp-game-bubble::before {
+    content: "";
+
+    position: absolute;
+
+    left: -13px;
+
+    bottom: 30px;
+
+    width: 24px;
+
+    height: 24px;
+
+    background: #fbf4e8;
+
+    border-left: 2px solid rgba(154,113,72,.35);
+
+    border-bottom: 2px solid rgba(154,113,72,.35);
+
+    transform: rotate(45deg);
+
+    z-index: -1;
+}
+
+.gmp-game-bubble p {
+    margin: 8px 0 0;
+
+    color: #432d1e;
+
+    font-size: clamp(9px,.72vw,13px);
+
+    line-height: 1.45;
+
+    font-weight: 800;
+}
+
+.gmp-difficulty {
+    display: inline-block;
+
+    padding: 5px 11px;
+
+    border-radius: 20px;
+
+    background: #f0dfbd;
+
+    color: #75512e;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+
+/* =====================================================
+   ANSWER AREA
+===================================================== */
+
+.gmp-answer-area {
+    position: absolute;
+
+    z-index: 45;
+
+    left: 50%;
+
+    bottom: 5px;
+
+    transform: translateX(-50%);
+
+    width: 290px;
+
+    min-height: 120px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    pointer-events: auto;
+}
+
+
+/* =====================================================
+   BUZZER
+===================================================== */
+
+.gmp-buzzer {
+    position: relative;
+
+    width: 190px;
+
+    height: 115px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #d76b51,
+            #9f392f
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-shadow:
+        inset 0 5px 0 rgba(255,255,255,.22),
+        0 9px 0 #69261f,
+        0 15px 25px rgba(0,0,0,.3);
+
+    transition: .12s ease;
+}
+
+.gmp-buzzer:hover {
+    transform: translateY(-3px);
+}
+
+.gmp-buzzer:active {
+    transform: translateY(7px);
+
+    box-shadow:
+        inset 0 5px 0 rgba(255,255,255,.22),
+        0 2px 0 #69261f;
+}
+
+.gmp-buzzer-light {
+    position: absolute;
+
+    top: 12px;
+
+    right: 18px;
+
+    width: 11px;
+
+    height: 11px;
+
+    border-radius: 50%;
+
+    background: #fff4bf;
+
+    box-shadow:
+        0 0 12px #fff4bf;
+}
+
+.gmp-buzzer-image {
+    width: 58px;
+
+    height: 58px;
+
+    object-fit: contain;
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    filter:
+        drop-shadow(
+            0 5px 5px rgba(0,0,0,.25)
+        );
+}
+.gmp-buzzer strong {
+    margin-top: 4px;
+
+    font-size: 22px;
+
+    letter-spacing: 1px;
+}
+
+.gmp-buzzer small {
+    font-size: 9px;
+
+    opacity: .9;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   MICROPHONE
+===================================================== */
+
+.gmp-mic-section {
+    width: 250px;
+
+    padding: 12px;
+
+    border-radius: 22px;
+
+    text-align: center;
+
+    background: rgba(255,253,248,.96);
+
+    box-shadow:
+        0 10px 28px rgba(0,0,0,.28);
+}
+
+.gmp-buzzed-label {
+    color: #a4473c;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+.gmp-mic-section p {
+    margin: 4px 0 8px;
+
+    color: #543620;
+
+    font-size: 14px;
+
+    font-weight: 900;
+}
+
+.gmp-mic-button {
+    width: 100%;
+
+    border: none;
+
+    padding: 12px;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    box-shadow:
+        0 5px 0 rgba(67,36,17,.45);
+
+    transition: .2s ease;
+}
+
+.gmp-mic-button:hover {
+    transform: translateY(-2px);
+}
+
+.gmp-mic-button span {
+    font-size: 22px;
+}
+
+.gmp-mic-button strong {
+    font-size: 13px;
+}
+
+.gmp-mic-listening {
+    animation: gmpMicPulse .8s infinite alternate;
+}
+
+@keyframes gmpMicPulse {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.04);
+    }
+}
+
+.gmp-spoken-answer {
+    margin-top: 7px;
+
+    color: #765741;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+.gmp-spoken-answer strong {
+    color: #432d1e;
+}
+
+
+/* =====================================================
+   FEEDBACK
+===================================================== */
+
+.gmp-feedback {
+    margin-top: 8px;
+
+    width: 100%;
+
+    padding: 8px 10px;
+
+    box-sizing: border-box;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+.gmp-feedback-correct {
+    background: #dff0d2;
+
+    color: #4d7c36;
+}
+
+.gmp-feedback-wrong {
+    background: #ffe0dc;
+
+    color: #a4473c;
+}
+
+.gmp-feedback-timeout {
+    background: #fff0cc;
+
+    color: #8c682e;
+}
+
+
+/* =====================================================
+   RESULT POPUP
+===================================================== */
+
+.gmp-popup-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(28,18,10,.48);
+
+    backdrop-filter: blur(7px);
+}
+
+.gmp-result-popup {
+    width: min(460px,88vw);
+
+    padding: 30px 35px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f8ead5
+        );
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.35);
+
+    animation:
+        gmpPopupIn .35s ease;
+}
+
+@keyframes gmpPopupIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(.8)
+            translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+.gmp-result-icon {
+    width: 78px;
+
+    height: 78px;
+
+    margin: 0 auto 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 22px;
+
+    background: #f3dfbd;
+
+    font-size: 42px;
+}
+
+.gmp-result-label {
+    display: inline-block;
+
+    padding: 6px 14px;
+
+    border-radius: 30px;
+
+    background: #dff0d2;
+
+    color: #557d39;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+.gmp-result-popup h2 {
+    margin: 14px 0 10px;
+
+    color: #432a19;
+
+    font-size: 28px;
+
+    font-weight: 900;
+}
+
+.gmp-result-popup p {
+    margin: 0;
+
+    color: #765741;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   RESULT STATS
+===================================================== */
+
+.gmp-result-stats {
+    margin: 20px auto;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 35px;
+}
+
+.gmp-result-stats div {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.gmp-result-stats span {
+    font-size: 25px;
+}
+
+.gmp-result-stats strong {
+    color: #4d301d;
+
+    font-size: 25px;
+}
+
+.gmp-result-stats small {
+    color: #80654f;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   NEXT
+===================================================== */
+
+.gmp-next-button {
+    width: 100%;
+
+    border: none;
+
+    padding: 14px 22px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 0 rgba(67,36,17,.45);
+}
+
+.gmp-next-button:hover {
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    .gmp-main-container {
+        width: 95vw;
+    }
+
+    .gmp-intro-layout {
+        grid-template-columns: 40% 60%;
+    }
+
+    .gmp-teacher-name {
+        width: 190px;
+
+        font-size: 18px;
+    }
+
+    .gmp-game-teacher {
+        width: 38%;
+    }
+
+    .gmp-preference-chip {
+        font-size: 8px;
+    }
+}
+
+
+/* =====================================================
+   SMALL TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .gmp-main-container {
+        height: 94vh;
+
+        margin: 3vh auto;
+    }
+
+    .gmp-header {
+        padding-top: 80px;
+    }
+
+    .gmp-intro-layout {
+        top: 155px;
+
+        width: 95%;
+
+        grid-template-columns: 1fr;
+
+        overflow-y: auto;
+    }
+
+    .gmp-intro-teacher-side {
+        min-height: 430px;
+    }
+
+    .gmp-intro-stage-side {
+        min-height: 480px;
+    }
+
+    .gmp-game-teacher {
+        width: 43%;
+    }
+
+    .gmp-contestant-1 {
+        left: 13%;
+    }
+
+    .gmp-contestant-2 {
+        left: 38%;
+    }
+
+    .gmp-contestant-3 {
+        right: 13%;
+    }
+
+    .gmp-preferences {
+        gap: 3px;
+    }
+
+    .gmp-preference-chip {
+        padding: 3px 2px;
+
+        font-size: 7px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .gmp-main-container {
+        width: 100vw;
+
+        height: 100vh;
+
+        margin: 0;
+
+        border-radius: 0;
+    }
+
+    .gmp-top-button {
+        top: 18px;
+
+        padding: 10px 14px;
+
+        font-size: 12px;
+    }
+
+    .gmp-back-button {
+        left: 14px;
+    }
+
+    .gmp-skip-button {
+        right: 14px;
+    }
+
+    .gmp-header {
+        padding: 68px 15px 0;
+    }
+
+    .gmp-header h1 {
+        font-size: 25px;
+    }
+
+    .gmp-header p {
+        font-size: 12px;
+    }
+
+    .gmp-intro-layout {
+        top: 135px;
+
+        height: calc(100% - 145px);
+    }
+
+    .gmp-intro-teacher-row {
+        transform: scale(.9);
+    }
+
+    .gmp-teacher-name {
+        width: 170px;
+
+        padding: 10px 14px;
+
+        font-size: 16px;
+    }
+
+    .gmp-stage-image-wrap {
+        height: 330px;
+    }
+
+    .gmp-start-button {
+        min-width: 250px;
+
+        padding: 14px 22px;
+
+        font-size: 18px;
+    }
+
+    .gmp-game-layout {
+        top: 135px;
+
+        width: 96%;
+
+        height: calc(100% - 150px);
+    }
+
+    .gmp-round-badge {
+        top: 10px;
+
+        left: 10px;
+
+        min-width: 90px;
+
+        padding: 8px;
+    }
+
+    .gmp-round-badge strong {
+        font-size: 20px;
+    }
+
+    .gmp-score-panel {
+        top: 10px;
+
+        right: 10px;
+
+        padding: 5px 8px;
+    }
+
+    .gmp-score-item {
+        min-width: 45px;
+    }
+
+    .gmp-score-item span {
+        font-size: 16px;
+    }
+
+    .gmp-score-item strong {
+        font-size: 18px;
+    }
+
+    .gmp-timer {
+        top: 90px;
+
+        right: 12px;
+
+        width: 62px;
+
+        height: 62px;
+    }
+
+    .gmp-timer strong {
+        font-size: 18px;
+    }
+
+
+    /* =================================================
+       MOBILE CONTESTANTS
+    ================================================= */
+
+    .gmp-contestant-1 {
+        left: 5%;
+
+        bottom: 31%;
+
+        width: 29%;
+
+        height: 40%;
+    }
+
+    .gmp-contestant-2 {
+        left: 35.5%;
+
+        bottom: 31%;
+
+        width: 29%;
+
+        height: 42%;
+    }
+
+    .gmp-contestant-3 {
+        right: 5%;
+
+        bottom: 31%;
+
+        width: 29%;
+
+        height: 40%;
+    }
+
+    .gmp-contestant-image-wrap {
+        height: 45%;
+    }
+
+    .gmp-contestant-name {
+        min-width: 60px;
+
+        padding: 4px 8px;
+
+        font-size: 9px;
+    }
+
+
+    /* =================================================
+       MOBILE PREFERENCES
+    ================================================= */
+
+    .gmp-preferences {
+        width: 100%;
+
+        margin-top: 4px;
+
+        padding: 3px;
+
+        gap: 3px;
+
+        border-radius: 8px;
+    }
+
+    .gmp-preference-chip {
+        min-height: 20px;
+
+        padding: 2px 2px;
+
+        border-radius: 5px;
+
+        font-size: 6px;
+
+        gap: 2px;
+    }
+
+    .gmp-preference-icon {
+        font-size: 7px;
+    }
+
+
+    /* =================================================
+       MOBILE TEACHER LEFT
+    ================================================= */
+
+    .gmp-game-teacher {
+        width: 87%;
+
+        left: -2%;
+
+        bottom: 2%;
+    }
+
+    .gmp-game-teacher-image {
+        width: 30%;
+
+        max-height: 190px;
+    }
+
+    .gmp-game-bubble {
+        width: 68%;
+
+        margin-left: -15px;
+
+        margin-bottom: 32px;
+
+        padding: 10px;
+    }
+
+    .gmp-game-bubble p {
+        font-size: 10px;
+    }
+
+
+    /* =================================================
+       MOBILE ANSWER
+    ================================================= */
+
+    .gmp-answer-area {
+        bottom: 10px;
+
+        width: 220px;
+    }
+
+    .gmp-buzzer {
+        width: 150px;
+
+        height: 85px;
+
+        border-radius: 22px;
+    }
+
+       .gmp-buzzer-image {
+        width: 43px;
+
+        height: 43px;
+
+        margin-bottom: 2px;
+    }
+    .gmp-buzzer strong {
+        font-size: 17px;
+    }
+
+    .gmp-mic-section {
+        width: 210px;
+
+        padding: 9px;
+    }
+
+    .gmp-next-button {
+        width: 100%;
+    }
+}

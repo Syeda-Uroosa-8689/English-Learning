@@ -1,113 +1,127 @@
 /* =====================================================
         FAVOURITE PERSON - ACTIVITY 2
-        INTERACTION / SPEAKING ACTIVITY
+        FINAL CORRECTED CSS
+        BASED ON ACTIVITY 1 LAYOUT
 ===================================================== */
+
+* {
+    box-sizing: border-box;
+}
 
 
 /* =====================================================
         PAGE
 ===================================================== */
 
-.favourite-person-activity{
+.favourite-person-activity2-page {
 
-    min-height:100vh;
-    width:100%;
+    width: 100%;
+    min-height: 100vh;
 
-    background-image:url("../../assets/chatbg.jpeg");
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
+    position: relative;
 
-    position:relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    padding: 20px;
 
-    padding:20px;
-    box-sizing:border-box;
+    overflow: hidden;
 
-    overflow:hidden;
-
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 
 /* =====================================================
-        SOFT OVERLAY
+        OVERLAY
 ===================================================== */
 
-.favourite-person-activity::before{
+.fp2-overlay {
 
-    content:"";
+    position: absolute;
 
-    position:absolute;
-    inset:0;
+    inset: 0;
 
-    background:rgba(0,0,0,.30);
+    background:
+        rgba(0, 0, 0, 0.30);
 
-    backdrop-filter:blur(8px);
-
-    z-index:0;
-
+    backdrop-filter:
+        blur(8px);
 }
 
 
 /* =====================================================
-        MAIN ACTIVITY CARD
+        MAIN CARD
 ===================================================== */
 
-.favourite-person-question-card{
+.favourite-person-activity2-card {
 
-    position:relative;
-    z-index:10;
+    position: relative;
 
-    width:100%;
-    max-width:1000px;
+    z-index: 10;
 
-    min-height:650px;
+    width: 1350px;
 
-    background-image:url("../../assets/favourite.jpeg");
-    background-size:cover;
-    background-position:center;
+    min-height: 820px;
 
-    border-radius:30px;
+    max-height: 94vh;
 
-    padding:28px 55px 40px;
+    padding:
+        25px
+        45px
+        30px;
 
-    box-sizing:border-box;
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    border-radius: 30px;
+
+    background-image:
+        url("../../assets/favourite.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
 
     box-shadow:
-        0 30px 80px rgba(0,0,0,.35);
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+        0 30px 80px
+        rgba(0, 0, 0, 0.35);
 
     animation:
-        fpActivity2CardIn
-        .5s
+        fp2CardAppear
+        0.45s
         ease;
-
 }
 
 
 /* =====================================================
-        CARD ANIMATION
+        CARD APPEAR
 ===================================================== */
 
-@keyframes fpActivity2CardIn{
+@keyframes fp2CardAppear {
 
-    from{
+    from {
 
-        opacity:0;
-        transform:scale(.95) translateY(15px);
+        opacity: 0;
+
+        transform:
+            scale(0.96);
 
     }
 
-    to{
+    to {
 
-        opacity:1;
-        transform:scale(1) translateY(0);
+        opacity: 1;
+
+        transform:
+            scale(1);
 
     }
 
@@ -115,64 +129,151 @@
 
 
 /* =====================================================
-        TOP BAR
+        HEADER
 ===================================================== */
 
-.activity-top-bar{
+.fp2-header {
 
-    width:100%;
+    width: 100%;
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
-    justify-content:space-between;
+    justify-content: space-between;
 
-    margin-bottom:18px;
+    align-items: center;
 
+    gap: 15px;
+
+    margin-bottom: 2px;
+
+    flex-shrink: 0;
 }
 
 
 /* =====================================================
-        BACK BUTTON
+        TITLE AREA
 ===================================================== */
 
-.activity-back-button{
+.fp2-title-area {
 
-    border:none;
+    flex: 1;
 
-    background:linear-gradient(
-        #9B6336,
-        #6D3F1E
-    );
+    text-align: center;
 
-    color:white;
+    min-width: 0;
+}
 
-    padding:12px 24px;
 
-    border-radius:13px;
+.fp2-title-area h1 {
 
-    cursor:pointer;
+    margin: 0;
 
-    font-size:17px;
-    font-weight:800;
+    color: #4F2E19;
+
+    font-size: 54px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    line-height: 1;
+}
+
+
+/* =====================================================
+        TITLE STRIP
+===================================================== */
+
+.fp2-title-strip {
+
+    display: inline-block;
+
+    margin-top: 6px;
+
+    padding:
+        8px
+        30px;
+
+    background:
+        linear-gradient(
+            #874A21,
+            #653715
+        );
+
+    color: white;
+
+    border-radius: 12px;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    line-height: 1.1;
 
     box-shadow:
-        0 5px 12px rgba(0,0,0,.25);
-
-    transition:.25s ease;
-
+        0 5px 12px
+        rgba(0, 0, 0, 0.22);
 }
 
 
-.activity-back-button:hover{
+/* =====================================================
+        HEADER BUTTONS
+===================================================== */
 
-    transform:translateY(-3px);
+.fp2-back-button,
+.fp2-skip-button {
 
-    background:linear-gradient(
-        #A96D3D,
-        #754522
-    );
+    border: none;
 
+    min-width: 125px;
+
+    padding:
+        12px
+        25px;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            #9B6336,
+            #6D3F1E
+        );
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 10px
+        rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+}
+
+
+.fp2-back-button:hover:not(:disabled),
+.fp2-skip-button:hover:not(:disabled) {
+
+    transform:
+        translateY(-3px);
+
+    filter:
+        brightness(1.08);
+}
+
+
+.fp2-back-button:disabled,
+.fp2-skip-button:disabled {
+
+    opacity: 0.7;
+
+    cursor: default;
 }
 
 
@@ -180,114 +281,704 @@
         PROGRESS
 ===================================================== */
 
-.activity-progress{
+.fp2-progress {
 
-    padding:9px 25px;
+    width: max-content;
 
-    background:#FFF3DE;
+    margin:
+        7px auto
+        8px;
 
-    border:2px solid #D6A66F;
+    padding:
+        8px
+        25px;
 
-    border-radius:30px;
+    border-radius: 30px;
 
-    color:#6A3C1D;
+    background:
+        #FFF3DE;
 
-    font-size:18px;
+    border:
+        2px solid #D6A66F;
 
-    font-weight:800;
+    color:
+        #6A3C1D;
+
+    font-size:
+        19px;
+
+    font-weight:
+        800;
 
     box-shadow:
-        0 5px 12px rgba(0,0,0,.10);
+        0 5px 12px
+        rgba(0, 0, 0, 0.10);
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+        MAIN CONTENT
+===================================================== */
+
+.fp2-main-content {
+
+    flex: 1;
+
+    min-height: 0;
+
+    width: 100%;
+
+    max-width: 1220px;
+
+    margin:
+        0 auto;
+
+    padding-top: 5px;
+
+    display: grid;
+
+    grid-template-columns:
+        300px
+        minmax(650px, 1fr);
+
+    column-gap: 20px;
+
+    align-items: start;
+
+    overflow: visible;
+}
+
+
+/* =====================================================
+        TEACHER SECTION
+===================================================== */
+
+.fp2-teacher-section {
+
+    width: 100%;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    height: auto;
+
+    padding-top: 0;
+
+    transform: none;
+}
+
+
+/* =====================================================
+        TEACHER IMAGE WRAPPER
+===================================================== */
+
+.fp2-teacher-image-wrapper {
+
+    width: 270px;
+
+    height: 390px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    /*
+        Teacher ko Activity 1 ke
+        same visual position mein rakhta hai.
+    */
+
+    transform:
+        translateY(-20px);
+}
+
+
+/* =====================================================
+        TEACHER IMAGE
+===================================================== */
+
+.fp2-teacher-image {
+
+    width: 260px;
+
+    height: auto;
+
+    max-height: 350px;
+
+    object-fit: contain;
+
+    transition:
+        0.3s ease;
+
+    filter:
+        drop-shadow(
+            0 12px 12px
+            rgba(0, 0, 0, 0.18)
+        );
+}
+
+
+/* =====================================================
+        TEACHER SPEAKING
+===================================================== */
+
+.fp2-teacher-image.speaking {
+
+    animation:
+        fp2TeacherTalk
+        0.55s
+        infinite
+        alternate;
+}
+
+
+@keyframes fp2TeacherTalk {
+
+    from {
+
+        transform:
+            translateY(0)
+            rotate(-1deg)
+            scale(1);
+
+    }
+
+    to {
+
+        transform:
+            translateY(-7px)
+            rotate(1deg)
+            scale(1.025);
+
+    }
 
 }
 
 
 /* =====================================================
-        QUESTION NUMBER
+        TEACHER SPEECH BUBBLE
 ===================================================== */
 
-.question-number{
+.fp2-teacher-bubble {
 
-    display:inline-flex;
+    position: relative;
 
-    align-items:center;
-    justify-content:center;
+    width: 275px;
 
-    padding:8px 24px;
+    min-height: 120px;
 
-    margin-top:2px;
-    margin-bottom:15px;
+    max-height: none;
 
-    background:#744421;
+    padding:
+        18px
+        20px;
 
-    color:white;
+    display: flex;
 
-    border-radius:30px;
+    flex-direction: column;
 
-    font-size:17px;
+    align-items: center;
 
-    font-weight:800;
+    justify-content: center;
+
+    text-align: center;
+
+    border:
+        3px solid #C98C52;
+
+    border-radius: 25px;
+
+    background:
+        #FFFDF8;
+
+    color:
+        #4F2E19;
 
     box-shadow:
-        0 5px 12px rgba(0,0,0,.20);
+        0 10px 25px
+        rgba(0, 0, 0, 0.16);
+
+    z-index: 5;
+
+    /*
+        IMPORTANT:
+        Teacher image ke neeche
+        bubble close rahega.
+    */
+
+    margin-top: -150px;
+
+    margin-bottom: 0;
+
+    overflow: visible;
+
+    animation:
+        fp2BubbleIn
+        0.3s
+        ease;
+}
+
+
+/* =====================================================
+        BUBBLE TRIANGLE - OUTER
+===================================================== */
+
+.fp2-teacher-bubble::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -17px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 0;
+
+    height: 0;
+
+    border-left:
+        17px solid transparent;
+
+    border-right:
+        17px solid transparent;
+
+    border-bottom:
+        18px solid #C98C52;
+}
+
+
+/* =====================================================
+        BUBBLE TRIANGLE - INNER
+===================================================== */
+
+.fp2-teacher-bubble::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: -11px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 0;
+
+    height: 0;
+
+    border-left:
+        13px solid transparent;
+
+    border-right:
+        13px solid transparent;
+
+    border-bottom:
+        14px solid #FFFDF8;
+}
+
+
+/* =====================================================
+        BUBBLE ANIMATION
+===================================================== */
+
+@keyframes fp2BubbleIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(10px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
 
 }
 
 
 /* =====================================================
-        MAIN TITLE
+        BUBBLE HEADING
 ===================================================== */
 
-.favourite-person-question-card h2{
+.fp2-teacher-bubble strong {
 
-    margin:0 0 14px;
+    display: block;
 
-    text-align:center;
+    margin-bottom: 8px;
 
-    color:#4F2E19;
+    color:
+        #71421F;
 
-    font-size:38px;
+    font-size:
+        25px;
 
-    font-weight:900;
+    font-weight:
+        900;
 
-    line-height:1.15;
+    line-height:
+        1;
+}
+
+
+/* =====================================================
+        BUBBLE TEXT
+===================================================== */
+
+.fp2-teacher-bubble p {
+
+    margin: 0;
+
+    max-width: 275px;
+
+    color:
+        #4F2E19;
+
+    font-size:
+        17px;
+
+    line-height:
+        1.45;
+
+    font-weight:
+        600;
+}
+
+
+/* =====================================================
+        SUCCESS BUBBLE
+===================================================== */
+
+.fp2-teacher-bubble.success {
+
+    border-color:
+        #48A868;
+
+    background:
+        #F1FFF3;
+}
+
+
+.fp2-teacher-bubble.success::before {
+
+    border-bottom-color:
+        #48A868;
+}
+
+
+.fp2-teacher-bubble.success::after {
+
+    border-bottom-color:
+        #F1FFF3;
+}
+
+
+.fp2-teacher-bubble.success strong {
+
+    color:
+        #258343;
+}
+
+
+/* =====================================================
+        TRY AGAIN BUBBLE
+===================================================== */
+
+.fp2-teacher-bubble.try-again {
+
+    border-color:
+        #D99A45;
+
+    background:
+        #FFF9ED;
+}
+
+
+.fp2-teacher-bubble.try-again::before {
+
+    border-bottom-color:
+        #D99A45;
+}
+
+
+.fp2-teacher-bubble.try-again::after {
+
+    border-bottom-color:
+        #FFF9ED;
+}
+
+
+/* =====================================================
+        QUESTION SECTION
+===================================================== */
+
+.fp2-question-section {
+
+    width: 100%;
+
+    min-width: 0;
+
+    min-height: 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    padding-top: 25px;
+
+    overflow: visible;
+
+    transform: none;
+}
+
+
+/* =====================================================
+        QUESTION CARD
+===================================================== */
+
+.fp2-question-card {
+
+    width: 100%;
+
+    max-width: 850px;
+
+    height: 555px;
+
+    min-height: 555px;
+
+    padding:
+        28px
+        32px;
+
+    box-sizing: border-box;
+
+    border:
+        3px solid #D7A873;
+
+    border-radius:
+        28px;
+
+    background:
+        rgba(
+            255,
+            250,
+            240,
+            0.96
+        );
+
+    box-shadow:
+        0 15px 35px
+        rgba(
+            79,
+            46,
+            25,
+            0.16
+        ),
+
+        0 4px 10px
+        rgba(
+            0,
+            0,
+            0,
+            0.06
+        );
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    flex-shrink: 0;
+
+    animation:
+        fp2QuestionCardIn
+        0.45s
+        ease;
+}
+
+
+/* =====================================================
+        QUESTION CARD ANIMATION
+===================================================== */
+
+@keyframes fp2QuestionCardIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(15px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
 
 }
 
 
 /* =====================================================
-        QUESTION TEXT
+        QUESTION HEADING
 ===================================================== */
 
-.question-text{
+.fp2-question-heading {
 
-    width:90%;
+    width: 100%;
 
-    margin:0 auto 22px;
+    min-height: 76px;
 
-    padding:18px 25px;
+    display: flex;
 
-    box-sizing:border-box;
+    align-items: center;
 
-    background:#FFF1DD;
+    justify-content: center;
 
-    border:2px solid #E1B982;
+    gap: 18px;
 
-    border-radius:20px;
+    flex-shrink: 0;
+}
 
-    color:#5A3620;
 
-    text-align:center;
+.fp2-question-heading h2 {
 
-    font-size:25px;
+    margin: 0;
 
-    font-weight:800;
+    max-width: 760px;
 
-    line-height:1.4;
+    color:
+        #4F2E19;
+
+    font-size:
+        clamp(
+            30px,
+            3vw,
+            42px
+        );
+
+    line-height:
+        1.15;
+
+    font-weight:
+        900;
+
+    text-align:
+        center;
+}
+
+
+/* =====================================================
+        SPEAKER BUTTON
+===================================================== */
+
+.fp2-speaker-button {
+
+    flex-shrink: 0;
+
+    width: 58px;
+
+    height: 58px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #A9662B,
+            #6B3B17
+        );
+
+    color: white;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
 
     box-shadow:
-        0 6px 15px rgba(0,0,0,.08);
+        0 7px 14px
+        rgba(0, 0, 0, 0.22);
 
+    transition:
+        transform 0.2s ease;
+}
+
+
+.fp2-speaker-button:hover:not(:disabled) {
+
+    transform:
+        scale(1.07);
+}
+
+
+.fp2-speaker-button:disabled {
+
+    opacity:
+        0.65;
+
+    cursor:
+        default;
+}
+
+
+/* =====================================================
+        DIVIDER
+===================================================== */
+
+.fp2-divider {
+
+    width: 100%;
+
+    margin:
+        18px 0;
+
+    border-top:
+        3px dashed #C49A69;
+
+    flex-shrink: 0;
 }
 
 
@@ -295,149 +986,356 @@
         ANSWER AREA
 ===================================================== */
 
-.favourite-person-answer-input{
+.fp2-answer-area {
 
-    width:90%;
+    width: 100%;
 
-    min-height:150px;
+    height: 250px;
 
-    resize:none;
+    min-height: 250px;
 
-    box-sizing:border-box;
+    padding: 20px;
 
-    padding:20px;
+    border:
+        2px solid #E3CCAD;
 
-    border:3px solid #D6B083;
+    border-radius:
+        24px;
 
-    border-radius:22px;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.38
+        );
 
-    background:rgba(255,253,248,.96);
+    display: flex;
 
-    color:#4F2E19;
+    flex-direction: column;
 
-    font-family:inherit;
+    align-items: center;
 
-    font-size:19px;
+    justify-content: center;
 
-    font-weight:600;
-
-    line-height:1.5;
-
-    outline:none;
-
-    box-shadow:
-        0 8px 18px rgba(0,0,0,.08);
-
-    transition:.25s ease;
-
+    flex-shrink: 0;
 }
 
 
-.favourite-person-answer-input:focus{
+/* =====================================================
+        ANSWER TITLE
+===================================================== */
 
-    border-color:#9B6336;
+.fp2-answer-title {
 
-    background:#FFFDF8;
+    margin:
+        0 0 24px;
 
-    box-shadow:
-        0 0 0 4px rgba(155,99,54,.12),
-        0 10px 22px rgba(0,0,0,.10);
+    color:
+        #8E673C;
 
+    font-size:
+        22px;
+
+    font-weight:
+        900;
+
+    text-align:
+        center;
 }
 
 
-.favourite-person-answer-input::placeholder{
+/* =====================================================
+        WAVE ROW
+===================================================== */
 
-    color:#A88B73;
+.fp2-wave-row {
 
-    font-weight:600;
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 42px;
+}
+
+
+.fp2-wave {
+
+    width: 150px;
+
+    height: 80px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+}
+
+
+.fp2-wave span {
+
+    width: 6px;
+
+    border-radius: 20px;
+
+    background:
+        #DABA83;
+
+    opacity:
+        0.68;
+}
+
+
+.fp2-wave span:nth-child(1) {
+
+    height: 18px;
+}
+
+
+.fp2-wave span:nth-child(2) {
+
+    height: 34px;
+}
+
+
+.fp2-wave span:nth-child(3) {
+
+    height: 58px;
+}
+
+
+.fp2-wave span:nth-child(4) {
+
+    height: 38px;
+}
+
+
+.fp2-wave span:nth-child(5) {
+
+    height: 20px;
+}
+
+
+/* =====================================================
+        MICROPHONE
+===================================================== */
+
+.fp2-mic-button {
+
+    width: 122px;
+
+    height: 122px;
+
+    flex-shrink: 0;
+
+    border:
+        8px solid #F3E6D2;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #A7672D,
+            #6D3C16
+        );
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 46px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 22px
+        rgba(
+            92,
+            49,
+            16,
+            0.30
+        );
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.fp2-mic-button:hover:not(:disabled) {
+
+    transform:
+        scale(1.05);
+}
+
+
+.fp2-mic-button:disabled {
+
+    opacity:
+        0.72;
+
+    cursor:
+        default;
+}
+
+
+/* =====================================================
+        LISTENING ANIMATION
+===================================================== */
+
+.fp2-mic-button.listening {
+
+    animation:
+        fp2MicPulse
+        1s
+        infinite;
+
+    background:
+        linear-gradient(
+            145deg,
+            #D17B31,
+            #8A4917
+        );
+}
+
+
+@keyframes fp2MicPulse {
+
+    0% {
+
+        box-shadow:
+            0 0 0 0
+            rgba(
+                171,
+                104,
+                40,
+                0.45
+            );
+
+    }
+
+    70% {
+
+        box-shadow:
+            0 0 0 22px
+            rgba(
+                171,
+                104,
+                40,
+                0
+            );
+
+    }
+
+    100% {
+
+        box-shadow:
+            0 0 0 0
+            rgba(
+                171,
+                104,
+                40,
+                0
+            );
+
+    }
 
 }
 
 
 /* =====================================================
-        HINT
+        TAP TEXT
 ===================================================== */
 
-.answer-hint{
+.fp2-tap-text {
 
-    width:90%;
+    margin:
+        20px 0 0;
 
-    box-sizing:border-box;
+    color:
+        #876038;
 
-    margin-top:15px;
+    font-size:
+        20px;
 
-    padding:14px 20px;
+    font-weight:
+        800;
 
-    background:#FFF8EA;
-
-    border:2px solid #E1B982;
-
-    border-radius:17px;
-
-    color:#65452D;
-
-    font-size:16px;
-
-    line-height:1.45;
-
-    font-weight:600;
-
-    text-align:center;
-
-}
-
-
-.answer-hint strong{
-
-    color:#8B5E3C;
-
+    text-align:
+        center;
 }
 
 
 /* =====================================================
-        CHECK BUTTON
+        SPOKEN ANSWER
 ===================================================== */
 
-.activity-check-button{
+.fp2-spoken-answer {
 
-    margin-top:20px;
+    width: 100%;
 
-    border:none;
+    min-height: 78px;
 
-    background:linear-gradient(
-        135deg,
-        #A86D3C,
-        #6E401F
-    );
+    margin-top: 18px;
 
-    color:white;
+    padding:
+        14px
+        20px;
 
-    padding:14px 38px;
+    border:
+        2px solid #E0BA7F;
 
-    border-radius:15px;
+    border-radius:
+        17px;
 
-    cursor:pointer;
+    background:
+        #FFF4DF;
 
-    font-size:19px;
+    color:
+        #5A351D;
 
-    font-weight:900;
+    display: flex;
 
-    box-shadow:
-        0 7px 15px rgba(0,0,0,.25);
+    flex-direction: column;
 
-    transition:.25s ease;
+    justify-content: center;
 
+    text-align: center;
+
+    font-size: 16px;
+
+    word-break: break-word;
 }
 
 
-.activity-check-button:hover{
+.fp2-spoken-answer span {
 
-    transform:translateY(-4px) scale(1.02);
+    margin-bottom:
+        4px;
 
-    box-shadow:
-        0 11px 22px rgba(0,0,0,.28);
+    color:
+        #9D6630;
 
+    font-weight:
+        900;
+}
+
+
+.fp2-spoken-answer strong {
+
+    font-weight:
+        800;
 }
 
 
@@ -445,117 +1343,220 @@
         FEEDBACK
 ===================================================== */
 
-.answer-feedback{
+.fp2-feedback {
 
-    width:90%;
+    width: 100%;
 
-    box-sizing:border-box;
+    min-height: 94px;
 
-    margin-top:20px;
+    margin-top: 18px;
 
-    padding:18px 22px;
+    padding:
+        18px
+        24px;
 
-    background:#F1FFF3;
+    border-radius:
+        18px;
 
-    border:3px solid #48A868;
+    display: flex;
 
-    border-radius:20px;
+    align-items: center;
 
-    text-align:center;
+    justify-content: center;
 
-    box-shadow:
-        0 8px 18px rgba(0,0,0,.10);
+    text-align: center;
 
-    animation:
-        fpFeedbackIn
-        .35s
-        ease;
+    font-size: 21px;
 
+    font-weight: 900;
 }
 
 
-.answer-feedback p{
+.fp2-feedback.success {
 
-    margin:0;
+    background:
+        #EDFFF1;
 
-    color:#258343;
+    border:
+        2px solid #58AA69;
 
-    font-size:18px;
-
-    font-weight:800;
-
-    line-height:1.5;
-
-    white-space:pre-line;
-
+    color:
+        #23743A;
 }
 
 
-/* =====================================================
-        FEEDBACK ANIMATION
-===================================================== */
+.fp2-feedback.try-again {
 
-@keyframes fpFeedbackIn{
+    background:
+        #FFF8EA;
 
-    from{
+    border:
+        2px solid #D69B4B;
 
-        opacity:0;
-        transform:translateY(10px) scale(.97);
-
-    }
-
-    to{
-
-        opacity:1;
-        transform:translateY(0) scale(1);
-
-    }
-
+    color:
+        #8C5C1F;
 }
 
 
 /* =====================================================
-        NEXT BUTTON
+        RETRY BUTTON
 ===================================================== */
 
-.activity-next-button{
+.fp2-retry-button {
 
-    margin-top:17px;
+    align-self: center;
 
-    border:none;
+    margin-top: 18px;
 
-    background:linear-gradient(
-        135deg,
-        #48A868,
-        #258343
-    );
+    padding:
+        12px
+        28px;
 
-    color:white;
+    border: none;
 
-    padding:14px 35px;
+    border-radius:
+        14px;
 
-    border-radius:15px;
+    background:
+        linear-gradient(
+            180deg,
+            #A96A32,
+            #6C3B17
+        );
 
-    cursor:pointer;
+    color: white;
 
-    font-size:18px;
+    font-size: 17px;
 
-    font-weight:900;
+    font-weight: 900;
+
+    cursor: pointer;
 
     box-shadow:
-        0 7px 15px rgba(0,0,0,.20);
+        0 6px 12px
+        rgba(
+            0,
+            0,
+            0,
+            0.20
+        );
 
-    transition:.25s ease;
-
+    transition:
+        transform 0.2s ease;
 }
 
 
-.activity-next-button:hover{
+.fp2-retry-button:hover {
 
-    transform:translateY(-4px);
+    transform:
+        translateY(-2px);
+}
 
-    box-shadow:
-        0 11px 22px rgba(0,0,0,.25);
+
+/* =====================================================
+        REMOVE OLD ELEMENTS
+===================================================== */
+
+.fp2-bubble-heart,
+.fp2-bottom-tip,
+.fp2-hint,
+.fp2-next-button {
+
+    display:
+        none !important;
+}
+
+
+/* =====================================================
+        EMPTY CARD
+===================================================== */
+
+.empty-card {
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+}
+
+
+/* =====================================================
+        LARGE SCREENS
+===================================================== */
+
+@media (min-width: 1450px) {
+
+    .favourite-person-activity2-card {
+
+        width:
+            min(96vw, 1580px);
+
+        height:
+            min(94vh, 920px);
+
+        min-height:
+            820px;
+
+        padding:
+            28px
+            48px
+            32px;
+    }
+
+
+    .fp2-main-content {
+
+        max-width:
+            1220px;
+
+        grid-template-columns:
+            300px
+            minmax(650px, 1fr);
+
+        column-gap:
+            20px;
+    }
+
+
+    .fp2-teacher-image-wrapper {
+
+        width:
+            270px;
+
+        height:
+            390px;
+    }
+
+
+    .fp2-teacher-image {
+
+        width:
+            260px;
+
+        max-height:
+            350px;
+    }
+
+
+    .fp2-teacher-bubble {
+
+        width:
+            275px;
+    }
+
+
+    .fp2-question-card {
+
+        max-width:
+            850px;
+
+        height:
+            555px;
+
+        min-height:
+            555px;
+    }
 
 }
 
@@ -564,29 +1565,124 @@
         TABLET
 ===================================================== */
 
-@media(max-width:1000px){
+@media (max-width: 1150px) {
 
-    .favourite-person-question-card{
+    .favourite-person-activity2-card {
 
-        max-width:94%;
+        width:
+            96%;
+
+        min-height:
+            auto;
+
+        max-height:
+            94vh;
 
         padding:
-            25px
-            35px
-            35px;
-
+            22px
+            26px
+            26px;
     }
 
-    .favourite-person-question-card h2{
 
-        font-size:34px;
+    .fp2-main-content {
 
+        grid-template-columns:
+            230px
+            minmax(0, 1fr);
+
+        column-gap:
+            15px;
     }
 
-    .question-text{
 
-        font-size:22px;
+    .fp2-teacher-image-wrapper {
 
+        width:
+            220px;
+
+        height:
+            320px;
+
+        transform:
+            none;
+    }
+
+
+    .fp2-teacher-image {
+
+        width:
+            210px;
+
+        max-height:
+            320px;
+    }
+
+
+    .fp2-teacher-bubble {
+
+        width:
+            220px;
+
+        min-height:
+            120px;
+
+        padding:
+            16px;
+
+        margin-top:
+            -120px;
+    }
+
+
+    .fp2-teacher-bubble strong {
+
+        font-size:
+            22px;
+    }
+
+
+    .fp2-teacher-bubble p {
+
+        font-size:
+            15px;
+    }
+
+
+    .fp2-question-section {
+
+        padding-top:
+            25px;
+    }
+
+
+    .fp2-question-card {
+
+        height:
+            545px;
+
+        min-height:
+            545px;
+
+        padding:
+            22px;
+    }
+
+
+    .fp2-answer-area {
+
+        height:
+            245px;
+
+        min-height:
+            245px;
+    }
+
+
+    .fp2-wave {
+
+        width:
+            95px;
     }
 
 }
@@ -596,140 +1692,335 @@
         MOBILE
 ===================================================== */
 
-@media(max-width:700px){
+@media (max-width: 800px) {
 
-    .favourite-person-activity{
+    .favourite-person-activity2-page {
 
-        min-height:100vh;
+        min-height:
+            100vh;
 
-        align-items:flex-start;
+        height:
+            auto;
 
-        overflow-y:auto;
+        align-items:
+            flex-start;
 
-        padding:12px;
+        padding:
+            10px;
 
+        overflow-y:
+            auto;
+
+        overflow-x:
+            hidden;
     }
 
 
-    .favourite-person-question-card{
+    .favourite-person-activity2-card {
 
-        width:96%;
+        width:
+            96%;
 
-        min-height:auto;
+        height:
+            auto;
 
-        padding:20px 18px 30px;
+        min-height:
+            auto;
 
-        border-radius:23px;
+        max-height:
+            none;
 
+        padding:
+            18px;
+
+        border-radius:
+            22px;
+
+        overflow:
+            visible;
     }
 
 
-    .activity-top-bar{
+    /* HEADER */
 
-        margin-bottom:15px;
+    .fp2-header {
 
+        flex-wrap:
+            wrap;
+
+        gap:
+            10px;
     }
 
 
-    .activity-back-button{
+    .fp2-title-area {
 
-        padding:10px 16px;
+        order:
+            1;
 
-        font-size:15px;
+        width:
+            100%;
 
+        flex:
+            none;
     }
 
 
-    .activity-progress{
+    .fp2-back-button {
 
-        padding:8px 15px;
-
-        font-size:14px;
-
+        order:
+            2;
     }
 
 
-    .question-number{
+    .fp2-skip-button {
 
-        font-size:15px;
+        order:
+            3;
 
-        padding:7px 18px;
-
-        margin-bottom:12px;
-
+        margin-left:
+            auto;
     }
 
 
-    .favourite-person-question-card h2{
+    .fp2-title-area h1 {
 
-        font-size:27px;
-
-        margin-bottom:12px;
-
+        font-size:
+            38px;
     }
 
 
-    .question-text{
+    .fp2-title-strip {
 
-        width:100%;
+        font-size:
+            17px;
 
-        padding:15px 17px;
-
-        font-size:20px;
-
-        margin-bottom:17px;
-
+        padding:
+            8px
+            18px;
     }
 
 
-    .favourite-person-answer-input{
+    .fp2-progress {
 
-        width:100%;
+        font-size:
+            16px;
 
-        min-height:135px;
+        padding:
+            7px
+            18px;
 
-        font-size:17px;
-
-        padding:16px;
-
+        margin:
+            7px auto
+            10px;
     }
 
 
-    .answer-hint{
+    /* MAIN CONTENT */
 
-        width:100%;
+    .fp2-main-content {
 
-        font-size:15px;
+        grid-template-columns:
+            1fr;
 
-        padding:13px 15px;
+        gap:
+            12px;
 
+        padding-top:
+            0;
+
+        overflow:
+            visible;
     }
 
 
-    .activity-check-button{
+    /* TEACHER */
 
-        width:100%;
+    .fp2-teacher-section {
 
-        padding:14px;
+        order:
+            1;
 
-        font-size:17px;
+        min-height:
+            auto;
 
+        height:
+            auto;
+
+        transform:
+            none;
     }
 
 
-    .answer-feedback{
+    .fp2-teacher-image-wrapper {
 
-        width:100%;
+        width:
+            100%;
 
+        height:
+            230px;
+
+        margin-top:
+            -8px;
+
+        transform:
+            none;
     }
 
 
-    .activity-next-button{
+    .fp2-teacher-image {
 
-        width:100%;
+        width:
+            180px;
 
-        padding:14px;
+        max-height:
+            230px;
+    }
 
+
+    .fp2-teacher-bubble {
+
+        order:
+            2;
+
+        width:
+            90%;
+
+        max-width:
+            320px;
+
+        min-height:
+            105px;
+
+        padding:
+            14px
+            17px;
+
+        margin-top:
+            -3px;
+    }
+
+
+    .fp2-teacher-bubble strong {
+
+        font-size:
+            21px;
+    }
+
+
+    .fp2-teacher-bubble p {
+
+        font-size:
+            15px;
+    }
+
+
+    /* QUESTION */
+
+    .fp2-question-section {
+
+        order:
+            2;
+
+        width:
+            100%;
+
+        padding-top:
+            0;
+    }
+
+
+    .fp2-question-card {
+
+        width:
+            100%;
+
+        height:
+            auto;
+
+        min-height:
+            510px;
+
+        padding:
+            20px
+            17px;
+
+        border-radius:
+            22px;
+    }
+
+
+    .fp2-question-heading {
+
+        gap:
+            10px;
+    }
+
+
+    .fp2-question-heading h2 {
+
+        font-size:
+            27px;
+    }
+
+
+    .fp2-speaker-button {
+
+        width:
+            44px;
+
+        height:
+            44px;
+
+        font-size:
+            18px;
+    }
+
+
+    .fp2-answer-area {
+
+        height:
+            220px;
+
+        min-height:
+            220px;
+
+        padding:
+            15px;
+    }
+
+
+    .fp2-wave {
+
+        display:
+            none;
+    }
+
+
+    .fp2-mic-button {
+
+        width:
+            96px;
+
+        height:
+            96px;
+
+        font-size:
+            37px;
+    }
+
+
+    .fp2-answer-title {
+
+        font-size:
+            18px;
+    }
+
+
+    .fp2-tap-text {
+
+        font-size:
+            15px;
     }
 
 }
@@ -739,78 +2030,121 @@
         SMALL MOBILE
 ===================================================== */
 
-@media(max-width:480px){
+@media (max-width: 480px) {
 
-    .favourite-person-question-card{
+    .favourite-person-activity2-card {
 
-        padding:17px 13px 25px;
-
+        padding:
+            15px;
     }
 
 
-    .activity-top-bar{
+    .fp2-title-area h1 {
 
-        align-items:flex-start;
-
+        font-size:
+            30px;
     }
 
 
-    .activity-back-button{
+    .fp2-title-strip {
 
-        padding:9px 13px;
+        font-size:
+            15px;
 
-        font-size:14px;
-
+        padding:
+            7px
+            15px;
     }
 
 
-    .activity-progress{
+    .fp2-back-button,
+    .fp2-skip-button {
 
-        padding:7px 12px;
+        padding:
+            10px
+            17px;
 
-        font-size:13px;
-
+        font-size:
+            15px;
     }
 
 
-    .question-number{
+    .fp2-teacher-image-wrapper {
 
-        font-size:14px;
+        height:
+            205px;
 
-        padding:7px 15px;
-
+        margin-top:
+            -10px;
     }
 
 
-    .favourite-person-question-card h2{
+    .fp2-teacher-image {
 
-        font-size:24px;
+        width:
+            160px;
 
+        max-height:
+            205px;
     }
 
 
-    .question-text{
+    .fp2-teacher-bubble {
 
-        font-size:18px;
+        width:
+            95%;
 
-        padding:14px;
+        min-height:
+            100px;
 
+        padding:
+            13px
+            15px;
     }
 
 
-    .favourite-person-answer-input{
+    .fp2-teacher-bubble strong {
 
-        min-height:120px;
-
-        font-size:16px;
-
+        font-size:
+            20px;
     }
 
 
-    .answer-hint{
+    .fp2-teacher-bubble p {
 
-        font-size:14px;
+        font-size:
+            14px;
+    }
 
+
+    .fp2-question-card {
+
+        min-height:
+            475px;
+
+        padding:
+            17px
+            13px;
+    }
+
+
+    .fp2-question-heading h2 {
+
+        font-size:
+            24px;
+    }
+
+
+    .fp2-mic-button {
+
+        width:
+            88px;
+
+        height:
+            88px;
+
+        font-size:
+            34px;
     }
 
 }

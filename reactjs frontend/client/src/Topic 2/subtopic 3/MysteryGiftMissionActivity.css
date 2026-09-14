@@ -1,0 +1,1837 @@
+/* =====================================================
+   MAIN PAGE
+===================================================== */
+
+.mystery-gift-page {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    font-family: "Poppins", sans-serif;
+
+    background: #5f4637;
+}
+
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+.mystery-gift-background {
+    position: absolute;
+    inset: -20px;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    filter: blur(8px);
+
+    transform: scale(1.08);
+}
+
+.mystery-gift-background::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(48, 30, 20, 0.30);
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+
+.mystery-gift-main-container {
+    position: relative;
+    z-index: 2;
+
+    width: min(1680px, 96vw);
+    height: min(920px, 96vh);
+
+    margin: 2vh auto;
+
+    overflow: hidden;
+
+    border-radius: 32px;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border: 2px solid rgba(255, 255, 255, 0.78);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.40);
+}
+
+
+/* =====================================================
+   TOP BUTTONS
+===================================================== */
+
+.mystery-gift-top-button {
+    position: absolute;
+
+    top: 24px;
+    z-index: 50;
+
+    border: none;
+    border-radius: 20px;
+
+    padding: 14px 28px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #704927,
+            #54321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 16px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.18),
+        0 6px 0 rgba(58,31,13,.30);
+
+    transition: .2s ease;
+}
+
+.mystery-gift-top-button:hover {
+    transform: translateY(-2px);
+}
+
+.mystery-gift-back {
+    left: 32px;
+}
+
+.mystery-gift-skip {
+    right: 32px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.mystery-gift-header {
+    position: relative;
+
+    z-index: 5;
+
+    text-align: center;
+
+    padding-top: 22px;
+
+    pointer-events: none;
+}
+
+.mystery-gift-header h1 {
+    margin: 0;
+
+    color: #382113;
+
+    font-size:
+        clamp(30px, 3.2vw, 54px);
+
+    font-weight: 900;
+}
+
+.mystery-gift-header p {
+    margin: 3px 0 0;
+
+    color: #5d4637;
+
+    font-size:
+        clamp(14px, 1.3vw, 21px);
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   GAME LAYOUT
+===================================================== */
+
+.mystery-gift-game-layout {
+    position: absolute;
+
+    top: 118px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 94%;
+    height: calc(100% - 140px);
+
+    display: grid;
+
+    grid-template-columns: 29% 71%;
+
+    gap: 20px;
+
+    align-items: center;
+}
+
+
+/* =====================================================
+   TEACHER
+===================================================== */
+
+.mystery-gift-teacher-area {
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.mystery-gift-teacher-wrap {
+    position: relative;
+
+    width: 72%;
+    max-width: 330px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: flex-end;
+
+    margin-bottom: -8px;
+}
+
+.mystery-gift-teacher-image {
+    width: 100%;
+
+    max-height: 420px;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+.mystery-gift-teacher-name {
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+
+    transform: translateX(-50%);
+
+    width: 170px;
+
+    padding: 9px 15px;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321c
+        );
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 5px 12px rgba(55,30,15,.20);
+}
+
+
+/* =====================================================
+   SPEECH
+===================================================== */
+
+.mystery-gift-speech {
+    position: relative;
+
+    width: 88%;
+    max-width: 380px;
+
+    padding: 18px 20px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7ecdc
+        );
+
+    border:
+        2px solid rgba(154,113,72,.35);
+
+    color: #3f2a1c;
+
+    box-shadow:
+        0 10px 30px rgba(88,51,24,.15);
+}
+
+.mystery-gift-repeat {
+    position: absolute;
+
+    top: 9px;
+    right: 11px;
+
+    width: 34px;
+    height: 34px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f4dfbf;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+.mystery-gift-clue-label {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-bottom: 8px;
+
+    padding: 6px 10px;
+
+    border-radius: 30px;
+
+    background: #f0dfbd;
+
+    color: #75512e;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: .6px;
+}
+
+.mystery-gift-speech p {
+    margin: 0;
+
+    padding-right: 12px;
+
+    color: #432d1e;
+
+    font-size:
+        clamp(11px,.82vw,14px);
+
+    line-height: 1.45;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   FEEDBACK
+===================================================== */
+
+.mystery-gift-wrong,
+.mystery-gift-correct {
+    margin-top: 11px;
+
+    padding: 8px 10px;
+
+    border-radius: 12px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+.mystery-gift-wrong {
+    background: #ffe0dc;
+    color: #a4473c;
+}
+
+.mystery-gift-correct {
+    background: #e3f1d8;
+    color: #4d7c36;
+}
+
+
+/* =====================================================
+   GAME CARD
+===================================================== */
+
+.mystery-gift-game-card {
+    position: relative;
+
+    width: 100%;
+    height: 94%;
+
+    padding: 22px 28px;
+
+    box-sizing: border-box;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,253,248,.97),
+            rgba(248,235,216,.97)
+        );
+
+    box-shadow:
+        0 20px 50px rgba(70,40,20,.18);
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* =====================================================
+   GAME TOP
+===================================================== */
+
+.mystery-gift-game-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.mystery-gift-round,
+.mystery-gift-score {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 9px 14px;
+
+    border-radius: 17px;
+
+    background: #fffaf1;
+
+    border:
+        2px solid rgba(151,109,73,.20);
+}
+
+.mystery-gift-round > span,
+.mystery-gift-score > span {
+    font-size: 25px;
+}
+
+.mystery-gift-round div,
+.mystery-gift-score div {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.mystery-gift-round strong,
+.mystery-gift-score strong {
+    color: #49301f;
+
+    font-size: 13px;
+
+    font-weight: 900;
+}
+
+.mystery-gift-round small,
+.mystery-gift-score small {
+    color: #80614d;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   QUESTION
+===================================================== */
+
+.mystery-gift-question {
+    margin-top: 14px;
+
+    padding: 12px 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8e8cf,
+            #fff7e9
+        );
+
+    border:
+        2px solid rgba(177,126,70,.20);
+}
+
+.mystery-gift-question > span {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: #f3dfbd;
+
+    font-size: 25px;
+
+    flex-shrink: 0;
+}
+
+.mystery-gift-question strong {
+    color: #49301f;
+
+    font-size: 14px;
+
+    font-weight: 900;
+}
+
+.mystery-gift-question p {
+    margin: 3px 0 0;
+
+    color: #745846;
+
+    font-size: 11px;
+
+    line-height: 1.35;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   GIFT OPTIONS
+===================================================== */
+
+.mystery-gift-options {
+    flex: 1;
+
+    min-height: 0;
+
+    margin-top: 15px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 12px;
+}
+
+.mystery-gift-card {
+    position: relative;
+
+    min-height: 0;
+
+    border: 3px solid transparent;
+
+    border-radius: 21px;
+
+    padding: 10px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f3e3cd
+        );
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    transition: .22s ease;
+
+    overflow: hidden;
+}
+
+.mystery-gift-card:hover {
+    transform:
+        translateY(-4px)
+        scale(1.015);
+
+    box-shadow:
+        0 10px 25px rgba(90,53,27,.16);
+}
+
+.mystery-gift-selected {
+    border-color: #c28a3e;
+}
+
+.mystery-gift-wrong-card {
+    border-color: #d98276 !important;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff6f4,
+            #ffe6e1
+        );
+}
+
+
+/* =====================================================
+   RIBBON
+===================================================== */
+
+.mystery-gift-ribbon {
+    position: absolute;
+
+    top: 7px;
+    right: 8px;
+
+    width: 29px;
+    height: 29px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f3dfbd;
+
+    font-size: 15px;
+
+    z-index: 2;
+}
+
+
+/* =====================================================
+   GIFT IMAGE
+===================================================== */
+
+.mystery-gift-image-wrap {
+    width: 100%;
+
+    height: 105px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.mystery-gift-image-wrap img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+
+    transition: .25s ease;
+}
+
+.mystery-gift-card:hover
+.mystery-gift-image-wrap img {
+    transform:
+        scale(1.08)
+        rotate(-2deg);
+}
+
+.mystery-gift-name {
+    margin-top: 4px;
+
+    color: #4b3020;
+
+    font-size: 13px;
+
+    font-weight: 900;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   SELECTED BADGE
+===================================================== */
+
+.mystery-gift-selected-badge {
+    position: absolute;
+
+    left: 50%;
+    bottom: 6px;
+
+    transform: translateX(-50%);
+
+    padding: 4px 10px;
+
+    border-radius: 20px;
+
+    background: white;
+
+    color: #557d39;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 4px 10px rgba(50,30,15,.12);
+}
+
+.mystery-gift-try-badge {
+    color: #a4473c;
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.mystery-gift-progress-area {
+    margin-top: 12px;
+}
+
+.mystery-gift-progress-text {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 6px;
+
+    color: #765741;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+.mystery-gift-progress-text strong {
+    color: #4b3020;
+
+    font-weight: 900;
+}
+
+.mystery-gift-progress-track {
+    width: 100%;
+
+    height: 9px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: #ead9c2;
+}
+
+.mystery-gift-progress-fill {
+    height: 100%;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #a7659a,
+            #d39a75
+        );
+
+    transition:
+        width .35s ease;
+}
+
+
+/* =====================================================
+   WRAPPING SCREEN
+===================================================== */
+
+.mystery-gift-wrapping-screen,
+.mystery-gift-wrapped-screen,
+.mystery-gift-complete-screen {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   WRAPPING TITLE
+===================================================== */
+
+.mystery-gift-wrapping-title {
+    display: inline-block;
+
+    padding: 8px 30px;
+
+    border-radius: 7px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ed5570,
+            #d83f59
+        );
+
+    color: white;
+
+    font-size:
+        clamp(18px,1.8vw,28px);
+
+    font-weight: 900;
+
+    box-shadow:
+        0 5px 0 rgba(133,44,57,.25);
+
+    animation:
+        wrappingTitlePulse 1.2s ease-in-out infinite;
+}
+
+@keyframes wrappingTitlePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.035);
+    }
+}
+
+.mystery-gift-wrapping-subtitle {
+    margin-top: 8px;
+
+    color: #795943;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   REAL WRAPPING STAGE
+===================================================== */
+
+.mystery-gift-real-wrap-stage {
+    position: relative;
+
+    width: 80%;
+
+    height: 58%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: visible;
+}
+
+
+/* =====================================================
+   OPEN BOX
+===================================================== */
+
+.mystery-gift-open-box {
+    position: absolute;
+
+    z-index: 3;
+
+    width: 65%;
+    height: 100%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 20px 25px
+            rgba(77,42,19,.24)
+        );
+
+    animation:
+        boxPopIn .7s ease-out;
+}
+
+@keyframes boxPopIn {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            scale(.65)
+            translateY(35px);
+    }
+
+    70% {
+        transform:
+            scale(1.05)
+            translateY(-5px);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+
+/* =====================================================
+   SELECTED GIFT GOING INSIDE
+===================================================== */
+
+.mystery-gift-going-inside {
+    position: absolute;
+
+    z-index: 5;
+
+    top: 3%;
+
+    width: 31%;
+    height: 42%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    animation:
+        giftIntoBox 2.4s ease-in forwards;
+}
+
+.mystery-gift-going-inside img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 10px 12px
+            rgba(65,35,15,.25)
+        );
+}
+
+@keyframes giftIntoBox {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(-85px)
+            scale(.75)
+            rotate(-4deg);
+    }
+
+    18% {
+        opacity: 1;
+
+        transform:
+            translateY(-55px)
+            scale(1)
+            rotate(3deg);
+    }
+
+    58% {
+        transform:
+            translateY(5px)
+            scale(.94)
+            rotate(-2deg);
+    }
+
+    82% {
+        transform:
+            translateY(35px)
+            scale(.72)
+            rotate(1deg);
+    }
+
+    100% {
+        opacity: .15;
+
+        transform:
+            translateY(55px)
+            scale(.52)
+            rotate(0);
+    }
+}
+
+
+/* =====================================================
+   DROP ARROW
+===================================================== */
+
+.mystery-gift-drop-arrow {
+    position: absolute;
+
+    z-index: 8;
+
+    top: 4%;
+    right: 23%;
+
+    font-size: 46px;
+
+    color: #d65b63;
+
+    font-weight: 900;
+
+    animation:
+        arrowDrop 1s ease-in-out infinite;
+}
+
+@keyframes arrowDrop {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+
+        opacity: .55;
+    }
+
+    50% {
+        transform:
+            translateY(10px);
+
+        opacity: 1;
+    }
+}
+
+
+/* =====================================================
+   SPARKLES
+===================================================== */
+
+.mystery-gift-sparkle,
+.mystery-gift-success-sparkle {
+    position: absolute;
+
+    font-size: 34px;
+
+    animation:
+        sparkleFloat 1.3s ease-in-out infinite;
+
+    z-index: 10;
+}
+
+.sparkle-one {
+    top: 20%;
+    left: 18%;
+}
+
+.sparkle-two {
+    top: 18%;
+    right: 18%;
+
+    animation-delay: .25s;
+}
+
+.sparkle-three {
+    bottom: 18%;
+    right: 25%;
+
+    animation-delay: .5s;
+}
+
+@keyframes sparkleFloat {
+
+    0% {
+        transform:
+            scale(.7)
+            rotate(-10deg);
+
+        opacity: .45;
+    }
+
+    50% {
+        transform:
+            scale(1.2)
+            rotate(10deg);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            scale(.7)
+            rotate(-10deg);
+
+        opacity: .45;
+    }
+}
+
+
+/* =====================================================
+   LOADER
+===================================================== */
+
+.mystery-gift-wrapping-loader {
+    display: flex;
+
+    gap: 7px;
+
+    margin-top: -5px;
+}
+
+.mystery-gift-wrapping-loader span {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #b875a3;
+
+    animation:
+        loadingDot 1s infinite;
+}
+
+.mystery-gift-wrapping-loader span:nth-child(2) {
+    animation-delay: .15s;
+}
+
+.mystery-gift-wrapping-loader span:nth-child(3) {
+    animation-delay: .3s;
+}
+
+@keyframes loadingDot {
+
+    0%,
+    100% {
+        transform: translateY(0);
+
+        opacity: .4;
+    }
+
+    50% {
+        transform: translateY(-6px);
+
+        opacity: 1;
+    }
+}
+
+.mystery-gift-wrapping-text {
+    margin-top: 8px;
+
+    color: #765741;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   WRAPPED SUCCESS
+===================================================== */
+
+.mystery-gift-wrapped-title {
+    display: inline-block;
+
+    padding: 8px 28px;
+
+    border-radius: 7px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ed5570,
+            #d83f59
+        );
+
+    color: white;
+
+    font-size:
+        clamp(20px,2vw,30px);
+
+    font-weight: 900;
+
+    box-shadow:
+        0 5px 0 rgba(133,44,57,.25);
+}
+
+
+/* =====================================================
+   REAL CLOSED BOX STAGE
+===================================================== */
+
+.mystery-gift-real-wrapped-stage {
+    position: relative;
+
+    width: 78%;
+    height: 58%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =====================================================
+   GLOW
+===================================================== */
+
+.mystery-gift-glow {
+    position: absolute;
+
+    width: 55%;
+
+    aspect-ratio: 1;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,217,94,.62),
+            rgba(255,217,94,.15),
+            transparent 70%
+        );
+
+    filter: blur(8px);
+
+    animation:
+        glowPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        transform: scale(.9);
+
+        opacity: .65;
+    }
+
+    50% {
+        transform: scale(1.1);
+
+        opacity: 1;
+    }
+}
+
+
+/* =====================================================
+   CLOSED GIFT BOX
+===================================================== */
+
+.mystery-gift-closed-box {
+    position: relative;
+
+    z-index: 3;
+
+    width: 68%;
+    height: 100%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 25px 30px
+            rgba(65,35,15,.30)
+        );
+
+    animation:
+        closedGiftAppear .8s ease-out;
+}
+
+@keyframes closedGiftAppear {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            scale(.45)
+            translateY(45px)
+            rotate(-8deg);
+    }
+
+    65% {
+        transform:
+            scale(1.08)
+            translateY(-7px)
+            rotate(3deg);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0)
+            rotate(0);
+    }
+}
+
+
+/* =====================================================
+   WRAPPED MESSAGE
+===================================================== */
+
+.mystery-gift-wrapped-message {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+    margin-top: -4px;
+}
+
+.mystery-gift-wrapped-message strong {
+    color: #4b3020;
+
+    font-size: 16px;
+
+    font-weight: 900;
+}
+
+.mystery-gift-wrapped-message span {
+    color: #765741;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   NEXT BUTTON
+===================================================== */
+
+.mystery-gift-next-button,
+.mystery-gift-finish-button {
+    margin-top: 16px;
+
+    border: none;
+
+    padding: 12px 35px;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #69b34c,
+            #438c32
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 0 rgba(54,104,39,.35);
+
+    transition: .2s ease;
+}
+
+.mystery-gift-next-button:hover,
+.mystery-gift-finish-button:hover {
+    transform: translateY(-3px);
+}
+
+
+/* =====================================================
+   COMPLETE
+===================================================== */
+
+.mystery-gift-complete-icon {
+    font-size: 70px;
+
+    animation:
+        completeBounce 1.1s ease-in-out infinite;
+}
+
+@keyframes completeBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.mystery-gift-complete-badge {
+    margin-top: 10px;
+
+    padding: 8px 18px;
+
+    border-radius: 30px;
+
+    background: #dff0d2;
+
+    color: #557d39;
+
+    font-size: 11px;
+
+    font-weight: 900;
+}
+
+.mystery-gift-complete-screen h2 {
+    margin: 13px 0 5px;
+
+    color: #432a19;
+
+    font-size: 30px;
+
+    font-weight: 900;
+}
+
+.mystery-gift-complete-screen p {
+    margin: 0;
+
+    color: #765741;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.mystery-gift-final-score {
+    margin-top: 15px;
+
+    padding: 10px 25px;
+
+    border-radius: 20px;
+
+    background: #fff4d8;
+
+    color: #80582c;
+
+    font-size: 21px;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width:1100px) {
+
+    .mystery-gift-main-container {
+        width: 98vw;
+        height: 98vh;
+
+        margin: 1vh auto;
+    }
+
+    .mystery-gift-game-layout {
+        width: 96%;
+
+        grid-template-columns:
+            27% 73%;
+
+        gap: 12px;
+    }
+
+    .mystery-gift-teacher-wrap {
+        width: 90%;
+    }
+
+    .mystery-gift-teacher-image {
+        max-height: 320px;
+    }
+
+    .mystery-gift-speech {
+        width: 96%;
+
+        padding: 14px;
+    }
+
+    .mystery-gift-game-card {
+        padding: 18px;
+    }
+
+    .mystery-gift-image-wrap {
+        height: 90px;
+    }
+
+    .mystery-gift-real-wrap-stage {
+        width: 90%;
+    }
+
+    .mystery-gift-real-wrapped-stage {
+        width: 88%;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width:700px) {
+
+    .mystery-gift-main-container {
+        width: 100vw;
+        height: 100vh;
+
+        margin: 0;
+
+        border-radius: 0;
+    }
+
+    .mystery-gift-top-button {
+        top: 12px;
+
+        padding: 8px 12px;
+
+        font-size: 11px;
+    }
+
+    .mystery-gift-back {
+        left: 10px;
+    }
+
+    .mystery-gift-skip {
+        right: 10px;
+    }
+
+    .mystery-gift-header {
+        padding:
+            56px 45px 0;
+    }
+
+    .mystery-gift-header h1 {
+        font-size: 22px;
+    }
+
+    .mystery-gift-header p {
+        font-size: 10px;
+    }
+
+    .mystery-gift-game-layout {
+        top: 118px;
+
+        width: 96%;
+
+        height: calc(100% - 128px);
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 7px;
+
+        overflow-y: auto;
+    }
+
+    .mystery-gift-teacher-area {
+        width: 100%;
+
+        height: auto;
+
+        min-height: 130px;
+
+        flex-direction: row;
+    }
+
+    .mystery-gift-teacher-wrap {
+        width: 27%;
+
+        min-width: 80px;
+
+        margin-bottom: 0;
+    }
+
+    .mystery-gift-teacher-image {
+        max-height: 140px;
+    }
+
+    .mystery-gift-teacher-name {
+        width: 90px;
+
+        padding: 6px 5px;
+
+        font-size: 8px;
+    }
+
+    .mystery-gift-speech {
+        width: 68%;
+
+        padding: 9px;
+
+        border-radius: 16px;
+    }
+
+    .mystery-gift-speech p {
+        font-size: 8px;
+
+        line-height: 1.35;
+    }
+
+    .mystery-gift-clue-label {
+        padding: 4px 7px;
+
+        font-size: 6px;
+    }
+
+    .mystery-gift-game-card {
+        width: 100%;
+
+        min-height: 500px;
+
+        height: auto;
+
+        padding: 11px;
+
+        border-radius: 20px;
+    }
+
+    .mystery-gift-round,
+    .mystery-gift-score {
+        padding: 6px 8px;
+    }
+
+    .mystery-gift-round > span,
+    .mystery-gift-score > span {
+        font-size: 17px;
+    }
+
+    .mystery-gift-round strong,
+    .mystery-gift-score strong {
+        font-size: 9px;
+    }
+
+    .mystery-gift-round small,
+    .mystery-gift-score small {
+        font-size: 6px;
+    }
+
+    .mystery-gift-question {
+        margin-top: 8px;
+
+        padding: 8px;
+
+        gap: 7px;
+    }
+
+    .mystery-gift-question > span {
+        width: 33px;
+        height: 33px;
+
+        font-size: 17px;
+    }
+
+    .mystery-gift-question strong {
+        font-size: 9px;
+    }
+
+    .mystery-gift-question p {
+        font-size: 7px;
+    }
+
+    .mystery-gift-options {
+        gap: 7px;
+
+        margin-top: 8px;
+    }
+
+    .mystery-gift-card {
+        padding: 6px;
+
+        border-radius: 14px;
+    }
+
+    .mystery-gift-image-wrap {
+        height: 73px;
+    }
+
+    .mystery-gift-name {
+        font-size: 8px;
+    }
+
+    .mystery-gift-ribbon {
+        width: 21px;
+        height: 21px;
+
+        font-size: 10px;
+
+        top: 4px;
+        right: 4px;
+    }
+
+    .mystery-gift-selected-badge {
+        font-size: 6px;
+
+        padding: 3px 5px;
+    }
+
+    .mystery-gift-progress-text {
+        font-size: 7px;
+    }
+
+    .mystery-gift-progress-track {
+        height: 6px;
+    }
+
+
+    /* =================================================
+       MOBILE WRAPPING
+    ================================================= */
+
+    .mystery-gift-wrapping-title {
+        font-size: 16px;
+
+        padding: 7px 20px;
+    }
+
+    .mystery-gift-wrapping-subtitle {
+        font-size: 9px;
+    }
+
+    .mystery-gift-real-wrap-stage {
+        width: 100%;
+
+        height: 52%;
+    }
+
+    .mystery-gift-open-box {
+        width: 78%;
+    }
+
+    .mystery-gift-going-inside {
+        width: 38%;
+        height: 40%;
+    }
+
+    .mystery-gift-drop-arrow {
+        font-size: 28px;
+
+        right: 16%;
+    }
+
+    .mystery-gift-sparkle,
+    .mystery-gift-success-sparkle {
+        font-size: 22px;
+    }
+
+    .mystery-gift-wrapping-text {
+        font-size: 9px;
+    }
+
+
+    /* =================================================
+       MOBILE CLOSED BOX
+    ================================================= */
+
+    .mystery-gift-wrapped-title {
+        font-size: 17px;
+
+        padding: 7px 20px;
+    }
+
+    .mystery-gift-real-wrapped-stage {
+        width: 100%;
+
+        height: 52%;
+    }
+
+    .mystery-gift-closed-box {
+        width: 78%;
+    }
+
+    .mystery-gift-wrapped-message strong {
+        font-size: 12px;
+    }
+
+    .mystery-gift-wrapped-message span {
+        font-size: 9px;
+    }
+
+    .mystery-gift-next-button,
+    .mystery-gift-finish-button {
+        padding: 10px 25px;
+
+        font-size: 10px;
+    }
+
+
+    /* =================================================
+       COMPLETE
+    ================================================= */
+
+    .mystery-gift-complete-icon {
+        font-size: 48px;
+    }
+
+    .mystery-gift-complete-screen h2 {
+        font-size: 20px;
+    }
+
+    .mystery-gift-complete-screen p {
+        font-size: 10px;
+    }
+
+    .mystery-gift-final-score {
+        font-size: 16px;
+    }
+}

@@ -1,306 +1,335 @@
-/* --- Global Wrappers --- */
-.app-main-wrapper {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f1f5f9;
-  min-height: 100vh;
-}
 
-/* --- PAGE 1: HOME PAGE STYLES --- */
-
-
-.home-container{
-
-width:100%;
-height:100vh;
-
-background:url("/src/homepage.png");
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-font-family:Poppins,sans-serif;
-
-overflow:hidden;
-
-
-}
-.home-content{
-
-width:500px;
-
-text-align:center;
-
-background:transparent;
-backdrop-filter:none;
-box-shadow:none;
-
-padding:20px;
-
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-
-margin:auto;
-
-transform: translate(-5px,-80px);
-
-}
-
-.home-content h1{
-
-font-size:72px;
-line-height:0.95;
-font-weight:800;
-
-margin-bottom:-1px;
-
-}
-
-.blue{
-
-color:#4946a9;
-padding-left: 30px;
-
-
-}
-
-.orange{
-  padding-left: 30px;
-
-color:#f6a321;
-
-}
-
-.home-content p{
-
-font-size:22px;
-
-font-weight:600;
-
-color:#333;
-
-line-height:1.5;
-
-margin-bottom:10px;
-padding-left: 30px;
-
-}
-
-.home-content p span{
-
-color:#3e3b97;
-
-font-weight:700;
-
-}
-
-.home-content button{
-
-background:#503dab;
-
-color:white;
-
-border:none;
-
-padding:18px 50px ;
-
-font-size:24px;
-
-font-weight:700;
-
-border-radius:50px;
-
-cursor:pointer;
-
-transition:.3s;
-
-
-}
-
-.home-content button:hover{
-
-transform:scale(1.05);
-
-}
-
-@media(max-width:768px){
-
-.home-content{
-
-width:90%;
-
-transform:translateY(-85px);
-
-}
-
-.home-content h1{
-
-font-size:48px;
-
-}
-
-.home-content p{
-
-font-size:18px;
-
-}
-
-.home-content button{
-
-font-size:18px;
-
-padding:15px 35px;
-
-}
-
-}
-
-
-/*-----Registration-----*/
-
-
-
-
-
-
-
-.auth-page {
-  width: 100%;
-  height: 100vh;
-
-  background: url("/src/ragisterpage.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-family: Poppins, sans-serif;
-  overflow: hidden;
-}
-
-.auth-card {
-
-  width: 480px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  text-align: center;
-
-  background: transparent;
-  box-shadow: none;
-
-  /* Paper ke center ke liye */
-  transform: translateY(-20px);
-}
-
-.auth-card h1 {
-
-  font-size: 48px;
-  font-weight: 800;
-
-  color: #5a3d16;
-
-  margin-bottom: 25px;
-}
-
-.auth-card input {
-
-  width: 100%;
-  padding: 15px 20px;
-
-  margin-bottom: 14px;
-
-  border: none;
-  outline: none;
-
-  border-radius: 14px;
-
-  font-size: 17px;
-
-  background: rgba(14, 13, 13, 0.9);
-
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-
-  box-sizing: border-box;
-}
-
-.auth-card button {
-
-  width: 100%;
-
-  padding: 16px;
-
-  border: none;
-
-  border-radius: 50px;
-
-  font-size: 20px;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition: 0.3s;
-}
-
-.auth-card button:not(.back-btn) {
-
-  background:  rgba(65, 66, 9, 0.95);
-  color: white;
-}
-
-.auth-card button:not(.back-btn):hover {
-
-  transform: scale(1.03);
-}
-
-.back-btn {
-
-  margin-top: 12px !important;
-
-  background: rgba(65, 66, 9, 0.95) !important;
-  color: #f8f2f2 !important;
-
-
-}
-
-@media (max-width: 768px) {
-
-  .auth-card {
-    width: 90%;
-    transform: translateY(-10px);
+/* --- Global Wrappers --- */ 
+.app-main-wrapper { 
+  margin: 0; 
+  padding: 0; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  background-color: #f1f5f9; 
+  min-height: 100vh; 
+} 
+ 
+/* --- PAGE 1: HOME PAGE STYLES --- */ 
+ 
+.home-container{ 
+  width:100%; 
+  height:100vh; 
+ 
+  background:url("/src/homepage.png"); 
+  background-size:cover; 
+  background-position:center; 
+  background-repeat:no-repeat; 
+ 
+  display:flex; 
+  justify-content:center; 
+  align-items:center; 
+ 
+  font-family:Poppins,sans-serif; 
+ 
+  overflow:hidden; 
+} 
+ 
+.home-content{ 
+  width:500px; 
+ 
+  text-align:center; 
+ 
+  background:transparent; 
+  backdrop-filter:none; 
+  box-shadow:none; 
+ 
+  padding:20px; 
+ 
+  display:flex; 
+  flex-direction:column; 
+  justify-content:center; 
+  align-items:center; 
+ 
+  margin:auto; 
+ 
+  transform: translate(-5px,-80px); 
+} 
+ 
+.home-content h1{ 
+  font-size:72px; 
+  line-height:0.95; 
+  font-weight:800; 
+ 
+  margin-bottom:-1px; 
+} 
+ 
+.blue{ 
+  color:#4946a9; 
+  padding-left:30px; 
+} 
+ 
+.orange{ 
+  padding-left:30px; 
+  color:#f6a321; 
+} 
+ 
+.home-content p{ 
+  font-size:22px; 
+ 
+  font-weight:600; 
+ 
+  color:#333; 
+ 
+  line-height:1.5; 
+ 
+  margin-bottom:10px; 
+ 
+  padding-left:30px; 
+} 
+ 
+.home-content p span{ 
+  color:#3e3b97; 
+  font-weight:700; 
+} 
+ 
+.home-content button{ 
+  background:#503dab; 
+  color:white; 
+  border:none; 
+ 
+  padding:18px 50px; 
+ 
+  font-size:24px; 
+  font-weight:700; 
+ 
+  border-radius:50px; 
+ 
+  cursor:pointer; 
+ 
+  transition:.3s; 
+} 
+ 
+.home-content button:hover{ 
+  transform:scale(1.05); 
+} 
+ 
+/* =====================================================
+   HOME PAGE — MOBILE
+===================================================== */ 
+ 
+@media(max-width:768px){ 
+ 
+  .home-container{
+    width:100%;
+    height:100vh;
+    min-height:100dvh;
+  }
+ 
+  .home-content{ 
+    width:90%; 
+    max-width:500px;
+    padding:15px;
+    transform:translateY(-85px); 
+  } 
+ 
+  .home-content h1{ 
+    font-size:48px; 
+  } 
+ 
+  .home-content p{ 
+    font-size:18px; 
+  } 
+ 
+  .home-content button{ 
+    font-size:18px; 
+    padding:15px 35px; 
+  } 
+ 
+} 
+
+/* =====================================================
+   HOME PAGE — SMALL MOBILE
+===================================================== */
+
+@media(max-width:400px){
+
+  .home-content{
+    width:94%;
+    padding:10px;
+    transform:translateY(-65px);
   }
 
-  .auth-card h1 {
-    font-size: 36px;
+  .home-content h1{
+    font-size:40px;
   }
 
-  .auth-card input {
-    font-size: 16px;
+  .home-content p{
+    font-size:16px;
+    padding-left:10px;
+    padding-right:10px;
   }
 
-  .auth-card button {
-    font-size: 18px;
+  .blue,
+  .orange{
+    padding-left:10px;
   }
+
+  .home-content button{
+    font-size:17px;
+    padding:14px 30px;
+  }
+
 }
+ 
+ 
+/*-----Registration-----*/ 
+ 
+.auth-page { 
+  width: 100%; 
+  height: 100vh; 
+ 
+  background: url("/src/ragisterpage.png"); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+ 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+ 
+  font-family: Poppins, sans-serif; 
+  overflow: hidden; 
+} 
+ 
+.auth-card { 
+  width: 480px; 
+ 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+ 
+  text-align: center; 
+ 
+  background: transparent; 
+  box-shadow: none; 
+ 
+  /* Paper ke center ke liye */ 
+  transform: translateY(-20px); 
+} 
+ 
+.auth-card h1 { 
+  font-size: 48px; 
+  font-weight: 800; 
+ 
+  color: #5a3d16; 
+ 
+  margin-bottom: 25px; 
+} 
+ 
+.auth-card input { 
+  width: 100%; 
+  padding: 15px 20px; 
+ 
+  margin-bottom: 14px; 
+ 
+  border: none; 
+  outline: none; 
+ 
+  border-radius: 14px; 
+ 
+  font-size: 17px; 
+ 
+  background: rgba(14, 13, 13, 0.9); 
+ 
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08); 
+ 
+  box-sizing: border-box; 
+} 
+ 
+.auth-card button { 
+  width: 100%; 
+ 
+  padding: 16px; 
+ 
+  border: none; 
+ 
+  border-radius: 50px; 
+ 
+  font-size: 20px; 
+  font-weight: 700; 
+ 
+  cursor: pointer; 
+ 
+  transition: 0.3s; 
+} 
+ 
+.auth-card button:not(.back-btn) { 
+  background: rgba(65, 66, 9, 0.95); 
+  color: white; 
+} 
+ 
+.auth-card button:not(.back-btn):hover { 
+  transform: scale(1.03); 
+} 
+ 
+.back-btn { 
+  margin-top: 12px !important; 
+ 
+  background: rgba(65, 66, 9, 0.95) !important; 
+  color: #f8f2f2 !important; 
+} 
+ 
+/* =====================================================
+   REGISTRATION — MOBILE
+===================================================== */ 
+ 
+@media (max-width: 768px) { 
+ 
+  .auth-page{
+    width:100%;
+    height:100vh;
+    min-height:100dvh;
+  }
 
+  .auth-card { 
+    width: 90%; 
+    max-width:480px;
+    transform: translateY(-10px); 
+  } 
+ 
+  .auth-card h1 { 
+    font-size: 36px; 
+  } 
+ 
+  .auth-card input { 
+    font-size: 16px; 
+  } 
+ 
+  .auth-card button { 
+    font-size: 18px; 
+  } 
+} 
 
+/* =====================================================
+   REGISTRATION — SMALL MOBILE
+===================================================== */
 
+@media (max-width:400px){
 
+  .auth-card{
+    width:94%;
+  }
 
+  .auth-card h1{
+    font-size:32px;
+    margin-bottom:20px;
+  }
 
+  .auth-card input{
+    padding:13px 16px;
+    font-size:15px;
+  }
 
+  .auth-card button{
+    padding:14px;
+    font-size:17px;
+  }
+
+}
 
 
 
@@ -313,6 +342,7 @@ padding:15px 35px;
 /* ==========================================================================
 🎨 PATHWAY PAGE - FINAL PIXEL PERFECT VERSION
 ========================================================================== */
+
 .pathway-main-container{
   width:100%;
   height:100vh;
@@ -579,6 +609,13 @@ RESPONSIVE
     font-size:13px;
   }
 
+  .pathway-main-container{
+    height:100vh;
+    min-height:100dvh;
+    overflow-y:auto;
+    overflow-x:hidden;
+  }
+
   .pathway-cards-row{
     position:static;
 
@@ -586,17 +623,71 @@ RESPONSIVE
 
     margin-top:220px;
 
+    padding:0 20px 30px;
+
     flex-direction:column;
+
+    width:100%;
+
+    gap:18px;
   }
 
   .pathway-ui-card{
-    width:260px;
+    width:min(260px, 88vw);
     height:300px;
+    flex-shrink:0;
   }
+
+  .pathway-back-btn{
+    top:15px;
+    left:15px;
+
+    padding:9px 20px;
+
+    font-size:14px;
+  }
+
 }
 
+/* =========================
+SMALL MOBILE
+========================= */
 
+@media(max-width:400px){
 
+  .pathway-title-wrapper{
+    top:65px;
+    width:92%;
+  }
+
+  .pathway-main-title{
+    font-size:20px;
+  }
+
+  .pathway-main-subtitle{
+    font-size:12px;
+    margin-top:7px;
+  }
+
+  .pathway-cards-row{
+    margin-top:205px;
+    padding-left:12px;
+    padding-right:12px;
+    gap:15px;
+  }
+
+  .pathway-ui-card{
+    width:90vw;
+    max-width:260px;
+    height:285px;
+  }
+
+  .pathway-back-btn{
+    padding:8px 17px;
+    font-size:13px;
+  }
+
+}
 
 
 
@@ -632,6 +723,7 @@ body,
 
 .tp-back-btn {
   position: absolute;
+
   top: 20px;
   left: 20px;
 
@@ -742,561 +834,1646 @@ body,
   line-height: 1.1;
 }
 
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1100px) {
+
+  .tp-topic-container {
+    width: 42%;
+    height: 32%;
+  }
+
+}
+
+
 /* =========================
    MOBILE
 ========================= */
 
 @media (max-width: 768px) {
 
+  .tp-page {
+    width: 100%;
+    height: 100dvh;
+
+    min-height: 100dvh;
+
+    overflow: hidden;
+  }
+
+  .tp-image-wrapper {
+    width: 100%;
+    height: 100dvh;
+
+    overflow: hidden;
+  }
+
+  /*
+     IMPORTANT:
+     Mobile par contain ki wajah se
+     background beech mein chhoti ho rahi thi.
+     Cover se illustration poori screen ko fill karegi.
+  */
+
+  .tp-bg-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  /* -------------------------
+     TOPICS
+  ------------------------- */
+
   .tp-topic-container {
-    width: 44%;
-    height: 30%;
+
+    /*
+      Topics ko image ke andar
+      center area mein rakha hai.
+    */
+
+    left: 50%;
+    top: 55%;
+
+    transform: translate(-50%, -50%);
+
+    width: 62%;
+    height: 31%;
+
+    justify-content: space-between;
   }
 
   .tp-topic-number {
+
     width: 32px;
     height: 32px;
+
     font-size: 15px;
   }
 
   .tp-topic-title {
+
     font-size: 13px;
+
     margin-left: 10px;
+
+    white-space: nowrap;
   }
 
   .tp-back-btn {
+
+    top: 15px;
+    left: 15px;
+
     padding: 10px 18px;
+
     font-size: 14px;
   }
 }
 
 
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+  .tp-bg-image {
+
+    object-position: center center;
+  }
+
+  .tp-topic-container {
+
+    /*
+      Thoda wider + slightly shorter
+      so all 4 topics stay inside
+      the illustrated area.
+    */
+
+    width: 68%;
+    height: 29%;
+
+    top: 55%;
+  }
+
+  .tp-topic-number {
+
+    width: 29px;
+    height: 29px;
+
+    font-size: 13px;
+  }
+
+  .tp-topic-title {
+
+    font-size: 12px;
+
+    margin-left: 8px;
+  }
+
+  .tp-back-btn {
+
+    top: 12px;
+    left: 12px;
+
+    padding: 8px 15px;
+
+    font-size: 13px;
+  }
+
+}
+
+
+/* =========================
+   VERY SMALL PHONES
+========================= */
+
+@media (max-width: 350px) {
+
+  .tp-topic-container {
+
+    width: 72%;
+    height: 28%;
+
+    top: 55%;
+  }
+
+  .tp-topic-number {
+
+    width: 27px;
+    height: 27px;
+
+    font-size: 12px;
+  }
+
+  .tp-topic-title {
+
+    font-size: 11px;
+
+    margin-left: 7px;
+  }
+
+}
 
 
 
 
-
-/*subtopic*/
+/* =====================================================
+   SUBTOPIC PAGE
+===================================================== */
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 .subtopic-page{
 
-width:100vw;
-height:100vh;
+  width:100vw;
+  height:100vh;
 
-position:relative;
+  position:relative;
 
-overflow:hidden;
+  overflow:hidden;
 
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
 
-font-family:Poppins,sans-serif;
-
+  font-family:Poppins,sans-serif;
 }
 
-/* Overlay */
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
 .overlay{
-position:absolute;
-inset:0;
-background:rgba(0,0,0,.60);
-z-index:1;
+
+  position:absolute;
+  inset:0;
+
+  background:rgba(0,0,0,.60);
+
+  z-index:1;
 }
 
-/* Back */
+
+/* =====================================================
+   BACK
+===================================================== */
 
 .sb-back-btn{
 
-position:absolute;
+  position:absolute;
 
-top:20px;
-left:20px;
+  top:20px;
+  left:20px;
 
-z-index:100;
+  z-index:100;
 
-border:none;
+  border:none;
 
-padding:12px 24px;
+  padding:12px 24px;
 
-border-radius:30px;
+  border-radius:30px;
 
-background:#f6a623;
+  background:#f6a623;
 
-color:white;
+  color:white;
 
-font-size:18px;
+  font-size:18px;
 
-font-weight:700;
+  font-weight:700;
 
-cursor:pointer;
+  cursor:pointer;
 
-box-shadow:0 5px 15px rgba(0,0,0,.2);
-
+  box-shadow:0 5px 15px rgba(0,0,0,.2);
 }
 
-/* Title */
+
+/* =====================================================
+   TITLE
+===================================================== */
 
 .page-title{
 
-position:absolute;
+  position:absolute;
 
-top:20px;
+  top:20px;
+  left:50%;
 
-left:50%;
+  transform:translateX(-50%);
 
-transform:translateX(-50%);
+  z-index:100;
 
-z-index:100;
+  font-size:55px;
 
-font-size:55px;
+  font-weight:900;
 
-font-weight:900;
+  color:white;
 
-color:white;
-
-text-shadow:
-3px 3px 0 #2b542c,
-6px 6px 15px rgba(0,0,0,.5);
-
+  text-shadow:
+  3px 3px 0 #2b542c,
+  6px 6px 15px rgba(0,0,0,.5);
 }
 
-/* Teacher */
+
+/* =====================================================
+   TEACHER
+===================================================== */
 
 .teacher{
-position:absolute;
-left:20px;
-bottom:0;
-width:250px;
-z-index:40;
-animation:teacherFloat 3s infinite ease-in-out;
+
+  position:absolute;
+
+  left:20px;
+  bottom:0;
+
+  width:250px;
+
+  z-index:40;
+
+  animation:teacherFloat 3s infinite ease-in-out;
 }
+
 
 @keyframes teacherFloat{
 
-0%{
-transform:translateY(0);
+  0%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-8px);
+  }
+
+  100%{
+    transform:translateY(0);
+  }
+
 }
 
-50%{
-transform:translateY(-8px);
-}
 
-100%{
-transform:translateY(0);
-}
-
-}
-
-/* Start */
+/* =====================================================
+   START
+===================================================== */
 
 .start-img{
-position:absolute;
-left:190px;
-bottom:95px;
-width:150px;
-z-index:60;
+
+  position:absolute;
+
+  left:190px;
+  bottom:95px;
+
+  width:150px;
+
+  z-index:60;
 }
 
 
-/* Road */
+/* =====================================================
+   ROAD
+===================================================== */
 
 .road{
-position:absolute;
-left:0;
-top:0;
-width:100%;
-height:100%;
-z-index:5;
+
+  position:absolute;
+
+  left:0;
+  top:0;
+
+  width:100%;
+  height:100%;
+
+  z-index:5;
 }
 
 .road path{
-fill:none;
-stroke:#7CFF58;
-stroke-width:20;
-stroke-linecap:round;
-stroke-linejoin:round;
 
-filter:
-drop-shadow(0 0 10px rgba(124,255,88,.8))
-drop-shadow(0 0 20px rgba(124,255,88,.5));
+  fill:none;
+
+  stroke:#7CFF58;
+
+  stroke-width:20;
+
+  stroke-linecap:round;
+  stroke-linejoin:round;
+
+  filter:
+  drop-shadow(0 0 10px rgba(124,255,88,.8))
+  drop-shadow(0 0 20px rgba(124,255,88,.5));
 }
 
 
-/* Huts */
+/* =====================================================
+   HUTS
+===================================================== */
+
 .hut{
-position:absolute;
-z-index:70;
-cursor:pointer;
-text-align:center;
-transition:.3s;
+
+  position:absolute;
+
+  z-index:70;
+
+  cursor:pointer;
+
+  text-align:center;
+
+  transition:.3s;
 }
 
 .hut:hover{
-transform:scale(1.05);
+
+  transform:scale(1.05);
 }
 
 .hut img{
-width:150px;
-display:block;
-margin:auto;
-animation:hutFloat 3s infinite ease-in-out;
+
+  width:150px;
+
+  display:block;
+
+  margin:auto;
+
+  animation:hutFloat 3s infinite ease-in-out;
 }
+
+
 @keyframes hutFloat{
 
-0%{
-transform:translateY(0);
+  0%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-8px);
+  }
+
+  100%{
+    transform:translateY(0);
+  }
+
 }
 
-50%{
-transform:translateY(-8px);
-}
 
-100%{
-transform:translateY(0);
-}
+/* =====================================================
+   LEVEL
+===================================================== */
 
-}
-
-/* Level */
 .level{
-position:absolute;
-top:-10px;
-left:50%;
-transform:translateX(-50%);
-width:42px;
-height:42px;
-border-radius:50%;
-background:#ffd93d;
-border:4px solid white;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:20px;
-font-weight:800;
-z-index:100;
+
+  position:absolute;
+
+  top:-10px;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  width:42px;
+  height:42px;
+
+  border-radius:50%;
+
+  background:#ffd93d;
+
+  border:4px solid white;
+
+  display:flex;
+
+  justify-content:center;
+  align-items:center;
+
+  font-size:20px;
+
+  font-weight:800;
+
+  z-index:100;
 }
 
-/* Cards */
+
+/* =====================================================
+   CARDS
+===================================================== */
 
 .card{
-width:210px;
-padding:14px;
-background:white;
-border-radius:18px;
-font-size:15px;
-font-weight:700;
-line-height:22px;
-box-shadow:0 8px 20px rgba(0,0,0,.25);
-margin-top:-10px;
-transition:.3s;
+
+  width:210px;
+
+  padding:14px;
+
+  background:white;
+
+  border-radius:18px;
+
+  font-size:15px;
+
+  font-weight:700;
+
+  line-height:22px;
+
+  box-shadow:0 8px 20px rgba(0,0,0,.25);
+
+  margin-top:-10px;
+
+  transition:.3s;
 }
 
 .hut:hover .card{
 
-transform:translateY(-5px);
+  transform:translateY(-5px);
 
 }
 
-/* Positions */
+
+/* =====================================================
+   DESKTOP POSITIONS
+===================================================== */
 
 .hut1{
-left:300px;
-bottom:70px;
+
+  left:300px;
+  bottom:70px;
 }
 
 .hut2{
-left:560px;
-bottom:270px;
+
+  left:560px;
+  bottom:270px;
 }
 
 .hut3{
-left:950px;
-bottom:240px;
+
+  left:950px;
+  bottom:240px;
 }
 
 .hut4{
-right:90px;
-top:170px;
+
+  right:90px;
+  top:170px;
 }
 
-/* Mobile */
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:768px){
 
-.page-title{
-font-size:28px;
-width:90%;
-text-align:center;
+  .subtopic-page{
+
+    width:100%;
+    height:100dvh;
+
+    min-height:100dvh;
+
+    overflow:hidden;
+
+    background-position:center center;
+  }
+
+
+  /* -------------------------
+     TITLE
+  ------------------------- */
+
+  .page-title{
+
+    top:18px;
+
+    width:75%;
+
+    font-size:28px;
+
+    line-height:1.1;
+
+    text-align:center;
+  }
+
+
+  /* -------------------------
+     BACK BUTTON
+  ------------------------- */
+
+  .sb-back-btn{
+
+    top:14px;
+    left:14px;
+
+    padding:9px 17px;
+
+    font-size:14px;
+  }
+
+
+  /* -------------------------
+     TEACHER
+  ------------------------- */
+
+  .teacher{
+
+    width:150px;
+
+    left:0;
+
+    bottom:0;
+  }
+
+
+  /* -------------------------
+     START IMAGE
+  ------------------------- */
+
+  .start-img{
+
+    width:90px;
+
+    left:115px;
+
+    bottom:75px;
+  }
+
+
+  /* -------------------------
+     HUT IMAGES
+  ------------------------- */
+
+  .hut img{
+
+    width:85px;
+  }
+
+
+  /* -------------------------
+     HUT CARDS
+  ------------------------- */
+
+  .card{
+
+    width:130px;
+
+    padding:9px;
+
+    font-size:11px;
+
+    line-height:15px;
+
+    border-radius:12px;
+
+    margin-top:-5px;
+  }
+
+
+  /* -------------------------
+     LEVEL
+  ------------------------- */
+
+  .level{
+
+    width:27px;
+    height:27px;
+
+    font-size:13px;
+
+    border-width:3px;
+
+    top:-7px;
+  }
+
+
+  /* =================================================
+     MOBILE HUT POSITIONS
+
+     IMPORTANT:
+     All positions are now based on
+     viewport percentages instead of
+     desktop pixel values.
+  ================================================= */
+
+
+  /* HUT 1 — lower left */
+
+  .hut1{
+
+    left:24%;
+
+    bottom:12%;
+  }
+
+
+  /* HUT 2 — middle left */
+
+  .hut2{
+
+    left:8%;
+
+    bottom:38%;
+  }
+
+
+  /* HUT 3 — middle/right */
+
+  .hut3{
+
+    right:8%;
+
+    left:auto;
+
+    bottom:40%;
+  }
+
+
+  /* HUT 4 — upper right */
+
+  .hut4{
+
+    right:8%;
+
+    top:20%;
+  }
+
+
+  /* -------------------------
+     ROAD
+  ------------------------- */
+
+  .road{
+
+    width:100%;
+    height:100%;
+
+    pointer-events:none;
+  }
+
+  .road path{
+
+    stroke-width:10;
+  }
+
 }
 
-.teacher{
-width:220px;
-left:0;
-bottom:0;
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media(max-width:400px){
+
+  .page-title{
+
+    top:16px;
+
+    width:72%;
+
+    font-size:23px;
+  }
+
+
+  .sb-back-btn{
+
+    top:11px;
+    left:11px;
+
+    padding:8px 14px;
+
+    font-size:13px;
+  }
+
+
+  /* -------------------------
+     TEACHER
+  ------------------------- */
+
+  .teacher{
+
+    width:125px;
+
+    left:-3px;
+
+    bottom:0;
+  }
+
+
+  /* -------------------------
+     START
+  ------------------------- */
+
+  .start-img{
+
+    width:75px;
+
+    left:95px;
+
+    bottom:62px;
+  }
+
+
+  /* -------------------------
+     HUTS
+  ------------------------- */
+
+  .hut img{
+
+    width:72px;
+  }
+
+
+  .card{
+
+    width:115px;
+
+    padding:8px;
+
+    font-size:10px;
+
+    line-height:14px;
+
+    border-radius:11px;
+  }
+
+
+  .level{
+
+    width:24px;
+    height:24px;
+
+    font-size:12px;
+
+    border-width:2px;
+  }
+
+
+  /* -------------------------
+     SMALL PHONE POSITIONS
+  ------------------------- */
+
+  .hut1{
+
+    left:22%;
+
+    bottom:10%;
+  }
+
+
+  .hut2{
+
+    left:4%;
+
+    bottom:37%;
+  }
+
+
+  .hut3{
+
+    right:4%;
+
+    bottom:39%;
+
+    left:auto;
+  }
+
+
+  .hut4{
+
+    right:4%;
+
+    top:19%;
+  }
+
+
+  .road path{
+
+    stroke-width:8;
+  }
+
 }
 
-.start-img{
-width:120px;
-left:140px;
-bottom:90px;
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media(max-width:350px){
+
+  .page-title{
+
+    font-size:21px;
+
+    width:70%;
+  }
+
+
+  .teacher{
+
+    width:110px;
+  }
+
+
+  .start-img{
+
+    width:68px;
+
+    left:85px;
+
+    bottom:58px;
+  }
+
+
+  .hut img{
+
+    width:65px;
+  }
+
+
+  .card{
+
+    width:105px;
+
+    font-size:9px;
+
+    line-height:13px;
+
+    padding:7px;
+  }
+
+
+  .level{
+
+    width:22px;
+    height:22px;
+
+    font-size:11px;
+  }
+
+
+  .hut1{
+
+    left:20%;
+
+    bottom:9%;
+  }
+
+
+  .hut2{
+
+    left:3%;
+
+    bottom:36%;
+  }
+
+
+  .hut3{
+
+    right:3%;
+
+    bottom:38%;
+  }
+
+
+  .hut4{
+
+    right:3%;
+
+    top:18%;
+  }
+
 }
 
-.hut img{
-width:120px;
-}
-
-.hut1{
-left:180px;
-bottom:80px;
-}
-
-.hut2{
-left:360px;
-bottom:250px;
-}
-
-.hut3{
-left:610px;
-bottom:230px;
-}
-
-.hut4{
-right:20px;
-top:140px;
-}
-
-.card{
-width:180px;
-font-size:14px;
-}
-
-.level{
-width:30px;
-height:30px;
-font-size:14px;
-}
-
-.road path{
-stroke-width:12;
-}
-
-}
 
 
 
-
-
-/*chatpage*/
-
+/* =====================================================
+   CHAT PAGE
+===================================================== */
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
+
+/* =====================================================
+   CHAT PAGE
+===================================================== */
 
 .chat-page{
-width:100vw;
-height:100vh;
-position:relative;
-overflow:hidden;
-display:flex;
-justify-content:center;
-align-items:center;
+  width:100vw;
+  height:100vh;
 
-background:url("./assets/chatbg.jpeg");
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
+  position:relative;
 
+  overflow:hidden;
 
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:url("./assets/chatbg.jpeg");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
 }
 
 
-
-
-
+/* =====================================================
+   OVERLAY
+===================================================== */
 
 .chat-overlay{
-position:absolute;
-inset:0;
-background:rgba(0,0,0,.25);
-backdrop-filter:blur(8px);
-z-index:1;
+  position:absolute;
+  inset:0;
+
+  background:rgba(0,0,0,.25);
+
+  backdrop-filter:blur(8px);
+
+  z-index:1;
 }
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
 
 .chat-back{
-position:absolute;
-top:20px;
-left:20px;
-z-index:100;
-border:none;
-padding:12px 24px;
-border-radius:30px;
-background:#f6a623;
-color:white;
-font-size:16px;
-font-weight:700;
-cursor:pointer;
+  position:absolute;
+
+  top:20px;
+  left:20px;
+
+  z-index:100;
+
+  border:none;
+
+  padding:12px 24px;
+
+  border-radius:30px;
+
+  background:#f6a623;
+
+  color:white;
+
+  font-size:16px;
+
+  font-weight:700;
+
+  cursor:pointer;
 }
+
+
+/* =====================================================
+   CHAT CARD
+===================================================== */
 
 .chat-card{
-position:relative;
-z-index:10;
-width:800px;
-max-width:92%;
-background:rgba(255,255,255,.95);
-border-radius:35px;
-padding:40px;
-text-align:center;
-box-shadow:0 15px 40px rgba(0,0,0,.25);
-/* YE ADD KARO */
-position:absolute;
-left:50%;
-top:50%;
-transform:translate(-50%,-50%);
+  position:absolute;
 
+  z-index:10;
+
+  width:800px;
+  max-width:92%;
+
+  background:rgba(255,255,255,.95);
+
+  border-radius:35px;
+
+  padding:40px;
+
+  text-align:center;
+
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
+
+  left:50%;
+  top:50%;
+
+  transform:translate(-50%,-50%);
 }
+
+
+/* =====================================================
+   TITLE
+===================================================== */
 
 .mic-title{
-font-size:42px;
-font-weight:800;
-color:#111;
-margin-bottom:25px;
+  font-size:42px;
+
+  font-weight:800;
+
+  color:#111;
+
+  margin-bottom:25px;
 }
+
+
+/* =====================================================
+   TEACHER
+===================================================== */
 
 .teacher-img-large{
-width:220px;
-display:block;
-margin:auto;
-animation:teacherFloat 3s infinite ease-in-out;
+  width:220px;
+
+  display:block;
+
+  margin:auto;
+
+  animation:teacherFloat 3s infinite ease-in-out;
 }
+
+
+/* =====================================================
+   HELLO
+===================================================== */
 
 .hello-text{
-font-size:48px;
-font-weight:800;
-color:#2563eb;
-margin-top:20px;
+  font-size:48px;
+
+  font-weight:800;
+
+  color:#2563eb;
+
+  margin-top:20px;
 }
+
+
+/* =====================================================
+   SPEAK TEXT
+===================================================== */
 
 .speak-text{
-font-size:22px;
-color:#555;
-margin-top:10px;
-margin-bottom:25px;
+  font-size:22px;
+
+  color:#555;
+
+  margin-top:10px;
+
+  margin-bottom:25px;
 }
+
+
+/* =====================================================
+   VOICE LINE
+===================================================== */
 
 .voice-line{
-width:250px;
-height:10px;
-margin:20px auto;
-border-radius:20px;
-background:linear-gradient(
-90deg,
-#22c55e,
-#86efac,
-#22c55e
-);
-animation:voiceLine 1.5s infinite;
+  width:250px;
+  height:10px;
+
+  margin:20px auto;
+
+  border-radius:20px;
+
+  background:linear-gradient(
+    90deg,
+    #22c55e,
+    #86efac,
+    #22c55e
+  );
+
+  animation:voiceLine 1.5s infinite;
 }
+
+
+/* =====================================================
+   CALL BUTTON
+===================================================== */
 
 .call-btn{
-border:none;
-padding:18px 55px;
-border-radius:20px;
-font-size:24px;
-font-weight:700;
-cursor:pointer;
-color:white;
-background:linear-gradient(
-90deg,
-#00c853,
-#2196f3
-);
+  border:none;
+
+  padding:18px 55px;
+
+  border-radius:20px;
+
+  font-size:24px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  color:white;
+
+  background:linear-gradient(
+    90deg,
+    #00c853,
+    #2196f3
+  );
 }
 
-/* CALLING SCREEN */
+
+/* =====================================================
+   CALLING SCREEN
+===================================================== */
 
 .calling-screen{
-position:absolute;
-top:50%;
-left:50%;
+  position:absolute;
 
-transform:translate(-50%,-50%);
+  top:50%;
+  left:50%;
 
-z-index:10;
+  transform:translate(-50%,-50%);
 
-width:900px;
-max-width:92%;
+  z-index:10;
 
-background:white;
+  width:900px;
+  max-width:92%;
 
-border-radius:40px;
-padding:60px;
+  background:white;
 
-text-align:center;
+  border-radius:40px;
 
-box-shadow:0 20px 50px rgba(0,0,0,.25);
+  padding:60px;
+
+  text-align:center;
+
+  box-shadow:0 20px 50px rgba(0,0,0,.25);
 }
 
 
 .calling-teacher{
-width:220px;
-animation:teacherFloat 2s infinite;
+  width:220px;
+
+  animation:teacherFloat 2s infinite;
 }
 
+
 .calling-title{
-font-size:48px;
-font-weight:800;
-color:#2563eb;
-margin-top:25px;
+  font-size:48px;
+
+  font-weight:800;
+
+  color:#2563eb;
+
+  margin-top:25px;
 }
+
+
+/* =====================================================
+   TEACHER ANIMATION
+===================================================== */
 
 @keyframes teacherFloat{
 
-0%{
-transform:translateY(0);
+  0%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-10px);
+  }
+
+  100%{
+    transform:translateY(0);
+  }
+
 }
 
-50%{
-transform:translateY(-10px);
-}
 
-100%{
-transform:translateY(0);
-}
-
-}
+/* =====================================================
+   VOICE ANIMATION
+===================================================== */
 
 @keyframes voiceLine{
 
-0%{
-transform:scaleX(.7);
-opacity:.5;
+  0%{
+    transform:scaleX(.7);
+    opacity:.5;
+  }
+
+  50%{
+    transform:scaleX(1);
+    opacity:1;
+  }
+
+  100%{
+    transform:scaleX(.7);
+    opacity:.5;
+  }
+
 }
 
-50%{
-transform:scaleX(1);
-opacity:1;
+
+/* =====================================================
+   MOBILE RESPONSIVE
+===================================================== */
+
+@media(max-width:768px){
+
+  /* -------------------------
+     PAGE
+  ------------------------- */
+
+  .chat-page{
+
+    width:100%;
+
+    height:100dvh;
+
+    min-height:100dvh;
+
+    overflow:hidden;
+  }
+
+
+  /* -------------------------
+     BACK BUTTON
+  ------------------------- */
+
+  .chat-back{
+
+    top:14px;
+    left:14px;
+
+    padding:9px 17px;
+
+    font-size:14px;
+
+    border-radius:25px;
+  }
+
+
+  /* -------------------------
+     MAIN CHAT CARD
+  ------------------------- */
+
+  .chat-card{
+
+    width:92%;
+
+    max-width:92%;
+
+    max-height:calc(100dvh - 100px);
+
+    padding:24px 18px;
+
+    border-radius:25px;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+  }
+
+
+  /* -------------------------
+     TITLE
+  ------------------------- */
+
+  .mic-title{
+
+    font-size:28px;
+
+    line-height:1.2;
+
+    margin-bottom:14px;
+  }
+
+
+  /* -------------------------
+     TEACHER
+  ------------------------- */
+
+  .teacher-img-large{
+
+    width:150px;
+
+    max-width:60vw;
+  }
+
+
+  /* -------------------------
+     HELLO
+  ------------------------- */
+
+  .hello-text{
+
+    font-size:34px;
+
+    line-height:1.1;
+
+    margin-top:12px;
+  }
+
+
+  /* -------------------------
+     SPEAK TEXT
+  ------------------------- */
+
+  .speak-text{
+
+    font-size:16px;
+
+    line-height:1.4;
+
+    margin-top:8px;
+
+    margin-bottom:16px;
+
+    padding:0 5px;
+  }
+
+
+  /* -------------------------
+     VOICE LINE
+  ------------------------- */
+
+  .voice-line{
+
+    width:180px;
+
+    max-width:70%;
+
+    height:8px;
+
+    margin:14px auto;
+  }
+
+
+  /* -------------------------
+     CALL BUTTON
+  ------------------------- */
+
+  .call-btn{
+
+    padding:14px 32px;
+
+    font-size:18px;
+
+    border-radius:16px;
+
+    width:auto;
+
+    max-width:90%;
+  }
+
+
+  /* =================================================
+     CALLING SCREEN
+  ================================================= */
+
+  .calling-screen{
+
+    width:92%;
+
+    max-width:92%;
+
+    max-height:calc(100dvh - 100px);
+
+    padding:28px 18px;
+
+    border-radius:28px;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+  }
+
+
+  .calling-teacher{
+
+    width:150px;
+
+    max-width:60vw;
+  }
+
+
+  .calling-title{
+
+    font-size:32px;
+
+    line-height:1.15;
+
+    margin-top:15px;
+  }
+
 }
 
-100%{
-transform:scaleX(.7);
-opacity:.5;
-}
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media(max-width:400px){
+
+  .chat-back{
+
+    top:11px;
+    left:11px;
+
+    padding:8px 14px;
+
+    font-size:13px;
+  }
+
+
+  .chat-card{
+
+    width:94%;
+
+    max-width:94%;
+
+    max-height:calc(100dvh - 85px);
+
+    padding:20px 14px;
+
+    border-radius:22px;
+  }
+
+
+  .mic-title{
+
+    font-size:24px;
+
+    margin-bottom:10px;
+  }
+
+
+  .teacher-img-large{
+
+    width:125px;
+  }
+
+
+  .hello-text{
+
+    font-size:30px;
+
+    margin-top:9px;
+  }
+
+
+  .speak-text{
+
+    font-size:14px;
+
+    margin-bottom:12px;
+  }
+
+
+  .voice-line{
+
+    width:150px;
+
+    height:7px;
+
+    margin:11px auto;
+  }
+
+
+  .call-btn{
+
+    padding:12px 26px;
+
+    font-size:16px;
+
+    border-radius:14px;
+  }
+
+
+  /* -------------------------
+     CALLING
+  ------------------------- */
+
+  .calling-screen{
+
+    width:94%;
+
+    max-width:94%;
+
+    max-height:calc(100dvh - 85px);
+
+    padding:22px 14px;
+
+    border-radius:24px;
+  }
+
+
+  .calling-teacher{
+
+    width:125px;
+  }
+
+
+  .calling-title{
+
+    font-size:27px;
+
+    margin-top:12px;
+  }
 
 }
 
 
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
 
+@media(max-width:350px){
+
+  .chat-card{
+
+    padding:18px 12px;
+  }
+
+
+  .mic-title{
+
+    font-size:22px;
+  }
+
+
+  .teacher-img-large{
+
+    width:110px;
+  }
+
+
+  .hello-text{
+
+    font-size:27px;
+  }
+
+
+  .speak-text{
+
+    font-size:13px;
+  }
+
+
+  .call-btn{
+
+    padding:11px 22px;
+
+    font-size:15px;
+  }
+
+
+  .calling-screen{
+
+    padding:20px 12px;
+  }
+
+
+  .calling-teacher{
+
+    width:110px;
+  }
+
+
+  .calling-title{
+
+    font-size:24px;
+  }
+
+}
 
 
 /* INTRO SCREEN */
@@ -1424,7 +2601,6 @@ object-fit:contain;
 width:220px;
 object-fit:contain;
 }
-
 
 
 /* ===================================
@@ -1559,7 +2735,7 @@ object-fit:contain;
 
 
 /* ===================================
-   RESPONSIVE
+   TABLET
 =================================== */
 
 @media (max-width: 768px) {
@@ -1570,6 +2746,8 @@ object-fit:contain;
 
         height: 220px;
 
+        max-width: 650px;
+
     }
 
 
@@ -1577,12 +2755,73 @@ object-fit:contain;
 
         font-size: 34px;
 
+        line-height: 1.15;
+
+        padding: 0 20px;
+
     }
 
 }
 
 
+/* ===================================
+   SMALL MOBILE
+=================================== */
 
+@media (max-width: 400px) {
+
+    .vocab-intro-popup {
+
+        width: 90%;
+
+        height: 190px;
+
+    }
+
+
+    .vocab-intro-popup h1 {
+
+        font-size: 27px;
+
+        line-height: 1.15;
+
+        letter-spacing: 1px;
+
+        padding: 0 18px;
+
+    }
+
+}
+
+
+/* ===================================
+   VERY SMALL MOBILE
+=================================== */
+
+@media (max-width: 350px) {
+
+    .vocab-intro-popup {
+
+        width: 92%;
+
+        height: 165px;
+
+    }
+
+
+    .vocab-intro-popup h1 {
+
+        font-size: 23px;
+
+        line-height: 1.15;
+
+        letter-spacing: .5px;
+
+        padding: 0 15px;
+
+    }
+
+}
 /* =====================================================
    QUESTION / VOCABULARY ACTIVITY
    WARM WOODEN THEME
@@ -1652,10 +2891,14 @@ object-fit:contain;
     overflow:hidden;
 
     border-radius:42px;
-  background-image: url("./assets/ai-waiter-card.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+
+    background-image:url("./assets/ai-waiter-card.png");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
 
     border:3px solid #d4a45f;
 
@@ -1719,7 +2962,7 @@ object-fit:contain;
 
 
 /* =====================================================
-   BACK BUTTON
+   BACK + SKIP BUTTON
 ===================================================== */
 
 .qv-back-btn,
@@ -1742,6 +2985,7 @@ object-fit:contain;
     cursor:pointer;
 
     box-shadow:
+
         0 6px 15px rgba(91,65,20,.28);
 
     transition:.25s ease;
@@ -1801,6 +3045,7 @@ object-fit:contain;
     border:2px solid #dca95b;
 
     box-shadow:
+
         0 5px 12px rgba(126,80,20,.15);
 
 }
@@ -1924,15 +3169,21 @@ object-fit:contain;
 @keyframes qvTeacherHappy{
 
     0%{
+
         transform:scale(1);
+
     }
 
     50%{
+
         transform:scale(1.08) rotate(-2deg);
+
     }
 
     100%{
+
         transform:scale(1);
+
     }
 
 }
@@ -1989,8 +3240,6 @@ object-fit:contain;
 }
 
 
-/* bubble tail */
-
 .qv-teacher-bubble::after{
 
     content:"";
@@ -2045,6 +3294,7 @@ object-fit:contain;
     color:#513018;
 
     box-shadow:
+
         0 7px 15px rgba(75,48,20,.2);
 
 }
@@ -2450,7 +3700,9 @@ object-fit:contain;
 
     border:3px solid #e4bd7b;
 
-    box-shadow:0 10px 25px rgba(80,50,20,.18);
+    box-shadow:
+
+        0 10px 25px rgba(80,50,20,.18);
 
 }
 
@@ -2515,6 +3767,7 @@ object-fit:contain;
     cursor:pointer;
 
     box-shadow:
+
         0 8px 20px rgba(87,65,22,.3);
 
     transition:.25s;
@@ -2748,38 +4001,56 @@ object-fit:contain;
 
 
 .qv-red{
+
     left:8%;
+
     background:#e45757;
+
 }
 
 
 .qv-blue{
+
     left:24%;
+
     background:#5c91d9;
+
 }
 
 
 .qv-yellow{
+
     left:40%;
+
     background:#f4c84c;
+
 }
 
 
 .qv-green{
+
     left:56%;
+
     background:#68a94c;
+
 }
 
 
 .qv-pink{
+
     left:72%;
+
     background:#e77ca9;
+
 }
 
 
 .qv-purple{
+
     left:88%;
+
     background:#9a72c4;
+
 }
 
 
@@ -2809,10 +4080,10 @@ object-fit:contain;
 
 
 /* =====================================================
-   RESPONSIVE
+   TABLET
 ===================================================== */
 
-@media(max-width:1100px){
+@media (max-width:1100px){
 
     .qv-main-card{
 
@@ -2880,43 +4151,164 @@ object-fit:contain;
 }
 
 
-@media(max-width:800px){
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width:800px){
+
+    .qv-page{
+
+        width:100%;
+
+        height:100dvh;
+
+        min-height:100dvh;
+
+        padding:8px;
+
+        overflow:hidden;
+
+    }
+
 
     .qv-main-card{
 
-        height:94vh;
+        width:96%;
+
+        height:94dvh;
+
+        max-height:94dvh;
+
+        padding:14px;
+
+        border-radius:28px;
 
         overflow-y:auto;
 
+        overflow-x:hidden;
+
+        -webkit-overflow-scrolling:touch;
+
     }
 
+
+    .qv-main-card::before{
+
+        inset:7px;
+
+        border-radius:22px;
+
+    }
+
+
+    /* =================================================
+       HEADER
+    ================================================= */
+
+    .qv-header{
+
+        width:100%;
+
+        display:grid;
+
+        grid-template-columns:auto 1fr auto;
+
+        align-items:start;
+
+        gap:8px;
+
+    }
+
+
+    .qv-back-btn,
+    .qv-skip-btn{
+
+        padding:8px 13px;
+
+        font-size:13px;
+
+        border-radius:22px;
+
+        white-space:nowrap;
+
+    }
+
+
+    .qv-progress-area{
+
+        width:100%;
+
+        min-width:0;
+
+        gap:5px;
+
+    }
+
+
+    .qv-question-count{
+
+        font-size:17px;
+
+        padding:5px 12px;
+
+        border-radius:12px;
+
+        white-space:nowrap;
+
+    }
+
+
+    .qv-progress-bar{
+
+        width:90%;
+
+        max-width:180px;
+
+        height:8px;
+
+    }
+
+
+    /* =================================================
+       CONTENT
+    ================================================= */
 
     .qv-content{
 
+        width:100%;
+
         flex-direction:column;
+
+        gap:15px;
+
+        padding:15px 0 30px;
 
     }
 
+
+    /* =================================================
+       TEACHER
+    ================================================= */
 
     .qv-teacher-section{
 
         width:100%;
 
-        min-height:350px;
+        height:auto;
 
-    }
+        min-height:250px;
 
-
-    .qv-activity{
-
-        width:100%;
+        flex-shrink:0;
 
     }
 
 
     .qv-teacher-img{
 
-        width:210px;
+        width:190px;
+
+        max-height:300px;
 
     }
 
@@ -2925,45 +4317,1058 @@ object-fit:contain;
 
         top:0;
 
-        right:5%;
+        right:3%;
+
+        width:175px;
+
+        min-height:75px;
+
+        padding:15px 16px;
+
+        font-size:14px;
+
+        line-height:1.3;
 
     }
 
 
+    .qv-teacher-bubble::after{
+
+        width:25px;
+
+        height:25px;
+
+        bottom:-15px;
+
+        left:35px;
+
+    }
+
+
+    .qv-teacher-name{
+
+        margin-top:-8px;
+
+        padding:8px 22px;
+
+        font-size:17px;
+
+        border-radius:14px;
+
+    }
+
+
+    /* =================================================
+       ACTIVITY
+    ================================================= */
+
+    .qv-activity{
+
+        width:100%;
+
+        flex-shrink:0;
+
+    }
+
+
+    /* =================================================
+       QUESTION PANEL
+    ================================================= */
+
+    .qv-question-panel{
+
+        width:96%;
+
+        min-height:115px;
+
+        padding:16px 18px;
+
+        border-radius:20px;
+
+    }
+
+
+    .qv-question-panel::before{
+
+        inset:6px;
+
+        border-radius:14px;
+
+    }
+
+
+    .qv-question-label{
+
+        font-size:16px;
+
+    }
+
+
+    .qv-prompt{
+
+        font-size:28px;
+
+        letter-spacing:1px;
+
+        line-height:1.15;
+
+    }
+
+
+    .qv-panel-decoration{
+
+        font-size:18px;
+
+        top:5px;
+
+    }
+
+
+    .qv-panel-line{
+
+        font-size:13px;
+
+        bottom:3px;
+
+    }
+
+
+    /* =================================================
+       FOOD OPTIONS
+    ================================================= */
+
     .qv-food-options{
+
+        width:100%;
 
         flex-direction:column;
 
         align-items:center;
 
-    }
+        gap:15px;
 
-
-    .qv-question-count{
-
-        font-size:18px;
-
-        padding:7px 15px;
+        margin-top:16px;
 
     }
 
 
-    .qv-progress-area{
+    .qv-food-card{
 
-        width:200px;
+        width:92%;
+
+        max-width:360px;
+
+        border-radius:22px;
+
+        padding:8px;
 
     }
 
 
-    .qv-progress-bar{
+    .qv-food-image-wrap{
 
-        width:180px;
+        width:100%;
+
+        height:180px;
+
+        border-radius:16px;
+
+    }
+
+
+    .qv-food-name{
+
+        margin-top:8px;
+
+        min-height:48px;
+
+        border-radius:18px;
+
+        gap:10px;
+
+        font-size:20px;
+
+    }
+
+
+    .qv-food-name span{
+
+        font-size:14px;
+
+    }
+
+
+    /* =================================================
+       TIP
+    ================================================= */
+
+    .qv-tip-box{
+
+        width:92%;
+
+        margin-top:15px;
+
+        padding:9px 14px;
+
+        gap:10px;
+
+        font-size:13px;
+
+        text-align:center;
+
+    }
+
+
+    .qv-tip-icon{
+
+        font-size:19px;
+
+    }
+
+
+    .qv-tip-star{
+
+        font-size:17px;
+
+    }
+
+
+    /* =================================================
+       PRACTICE
+    ================================================= */
+
+    .qv-practice-section{
+
+        width:100%;
+
+    }
+
+
+    .qv-practice-title{
+
+        font-size:25px;
+
+        margin-bottom:14px;
+
+        text-align:center;
+
+    }
+
+
+    .qv-practice-card{
+
+        width:94%;
+
+        max-width:400px;
+
+        flex-direction:column;
+
+        align-items:center;
+
+        border-radius:22px;
+
+    }
+
+
+    .qv-practice-image{
+
+        width:100%;
+
+        height:150px;
+
+    }
+
+
+    .qv-practice-word{
+
+        width:100%;
+
+        min-width:0;
+
+        padding:15px;
+
+        font-size:40px;
+
+    }
+
+
+    .qv-practice-text{
+
+        font-size:16px;
+
+        text-align:center;
+
+    }
+
+
+    .qv-mic-btn{
+
+        width:70px;
+
+        height:70px;
+
+        font-size:30px;
+
+    }
+
+
+    /* =================================================
+       WORD BUILDER
+    ================================================= */
+
+    .qv-builder-section{
+
+        width:100%;
+
+    }
+
+
+    .qv-builder-section h2{
+
+        font-size:24px;
+
+        text-align:center;
+
+    }
+
+
+    .qv-blank-word{
+
+        gap:7px;
+
+        margin:14px 0;
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+    }
+
+
+    .qv-blank-box{
+
+        width:45px;
+
+        height:45px;
+
+        border-radius:11px;
+
+        font-size:22px;
+
+    }
+
+
+    .qv-letter-container{
+
+        width:94%;
+
+        max-width:400px;
+
+        gap:8px;
+
+    }
+
+
+    .qv-letter-btn{
+
+        width:48px;
+
+        height:48px;
+
+        border-radius:12px;
+
+        font-size:21px;
+
+    }
+
+
+    .qv-reset-btn{
+
+        margin-top:14px;
+
+        padding:9px 22px;
+
+        font-size:15px;
+
+    }
+
+
+    /* =================================================
+       FEEDBACK
+    ================================================= */
+
+    .qv-feedback{
+
+        bottom:12px;
+
+        width:max-content;
+
+        max-width:85%;
+
+        padding:9px 18px;
+
+        font-size:17px;
+
+        text-align:center;
 
     }
 
 }
 
 
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width:500px){
+
+    .qv-page{
+
+        padding:6px;
+
+    }
+
+
+    .qv-main-card{
+
+        width:98%;
+
+        height:96dvh;
+
+        max-height:96dvh;
+
+        padding:10px;
+
+        border-radius:24px;
+
+    }
+
+
+    .qv-main-card::before{
+
+        inset:6px;
+
+        border-radius:19px;
+
+    }
+
+
+    /* =================================================
+       HEADER
+    ================================================= */
+
+    .qv-header{
+
+        gap:5px;
+
+    }
+
+
+    .qv-back-btn,
+    .qv-skip-btn{
+
+        padding:7px 10px;
+
+        font-size:11px;
+
+    }
+
+
+    .qv-question-count{
+
+        font-size:14px;
+
+        padding:4px 8px;
+
+    }
+
+
+    .qv-progress-bar{
+
+        max-width:130px;
+
+        height:7px;
+
+    }
+
+
+    /* =================================================
+       CONTENT
+    ================================================= */
+
+    .qv-content{
+
+        gap:10px;
+
+        padding-top:10px;
+
+    }
+
+
+    /* =================================================
+       TEACHER
+    ================================================= */
+
+    .qv-teacher-section{
+
+        min-height:220px;
+
+    }
+
+
+    .qv-teacher-img{
+
+        width:155px;
+
+        max-height:240px;
+
+    }
+
+
+    .qv-teacher-bubble{
+
+        width:145px;
+
+        min-height:65px;
+
+        padding:11px 12px;
+
+        font-size:12px;
+
+    }
+
+
+    .qv-teacher-bubble::after{
+
+        width:20px;
+
+        height:20px;
+
+        bottom:-12px;
+
+        left:28px;
+
+    }
+
+
+    .qv-teacher-name{
+
+        padding:6px 17px;
+
+        font-size:14px;
+
+    }
+
+
+    /* =================================================
+       QUESTION
+    ================================================= */
+
+    .qv-question-panel{
+
+        width:98%;
+
+        min-height:100px;
+
+        padding:13px 12px;
+
+    }
+
+
+    .qv-question-label{
+
+        font-size:14px;
+
+    }
+
+
+    .qv-prompt{
+
+        font-size:23px;
+
+    }
+
+
+    .qv-panel-decoration{
+
+        font-size:15px;
+
+    }
+
+
+    .qv-panel-line{
+
+        font-size:11px;
+
+    }
+
+
+    /* =================================================
+       FOOD
+    ================================================= */
+
+    .qv-food-options{
+
+        gap:12px;
+
+        margin-top:12px;
+
+    }
+
+
+    .qv-food-card{
+
+        width:94%;
+
+        max-width:330px;
+
+    }
+
+
+    .qv-food-image-wrap{
+
+        height:145px;
+
+    }
+
+
+    .qv-food-name{
+
+        min-height:43px;
+
+        font-size:18px;
+
+    }
+
+
+    .qv-food-name span{
+
+        font-size:12px;
+
+    }
+
+
+    /* =================================================
+       TIP
+    ================================================= */
+
+    .qv-tip-box{
+
+        width:96%;
+
+        font-size:11px;
+
+        padding:8px 10px;
+
+    }
+
+
+    .qv-tip-icon{
+
+        font-size:16px;
+
+    }
+
+
+    .qv-tip-star{
+
+        font-size:14px;
+
+    }
+
+
+    /* =================================================
+       PRACTICE
+    ================================================= */
+
+    .qv-practice-title{
+
+        font-size:21px;
+
+    }
+
+
+    .qv-practice-image{
+
+        height:125px;
+
+    }
+
+
+    .qv-practice-word{
+
+        font-size:32px;
+
+    }
+
+
+    .qv-practice-text{
+
+        font-size:14px;
+
+    }
+
+
+    .qv-mic-btn{
+
+        width:62px;
+
+        height:62px;
+
+        font-size:26px;
+
+    }
+
+
+    /* =================================================
+       WORD BUILDER
+    ================================================= */
+
+    .qv-builder-section h2{
+
+        font-size:21px;
+
+    }
+
+
+    .qv-blank-box{
+
+        width:40px;
+
+        height:40px;
+
+        font-size:19px;
+
+    }
+
+
+    .qv-letter-btn{
+
+        width:43px;
+
+        height:43px;
+
+        font-size:19px;
+
+    }
+
+
+    .qv-feedback{
+
+        bottom:8px;
+
+        max-width:88%;
+
+        padding:8px 14px;
+
+        font-size:14px;
+
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width:360px){
+
+    .qv-page{
+
+        padding:4px;
+
+    }
+
+
+    .qv-main-card{
+
+        width:99%;
+
+        padding:8px;
+
+        border-radius:22px;
+
+    }
+
+
+    .qv-main-card::before{
+
+        inset:5px;
+
+        border-radius:18px;
+
+    }
+
+
+    /* HEADER */
+
+    .qv-back-btn,
+    .qv-skip-btn{
+
+        padding:6px 8px;
+
+        font-size:10px;
+
+    }
+
+
+    .qv-question-count{
+
+        font-size:12px;
+
+        padding:4px 6px;
+
+    }
+
+
+    .qv-progress-bar{
+
+        max-width:105px;
+
+    }
+
+
+    /* TEACHER */
+
+    .qv-teacher-section{
+
+        min-height:195px;
+
+    }
+
+
+    .qv-teacher-img{
+
+        width:135px;
+
+        max-height:210px;
+
+    }
+
+
+    .qv-teacher-bubble{
+
+        width:125px;
+
+        min-height:58px;
+
+        font-size:11px;
+
+        padding:9px 10px;
+
+    }
+
+
+    .qv-teacher-name{
+
+        font-size:12px;
+
+        padding:5px 14px;
+
+    }
+
+
+    /* QUESTION */
+
+    .qv-question-panel{
+
+        min-height:90px;
+
+        padding:11px 9px;
+
+    }
+
+
+    .qv-question-label{
+
+        font-size:12px;
+
+    }
+
+
+    .qv-prompt{
+
+        font-size:20px;
+
+    }
+
+
+    .qv-panel-decoration{
+
+        font-size:13px;
+
+    }
+
+
+    .qv-panel-line{
+
+        font-size:10px;
+
+    }
+
+
+    /* FOOD */
+
+    .qv-food-card{
+
+        width:96%;
+
+        padding:7px;
+
+    }
+
+
+    .qv-food-image-wrap{
+
+        height:125px;
+
+        border-radius:14px;
+
+    }
+
+
+    .qv-food-name{
+
+        font-size:16px;
+
+        min-height:38px;
+
+        border-radius:15px;
+
+    }
+
+
+    .qv-food-name span{
+
+        font-size:11px;
+
+    }
+
+
+    /* TIP */
+
+    .qv-tip-box{
+
+        font-size:10px;
+
+        width:98%;
+
+        gap:6px;
+
+    }
+
+
+    /* PRACTICE */
+
+    .qv-practice-title{
+
+        font-size:19px;
+
+    }
+
+
+    .qv-practice-image{
+
+        height:110px;
+
+    }
+
+
+    .qv-practice-word{
+
+        font-size:29px;
+
+    }
+
+
+    .qv-practice-text{
+
+        font-size:13px;
+
+    }
+
+
+    .qv-mic-btn{
+
+        width:58px;
+
+        height:58px;
+
+        font-size:24px;
+
+    }
+
+
+    /* WORD BUILDER */
+
+    .qv-builder-section h2{
+
+        font-size:19px;
+
+    }
+
+
+    .qv-blank-word{
+
+        gap:5px;
+
+    }
+
+
+    .qv-blank-box{
+
+        width:36px;
+
+        height:36px;
+
+        font-size:17px;
+
+    }
+
+
+    .qv-letter-container{
+
+        gap:6px;
+
+    }
+
+
+    .qv-letter-btn{
+
+        width:40px;
+
+        height:40px;
+
+        font-size:17px;
+
+    }
+
+
+    .qv-reset-btn{
+
+        padding:8px 18px;
+
+        font-size:13px;
+
+    }
+
+
+    /* FEEDBACK */
+
+    .qv-feedback{
+
+        bottom:6px;
+
+        max-width:90%;
+
+        padding:7px 12px;
+
+        font-size:13px;
+
+    }
+
+}
 
 /* =========================================
    LISTEN & REPEAT INTRO

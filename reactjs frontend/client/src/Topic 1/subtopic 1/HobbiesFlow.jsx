@@ -6,6 +6,15 @@ import HobbiesActivity from "./HobbiesActivity";
 
 import HobbyRankingIntro from "./HobbyRankingIntro";
 import HobbyRankingTeacherIntro from "./HobbyRankingTeacherIntro";
+import HobbyRankingActivity from "./HobbyRankingActivity";
+
+import SentenceRepairLabIntro from "./SentenceRepairLabIntro";
+import SentenceRepairLabTeacherIntro from "./SentenceRepairLabTeacherIntro";
+import SentenceRepairLabActivity from "./SentenceRepairLabActivity";
+
+import HobbyRoleplayIntro from "./HobbyRoleplayIntro";
+import HobbyRoleplayTeacherIntro from "./HobbyRoleplayTeacherIntro";
+import HobbyRoleplayActivity from "./HobbyRoleplayActivity";
 
 
 function HobbiesFlow({
@@ -14,8 +23,7 @@ function HobbiesFlow({
     onBack
 }) {
 
-    const [step, setStep] =
-        useState("intro");
+    const [step, setStep] = useState("intro");
 
 
     /* ==========================================
@@ -23,59 +31,125 @@ function HobbiesFlow({
     ========================================== */
 
     const handleIntroFinish = () => {
-
         setStep("teacherIntro");
-
     };
 
 
     /* ==========================================
-                TEACHER → ACTIVITY
+                TEACHER → HOBBIES ACTIVITY
     ========================================== */
 
     const handleTeacherNext = () => {
-
         setStep("activity");
-
     };
 
 
     /* ==========================================
-                ACTIVITY → RANKING INTRO
+          HOBBIES ACTIVITY → RANKING INTRO
     ========================================== */
 
     const handleActivityNext = () => {
-
         setStep("rankingIntro");
-
     };
 
 
     /* ==========================================
-             RANKING INTRO → RANKING TEACHER
+          RANKING INTRO → RANKING TEACHER
     ========================================== */
 
     const handleRankingIntroNext = () => {
-
         setStep("rankingTeacherIntro");
+    };
+
+
+    /* ==========================================
+       RANKING TEACHER → RANKING ACTIVITY
+    ========================================== */
+
+    const handleRankingTeacherNext = () => {
+        setStep("rankingActivity");
+    };
+
+
+    /* ==========================================
+       RANKING ACTIVITY → SENTENCE REPAIR INTRO
+    ========================================== */
+
+    const handleRankingActivityNext = () => {
+        setStep("sentenceRepairIntro");
+    };
+
+
+    /* ==========================================
+       SENTENCE REPAIR INTRO → TEACHER
+    ========================================== */
+
+    const handleSentenceRepairIntroNext = () => {
+        setStep("sentenceRepairTeacherIntro");
+    };
+
+
+    /* ==========================================
+       SENTENCE REPAIR TEACHER → ACTIVITY
+    ========================================== */
+
+    const handleSentenceRepairTeacherNext = () => {
+        setStep("sentenceRepairActivity");
+    };
+
+
+    /* ==========================================
+       SENTENCE REPAIR ACTIVITY → ROLEPLAY INTRO
+
+       IMPORTANT:
+       HobbyRoleplayIntro uses onFinish
+    ========================================== */
+
+    const handleSentenceRepairActivityNext = () => {
+        setStep("roleplayIntro");
+    };
+
+
+    /* ==========================================
+       ROLEPLAY INTRO → ROLEPLAY TEACHER
+
+       HobbyRoleplayIntro prop = onFinish
+    ========================================== */
+
+    const handleRoleplayIntroFinish = () => {
+        setStep("roleplayTeacherIntro");
+    };
+
+
+    /* ==========================================
+       ROLEPLAY TEACHER → ROLEPLAY ACTIVITY
+    ========================================== */
+
+    const handleRoleplayTeacherNext = () => {
+        setStep("roleplayActivity");
+    };
+
+
+    /* ==========================================
+       ROLEPLAY ACTIVITY → LESSON COMPLETE
+    ========================================== */
+
+    const handleRoleplayActivityNext = () => {
+
+        if (onFinish) {
+            onFinish();
+        }
 
     };
 
 
     /* ==========================================
-             RANKING TEACHER → NEXT ACTIVITY
+                        FLOW
     ========================================== */
 
-    const handleRankingTeacherNext = () => {
-
-        onFinish();
-
-    };
-
-
     return (
-
         <>
+
 
             {/* ======================================
                     1. HOBBIES INTRO
@@ -84,9 +158,7 @@ function HobbiesFlow({
             {step === "intro" && (
 
                 <HobbiesIntro
-                    onFinish={
-                        handleIntroFinish
-                    }
+                    onFinish={handleIntroFinish}
                     onBack={onBack}
                 />
 
@@ -100,9 +172,7 @@ function HobbiesFlow({
             {step === "teacherIntro" && (
 
                 <HobbiesTeacherIntro
-                    onNext={
-                        handleTeacherNext
-                    }
+                    onNext={handleTeacherNext}
                     onBack={onBack}
                 />
 
@@ -110,16 +180,14 @@ function HobbiesFlow({
 
 
             {/* ======================================
-                    3. WHICH SENTENCE ACTIVITY
+                    3. HOBBIES ACTIVITY
             ====================================== */}
 
             {step === "activity" && (
 
                 <HobbiesActivity
                     content={content}
-                    onNext={
-                        handleActivityNext
-                    }
+                    onNext={handleActivityNext}
                     onBack={onBack}
                 />
 
@@ -133,9 +201,7 @@ function HobbiesFlow({
             {step === "rankingIntro" && (
 
                 <HobbyRankingIntro
-                    onStart={
-                        handleRankingIntroNext
-                    }
+                    onStart={handleRankingIntroNext}
                     onBack={onBack}
                 />
 
@@ -149,18 +215,115 @@ function HobbiesFlow({
             {step === "rankingTeacherIntro" && (
 
                 <HobbyRankingTeacherIntro
-                    onNext={
-                        handleRankingTeacherNext
-                    }
+                    onNext={handleRankingTeacherNext}
+                    onBack={onBack}
+                />
+
+            )}
+
+
+            {/* ======================================
+                    6. HOBBY RANKING ACTIVITY
+            ====================================== */}
+
+            {step === "rankingActivity" && (
+
+                <HobbyRankingActivity
+                    content={content}
+                    onNext={handleRankingActivityNext}
+                    onBack={onBack}
+                />
+
+            )}
+
+
+            {/* ======================================
+                    7. SENTENCE REPAIR LAB INTRO
+            ====================================== */}
+
+            {step === "sentenceRepairIntro" && (
+
+                <SentenceRepairLabIntro
+                    onStart={handleSentenceRepairIntroNext}
+                    onBack={onBack}
+                />
+
+            )}
+
+
+            {/* ======================================
+                    8. SENTENCE REPAIR LAB TEACHER
+            ====================================== */}
+
+            {step === "sentenceRepairTeacherIntro" && (
+
+                <SentenceRepairLabTeacherIntro
+                    onNext={handleSentenceRepairTeacherNext}
+                    onBack={onBack}
+                />
+
+            )}
+
+
+            {/* ======================================
+                    9. SENTENCE REPAIR LAB ACTIVITY
+            ====================================== */}
+
+            {step === "sentenceRepairActivity" && (
+
+                <SentenceRepairLabActivity
+                    content={content}
+                    onNext={handleSentenceRepairActivityNext}
+                    onBack={onBack}
+                />
+
+            )}
+
+
+            {/* ======================================
+                    10. HOBBY ROLEPLAY INTRO
+            ====================================== */}
+
+            {step === "roleplayIntro" && (
+
+                <HobbyRoleplayIntro
+                    onFinish={handleRoleplayIntroFinish}
+                    onBack={onBack}
+                />
+
+            )}
+
+
+            {/* ======================================
+                    11. HOBBY ROLEPLAY TEACHER INTRO
+            ====================================== */}
+
+            {step === "roleplayTeacherIntro" && (
+
+                <HobbyRoleplayTeacherIntro
+                    onNext={handleRoleplayTeacherNext}
+                    onBack={onBack}
+                />
+
+            )}
+
+
+            {/* ======================================
+                    12. HOBBY ROLEPLAY ACTIVITY
+            ====================================== */}
+
+            {step === "roleplayActivity" && (
+
+                <HobbyRoleplayActivity
+                    content={content}
+                    onNext={handleRoleplayActivityNext}
                     onBack={onBack}
                 />
 
             )}
 
         </>
-
     );
-
 }
 
 

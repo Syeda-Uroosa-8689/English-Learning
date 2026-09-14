@@ -1,0 +1,963 @@
+/* =====================================================
+        SENTENCE REPAIR ACTIVITY PAGE
+===================================================== */
+
+.sentence-repair-activity-page {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+
+    padding: 24px;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =====================================================
+                    OVERLAY
+===================================================== */
+
+.sentence-repair-activity-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, .25);
+
+    backdrop-filter: blur(5px);
+
+}
+
+
+/* =====================================================
+                    MAIN CARD
+===================================================== */
+
+.sentence-repair-activity-card {
+
+    width: min(1250px, 94vw);
+
+    min-height: 720px;
+
+    max-height: 92vh;
+
+    background-image:
+        url("../../assets/favourite.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    border-radius: 30px;
+
+    position: relative;
+
+    z-index: 5;
+
+    padding: 28px 38px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    flex-direction: column;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.25);
+
+    overflow: hidden;
+
+}
+
+
+/* =====================================================
+                    HEADER
+===================================================== */
+
+.sentence-repair-header {
+
+    display: grid;
+
+    grid-template-columns:
+        130px 1fr 130px;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+
+.sentence-repair-header-center {
+
+    text-align: center;
+
+}
+
+
+.sentence-repair-header-center h1 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 34px;
+
+    font-weight: 800;
+
+}
+
+
+.sentence-repair-header-center span {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color: #8B5E3C;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+}
+
+
+/* =====================================================
+                    BACK BUTTON
+===================================================== */
+
+.sentence-repair-back-btn {
+
+    width: 120px;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #8B5E3C;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .25s;
+
+}
+
+
+.sentence-repair-back-btn:hover:not(:disabled) {
+
+    background: #6C452A;
+
+    transform: translateY(-2px);
+
+}
+
+
+.sentence-repair-back-btn:disabled {
+
+    opacity: .5;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =====================================================
+                    SKIP BUTTON
+===================================================== */
+
+.sentence-repair-skip-btn {
+
+    width: 120px;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #8B5E3C;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .25s;
+
+}
+
+
+.sentence-repair-skip-btn:hover:not(:disabled) {
+
+    background: #6C452A;
+
+    transform: translateY(-2px);
+
+}
+
+
+.sentence-repair-skip-btn:disabled {
+
+    opacity: .5;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =====================================================
+                QUESTION NUMBER
+===================================================== */
+
+.sentence-repair-question-number {
+
+    text-align: center;
+
+    margin-top: 10px;
+
+    color: #7A4C2C;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+}
+
+
+/* =====================================================
+                    MAIN CONTENT
+===================================================== */
+
+.sentence-repair-main {
+
+    flex: 1;
+
+    display: grid;
+
+    grid-template-columns:
+        350px 1fr;
+
+    gap: 45px;
+
+    align-items: center;
+
+    padding:
+        5px 25px 10px;
+
+}
+
+
+/* =====================================================
+                    TEACHER SECTION
+===================================================== */
+
+.sentence-repair-teacher-section {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.sentence-repair-teacher-stage {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+.sentence-repair-teacher {
+
+    width: 260px;
+
+    max-height: 400px;
+
+    object-fit: contain;
+
+    transition: .3s ease;
+
+}
+
+
+.sentence-repair-teacher.speaking {
+
+    transform:
+        translateY(-4px)
+        scale(1.035);
+
+    filter:
+        drop-shadow(
+            0 10px 18px
+            rgba(139,94,60,.25)
+        );
+
+}
+
+
+/* =====================================================
+                    TEACHER BUBBLE
+===================================================== */
+
+.sentence-repair-teacher-bubble {
+
+    width: 290px;
+
+    max-width: 100%;
+
+    margin-top: 2px;
+
+    padding: 14px 18px;
+
+    box-sizing: border-box;
+
+    background: white;
+
+    border: 2px solid #E4CDB5;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.12);
+
+    animation:
+        sentenceRepairBubbleIn
+        .3s ease;
+
+    position: relative;
+
+}
+
+
+.sentence-repair-teacher-bubble::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -10px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+
+    width: 18px;
+
+    height: 18px;
+
+    background: white;
+
+    border-left:
+        2px solid #E4CDB5;
+
+    border-top:
+        2px solid #E4CDB5;
+
+}
+
+
+.sentence-repair-teacher-name {
+
+    color: #ead6c7;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    margin-bottom: 5px;
+
+}
+
+
+.sentence-repair-teacher-text {
+
+    color: #5A3620;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+
+    font-weight: 600;
+
+}
+
+
+@keyframes sentenceRepairBubbleIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(8px)
+            scale(.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =====================================================
+                    QUESTION SECTION
+===================================================== */
+
+.sentence-repair-question-section {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-start;
+
+    align-items: center;
+
+    transform: translateY(-25px);
+
+}
+
+
+/* =====================================================
+                    BADGE
+===================================================== */
+
+.sentence-repair-badge {
+
+    padding:
+        8px 18px;
+
+    border-radius: 25px;
+
+    background: #FFF3E6;
+
+    border: 2px solid #E7D4BF;
+
+    color: #8B5E3C;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    margin-bottom: 12px;
+
+}
+
+
+/* =====================================================
+                    QUESTION CARD
+===================================================== */
+
+.sentence-repair-question-card {
+
+    width: min(680px, 100%);
+
+    background:
+        rgba(255,248,239,.96);
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 24px;
+
+    padding:
+        28px 30px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.08);
+
+}
+
+
+/* =====================================================
+                    QUESTION LABEL
+===================================================== */
+
+.sentence-repair-question-label {
+
+    color: #8B5E3C;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    margin-bottom: 15px;
+
+}
+
+
+/* =====================================================
+                    SENTENCE
+===================================================== */
+
+.sentence-repair-sentence {
+
+    color: #5A3620;
+
+    font-size: 29px;
+
+    line-height: 1.5;
+
+    font-weight: 800;
+
+    margin-bottom: 10px;
+
+}
+
+
+/* =====================================================
+                    BLANK
+===================================================== */
+
+.sentence-blank {
+
+    display: inline-flex;
+
+    min-width: 90px;
+
+    margin:
+        0 5px;
+
+    padding:
+        2px 10px;
+
+    justify-content: center;
+
+    border-bottom:
+        3px solid #8B5E3C;
+
+    color: #8B5E3C;
+
+}
+
+
+.sentence-blank.filled {
+
+    background: #FFF3E6;
+
+    border-radius: 8px;
+
+    border-bottom:
+        3px solid #8B5E3C;
+
+}
+
+
+/* =====================================================
+                    INSTRUCTION
+===================================================== */
+
+.sentence-repair-instruction {
+
+    margin:
+        8px 0 20px;
+
+    color: #7A4C2C;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+}
+
+
+/* =====================================================
+                    OPTIONS
+===================================================== */
+
+.sentence-repair-options {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    width: 100%;
+
+}
+
+
+.sentence-option {
+
+    width: 100%;
+
+    min-height: 52px;
+
+    border:
+        2px solid #E1CDB7;
+
+    border-radius: 14px;
+
+    background: white;
+
+    color: #5A3620;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .25s;
+
+}
+
+
+.sentence-option:hover:not(:disabled) {
+
+    background: #FFF8EF;
+
+    border-color: #B88B65;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.sentence-option.selected {
+
+    background: #FFF3E6;
+
+    border-color: #8B5E3C;
+
+    color: #7A4C2C;
+
+}
+
+
+.sentence-option span {
+
+    margin-right: 8px;
+
+    font-weight: 900;
+
+}
+
+
+/* =====================================================
+                    CORRECT OPTION
+===================================================== */
+
+.sentence-option.correct-option {
+
+    background: #DFF6E5;
+
+    border-color: #2E9B52;
+
+    color: #206D39;
+
+}
+
+
+/* =====================================================
+                    WRONG OPTION
+===================================================== */
+
+.sentence-option.wrong-option {
+
+    background: #FFE5E5;
+
+    border-color: #E74C3C;
+
+    color: #B71C1C;
+
+}
+
+
+/* =====================================================
+                    STATUS
+===================================================== */
+
+.sentence-repair-status {
+
+    margin-top: 14px;
+
+    padding:
+        10px 15px;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+}
+
+
+.sentence-repair-status.wrong {
+
+    background: #FFE5E5;
+
+    border:
+        2px solid #E74C3C;
+
+    color: #B71C1C;
+
+}
+
+
+.sentence-repair-status.correct {
+
+    background: #DFF6E5;
+
+    border:
+        2px solid #2E9B52;
+
+    color: #206D39;
+
+}
+
+
+/* =====================================================
+                    RESPONSIVE
+===================================================== */
+
+@media (max-width: 1050px) {
+
+    .sentence-repair-activity-card {
+
+        max-height: none;
+
+    }
+
+
+    .sentence-repair-main {
+
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+
+        overflow-y: auto;
+
+    }
+
+
+    .sentence-repair-question-section {
+
+        transform: none;
+
+    }
+
+
+    .sentence-repair-teacher {
+
+        width: 190px;
+
+        max-height: 270px;
+
+    }
+
+
+    .sentence-repair-teacher-bubble {
+
+        width: 400px;
+
+    }
+
+}
+
+
+/* =====================================================
+                    MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .sentence-repair-activity-page {
+
+        padding: 12px;
+
+    }
+
+
+    .sentence-repair-activity-card {
+
+        width: 96vw;
+
+        min-height: 94vh;
+
+        padding: 18px;
+
+        border-radius: 22px;
+
+    }
+
+
+    .sentence-repair-header {
+
+        grid-template-columns:
+            1fr 1fr;
+
+        gap: 10px;
+
+    }
+
+
+    .sentence-repair-header-center {
+
+        grid-column:
+            1 / 3;
+
+        grid-row: 1;
+
+        text-align: center;
+
+    }
+
+
+    .sentence-repair-back-btn {
+
+        grid-column: 1;
+
+        grid-row: 2;
+
+        width: 100%;
+
+    }
+
+
+    .sentence-repair-skip-btn {
+
+        grid-column: 2;
+
+        grid-row: 2;
+
+        width: 100%;
+
+    }
+
+
+    .sentence-repair-header-center h1 {
+
+        font-size: 25px;
+
+    }
+
+
+    .sentence-repair-header-center span {
+
+        font-size: 13px;
+
+    }
+
+
+    .sentence-repair-question-number {
+
+        margin-top: 8px;
+
+    }
+
+
+    .sentence-repair-main {
+
+        padding:
+            10px 0;
+
+    }
+
+
+    .sentence-repair-teacher {
+
+        width: 170px;
+
+        max-height: 240px;
+
+    }
+
+
+    .sentence-repair-teacher-bubble {
+
+        width: 100%;
+
+    }
+
+
+    .sentence-repair-question-section {
+
+        transform: none;
+
+    }
+
+
+    .sentence-repair-question-card {
+
+        padding:
+            20px 16px;
+
+    }
+
+
+    .sentence-repair-sentence {
+
+        font-size: 22px;
+
+    }
+
+
+    .sentence-option {
+
+        font-size: 16px;
+
+    }
+
+}

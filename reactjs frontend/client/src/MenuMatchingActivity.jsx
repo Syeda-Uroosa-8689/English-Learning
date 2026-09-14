@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+
+import React, { useState, useEffect, useRef } from "react";
 
 import teacher from "./assets/teacher1.png";
 
@@ -8,6 +9,11 @@ import pasta from "./assets/pasta.jpg";
 import fries from "./assets/fries.jpg";
 
 import chatBg from "./assets/chatbg.jpeg";
+
+import yaySound from "./assets/yay.mp3";
+
+import confetti from "canvas-confetti";
+
 
 function MenuMatchingActivity({
 
@@ -48,6 +54,7 @@ function MenuMatchingActivity({
 
     ];
 
+
     /* ==================================
             DROP BOXES
     =================================== */
@@ -64,6 +71,7 @@ function MenuMatchingActivity({
 
     ];
 
+
     /* ==================================
             STATES
     =================================== */
@@ -78,11 +86,36 @@ function MenuMatchingActivity({
 
     const [finished, setFinished] = useState(false);
 
+    /*
+       IMPORTANT
+
+       This locks the whole matching activity
+       while yay sound + confetti + teacher voice
+       are completing.
+    */
+
+    const [matchLocked, setMatchLocked] = useState(false);
+
+
+    /*
+       Ref to prevent accidental multiple drops
+    */
+
+    const processingRef = useRef(false);
+
+
+    /*
+       Audio reference
+    */
+
+    const yayAudioRef = useRef(null);
+
+
     /* ==================================
             TEACHER VOICE
     =================================== */
 
-    const speak = (text) => {
+    const speak = (text, onFinish = null) => {
 
         window.speechSynthesis.cancel();
 
@@ -90,7 +123,10 @@ function MenuMatchingActivity({
 
         setIsSpeaking(true);
 
-        const speech = new SpeechSynthesisUtterance(text);
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
 
         speech.rate = 0.9;
 
@@ -98,29 +134,71 @@ function MenuMatchingActivity({
 
         speech.volume = 1;
 
-        const voices = window.speechSynthesis.getVoices();
+
+        const voices =
+            window.speechSynthesis.getVoices();
+
 
         const femaleVoice =
 
-            voices.find(v => v.name.includes("Google UK English Female")) ||
+            voices.find(v =>
+                v.name.includes("Google UK English Female")
+            )
 
-            voices.find(v => v.name.includes("Samantha")) ||
+            ||
 
-            voices.find(v => v.name.includes("Zira")) ||
+            voices.find(v =>
+                v.name.includes("Samantha")
+            )
+
+            ||
+
+            voices.find(v =>
+                v.name.includes("Zira")
+            )
+
+            ||
 
             voices[0];
 
-        speech.voice = femaleVoice;
+
+        if (femaleVoice) {
+
+            speech.voice = femaleVoice;
+
+        }
+
 
         speech.onend = () => {
 
             setIsSpeaking(false);
 
+            if (onFinish) {
+
+                onFinish();
+
+            }
+
         };
+
+
+        speech.onerror = () => {
+
+            setIsSpeaking(false);
+
+            if (onFinish) {
+
+                onFinish();
+
+            }
+
+        };
+
 
         window.speechSynthesis.speak(speech);
 
     };
+
 
     /* ==================================
             FIRST INSTRUCTION
@@ -134,13 +212,24 @@ function MenuMatchingActivity({
 
         );
 
+
         return () => {
 
             window.speechSynthesis.cancel();
 
+
+            if (yayAudioRef.current) {
+
+                yayAudioRef.current.pause();
+
+                yayAudioRef.current.currentTime = 0;
+
+            }
+
         };
 
     }, []);
+
 
     const instruction =
 
@@ -148,15 +237,40 @@ function MenuMatchingActivity({
 
         "Drag each food picture to its correct name.";
 
-            /* ==================================
+
+    /* ==================================
             DRAG START
     =================================== */
 
     const handleDragStart = (food) => {
 
+        /*
+           DO NOT allow dragging while
+           celebration sequence is running.
+        */
+
+        if (matchLocked || finished || processingRef.current) {
+
+            return;
+
+        }
+
+
+        /*
+           Don't allow already matched food.
+        */
+
+        if (matchedItems[food.id]) {
+
+            return;
+
+        }
+
+
         setDragItem(food);
 
     };
+
 
     /* ==================================
             ALLOW DROP
@@ -168,18 +282,278 @@ function MenuMatchingActivity({
 
     };
 
+
+    /* ==================================
+       CELEBRATION SEQUENCE
+       
+       ORDER:
+
+       1. Lock activity
+       2. Confetti
+       3. Yay sound
+       4. Wait for BOTH to finish
+       5. Teacher says Excellent
+       6. Unlock next match
+    =================================== */
+
+    const playCorrectCelebration = (updatedMatches) => {
+
+        /*
+           Keep activity locked
+        */
+
+        setMatchLocked(true);
+
+        processingRef.current = true;
+
+
+        /*
+           ================================
+           CONFETTI
+        =================================
+        */
+
+        let confettiFinished = false;
+
+        let soundFinished = false;
+
+        let teacherStarted = false;
+
+
+        /*
+           This function runs only when
+           BOTH confetti and sound finish.
+        */
+
+        const tryFinishCelebration = () => {
+
+            if (
+                confettiFinished &&
+                soundFinished &&
+                !teacherStarted
+            ) {
+
+                teacherStarted = true;
+
+
+                /*
+                   ================================
+                   TEACHER EXCELLENT VOICE
+                =================================
+                */
+
+                speak(
+
+                    "Excellent! That's correct.",
+
+                    () => {
+
+                        /*
+                           Check whether all foods
+                           are matched.
+                        */
+
+                        const allMatched =
+                            Object.keys(updatedMatches).length === foods.length;
+
+
+                        if (allMatched) {
+
+                            /*
+                               Small delay after Excellent
+                               before completion card.
+                            */
+
+                            setTimeout(() => {
+
+                                setFinished(true);
+
+                                setMatchLocked(false);
+
+                                processingRef.current = false;
+
+                            }, 300);
+
+                        }
+
+                        else {
+
+                            /*
+                               Unlock next match ONLY
+                               after Excellent voice ends.
+                            */
+
+                            setMatchLocked(false);
+
+                            processingRef.current = false;
+
+                        }
+
+                    }
+
+                );
+
+            }
+
+        };
+
+
+        /*
+           Start confetti
+        */
+
+        confetti({
+
+            particleCount: 130,
+
+            spread: 90,
+
+            startVelocity: 35,
+
+            origin: {
+                y: 0.6
+            }
+
+        });
+
+
+        /*
+           Confetti animation duration.
+
+           We wait until the confetti animation
+           has completely finished before allowing
+           teacher voice.
+        */
+
+        setTimeout(() => {
+
+            confettiFinished = true;
+
+            tryFinishCelebration();
+
+        }, 2500);
+
+
+        /*
+           ================================
+           YAY SOUND
+        =================================
+        */
+
+        const audio = new Audio(yaySound);
+
+        yayAudioRef.current = audio;
+
+        audio.volume = 1;
+
+
+        /*
+           Sound finished
+        */
+
+        audio.onended = () => {
+
+            soundFinished = true;
+
+            yayAudioRef.current = null;
+
+            tryFinishCelebration();
+
+        };
+
+
+        /*
+           If audio fails for any reason,
+           don't permanently lock activity.
+        */
+
+        audio.onerror = () => {
+
+            console.log("Yay sound could not be played.");
+
+            soundFinished = true;
+
+            yayAudioRef.current = null;
+
+            tryFinishCelebration();
+
+        };
+
+
+        /*
+           Start yay sound
+        */
+
+        audio.play().catch(error => {
+
+            console.log(
+                "Yay audio play error:",
+                error
+            );
+
+            soundFinished = true;
+
+            yayAudioRef.current = null;
+
+            tryFinishCelebration();
+
+        });
+
+    };
+
+
     /* ==================================
             DROP
     =================================== */
 
     const handleDrop = (boxName) => {
 
-        if (!dragItem) return;
+        /*
+           IMPORTANT
 
-        // Already matched
-        if (matchedItems[dragItem.id]) return;
+           If celebration sequence is running,
+           completely ignore every drop.
+        */
 
-        // Correct Match
+        if (
+            matchLocked ||
+            finished ||
+            processingRef.current
+        ) {
+
+            setDragItem(null);
+
+            return;
+
+        }
+
+
+        if (!dragItem) {
+
+            return;
+
+        }
+
+
+        /*
+           Already matched
+        */
+
+        if (matchedItems[dragItem.id]) {
+
+            setDragItem(null);
+
+            return;
+
+        }
+
+
+        /*
+           ================================
+           CORRECT MATCH
+        =================================
+        */
+
         if (dragItem.name === boxName) {
 
             const updated = {
@@ -190,53 +564,62 @@ function MenuMatchingActivity({
 
             };
 
+
+            /*
+               Update matched item immediately.
+
+               But DO NOT unlock anything yet.
+            */
+
             setMatchedItems(updated);
 
-            speak(
 
-                "Excellent! That's correct."
+            /*
+               Clear drag item
+            */
 
-            );
+            setDragItem(null);
 
-            // All matched
 
-            if (
+            /*
+               Start:
 
-                Object.keys(updated).length === foods.length
+               CONFETTI
+                    +
+               YAY SOUND
+                    ↓
+               wait for both
+                    ↓
+               EXCELLENT VOICE
+                    ↓
+               unlock next
+            */
 
-            ) {
+            playCorrectCelebration(updated);
 
-                setTimeout(() => {
 
-                    setFinished(true);
-
-                    speak(
-
-                        "Excellent! You matched all the food pictures correctly. Click Next to continue."
-
-                    );
-
-                }, 800);
-
-            }
-
-        }
-
-        // Wrong Match
-
-        else {
-
-            speak(
-
-                "Oops! That's the wrong answer. Try again."
-
-            );
+            return;
 
         }
+
+
+        /*
+           ================================
+           WRONG MATCH
+        =================================
+        */
 
         setDragItem(null);
 
+
+        speak(
+
+            "Oops! That's the wrong answer. Try again."
+
+        );
+
     };
+
 
     /* ==================================
             CHECK IMAGE MATCHED
@@ -247,6 +630,7 @@ function MenuMatchingActivity({
         return matchedItems[foodId];
 
     };
+
 
     /* ==================================
             RETURN
@@ -268,17 +652,51 @@ function MenuMatchingActivity({
 
             <div className="menu-overlay"></div>
 
+
             <div className="menu-card">
 
-                {/* HEADER */}
+
+                {/* =================================
+                        HEADER
+                ================================= */}
 
                 <div className="menu-header">
+
 
                     <button
 
                         className="menu-back-btn"
 
-                        onClick={onBack}
+                        onClick={() => {
+
+                            /*
+                               Stop everything before going back
+                            */
+
+                            window.speechSynthesis.cancel();
+
+
+                            if (yayAudioRef.current) {
+
+                                yayAudioRef.current.pause();
+
+                                yayAudioRef.current.currentTime = 0;
+
+                                yayAudioRef.current = null;
+
+                            }
+
+
+                            setMatchLocked(false);
+
+                            processingRef.current = false;
+
+
+                            onBack();
+
+                        }}
+
+                        disabled={matchLocked}
 
                     >
 
@@ -286,13 +704,49 @@ function MenuMatchingActivity({
 
                     </button>
 
-                   
 
                     <button
 
                         className="menu-skip-btn"
 
-                        onClick={onNext}
+                        onClick={() => {
+
+                            /*
+                               Skip is also disabled while
+                               correct-answer celebration
+                               is running.
+                            */
+
+                            if (
+                                matchLocked ||
+                                processingRef.current
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            window.speechSynthesis.cancel();
+
+
+                            if (yayAudioRef.current) {
+
+                                yayAudioRef.current.pause();
+
+                                yayAudioRef.current.currentTime = 0;
+
+                            }
+
+
+                            onNext();
+
+                        }}
+
+                        disabled={
+                            matchLocked ||
+                            processingRef.current
+                        }
 
                     >
 
@@ -302,23 +756,42 @@ function MenuMatchingActivity({
 
                 </div>
 
-                                {/* ================= TITLE ================= */}
+
+                {/* =================================
+                        TITLE
+                ================================= */}
 
                 <div className="menu-title">
 
-                    <h1>MENU MATCHING</h1>
+                    <h1>
 
-                    <p>Drag each picture to the correct food name.</p>
+                        MENU MATCHING
+
+                    </h1>
+
+
+                    <p>
+
+                        Drag each picture to the correct food name.
+
+                    </p>
 
                 </div>
 
-                {/* ================= BODY ================= */}
+
+                {/* =================================
+                        BODY
+                ================================= */}
 
                 <div className="menu-content">
 
-                    {/* ============ LEFT ============ */}
+
+                    {/* =================================
+                            LEFT
+                    ================================= */}
 
                     <div className="teacher-panel">
+
 
                         <div className="teacher-frame">
 
@@ -329,20 +802,26 @@ function MenuMatchingActivity({
                                 alt="Teacher"
 
                                 className={
+
                                     isSpeaking
+
                                         ? "teacher-img speaking"
+
                                         : "teacher-img"
+
                                 }
 
                             />
 
                         </div>
 
+
                         <h3>
 
-                             Miss Uroosa
+                            Miss Uroosa
 
                         </h3>
+
 
                         <div className="teacher-message">
 
@@ -350,15 +829,37 @@ function MenuMatchingActivity({
 
                         </div>
 
+
+                        {/* =================================
+                              LOCK MESSAGE
+                        ================================= */}
+
+                        {matchLocked && !finished && (
+
+                            <div className="matching-lock-message">
+
+                                🎉 Great! Wait for the celebration...
+
+                            </div>
+
+                        )}
+
                     </div>
 
-                    {/* ============ RIGHT ============ */}
+
+                    {/* =================================
+                            RIGHT
+                    ================================= */}
 
                     <div className="matching-panel">
 
-                        {/* FOOD GRID */}
+
+                        {/* =================================
+                                FOOD GRID
+                        ================================= */}
 
                         <div className="food-grid">
+
 
                             {
 
@@ -369,17 +870,31 @@ function MenuMatchingActivity({
                                         key={food.id}
 
                                         className={
+
                                             isMatched(food.id)
 
                                                 ? "food-card matched"
 
                                                 : "food-card"
+
                                         }
 
-                                        draggable={!isMatched(food.id)}
+                                        draggable={
+
+                                            !isMatched(food.id) &&
+
+                                            !matchLocked &&
+
+                                            !finished &&
+
+                                            !processingRef.current
+
+                                        }
 
                                         onDragStart={() =>
+
                                             handleDragStart(food)
+
                                         }
 
                                     >
@@ -402,13 +917,18 @@ function MenuMatchingActivity({
 
                         </div>
 
-                        {/* DROP BOXES */}
+
+                        {/* =================================
+                                DROP BOXES
+                        ================================= */}
 
                         <div className="drop-list">
+
 
                             {
 
                                 dropBoxes.map(box => {
+
 
                                     const matchedFood = foods.find(
 
@@ -418,13 +938,22 @@ function MenuMatchingActivity({
 
                                     );
 
+
                                     return (
 
                                         <div
 
                                             key={box}
 
-                                            className="drop-box"
+                                            className={
+
+                                                matchLocked
+
+                                                    ? "drop-box locked"
+
+                                                    : "drop-box"
+
+                                            }
 
                                             onDragOver={handleDragOver}
 
@@ -436,11 +965,13 @@ function MenuMatchingActivity({
 
                                         >
 
+
                                             <div className="drop-title">
 
                                                 {box}
 
                                             </div>
+
 
                                             {
 
@@ -474,7 +1005,10 @@ function MenuMatchingActivity({
 
                 </div>
 
-                                {/* ================= FINISH CARD ================= */}
+
+                {/* =================================
+                        FINISH CARD
+                ================================= */}
 
                 {
 
@@ -488,11 +1022,13 @@ function MenuMatchingActivity({
 
                             </h2>
 
+
                             <p>
 
                                 You matched all the food pictures correctly.
 
                             </p>
+
 
                             <button
 
@@ -512,6 +1048,7 @@ function MenuMatchingActivity({
 
                 }
 
+
             </div>
 
         </div>
@@ -520,4 +1057,6 @@ function MenuMatchingActivity({
 
 }
 
+
 export default MenuMatchingActivity;
+

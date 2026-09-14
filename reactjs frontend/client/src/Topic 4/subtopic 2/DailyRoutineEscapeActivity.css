@@ -1,0 +1,2843 @@
+/* =====================================================
+   DAILY ROUTINE ESCAPE
+   Warm sample-style layout
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+.daily-routine-escape-page {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "Poppins", sans-serif;
+    background: #5f4637;
+}
+
+.dre-background {
+    position: absolute;
+    inset: -20px;
+    background-image: url("../../assets/chatbg.jpeg");
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
+    transform: scale(1.08);
+}
+
+.dre-background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(48, 30, 20, 0.28);
+}
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+
+.dre-main-container {
+    position: relative;
+    z-index: 2;
+
+    width: min(1420px, 92vw);
+    height: min(900px, 92vh);
+
+    margin: 4vh auto;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+    background: #f7ead7;
+
+    border: 2px solid rgba(255, 255, 255, 0.75);
+
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+}
+
+.dre-main-container::before {
+    content: "✦  ♡  ✧  ♡  ✦  ♡  ✧";
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+
+    color: rgba(151, 110, 66, 0.12);
+    font-size: 42px;
+    letter-spacing: 40px;
+    white-space: nowrap;
+
+    pointer-events: none;
+}
+
+/* =====================================================
+   TOP BUTTONS
+===================================================== */
+
+.dre-top-button {
+    position: absolute;
+    top: 30px;
+    z-index: 30;
+
+    border: none;
+    border-radius: 16px;
+
+    padding: 15px 25px;
+
+    background: linear-gradient(
+        180deg,
+        #704927,
+        #54321b
+    );
+
+    color: white;
+
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.18),
+        0 6px 0 rgba(58, 31, 13, 0.3);
+
+    transition: 0.2s ease;
+}
+
+.dre-top-button:hover {
+    transform: translateY(-2px);
+}
+
+.dre-back-button {
+    left: 38px;
+}
+
+.dre-skip-button {
+    right: 38px;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.dre-header {
+    position: relative;
+    z-index: 5;
+
+    text-align: center;
+
+    padding-top: 42px;
+}
+
+.dre-header h1 {
+    margin: 0;
+
+    color: #382113;
+
+    font-size: clamp(30px, 3.2vw, 52px);
+    font-weight: 900;
+
+    letter-spacing: -1px;
+}
+
+.dre-header-icon {
+    margin-right: 12px;
+}
+
+.dre-header p {
+    margin: 8px 0 0;
+
+    color: #5d4637;
+
+    font-size: clamp(15px, 1.45vw, 23px);
+    font-weight: 600;
+}
+
+/* =====================================================
+   COMMON
+===================================================== */
+
+.dre-speech-bubble {
+    position: relative;
+
+    background: linear-gradient(
+        180deg,
+        #fffdf8,
+        #f7ecdc
+    );
+
+    border: 2px solid rgba(154, 113, 72, 0.35);
+
+    border-radius: 28px;
+
+    color: #3f2a1c;
+
+    box-shadow:
+        0 10px 30px rgba(88, 51, 24, 0.15);
+}
+
+.dre-speech-bubble::before {
+    content: "";
+
+    position: absolute;
+
+    left: -18px;
+    bottom: 45px;
+
+    width: 34px;
+    height: 34px;
+
+    background: #fbf4e8;
+
+    border-left: 2px solid rgba(154, 113, 72, 0.35);
+    border-bottom: 2px solid rgba(154, 113, 72, 0.35);
+
+    transform: rotate(45deg);
+
+    z-index: -1;
+}
+
+.dre-repeat-button {
+    position: absolute;
+
+    top: 10px;
+    right: 12px;
+
+    border: none;
+
+    background: #f4dfbf;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+.dre-green-text {
+    color: #4d8a49;
+}
+
+.dre-wrong-feedback {
+    margin-top: 12px;
+
+    padding: 8px 12px;
+
+    border-radius: 12px;
+
+    background: #ffe0dc;
+
+    color: #a4473c;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.dre-success-feedback {
+    margin-top: 12px;
+
+    padding: 8px 12px;
+
+    border-radius: 12px;
+
+    background: #e3f1d8;
+
+    color: #4d7c36;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.dre-intro-layout {
+    position: absolute;
+
+    top: 145px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 91%;
+
+    /*
+      IMPORTANT FIX:
+      Keep the intro inside the main container,
+      but leave enough space for Start Escape.
+    */
+    height: calc(100% - 175px);
+
+    display: grid;
+
+    grid-template-columns: 38% 62%;
+
+    gap: 18px;
+
+    overflow: visible;
+}
+
+/* =====================================================
+   INTRO LEFT SIDE
+===================================================== */
+
+.dre-intro-teacher-side {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 0;
+
+    overflow: visible;
+}
+
+.dre-intro-teacher-row {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 0;
+}
+
+.dre-teacher-box {
+    position: relative;
+    z-index: 3;
+
+    width: 47%;
+
+    padding-bottom: 32px;
+
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.dre-teacher-image {
+    width: 100%;
+
+    max-height: 400px;
+
+    object-fit: contain;
+
+    object-position: bottom;
+
+    display: block;
+}
+
+.dre-teacher-name {
+    position: absolute;
+
+    z-index: 10;
+
+    left: 50%;
+    bottom: 0;
+
+    transform: translateX(-50%);
+
+    width: 215px;
+
+    padding: 13px 18px;
+
+    border-radius: 18px;
+
+    background: linear-gradient(
+        180deg,
+        #8a5a32,
+        #59321c
+    );
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.15),
+        0 7px 18px rgba(72, 41, 20, 0.28);
+}
+
+.dre-intro-bubble {
+    width: 48%;
+
+    min-width: 240px;
+
+    margin-left: -10px;
+
+    padding: 28px 25px;
+
+    flex-shrink: 0;
+}
+
+.dre-intro-bubble p {
+    margin: 0 0 15px;
+
+    text-align: center;
+
+    font-size: clamp(14px, 1.15vw, 20px);
+
+    line-height: 1.55;
+
+    font-weight: 700;
+}
+
+.dre-intro-bubble p:last-child {
+    margin-bottom: 0;
+}
+
+/* =====================================================
+   INTRO STATS
+===================================================== */
+
+.dre-intro-stats {
+    width: min(370px, 92%);
+
+    margin-top: 22px;
+
+    padding: 20px 25px;
+
+    display: flex;
+
+    justify-content: space-around;
+    align-items: center;
+
+    background: rgba(255, 252, 245, 0.85);
+
+    border: 2px solid rgba(159, 116, 69, 0.24);
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 8px 25px rgba(101, 61, 31, 0.1);
+
+    flex-shrink: 0;
+}
+
+.dre-stat {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+.dre-stat-icon {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 30px;
+}
+
+.dre-key-stat {
+    background: #ffe3a0;
+
+    box-shadow:
+        inset 0 0 0 2px #e2ad42;
+}
+
+.dre-lock-stat {
+    background: #e7d7f2;
+
+    box-shadow:
+        inset 0 0 0 2px #a873c5;
+}
+
+.dre-stat strong {
+    color: #3f291b;
+
+    font-size: 27px;
+}
+
+.dre-stat span {
+    color: #745846;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.dre-stat-divider {
+    width: 1px;
+    height: 85px;
+
+    background: #d9c7b2;
+}
+
+/* =====================================================
+   INTRO RIGHT SIDE
+   IMPORTANT FIX
+===================================================== */
+
+.dre-intro-room-side {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    /*
+      IMPORTANT:
+      Give this side an actual available height.
+      Start button will now sit BELOW the image,
+      instead of being absolutely positioned and
+      getting hidden/cut.
+    */
+    height: 100%;
+
+    min-height: 0;
+
+    overflow: visible;
+}
+
+/* =====================================================
+   INTRO ROOM IMAGE
+===================================================== */
+
+.dre-intro-room-image-wrap {
+    width: 100%;
+
+    /*
+      Leave space for the Start Escape button.
+    */
+    flex: 1;
+
+    min-height: 0;
+
+    padding: 10px;
+
+    border-radius: 28px;
+
+    background: #fffaf1;
+
+    border: 2px solid rgba(166, 120, 75, 0.28);
+
+    box-shadow:
+        0 12px 30px rgba(87, 52, 29, 0.15);
+
+    overflow: hidden;
+}
+
+.dre-intro-room-image {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 20px;
+}
+
+/* =====================================================
+   START ESCAPE BUTTON
+   FIXED — NOW VISIBLE
+===================================================== */
+
+.dre-start-button {
+    /*
+      IMPORTANT:
+      Removed absolute positioning.
+      Button is now part of normal layout.
+    */
+
+    position: relative;
+
+    z-index: 50;
+
+    flex-shrink: 0;
+
+    margin: 14px auto 10px;
+
+    border: none;
+
+    min-width: 390px;
+
+    padding: 17px 42px;
+
+    border-radius: 22px;
+
+    background: linear-gradient(
+        180deg,
+        #8a5a32,
+        #59321b
+    );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: clamp(18px, 2vw, 28px);
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 16px;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.25),
+        0 8px 0 rgba(67, 36, 17, 0.55);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.dre-start-button:hover {
+    transform: translateY(-3px);
+}
+
+.dre-start-button:active {
+    transform: translateY(1px);
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.25),
+        0 4px 0 rgba(67, 36, 17, 0.55);
+}
+
+/* =====================================================
+   MAP
+===================================================== */
+
+.dre-map-layout {
+    position: absolute;
+
+    top: 145px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 91%;
+
+    height: calc(100% - 175px);
+}
+
+.dre-map-card {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background: #5d3721;
+
+    box-shadow:
+        0 18px 45px rgba(64, 35, 16, 0.3);
+}
+
+.dre-map-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+
+    background: #5d3721;
+}
+
+.dre-map-title {
+    position: absolute;
+
+    top: 18px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    padding: 12px 28px;
+
+    border-radius: 18px;
+
+    background: #fff8e9;
+
+    color: #432a19;
+
+    font-size: clamp(18px, 1.8vw, 30px);
+
+    font-weight: 900;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.15);
+
+    white-space: nowrap;
+}
+
+.dre-map-instruction {
+    position: absolute;
+
+    top: 72px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    padding: 9px 20px;
+
+    border-radius: 14px;
+
+    background: rgba(255, 250, 240, 0.94);
+
+    color: #76543a;
+
+    font-size: clamp(11px, 0.9vw, 15px);
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.dre-map-keys {
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    display: flex;
+
+    gap: 8px;
+
+    padding: 8px 12px;
+
+    border-radius: 18px;
+
+    background: rgba(255, 250, 240, 0.95);
+
+    border: 2px solid rgba(166, 120, 75, 0.3);
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.12);
+}
+
+.dre-map-key {
+    width: 42px;
+    height: 48px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 2px;
+
+    border-radius: 12px;
+
+    background: #f2e2c6;
+
+    transition: 0.2s ease;
+}
+
+.dre-map-key img {
+    width: 27px;
+    height: 27px;
+
+    object-fit: contain;
+
+    opacity: 0.3;
+}
+
+.dre-map-key span {
+    font-size: 7px;
+
+    font-weight: 800;
+
+    color: #8a684c;
+
+    text-align: center;
+}
+
+.dre-map-key-found {
+    background: #e3f1d8;
+}
+
+.dre-map-key-found img {
+    opacity: 1;
+}
+
+.dre-map-key-found span {
+    color: #4d7c36;
+}
+
+.dre-map-rooms {
+    position: absolute;
+
+    inset: 0;
+
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 12px;
+
+    align-items: end;
+
+    padding: 20px;
+
+    padding-top: 145px;
+}
+
+.dre-map-room-button,
+.dre-map-final-button {
+    min-width: 0;
+
+    height: 125px;
+
+    border: 3px solid #c79c62;
+
+    border-radius: 20px;
+
+    background: rgba(255, 248, 234, 0.95);
+
+    color: #4b2e1b;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    padding: 10px;
+
+    box-shadow:
+        0 6px 0 rgba(89, 50, 28, 0.25),
+        0 10px 20px rgba(0, 0, 0, 0.12);
+
+    transition: 0.2s ease;
+}
+
+.dre-map-room-button:hover:not(:disabled),
+.dre-map-final-button:hover:not(:disabled) {
+    transform: translateY(-4px);
+}
+
+.dre-map-room-button:disabled,
+.dre-map-final-button:disabled {
+    cursor: not-allowed;
+
+    opacity: 0.72;
+}
+
+.dre-map-room-completed {
+    background: #e3f1d8;
+
+    border-color: #8bb66d;
+}
+
+.dre-map-room-locked {
+    background: #e8ddd0;
+
+    border-color: #c9b6a1;
+}
+
+.dre-map-final-button {
+    background: linear-gradient(
+        180deg,
+        #ffe8b4,
+        #e8b75f
+    );
+
+    border-color: #b27b2d;
+}
+
+.dre-map-final-button:disabled {
+    background: #d9cabb;
+
+    border-color: #b6a18b;
+}
+
+.dre-map-final-ready {
+    background: linear-gradient(
+        180deg,
+        #ffe8b4,
+        #e8b75f
+    );
+
+    border-color: #b27b2d;
+}
+
+.dre-map-room-icon {
+    font-size: 29px;
+}
+
+.dre-map-room-name {
+    font-size: clamp(11px, 1vw, 16px);
+
+    font-weight: 900;
+
+    text-align: center;
+}
+
+.dre-map-room-status {
+    font-size: 9px;
+
+    font-weight: 700;
+
+    color: #8b6848;
+}
+
+/* =====================================================
+   TASK
+===================================================== */
+
+.dre-task-layout {
+    position: absolute;
+
+    top: 145px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 91%;
+
+    height: calc(100% - 175px);
+}
+
+.dre-task-room-card {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background: #5d3721;
+
+    box-shadow:
+        0 18px 45px rgba(64, 35, 16, 0.3);
+}
+
+.dre-task-room-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    object-position: center;
+
+    display: block;
+
+    background: #5d3721;
+}
+
+.dre-task-key-counter {
+    position: absolute;
+
+    z-index: 40;
+
+    top: 22px;
+    right: 22px;
+
+    width: 112px;
+    height: 132px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px;
+
+    background: linear-gradient(
+        180deg,
+        rgba(255, 253, 248, 0.96),
+        rgba(248, 241, 230, 0.96)
+    );
+
+    border: 2px solid rgba(181, 139, 216, 0.75);
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 8px 24px rgba(68, 45, 25, 0.18);
+
+    backdrop-filter: blur(8px);
+}
+
+.dre-key-counter-icon {
+    width: 58px;
+    height: 58px;
+
+    margin-bottom: 5px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        180deg,
+        #eee4fa,
+        #dfd0f0
+    );
+
+    border: 2px solid #b180cf;
+
+    font-size: 29px;
+}
+
+.dre-task-key-counter strong {
+    color: #3f2d21;
+
+    font-size: 26px;
+
+    line-height: 1;
+
+    font-weight: 900;
+}
+
+.dre-task-key-counter span {
+    margin-top: 7px;
+
+    color: #765f50;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+.dre-task-teacher-area {
+    position: absolute;
+
+    z-index: 20;
+
+    left: 0;
+    bottom: 0;
+
+    width: 42%;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    transform: translateX(-8px);
+}
+
+.dre-task-teacher-image {
+    width: 32%;
+
+    max-height: 430px;
+
+    object-fit: contain;
+
+    object-position: bottom;
+
+    flex-shrink: 0;
+}
+
+.dre-task-bubble {
+    width: 50%;
+
+    margin-left: -35px;
+    margin-bottom: 65px;
+
+    padding: 12px 14px;
+
+    border-radius: 22px;
+}
+
+.dre-task-label {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    padding: 6px 12px;
+
+    border-radius: 30px;
+
+    background: #f0dfbd;
+
+    color: #75512e;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+.dre-task-message {
+    margin: 0;
+
+    color: #432d1e;
+
+    font-size: clamp(10px, 0.8vw, 14px);
+
+    line-height: 1.4;
+
+    font-weight: 700;
+}
+
+.dre-task-question-panel {
+    position: absolute;
+
+    z-index: 15;
+
+    right: 2.5%;
+    bottom: 4%;
+
+    width: 48%;
+
+    padding: 20px;
+
+    border-radius: 24px;
+
+    background: rgba(255, 250, 240, 0.96);
+
+    border: 2px solid rgba(166, 120, 75, 0.3);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.dre-task-question {
+    color: #432a19;
+
+    font-size: clamp(14px, 1.2vw, 20px);
+
+    line-height: 1.45;
+
+    font-weight: 800;
+
+    text-align: center;
+
+    margin-bottom: 15px;
+}
+
+.dre-task-options {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 10px;
+}
+
+.dre-task-option {
+    border: 2px solid #d8b98d;
+
+    border-radius: 14px;
+
+    padding: 12px 8px;
+
+    background: #fffdf8;
+
+    color: #5b3b24;
+
+    font-family: inherit;
+
+    font-size: clamp(11px, 0.9vw, 15px);
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.dre-task-option:hover {
+    transform: translateY(-2px);
+
+    background: #fff4dd;
+}
+
+.dre-task-option-selected {
+    background: #ffe3a0;
+
+    border-color: #d79b35;
+
+    color: #59321b;
+}
+
+.dre-submit-button {
+    width: 100%;
+
+    margin-top: 14px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    padding: 13px;
+
+    background: linear-gradient(
+        180deg,
+        #8a5a32,
+        #59321b
+    );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 0 rgba(67, 36, 17, 0.45);
+}
+
+.dre-submit-button:hover {
+    transform: translateY(-2px);
+}
+
+.dre-task-success-popup {
+    position: absolute;
+
+    z-index: 100;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 30px;
+
+    background: rgba(28, 18, 10, 0.48);
+
+    backdrop-filter: blur(7px);
+}
+
+.dre-success-key {
+    width: 100px;
+    height: 100px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 28px;
+
+    background: #f3dfbd;
+
+    margin-bottom: 14px;
+
+    animation: dreKeyPop 0.4s ease;
+}
+
+.dre-success-key img {
+    width: 75px;
+    height: 75px;
+
+    object-fit: contain;
+}
+
+@keyframes dreKeyPop {
+    from {
+        transform: scale(0.6);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.dre-popup-found-label {
+    display: inline-block;
+
+    padding: 6px 14px;
+
+    border-radius: 30px;
+
+    background: #dff0d2;
+
+    color: #557d39;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+.dre-task-success-popup h2 {
+    margin: 14px 0 10px;
+
+    color: white;
+
+    font-size: clamp(24px, 2.5vw, 36px);
+
+    font-weight: 900;
+}
+
+.dre-task-success-popup p {
+    margin: 0 0 20px;
+
+    color: #fff4e6;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.dre-popup-next {
+    border: none;
+
+    padding: 14px 28px;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        180deg,
+        #8a5a32,
+        #59321b
+    );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 0 rgba(67, 36, 17, 0.45);
+}
+
+/* =====================================================
+   FINAL ROUTINE
+===================================================== */
+
+.dre-final-layout {
+    position: absolute;
+
+    top: 145px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 91%;
+
+    height: calc(100% - 175px);
+}
+
+.dre-final-card {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background: #5d3721;
+
+    box-shadow:
+        0 18px 45px rgba(64, 35, 16, 0.3);
+}
+
+.dre-final-door-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+
+    background: #5d3721;
+}
+
+.dre-final-teacher-area {
+    position: absolute;
+
+    z-index: 20;
+
+    left: 0;
+    bottom: 0;
+
+    width: 34%;
+
+    display: flex;
+
+    align-items: flex-end;
+}
+
+.dre-final-teacher-image {
+    width: 32%;
+
+    max-height: 390px;
+
+    object-fit: contain;
+
+    object-position: bottom;
+}
+
+.dre-final-bubble {
+    width: 62%;
+
+    margin-left: -20px;
+    margin-bottom: 45px;
+
+    padding: 12px 14px;
+
+    border-radius: 22px;
+}
+
+.dre-final-bubble p {
+    margin: 0;
+
+    color: #432d1e;
+
+    font-size: clamp(10px, 0.8vw, 14px);
+
+    line-height: 1.4;
+
+    font-weight: 700;
+}
+
+.dre-final-content {
+    position: absolute;
+
+    z-index: 15;
+
+    right: 2%;
+    top: 6%;
+
+    width: 58%;
+    height: 88%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding: 20px;
+
+    border-radius: 24px;
+
+    background: rgba(255, 250, 240, 0.96);
+
+    border: 2px solid rgba(166, 120, 75, 0.3);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.18);
+
+    overflow-y: auto;
+}
+
+.dre-final-heading {
+    color: #432a19;
+
+    font-size: clamp(18px, 1.8vw, 28px);
+
+    font-weight: 900;
+
+    text-align: center;
+}
+
+.dre-final-subheading {
+    margin-top: 5px;
+
+    color: #76543a;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-align: center;
+}
+
+.dre-selected-routine {
+    width: 100%;
+
+    min-height: 92px;
+
+    margin-top: 16px;
+
+    padding: 10px;
+
+    display: flex;
+
+    gap: 8px;
+
+    align-items: center;
+
+    overflow-x: auto;
+
+    border-radius: 16px;
+
+    background: #f3e5d0;
+
+    border: 2px dashed #c79c62;
+}
+
+.dre-empty-routine {
+    width: 100%;
+
+    text-align: center;
+
+    color: #967b61;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.dre-selected-card {
+    position: relative;
+
+    min-width: 72px;
+
+    border: 2px solid #c79c62;
+
+    border-radius: 12px;
+
+    padding: 5px;
+
+    background: #fffdf8;
+
+    cursor: pointer;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 3px;
+}
+
+.dre-selected-card img {
+    width: 48px;
+    height: 40px;
+
+    object-fit: contain;
+}
+
+.dre-selected-card span {
+    font-size: 8px;
+
+    font-weight: 800;
+
+    color: #5b3b24;
+
+    text-align: center;
+}
+
+.dre-selected-card small {
+    color: #b94b42;
+
+    font-size: 7px;
+
+    font-weight: 700;
+}
+
+.dre-selected-number {
+    position: absolute;
+
+    top: -8px;
+    left: -8px;
+
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+
+    background: #8a5a32;
+
+    color: white !important;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 10px !important;
+}
+
+.dre-routine-card-list {
+    width: 100%;
+
+    margin-top: 14px;
+
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 8px;
+}
+
+.dre-routine-card {
+    position: relative;
+
+    border: 2px solid #d8b98d;
+
+    border-radius: 14px;
+
+    padding: 7px;
+
+    background: #fffdf8;
+
+    color: #5b3b24;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 4px;
+
+    transition: 0.2s ease;
+}
+
+.dre-routine-card:hover:not(:disabled) {
+    transform: translateY(-3px);
+
+    background: #fff4dd;
+}
+
+.dre-routine-card img {
+    width: 52px;
+    height: 45px;
+
+    object-fit: contain;
+}
+
+.dre-routine-card span {
+    font-size: 9px;
+
+    font-weight: 800;
+
+    text-align: center;
+}
+
+.dre-routine-card b {
+    position: absolute;
+
+    top: 4px;
+    right: 6px;
+
+    color: #4d8a49;
+}
+
+.dre-routine-card-selected {
+    opacity: 0.45;
+
+    background: #e3f1d8;
+
+    cursor: not-allowed;
+}
+
+.dre-card-confirm {
+    margin-top: 12px;
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 9px 14px;
+
+    border-radius: 12px;
+
+    background: #fff0d3;
+
+    color: #6b4a2d;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.dre-card-confirm button {
+    border: none;
+
+    padding: 7px 16px;
+
+    border-radius: 10px;
+
+    background: #8a5a32;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.dre-final-wrong,
+.dre-final-success {
+    margin-top: 12px;
+
+    padding: 10px 15px;
+
+    border-radius: 12px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    text-align: center;
+}
+
+.dre-final-wrong {
+    background: #ffe0dc;
+
+    color: #a4473c;
+}
+
+.dre-final-success {
+    background: #e3f1d8;
+
+    color: #4d7c36;
+}
+
+.dre-check-routine-button {
+    margin-top: 14px;
+
+    border: none;
+
+    padding: 14px 30px;
+
+    border-radius: 16px;
+
+    background: linear-gradient(
+        180deg,
+        #8a5a32,
+        #59321b
+    );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 0 rgba(67, 36, 17, 0.45);
+}
+
+.dre-check-routine-button:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+/* =====================================================
+   FINAL DOOR
+===================================================== */
+
+.dre-door-layout {
+    position: absolute;
+
+    top: 145px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 91%;
+
+    height: calc(100% - 175px);
+}
+
+.dre-door-card {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background: #5d3721;
+
+    box-shadow:
+        0 18px 45px rgba(64, 35, 16, 0.3);
+}
+
+.dre-door-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+
+    background: #5d3721;
+}
+
+.dre-door-content {
+    position: absolute;
+
+    z-index: 10;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: min(420px, 90%);
+
+    padding: 25px;
+
+    text-align: center;
+
+    border-radius: 25px;
+
+    background: rgba(255, 250, 240, 0.96);
+
+    border: 2px solid rgba(166, 120, 75, 0.3);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.dre-door-icon {
+    font-size: 65px;
+}
+
+.dre-door-content h2 {
+    margin: 10px 0 5px;
+
+    color: #432a19;
+
+    font-size: 30px;
+
+    font-weight: 900;
+}
+
+.dre-door-content p {
+    margin: 0;
+
+    color: #76543a;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+.dre-door-keys {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin: 15px 0;
+}
+
+.dre-door-keys img {
+    width: 48px;
+    height: 48px;
+
+    object-fit: contain;
+}
+
+.dre-unlock-button {
+    border: none;
+
+    padding: 14px 25px;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        180deg,
+        #8a5a32,
+        #59321b
+    );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 0 rgba(67, 36, 17, 0.45);
+}
+
+/* =====================================================
+   CELEBRATION
+===================================================== */
+
+.dre-celebration-layout {
+    position: absolute;
+
+    top: 145px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 91%;
+
+    height: calc(100% - 175px);
+}
+
+.dre-celebration-card {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background: linear-gradient(
+        180deg,
+        #fff1c8,
+        #f5d9a9
+    );
+
+    box-shadow:
+        0 18px 45px rgba(64, 35, 16, 0.3);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 35px;
+
+    padding: 30px;
+}
+
+.dre-celebration-stars {
+    position: absolute;
+
+    top: 25px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-size: 30px;
+}
+
+.dre-celebration-teacher {
+    width: 35%;
+
+    max-height: 480px;
+
+    object-fit: contain;
+
+    object-position: bottom;
+
+    align-self: flex-end;
+}
+
+.dre-celebration-message {
+    width: 55%;
+
+    text-align: center;
+}
+
+.dre-celebration-label {
+    display: inline-block;
+
+    padding: 8px 18px;
+
+    border-radius: 30px;
+
+    background: #dff0d2;
+
+    color: #557d39;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+.dre-celebration-message h2 {
+    margin: 18px 0 12px;
+
+    color: #432a19;
+
+    font-size: clamp(28px, 3vw, 46px);
+
+    font-weight: 900;
+
+    line-height: 1.2;
+}
+
+.dre-celebration-message h2 span {
+    display: block;
+
+    color: #b8792c;
+}
+
+.dre-celebration-message p {
+    margin: 0;
+
+    color: #76543a;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    font-weight: 700;
+}
+
+.dre-celebration-key-row {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin: 20px 0;
+}
+
+.dre-celebration-key-row img {
+    width: 52px;
+    height: 52px;
+
+    object-fit: contain;
+}
+
+.dre-next-button {
+    border: none;
+
+    padding: 15px 30px;
+
+    border-radius: 16px;
+
+    background: linear-gradient(
+        180deg,
+        #8a5a32,
+        #59321b
+    );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 0 rgba(67, 36, 17, 0.45);
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    .dre-main-container {
+        width: 95vw;
+    }
+
+    .dre-intro-layout {
+        grid-template-columns: 40% 60%;
+    }
+
+    .dre-teacher-name {
+        width: 190px;
+
+        font-size: 18px;
+    }
+
+    .dre-task-teacher-area {
+        width: 48%;
+    }
+
+    .dre-map-rooms {
+        gap: 8px;
+
+        padding: 14px;
+    }
+
+    .dre-map-room-button,
+    .dre-map-final-button {
+        height: 110px;
+    }
+
+    .dre-routine-card-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /*
+      INTRO BUTTON FIX FOR TABLET
+    */
+
+    .dre-intro-room-side {
+        height: 100%;
+    }
+
+    .dre-start-button {
+        min-width: 300px;
+
+        padding: 14px 30px;
+
+        font-size: 21px;
+    }
+
+    .dre-intro-room-image-wrap {
+        min-height: 0;
+    }
+}
+
+/* =====================================================
+   SMALL TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .daily-routine-escape-page {
+        overflow-y: auto;
+    }
+
+    .dre-main-container {
+        height: 94vh;
+
+        margin: 3vh auto;
+
+        overflow: hidden;
+    }
+
+    .dre-header {
+        padding-top: 80px;
+    }
+
+    .dre-intro-layout {
+        top: 155px;
+
+        width: 95%;
+
+        grid-template-columns: 1fr;
+
+        /*
+          Intro itself can scroll on smaller screens.
+        */
+        height: calc(100% - 165px);
+
+        overflow-y: auto;
+
+        overflow-x: hidden;
+
+        padding-bottom: 20px;
+    }
+
+    .dre-intro-teacher-side {
+        min-height: 430px;
+
+        flex-shrink: 0;
+    }
+
+    .dre-intro-room-side {
+        min-height: 500px;
+
+        height: 500px;
+
+        flex-shrink: 0;
+    }
+
+    .dre-intro-room-image-wrap {
+        min-height: 0;
+
+        height: auto;
+    }
+
+    .dre-start-button {
+        min-width: 280px;
+
+        padding: 14px 25px;
+
+        font-size: 19px;
+
+        margin-top: 12px;
+    }
+
+    .dre-task-teacher-area {
+        width: 58%;
+    }
+
+    .dre-task-question-panel {
+        width: 50%;
+
+        right: 2%;
+
+        padding: 14px;
+    }
+
+    .dre-map-rooms {
+        grid-template-columns: repeat(3, 1fr);
+
+        align-items: center;
+
+        padding-top: 150px;
+    }
+
+    .dre-map-card {
+        overflow-y: auto;
+    }
+
+    .dre-map-keys {
+        top: 18px;
+
+        right: 18px;
+    }
+
+    .dre-final-content {
+        width: 65%;
+
+        right: 2%;
+    }
+
+    .dre-final-teacher-area {
+        width: 36%;
+    }
+
+    .dre-celebration-card {
+        gap: 15px;
+    }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .daily-routine-escape-page {
+        position: absolute;
+
+        min-height: 100vh;
+
+        height: auto;
+
+        overflow-y: auto;
+    }
+
+    .dre-main-container {
+        width: 100vw;
+
+        min-height: 100vh;
+
+        height: 100vh;
+
+        margin: 0;
+
+        border-radius: 0;
+
+        overflow: hidden;
+    }
+
+    .dre-top-button {
+        top: 18px;
+
+        padding: 10px 14px;
+
+        font-size: 12px;
+    }
+
+    .dre-back-button {
+        left: 14px;
+    }
+
+    .dre-skip-button {
+        right: 14px;
+    }
+
+    .dre-header {
+        padding: 68px 15px 0;
+    }
+
+    .dre-header h1 {
+        font-size: 25px;
+    }
+
+    .dre-header p {
+        font-size: 12px;
+    }
+
+    /* =================================================
+       MOBILE INTRO
+    ================================================= */
+
+    .dre-intro-layout {
+        top: 135px;
+
+        width: 94%;
+
+        height: calc(100% - 145px);
+
+        overflow-y: auto;
+
+        overflow-x: hidden;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 15px;
+
+        padding-bottom: 25px;
+    }
+
+    .dre-intro-teacher-side {
+        min-height: 390px;
+
+        flex-shrink: 0;
+    }
+
+    .dre-intro-teacher-row {
+        transform: scale(0.88);
+
+        transform-origin: center top;
+    }
+
+    .dre-teacher-name {
+        width: 170px;
+
+        padding: 10px 14px;
+
+        font-size: 16px;
+    }
+
+    .dre-intro-bubble {
+        min-width: 0;
+
+        width: 50%;
+
+        padding: 20px 18px;
+    }
+
+    .dre-intro-bubble p {
+        font-size: 13px;
+    }
+
+    .dre-intro-stats {
+        width: 90%;
+
+        margin-top: 15px;
+
+        padding: 14px 15px;
+    }
+
+    .dre-stat-icon {
+        width: 48px;
+        height: 48px;
+
+        font-size: 24px;
+    }
+
+    .dre-stat strong {
+        font-size: 22px;
+    }
+
+    .dre-stat span {
+        font-size: 11px;
+    }
+
+    .dre-stat-divider {
+        height: 65px;
+    }
+
+    /*
+      MOBILE ROOM
+    */
+
+    .dre-intro-room-side {
+        width: 100%;
+
+        height: 430px;
+
+        min-height: 430px;
+
+        flex-shrink: 0;
+    }
+
+    .dre-intro-room-image-wrap {
+        width: 100%;
+
+        flex: 1;
+
+        min-height: 0;
+
+        padding: 7px;
+
+        border-radius: 22px;
+    }
+
+    .dre-intro-room-image {
+        border-radius: 16px;
+    }
+
+    /*
+      MOBILE START BUTTON
+    */
+
+    .dre-start-button {
+        position: relative;
+
+        width: 90%;
+
+        min-width: 0;
+
+        margin: 10px auto 12px;
+
+        padding: 13px 20px;
+
+        border-radius: 18px;
+
+        font-size: 18px;
+
+        gap: 10px;
+    }
+
+    /* =================================================
+       MOBILE MAP
+    ================================================= */
+
+    .dre-map-layout {
+        top: 135px;
+
+        width: 96%;
+
+        height: calc(100% - 150px);
+    }
+
+    .dre-map-title {
+        font-size: 18px;
+
+        top: 12px;
+
+        padding: 9px 16px;
+    }
+
+    .dre-map-instruction {
+        top: 55px;
+
+        font-size: 10px;
+    }
+
+    .dre-map-keys {
+        top: 90px;
+
+        left: 50%;
+        right: auto;
+
+        transform: translateX(-50%);
+
+        gap: 5px;
+
+        padding: 6px;
+    }
+
+    .dre-map-key {
+        width: 38px;
+
+        height: 42px;
+    }
+
+    .dre-map-key img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .dre-map-rooms {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 8px;
+
+        padding: 12px;
+
+        padding-top: 155px;
+
+        align-items: center;
+    }
+
+    .dre-map-room-button,
+    .dre-map-final-button {
+        height: 95px;
+
+        border-radius: 16px;
+    }
+
+    .dre-map-room-icon {
+        font-size: 24px;
+    }
+
+    .dre-map-room-name {
+        font-size: 11px;
+    }
+
+    .dre-map-room-status {
+        font-size: 8px;
+    }
+
+    /* =================================================
+       MOBILE TASK
+    ================================================= */
+
+    .dre-task-layout {
+        top: 135px;
+
+        width: 96%;
+
+        height: calc(100% - 150px);
+    }
+
+    .dre-task-key-counter {
+        top: 10px;
+
+        right: 10px;
+
+        width: 82px;
+
+        height: 98px;
+
+        border-radius: 18px;
+    }
+
+    .dre-key-counter-icon {
+        width: 40px;
+
+        height: 40px;
+
+        font-size: 22px;
+    }
+
+    .dre-task-key-counter strong {
+        font-size: 20px;
+    }
+
+    .dre-task-key-counter span {
+        font-size: 10px;
+    }
+
+    .dre-task-teacher-area {
+        width: 90%;
+
+        left: 2%;
+    }
+
+    .dre-task-teacher-image {
+        width: 31%;
+    }
+
+    .dre-task-bubble {
+        width: 69%;
+
+        padding: 15px;
+
+        margin-bottom: 30px;
+    }
+
+    .dre-task-message {
+        font-size: 11px;
+    }
+
+    .dre-task-question-panel {
+        width: 94%;
+
+        right: 3%;
+
+        bottom: 3%;
+
+        padding: 12px;
+    }
+
+    .dre-task-question {
+        font-size: 12px;
+
+        margin-bottom: 10px;
+    }
+
+    .dre-task-options {
+        gap: 7px;
+    }
+
+    .dre-task-option {
+        padding: 9px 5px;
+
+        font-size: 10px;
+    }
+
+    .dre-submit-button {
+        margin-top: 10px;
+
+        padding: 10px;
+
+        font-size: 12px;
+    }
+
+    /* =================================================
+       MOBILE FINAL ROUTINE
+    ================================================= */
+
+    .dre-final-layout {
+        top: 135px;
+
+        width: 96%;
+
+        height: calc(100% - 150px);
+    }
+
+    .dre-final-content {
+        width: 94%;
+
+        height: 64%;
+
+        top: 3%;
+
+        right: 3%;
+
+        padding: 12px;
+    }
+
+    .dre-final-teacher-area {
+        width: 90%;
+
+        left: 2%;
+    }
+
+    .dre-final-teacher-image {
+        width: 31%;
+    }
+
+    .dre-final-bubble {
+        width: 69%;
+
+        margin-bottom: 20px;
+    }
+
+    .dre-final-heading {
+        font-size: 18px;
+    }
+
+    .dre-final-subheading {
+        font-size: 10px;
+    }
+
+    .dre-selected-routine {
+        min-height: 75px;
+
+        gap: 5px;
+
+        padding: 6px;
+    }
+
+    .dre-selected-card {
+        min-width: 62px;
+    }
+
+    .dre-selected-card img {
+        width: 40px;
+
+        height: 32px;
+    }
+
+    .dre-selected-card span {
+        font-size: 7px;
+    }
+
+    .dre-routine-card-list {
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 5px;
+    }
+
+    .dre-routine-card {
+        padding: 5px;
+    }
+
+    .dre-routine-card img {
+        width: 42px;
+
+        height: 35px;
+    }
+
+    .dre-routine-card span {
+        font-size: 8px;
+    }
+
+    .dre-check-routine-button {
+        padding: 11px 20px;
+
+        font-size: 12px;
+    }
+
+    /* =================================================
+       MOBILE DOOR
+    ================================================= */
+
+    .dre-door-layout {
+        top: 135px;
+
+        width: 96%;
+
+        height: calc(100% - 150px);
+    }
+
+    .dre-door-content {
+        width: 90%;
+
+        padding: 18px;
+    }
+
+    .dre-door-icon {
+        font-size: 50px;
+    }
+
+    .dre-door-content h2 {
+        font-size: 25px;
+    }
+
+    .dre-door-keys img {
+        width: 38px;
+
+        height: 38px;
+    }
+
+    .dre-unlock-button {
+        padding: 12px 18px;
+
+        font-size: 12px;
+    }
+
+    /* =================================================
+       MOBILE CELEBRATION
+    ================================================= */
+
+    .dre-celebration-layout {
+        top: 135px;
+
+        width: 96%;
+
+        height: calc(100% - 150px);
+    }
+
+    .dre-celebration-card {
+        flex-direction: column;
+
+        gap: 0;
+
+        padding: 20px;
+    }
+
+    .dre-celebration-teacher {
+        width: 50%;
+
+        max-height: 250px;
+
+        align-self: center;
+    }
+
+    .dre-celebration-message {
+        width: 100%;
+    }
+
+    .dre-celebration-message h2 {
+        font-size: 27px;
+
+        margin: 12px 0 8px;
+    }
+
+    .dre-celebration-message p {
+        font-size: 12px;
+    }
+
+    .dre-celebration-key-row {
+        margin: 12px 0;
+    }
+
+    .dre-celebration-key-row img {
+        width: 40px;
+
+        height: 40px;
+    }
+
+    .dre-next-button {
+        padding: 12px 25px;
+
+        font-size: 13px;
+    }
+}

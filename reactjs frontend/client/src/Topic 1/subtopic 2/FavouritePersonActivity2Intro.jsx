@@ -17,9 +17,9 @@ function FavouritePersonActivity2Intro({ onFinish }) {
 
             setTimeout(() => {
                 onFinish();
-            }, 500);
+            }, 300);
 
-        }, 4000);
+        }, 1500);
 
         return () => {
 
@@ -49,9 +49,8 @@ function FavouritePersonActivity2Intro({ onFinish }) {
                     Describe Your Favourite Person
                 </h1>
 
-                <p>
-                    Describe your favourite person using simple sentences and tell us what makes them special.
-                </p>
+                
+            
 
             </div>
 

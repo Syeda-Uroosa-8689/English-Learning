@@ -20,9 +20,9 @@ function MoodConversationIntro({ onFinish }) {
 
                 onFinish();
 
-            }, 500);
+            }, 300);
 
-        }, 4000);
+        }, 1500);
 
         return () => clearTimeout(timer);
 

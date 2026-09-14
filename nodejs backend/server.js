@@ -7184,6 +7184,1475 @@ IMPORTANT:
 );
 
 
+/* =========================================================
+   PLAN IT TOGETHER
+   FAST NATURAL SPEAKING CONVERSATION
+========================================================= */
+
+/* =========================================================
+   COMPACT SYSTEM PROMPT
+
+   IMPORTANT:
+   Keep this SHORT.
+
+   The old prompt repeated the same rules many times,
+   which made every Groq request unnecessarily large.
+========================================================= */
+
+function createPlanItTogetherPrompt() {
+  return `
+You are Miss Uroosa, a friendly English teacher for primary-school children.
+
+Activity: "Plan It Together"
+
+This is a natural speaking conversation.
+The child and teacher are making a simple plan.
+
+You MUST evaluate ONLY the child's CURRENT spoken answer against:
+- current question
+- current step
+- current confirmed plan
+
+NEVER invent information.
+
+NEVER assume:
+park, football, library, books, lunch, walking, sleeping,
+or any other example unless the child actually says it.
+
+CORE RULES:
+
+1. Accept meaningful answers even when grammar is imperfect.
+
+2. The child can choose ANY reasonable:
+- day
+- activity
+- place
+- time
+
+3. "No" is NOT automatically wrong.
+
+4. If the child rejects a suggestion but gives no alternative,
+stay on the same step and ask what they prefer.
+
+5. If the child gives an alternative, accept it.
+
+6. If the answer is unrelated to the current question,
+stay on the same step and gently redirect.
+
+7. Never replace the child's idea with a predefined example.
+
+8. Preserve confirmed plan information.
+
+9. Only change a plan field when the child actually provides
+or changes that information.
+
+10. If the child gives multiple planning details in one answer,
+keep all understandable details.
+
+11. Short meaningful answers may be understood naturally.
+If speaking practice requires a complete sentence, politely ask
+the child to repeat a complete sentence and stay on the same step.
+
+12. Clear grammar mistakes should stay on the same step.
+Give only a short correction.
+
+13. Speech-recognition mistakes should be ignored when the
+intended meaning is obvious.
+
+NORMAL ORDER:
+
+day -> activity -> place -> time -> final
+
+DAY:
+
+If asked:
+"Are you free this Saturday?"
+
+"Yes" can confirm Saturday.
+
+"No" alone means Saturday was rejected.
+Ask which day the child is free.
+
+"No, I am free on Sunday."
+Accept Sunday.
+
+ACTIVITY:
+
+If asked:
+"What would you like to do?"
+
+Accept any meaningful activity.
+
+Examples are NOT restrictions.
+
+"I want to sleep."
+means activity = sleep.
+
+"I want to play football."
+means activity = play football.
+
+"I want to read."
+means activity = read.
+
+"I like chocolate."
+does NOT answer what activity they want.
+Stay on activity and redirect.
+
+PLACE:
+
+Accept any meaningful place.
+
+If the child says:
+"I don't want to go to the park."
+
+Do NOT keep park.
+Ask where they would like to go instead.
+
+If the child says:
+"No, let's go to the library instead."
+accept library.
+
+TIME:
+
+Accept natural expressions such as:
+"At five."
+"Five o'clock."
+"5 PM."
+"In the evening."
+"After school."
+
+Do NOT assume a time.
+
+FINAL:
+
+Only complete after day, activity, place and time are known.
+
+If the child confirms the complete plan with yes,
+conversationComplete may be true.
+
+If the child says no,
+do NOT complete.
+Handle the requested change naturally.
+
+TEACHER STYLE:
+
+Friendly, warm, encouraging and short.
+
+Never say:
+"Wrong!"
+"You are incorrect."
+"Bad answer."
+
+Use natural responses such as:
+"That's okay!"
+"Nice idea!"
+"That sounds fun!"
+"Great choice!"
+"No problem!"
+"Let's try that again."
+
+teacherResponse is spoken aloud, so keep it short.
+
+Do NOT return marks, scores, percentages, stars or grades.
+
+Return ONLY valid JSON.
+
+Required JSON:
+
+{
+  "isCorrect": true,
+  "feedback": "",
+  "correction": "",
+  "teacherResponse": "",
+  "retry": false,
+  "conversationComplete": false,
+  "nextStep": "activity",
+  "updatedPlan": {
+    "day": "",
+    "activity": "",
+    "place": "",
+    "time": ""
+  }
+}
+`;
+}
+
+
+/* =========================================================
+   PLAN IT TOGETHER ROUTE
+========================================================= */
+
+app.post(
+  "/api/plan-it-together",
+  async (req, res) => {
+    try {
+      const {
+        message,
+        question,
+        userName,
+        currentStep,
+        selectedDay,
+        selectedActivity,
+        selectedPlace,
+        selectedTime,
+        previousMessages,
+      } = req.body;
+
+      /* ===================================================
+         NORMALIZE PLAN
+      =================================================== */
+
+      const existingPlan = {
+        day: String(
+          selectedDay || ""
+        ).trim(),
+
+        activity: String(
+          selectedActivity || ""
+        ).trim(),
+
+        place: String(
+          selectedPlace || ""
+        ).trim(),
+
+        time: String(
+          selectedTime || ""
+        ).trim(),
+      };
+
+      const safeStep =
+        String(
+          currentStep || "day"
+        ).trim().toLowerCase();
+
+      /* ===================================================
+         NO SPEECH
+      =================================================== */
+
+      if (
+        !message ||
+        !String(message).trim()
+      ) {
+        return res.json({
+          success: true,
+
+          isCorrect: false,
+
+          feedback:
+            "Sorry, I couldn't hear you.",
+
+          correction: "",
+
+          teacherResponse:
+            "Sorry, I couldn't hear you. Please try again.",
+
+          retry: true,
+
+          conversationComplete: false,
+
+          nextStep: safeStep,
+
+          updatedPlan: existingPlan,
+        });
+      }
+
+      /* ===================================================
+         QUESTION VALIDATION
+      =================================================== */
+
+      if (
+        !question ||
+        !String(question).trim()
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Question is required.",
+        });
+      }
+
+      /* ===================================================
+         CLEAN STUDENT MESSAGE
+      =================================================== */
+
+      const studentMessage =
+        String(message).trim();
+
+      const currentQuestion =
+        String(question).trim();
+
+      /* ===================================================
+         ONLY LAST 4 HISTORY ITEMS
+
+         Do NOT send the whole conversation.
+      =================================================== */
+
+      let safePreviousMessages = [];
+
+      if (
+        Array.isArray(previousMessages)
+      ) {
+        safePreviousMessages =
+          previousMessages
+            .slice(-4)
+            .map((item) => ({
+              role:
+                item?.role === "teacher"
+                  ? "teacher"
+                  : "student",
+
+              message:
+                String(
+                  item?.message || ""
+                )
+                  .trim()
+                  .slice(0, 180),
+
+              step:
+                String(
+                  item?.step || ""
+                ).trim(),
+            }))
+            .filter(
+              (item) =>
+                item.message
+            );
+      }
+
+      /* ===================================================
+         COMPACT SYSTEM PROMPT
+      =================================================== */
+
+      const systemPrompt =
+        createPlanItTogetherPrompt();
+
+      /* ===================================================
+         SMALL USER PROMPT
+
+         No giant duplicated instructions.
+      =================================================== */
+
+      const userPrompt = `
+CURRENT STEP:
+${safeStep}
+
+CURRENT QUESTION:
+${currentQuestion}
+
+STUDENT'S ACTUAL SPOKEN ANSWER:
+${studentMessage}
+
+CURRENT CONFIRMED PLAN:
+${JSON.stringify(existingPlan)}
+
+RECENT CONVERSATION:
+${JSON.stringify(safePreviousMessages)}
+
+Evaluate ONLY the student's actual spoken answer.
+
+Important:
+- Do not invent information.
+- Do not assume examples.
+- Accept meaningful alternatives.
+- If the child rejects something, handle it naturally.
+- If the answer is unrelated, stay on the current step.
+- Preserve confirmed plan information.
+- Update only information the child actually provided.
+- Return the next missing planning step.
+- Always return updatedPlan.
+- Return ONLY valid JSON.
+`;
+
+      /* ===================================================
+         GROQ REQUEST
+
+         Smaller output = faster response.
+      =================================================== */
+
+      const completion =
+        await groq.chat.completions.create({
+          model:
+            "openai/gpt-oss-120b",
+
+          messages: [
+            {
+              role: "system",
+              content: systemPrompt,
+            },
+
+            {
+              role: "user",
+              content: userPrompt,
+            },
+          ],
+
+          temperature: 0.1,
+
+          max_tokens: 250,
+        });
+
+      /* ===================================================
+         GET AI RESPONSE
+      =================================================== */
+
+      let aiReply =
+        completion
+          ?.choices?.[0]
+          ?.message
+          ?.content
+          ?.trim();
+
+      if (!aiReply) {
+        return res.status(500).json({
+          success: false,
+          message:
+            "AI did not return a response.",
+        });
+      }
+
+      console.log(
+        "📥 Plan It Together AI:",
+        aiReply
+      );
+
+      /* ===================================================
+         CLEAN MARKDOWN
+      =================================================== */
+
+      aiReply = aiReply
+        .replace(
+          /^```json\s*/i,
+          ""
+        )
+        .replace(
+          /^```\s*/i,
+          ""
+        )
+        .replace(
+          /\s*```$/i,
+          ""
+        )
+        .trim();
+
+      /* ===================================================
+         PARSE JSON
+      =================================================== */
+
+      let evaluation;
+
+      try {
+        evaluation =
+          JSON.parse(aiReply);
+      } catch (jsonError) {
+        console.error(
+          "❌ Plan It Together JSON Parse Error:",
+          jsonError
+        );
+
+        console.error(
+          "AI Reply:",
+          aiReply
+        );
+
+        return res.status(500).json({
+          success: false,
+          message:
+            "AI response format error.",
+        });
+      }
+
+      /* ===================================================
+         SAFE PLAN
+
+         Preserve existing values if AI omits them.
+      =================================================== */
+
+      const aiPlan =
+        evaluation?.updatedPlan || {};
+
+      const updatedPlan = {
+        day:
+          typeof aiPlan.day === "string"
+            ? aiPlan.day.trim()
+            : existingPlan.day,
+
+        activity:
+          typeof aiPlan.activity === "string"
+            ? aiPlan.activity.trim()
+            : existingPlan.activity,
+
+        place:
+          typeof aiPlan.place === "string"
+            ? aiPlan.place.trim()
+            : existingPlan.place,
+
+        time:
+          typeof aiPlan.time === "string"
+            ? aiPlan.time.trim()
+            : existingPlan.time,
+      };
+
+      /* ===================================================
+         ALLOWED STEPS
+      =================================================== */
+
+      const allowedSteps = [
+        "day",
+        "activity",
+        "place",
+        "time",
+        "final",
+      ];
+
+      let safeNextStep =
+        typeof evaluation?.nextStep ===
+        "string"
+          ? evaluation.nextStep
+              .trim()
+              .toLowerCase()
+          : safeStep;
+
+      if (
+        !allowedSteps.includes(
+          safeNextStep
+        )
+      ) {
+        safeNextStep = safeStep;
+      }
+
+      /* ===================================================
+         SAFE RESPONSE TEXT
+      =================================================== */
+
+      const teacherResponse =
+        typeof evaluation?.teacherResponse ===
+        "string"
+          ? evaluation.teacherResponse
+              .trim()
+          : "Let's try again.";
+
+      const feedback =
+        typeof evaluation?.feedback ===
+        "string"
+          ? evaluation.feedback.trim()
+          : "";
+
+      const correction =
+        typeof evaluation?.correction ===
+        "string"
+          ? evaluation.correction.trim()
+          : "";
+
+      /* ===================================================
+         RETRY
+      =================================================== */
+
+      const retry =
+        Boolean(
+          evaluation?.retry
+        );
+
+      let isCorrect =
+        Boolean(
+          evaluation?.isCorrect
+        ) && !retry;
+
+      /* ===================================================
+         IF RETRY
+
+         NEVER advance.
+      =================================================== */
+
+      if (retry) {
+        isCorrect = false;
+
+        safeNextStep = safeStep;
+      }
+
+      /* ===================================================
+         REQUIRED PLAN FIELDS
+      =================================================== */
+
+      const hasDay =
+        Boolean(
+          updatedPlan.day
+        );
+
+      const hasActivity =
+        Boolean(
+          updatedPlan.activity
+        );
+
+      const hasPlace =
+        Boolean(
+          updatedPlan.place
+        );
+
+      const hasTime =
+        Boolean(
+          updatedPlan.time
+        );
+
+      /* ===================================================
+         COMPLETION SAFETY
+      =================================================== */
+
+      let conversationComplete =
+        Boolean(
+          evaluation?.conversationComplete
+        );
+
+      if (
+        !(
+          hasDay &&
+          hasActivity &&
+          hasPlace &&
+          hasTime
+        )
+      ) {
+        conversationComplete = false;
+      }
+
+      /* ===================================================
+         IMPORTANT:
+
+         Child must actually confirm the final plan.
+      =================================================== */
+
+      if (
+        safeStep === "final" &&
+        !isCorrect
+      ) {
+        conversationComplete = false;
+      }
+
+      /* ===================================================
+         NEVER COMPLETE ON RETRY
+      =================================================== */
+
+      if (retry) {
+        conversationComplete = false;
+      }
+
+      /* ===================================================
+         FINAL RESPONSE
+      =================================================== */
+
+      const finalResponse = {
+        success: true,
+
+        isCorrect,
+
+        feedback,
+
+        correction,
+
+        teacherResponse,
+
+        retry,
+
+        conversationComplete,
+
+        nextStep:
+          safeNextStep,
+
+        updatedPlan,
+      };
+
+      console.log(
+        "✅ Plan It Together:",
+        finalResponse
+      );
+
+      return res.json(
+        finalResponse
+      );
+
+    } catch (error) {
+      console.error(
+        "❌ Plan It Together Error:",
+        error
+      );
+
+      return res.status(500).json({
+        success: false,
+
+        message:
+          "Unable to continue the conversation right now.",
+      });
+    }
+  }
+);
+
+/* =========================================================
+   SPACE PREFERENCE MISSION
+   ROUND 3 — FINAL SPEAKING PROMPT
+========================================================= */
+
+
+function createSpacePreferenceRound3Prompt() {
+
+  return `
+
+You are Miss Uroosa, a friendly English teacher
+for primary school children.
+
+The student is doing:
+
+"SPACE PREFERENCE MISSION"
+"ROUND 3 - FINAL SPEAK CHALLENGE"
+
+This is the FINAL speaking round.
+
+The student must speak about their partner's
+likes and dislikes.
+
+==================================================
+MAIN PURPOSE
+==================================================
+
+Evaluate ONLY the student's spoken answer for
+the CURRENT FINAL ROUND.
+
+The student may:
+
+- give a correct sentence
+- make a grammar mistake
+- use the wrong word
+- confuse like and dislike
+- give an incomplete sentence
+- give a short but meaningful answer
+- make a small speech-recognition mistake
+- say something unrelated
+- say nothing
+- speak unclearly
+
+Be friendly and encouraging.
+
+Never make the child feel bad.
+
+==================================================
+ROMAN ENGLISH
+==================================================
+
+Whenever you explain a mistake, explain it in
+simple ROMAN ENGLISH.
+
+Roman English means Hindi/Urdu spoken language
+written using English letters.
+
+Example:
+
+Student:
+
+"My partner like football."
+
+Teacher:
+
+"Good try! Tumne kaha: My partner like football.
+
+Sahi sentence hai:
+
+My partner likes football.
+
+Yahan 'partner' singular hai, isliye 'like' ke saath
+'s' lagayenge.
+
+Ab bolo:
+
+My partner likes football."
+
+IMPORTANT:
+
+- Never use Urdu script.
+- Never use Hindi script.
+- Never use Devanagari.
+- Never use Arabic script.
+- Explanations must be Roman English.
+- Correct English sentences must remain English.
+
+==================================================
+FINAL SPEAKING TASK
+==================================================
+
+The student should talk about their partner's
+preferences.
+
+Example:
+
+"My partner likes football.
+My partner doesn't like swimming."
+
+The student does NOT have to reproduce this
+exact sentence word-for-word.
+
+Natural English variations are acceptable.
+
+==================================================
+EXPECTED INFORMATION
+==================================================
+
+The frontend may send the partner preferences
+discovered during the previous rounds.
+
+These may include:
+
+- painting
+- reading
+- football
+- sports
+- food
+- music
+- other likes
+- other dislikes
+
+Use the provided partner preferences as context.
+
+If expected preferences are provided, use them
+to check whether the student is talking about
+the correct partner preferences.
+
+==================================================
+CORRECT ANSWER
+==================================================
+
+If the student's answer is grammatically correct
+and communicates the intended partner preference:
+
+Mark it correct.
+
+Do NOT invent a mistake.
+
+Example:
+
+Student:
+
+"My partner likes football."
+
+Teacher:
+
+"Excellent! Tumne partner ki preference
+bilkul clearly batayi. 🎉"
+
+Return:
+
+{
+  "isCorrect": true,
+  "feedback": "Excellent!",
+  "correction": "",
+  "teacherResponse": "Excellent! Tumne partner ki preference bilkul clearly batayi. 🎉",
+  "retry": false
+}
+
+==================================================
+GRAMMAR MISTAKE
+==================================================
+
+If there is a clear grammar mistake:
+
+1. Appreciate the effort.
+2. Tell the student what they said.
+3. Give the corrected English sentence.
+4. Explain the important mistake in Roman English.
+5. Ask them to repeat.
+6. retry = true.
+
+Example:
+
+Student:
+
+"My partner like football."
+
+Return:
+
+{
+  "isCorrect": false,
+  "feedback": "Good try!",
+  "correction": "My partner likes football.",
+  "teacherResponse": "Good try! Tumne kaha: My partner like football. Sahi sentence hai: My partner likes football. Yahan 'partner' singular hai, isliye 'like' ke saath 's' lagayenge. Ab bolo: My partner likes football.",
+  "retry": true
+}
+
+==================================================
+LIKE / DISLIKE CONFUSION
+==================================================
+
+If the student changes the meaning of like/dislike:
+
+Expected:
+
+"My partner likes football."
+
+Student:
+
+"My partner doesn't like football."
+
+This is incorrect if football is a known preference.
+
+Explain simply:
+
+"Good try! Tumne football ke baare mein 'doesn't like'
+bola, lekin partner ko football pasand hai.
+
+Sahi sentence hai:
+
+My partner likes football.
+
+Ab bolo."
+
+retry = true.
+
+==================================================
+INCOMPLETE ANSWER
+==================================================
+
+If the student says:
+
+"Football."
+
+or:
+
+"Likes football."
+
+Guide them to a complete sentence.
+
+Example:
+
+"Good try! Tumne football bola.
+
+Complete sentence hai:
+
+My partner likes football.
+
+Ab bolo:
+
+My partner likes football."
+
+retry = true.
+
+==================================================
+MULTIPLE SENTENCES
+==================================================
+
+The final round can contain more than one sentence.
+
+Example:
+
+"My partner likes football.
+My partner doesn't like swimming."
+
+If both sentences are meaningful and grammatically
+acceptable, mark correct.
+
+Do not force an exact number of sentences.
+
+==================================================
+NATURAL VARIATIONS
+==================================================
+
+Accept natural variations.
+
+Examples:
+
+"My partner likes football."
+
+"My partner really likes football."
+
+"My partner is a fan of football."
+
+"My partner doesn't like swimming."
+
+"My partner dislikes swimming."
+
+Do not unnecessarily reject natural English.
+
+==================================================
+SMALL TRANSCRIPTION ERRORS
+==================================================
+
+Speech recognition may produce small errors.
+
+Do NOT punish obvious transcription mistakes.
+
+Example:
+
+"hair" → "hare"
+
+"football" → "foot ball"
+
+If the intended meaning is obvious, accept it.
+
+==================================================
+UNRELATED ANSWER
+==================================================
+
+If the student says something unrelated:
+
+Do not start a new conversation.
+
+Guide them back to the final task.
+
+Example:
+
+"Good try! 😊 Chalo apne partner ki preference ke
+baare mein bolte hain.
+
+Ab bolo:
+
+My partner likes football."
+
+retry = true.
+
+==================================================
+UNCLEAR SPEECH
+==================================================
+
+If the transcript cannot reasonably be understood:
+
+Return:
+
+{
+  "isCorrect": false,
+  "feedback": "Good try!",
+  "correction": "",
+  "teacherResponse": "Good try! Mujhe sentence thoda clear nahi suna. Ek baar phir clearly bolo.",
+  "retry": true
+}
+
+Do NOT invent a correction.
+
+==================================================
+NO SPEECH
+==================================================
+
+If the student's message is empty, blank, whitespace,
+or missing:
+
+Return:
+
+{
+  "isCorrect": false,
+  "feedback": "Sorry, I couldn't hear you.",
+  "correction": "",
+  "teacherResponse": "Sorry, I couldn't hear you. Please try again.",
+  "retry": true
+}
+
+==================================================
+TEACHER PERSONALITY
+==================================================
+
+You are:
+
+- friendly
+- patient
+- cheerful
+- encouraging
+- supportive
+- suitable for primary school children
+
+Never say:
+
+"Wrong!"
+
+"You are incorrect."
+
+"Bad answer."
+
+Instead say:
+
+"Good try!"
+
+"Nice try!"
+
+"Almost!"
+
+"Let's try that again."
+
+"You're doing great!"
+
+==================================================
+RESPONSE LENGTH
+==================================================
+
+Keep teacherResponse short.
+
+Maximum around 70 words.
+
+==================================================
+OUTPUT
+==================================================
+
+Return ONLY valid JSON.
+
+Do NOT use markdown.
+
+Do NOT use code fences.
+
+Do NOT include an explanation field.
+
+Do NOT include marks.
+
+Do NOT include score.
+
+Do NOT include percentage.
+
+Do NOT include database information.
+
+Use EXACTLY:
+
+{
+  "isCorrect": true,
+  "feedback": "Excellent!",
+  "correction": "",
+  "teacherResponse": "Excellent! Tumne partner ki preference bilkul clearly batayi. 🎉",
+  "retry": false
+}
+
+For incorrect:
+
+{
+  "isCorrect": false,
+  "feedback": "Good try!",
+  "correction": "My partner likes football.",
+  "teacherResponse": "Good try! Tumne kaha: My partner like football. Sahi sentence hai: My partner likes football. Yahan 'partner' singular hai, isliye 'like' ke saath 's' lagayenge. Ab bolo: My partner likes football.",
+  "retry": true
+}
+
+IMPORTANT:
+
+- Return JSON only.
+- Never include explanation.
+- Never include marks.
+- Never include score.
+- Never include percentage.
+- Never invent a grammar mistake.
+- Never invent a correction.
+- correction must contain ONLY corrected English.
+- teacherResponse is exactly what Miss Uroosa speaks.
+
+`;
+
+}
+
+
+/* =========================================================
+   SPACE PREFERENCE MISSION
+   ROUND 3 — FINAL SPEAKING CHECK
+========================================================= */
+
+app.post(
+  "/api/space-preference/round3",
+  async (req, res) => {
+
+    try {
+
+      const {
+        message,
+        question,
+        userName,
+        preferences,
+        context
+      } = req.body;
+
+
+      /* ---------------------------------------------
+         NO SPEECH
+      --------------------------------------------- */
+
+      if (
+        !message ||
+        !String(message).trim()
+      ) {
+
+        return res.json({
+
+          success: true,
+
+          isCorrect: false,
+
+          feedback:
+            "Sorry, I couldn't hear you.",
+
+          correction: "",
+
+          teacherResponse:
+            "Sorry, I couldn't hear you. Please try again.",
+
+          retry: true
+
+        });
+
+      }
+
+
+      /* ---------------------------------------------
+         QUESTION VALIDATION
+      --------------------------------------------- */
+
+      if (
+        !question ||
+        !String(question).trim()
+      ) {
+
+        return res.status(400).json({
+
+          success: false,
+
+          message:
+            "Question is required."
+
+        });
+
+      }
+
+
+      /* ---------------------------------------------
+         PROMPT
+      --------------------------------------------- */
+
+      const systemPrompt =
+        createSpacePreferenceRound3Prompt();
+
+
+      const userPrompt = `
+
+CURRENT QUESTION:
+
+${question}
+
+
+STUDENT SPOKEN ANSWER:
+
+${message}
+
+
+PARTNER PREFERENCES:
+
+${
+  preferences
+    ? JSON.stringify(preferences)
+    : "Not provided"
+}
+
+
+ADDITIONAL CONTEXT:
+
+${
+  context ||
+  "Space Preference Mission - Round 3 Final Speaking Challenge"
+}
+
+
+STUDENT NAME:
+
+${userName || "Student"}
+
+
+Evaluate ONLY the student's spoken answer.
+
+IMPORTANT:
+
+- Check grammar.
+- Check whether the answer communicates the partner's preference.
+- Check like/dislike meaning.
+- Accept natural English variations.
+- Accept small speech-recognition mistakes when meaning is clear.
+- Do not invent mistakes.
+- If incorrect, explain in simple Roman English.
+- correction must contain ONLY corrected English.
+- teacherResponse must be what Miss Uroosa speaks.
+- If unclear, ask the child to repeat.
+- If no speech, ask the child to try again.
+- Never use Urdu script.
+- Never use Hindi script.
+- Never use Devanagari.
+- Never include an explanation field.
+- Never give marks.
+- Never give score.
+- Never give percentage.
+- Return ONLY valid JSON.
+
+`;
+
+
+      /* ---------------------------------------------
+         GROQ
+      --------------------------------------------- */
+
+      const completion =
+        await groq.chat.completions.create({
+
+          model:
+            "openai/gpt-oss-120b",
+
+          messages: [
+
+            {
+              role: "system",
+
+              content:
+                systemPrompt
+
+            },
+
+            {
+              role: "user",
+
+              content:
+                userPrompt
+
+            }
+
+          ],
+
+          temperature: 0.2,
+
+          max_tokens: 500
+
+        });
+
+
+      /* ---------------------------------------------
+         AI RESPONSE
+      --------------------------------------------- */
+
+      let aiReply =
+        completion
+          ?.choices?.[0]
+          ?.message
+          ?.content
+          ?.trim();
+
+
+      if (!aiReply) {
+
+        return res.status(500).json({
+
+          success: false,
+
+          message:
+            "AI did not return a response."
+
+        });
+
+      }
+
+
+      /* ---------------------------------------------
+         CLEAN JSON
+      --------------------------------------------- */
+
+      aiReply =
+        aiReply
+          .replace(
+            /^```json\s*/i,
+            ""
+          )
+          .replace(
+            /^```\s*/i,
+            ""
+          )
+          .replace(
+            /\s*```$/i,
+            ""
+          )
+          .trim();
+
+
+      /* ---------------------------------------------
+         PARSE JSON
+      --------------------------------------------- */
+
+      let evaluation;
+
+      try {
+
+        evaluation =
+          JSON.parse(aiReply);
+
+      }
+
+      catch (jsonError) {
+
+        console.log(
+          "❌ Space Preference Round 3 JSON Error:",
+          jsonError
+        );
+
+        console.log(
+          "AI Reply:",
+          aiReply
+        );
+
+        return res.status(500).json({
+
+          success: false,
+
+          message:
+            "AI evaluation format error."
+
+        });
+
+      }
+
+
+      /* ---------------------------------------------
+         SAFE RESPONSE
+      --------------------------------------------- */
+
+      return res.json({
+
+        success: true,
+
+        isCorrect:
+          Boolean(
+            evaluation.isCorrect
+          ),
+
+        feedback:
+          evaluation.feedback ||
+          "",
+
+        correction:
+          evaluation.correction ||
+          "",
+
+        teacherResponse:
+          evaluation.teacherResponse ||
+          "Let's try again.",
+
+        retry:
+          Boolean(
+            evaluation.retry
+          )
+
+      });
+
+    }
+
+
+    catch (err) {
+
+      console.log(
+        "❌ Space Preference Round 3 Error:",
+        err
+      );
+
+      return res.status(500).json({
+
+        success: false,
+
+        message:
+          "Unable to check the answer right now."
+
+      });
+
+    }
+
+  }
+);
+
 /* =====================================================
    FAVOURITE PLACE - ACTIVITY 3
    AI TEACHER CHECK
@@ -9238,6 +10707,1487 @@ app.post(
     }
   }
 );
+
+
+
+
+
+
+
+/* =========================================================
+   FINAL CHALLENGE 4
+   TOPIC 4: ON MY CALENDAR
+
+   5 QUESTIONS × 5 MARKS = 25
+========================================================= */
+
+
+/* =========================================================
+   FINAL CHALLENGE 4 PROMPT
+========================================================= */
+
+function createFinalChallengePrompt() {
+  return `
+
+You are an English assessment evaluator for a primary school English learning application.
+
+The student is completing the FINAL CHALLENGE of Topic 4:
+"On My Calendar".
+
+The student has already learned:
+
+1. Days and Months
+2. My Daily Routine
+3. Making Plans
+
+==================================================
+ASSESSMENT
+==================================================
+
+Evaluate ONLY the student's current answer.
+
+Do NOT behave like a normal conversation teacher.
+
+Do NOT ask another question.
+
+Do NOT continue the conversation.
+
+Do NOT invent information that the student did not say.
+
+Evaluate the student's answer according to the question provided.
+
+Evaluate:
+
+- Answer relevance
+- Grammar
+- Sentence structure
+- Vocabulary
+- Days and months
+- Calendar vocabulary
+- Daily routine vocabulary
+- Time expressions
+- Making plans
+- Future plans
+- Logical sequence
+- Clarity
+
+==================================================
+SCORING
+==================================================
+
+The frontend sends the maximum marks.
+
+Give a score from 0 to the provided maximum.
+
+IMPORTANT:
+
+Never give more marks than the question maximum.
+
+A completely correct and complete answer:
+Give full marks.
+
+Correct meaning with small grammar mistakes:
+Give partial marks.
+
+Short but relevant answer:
+Give reasonable partial marks.
+
+Understandable answer with some missing details:
+Give partial marks according to the question.
+
+Unclear answer:
+Give low marks.
+
+Completely unrelated answer:
+Give 0 marks.
+
+Do NOT invent requirements that are not present in the question.
+
+Do NOT require advanced English.
+
+Do NOT penalize a child for using simple vocabulary.
+
+Simple but correct English can receive full marks.
+
+==================================================
+DAYS & MONTHS
+==================================================
+
+When the question involves days or months, check:
+
+- correct day names
+- correct month names
+- relevant calendar information
+- understandable reasons when reasons are requested
+- whether the answer answers the question
+
+Do NOT require a specific day or month unless the question requires one.
+
+==================================================
+DAILY ROUTINE
+==================================================
+
+When the question involves daily routine, check:
+
+- routine activities
+- suitable time expressions
+- morning
+- afternoon
+- evening
+- logical order when appropriate
+- understandable sentences
+
+Suitable examples include:
+
+- in the morning
+- in the afternoon
+- in the evening
+- at 7 o'clock
+- at 8:30
+- before school
+- after school
+
+Do NOT require exact times unless the question specifically asks for them.
+
+==================================================
+MAKING PLANS
+==================================================
+
+When the question involves future plans, check:
+
+- planned activities
+- future meaning
+- days
+- times
+- appropriate future expressions
+
+Accept simple forms such as:
+
+- I will play.
+- I am going to visit my cousin.
+- I will go on Saturday.
+- I am going to watch a movie.
+
+Do NOT require one specific future structure when another grammatically correct structure communicates the same meaning.
+
+==================================================
+GRAMMAR
+==================================================
+
+Check:
+
+- subject and verb agreement
+- articles
+- singular/plural
+- verb tense
+- future tense
+- word order
+- prepositions
+- sentence structure
+- incorrect word usage
+- time expressions
+- day/month usage
+
+==================================================
+ROMAN ENGLISH
+==================================================
+
+All explanations MUST be in Roman English.
+
+NEVER use:
+
+- Urdu script
+- Hindi script
+- Devanagari
+
+Example:
+
+Mistake:
+"I go school at 8."
+
+Correction:
+"I go to school at 8."
+
+Explanation:
+"Yahan 'go school' ke bajaye 'go to school' bolna sahi hai."
+
+Another example:
+
+Mistake:
+"I am going play on Saturday."
+
+Correction:
+"I am going to play on Saturday."
+
+Explanation:
+"Future plan batane ke liye 'going to' ke baad verb ki simple form use hoti hai."
+
+==================================================
+ANSWER CORRECT
+==================================================
+
+Set answerCorrect to true when the student's answer meaningfully answers the question.
+
+Set answerCorrect to false when:
+
+- the answer is completely unrelated
+- the answer does not answer the question
+- the answer is too unclear to understand
+
+Small grammar mistakes do NOT automatically make answerCorrect false.
+
+==================================================
+GRAMMAR CORRECT
+==================================================
+
+Set grammarCorrect to true when there are no meaningful grammar mistakes.
+
+Set grammarCorrect to false when there are actual grammar mistakes.
+
+Do NOT invent mistakes.
+
+Do NOT change a correct sentence just to make it more advanced.
+
+==================================================
+MISTAKES
+==================================================
+
+Only include real mistakes.
+
+Each mistake must contain:
+
+{
+  "mistake": "incorrect phrase",
+  "correction": "correct phrase",
+  "urduExplanation": "Roman English explanation"
+}
+
+IMPORTANT:
+
+The field MUST be named:
+
+"urduExplanation"
+
+But the explanation MUST contain Roman English only.
+
+If there are no mistakes:
+
+"mistakes": []
+
+"correction": ""
+
+==================================================
+FEEDBACK
+==================================================
+
+Feedback must be short, positive, and child-friendly.
+
+Examples:
+
+"Excellent work! Your answer was clear and complete."
+
+"Great job! Your plan was easy to understand."
+
+"Good effort! Your idea was clear, but there was a small grammar mistake."
+
+"Nice try! Remember to use 'going to' for your future plan."
+
+Do NOT ask another question.
+
+Do NOT continue the conversation.
+
+==================================================
+OUTPUT
+==================================================
+
+Return ONLY valid JSON.
+
+Do NOT use markdown.
+
+Return exactly this structure:
+
+{
+  "marks": 5,
+  "maxMarks": 5,
+  "answerCorrect": true,
+  "grammarCorrect": true,
+  "mistakes": [],
+  "correction": "",
+  "feedback": "Excellent work!"
+}
+
+When there is a mistake:
+
+{
+  "marks": 4,
+  "maxMarks": 5,
+  "answerCorrect": true,
+  "grammarCorrect": false,
+  "mistakes": [
+    {
+      "mistake": "I am going play on Saturday",
+      "correction": "I am going to play on Saturday",
+      "urduExplanation": "Future plan batane ke liye 'going to' ke baad verb ki simple form use hoti hai."
+    }
+  ],
+  "correction": "I am going to play on Saturday.",
+  "feedback": "Good try! Your plan is clear, but there is a small grammar mistake."
+}
+
+IMPORTANT:
+
+Do not invent mistakes.
+
+If the answer is completely correct:
+
+"mistakes": []
+
+"correction": ""
+
+"answerCorrect": true
+
+"grammarCorrect": true
+
+Always respect the maximum marks.
+
+`;
+}
+
+
+/* =========================================================
+   FINAL CHALLENGE - CHECK ANSWER
+========================================================= */
+
+app.post(
+  "/api/final-challenge/check",
+  async (req, res) => {
+
+    try {
+
+      const {
+        questionId,
+        question,
+        message,
+        maxMarks,
+        questionType,
+        expectedAnswer,
+        context,
+        userName,
+      } = req.body;
+
+
+      /* ---------------------------------------------
+         VALIDATION
+      --------------------------------------------- */
+
+      if (
+        !question ||
+        !String(question).trim()
+      ) {
+
+        return res.status(400).json({
+          success: false,
+          message: "Question is required.",
+        });
+
+      }
+
+
+      if (
+        !message ||
+        !String(message).trim()
+      ) {
+
+        return res.status(400).json({
+          success: false,
+          message:
+            "Student answer is required.",
+        });
+
+      }
+
+
+      /* ---------------------------------------------
+         SAFE QUESTION MARKS
+
+         Every Final Challenge 4 question = 5 marks
+      --------------------------------------------- */
+
+      let marksLimit =
+        Number(maxMarks);
+
+
+      if (
+        !Number.isFinite(
+          marksLimit
+        ) ||
+        marksLimit <= 0
+      ) {
+
+        marksLimit = 5;
+
+      }
+
+
+      marksLimit =
+        Math.min(
+          Math.max(
+            marksLimit,
+            1
+          ),
+          5
+        );
+
+
+      /* ---------------------------------------------
+         SYSTEM PROMPT
+      --------------------------------------------- */
+
+      const systemPrompt =
+        createFinalChallengePrompt();
+
+
+      /* ---------------------------------------------
+         ASSESSMENT PROMPT
+      --------------------------------------------- */
+
+      const assessmentPrompt = `
+
+QUESTION:
+
+${question}
+
+
+QUESTION ID:
+
+${questionId ?? ""}
+
+
+QUESTION TYPE:
+
+${questionType || "speaking"}
+
+
+EXPECTED ANSWER / GUIDANCE:
+
+${
+  expectedAnswer ||
+  "Evaluate the answer based on the question."
+}
+
+
+ADDITIONAL CONTEXT:
+
+${
+  context ||
+  "Topic 4: On My Calendar English assessment."
+}
+
+
+STUDENT NAME:
+
+${userName || "Student"}
+
+
+MAXIMUM MARKS FOR THIS QUESTION:
+
+${marksLimit}
+
+
+STUDENT ANSWER:
+
+${String(message).trim()}
+
+
+IMPORTANT:
+
+The maximum possible score is ${marksLimit}.
+
+Never give more than ${marksLimit}.
+
+Evaluate ONLY this answer.
+
+Do not ask another question.
+
+Do not continue the conversation.
+
+Return ONLY valid JSON.
+
+`;
+
+
+      /* ---------------------------------------------
+         GROQ AI
+      --------------------------------------------- */
+
+      const completion =
+        await groq.chat.completions.create({
+
+          model:
+            "openai/gpt-oss-120b",
+
+          messages: [
+
+            {
+              role: "system",
+              content: systemPrompt,
+            },
+
+            {
+              role: "user",
+              content: assessmentPrompt,
+            },
+
+          ],
+
+          temperature: 0.1,
+
+          max_tokens: 600,
+
+        });
+
+
+      /* ---------------------------------------------
+         GET AI RESPONSE
+      --------------------------------------------- */
+
+      let aiReply =
+        completion
+          ?.choices?.[0]
+          ?.message
+          ?.content
+          ?.trim();
+
+
+      if (!aiReply) {
+
+        return res.status(500).json({
+          success: false,
+          message:
+            "AI did not return an evaluation.",
+        });
+
+      }
+
+
+      /* ---------------------------------------------
+         REMOVE MARKDOWN JSON
+      --------------------------------------------- */
+
+      aiReply =
+        aiReply
+          .replace(
+            /^```json\s*/i,
+            ""
+          )
+          .replace(
+            /^```\s*/i,
+            ""
+          )
+          .replace(
+            /\s*```$/i,
+            ""
+          )
+          .trim();
+
+
+      /* ---------------------------------------------
+         PARSE JSON
+      --------------------------------------------- */
+
+      let evaluation;
+
+      try {
+
+        evaluation =
+          JSON.parse(aiReply);
+
+      } catch (jsonError) {
+
+        console.log(
+          "❌ Final Challenge 4 JSON Error:",
+          jsonError
+        );
+
+        console.log(
+          "AI Reply:",
+          aiReply
+        );
+
+        return res.status(500).json({
+          success: false,
+          message:
+            "AI evaluation format error.",
+        });
+
+      }
+
+
+      /* ---------------------------------------------
+         SAFE MARKS
+      --------------------------------------------- */
+
+      let marks =
+        Number(
+          evaluation?.marks
+        );
+
+
+      if (
+        !Number.isFinite(
+          marks
+        )
+      ) {
+
+        marks = 0;
+
+      }
+
+
+      marks =
+        Math.max(
+          0,
+          Math.min(
+            marks,
+            marksLimit
+          )
+        );
+
+
+      /* ---------------------------------------------
+         SAFE MISTAKES
+      --------------------------------------------- */
+
+      const mistakes =
+        Array.isArray(
+          evaluation?.mistakes
+        )
+
+          ? evaluation.mistakes
+              .map(
+                (item) => ({
+
+                  mistake:
+                    item?.mistake ||
+                    "",
+
+                  correction:
+                    item?.correction ||
+                    "",
+
+                  urduExplanation:
+                    item?.urduExplanation ||
+                    "",
+
+                })
+              )
+              .filter(
+                (item) =>
+                  item.mistake ||
+                  item.correction ||
+                  item.urduExplanation
+              )
+
+          : [];
+
+
+      /* ---------------------------------------------
+         GRAMMAR STATUS
+      --------------------------------------------- */
+
+      const grammarCorrect =
+        mistakes.length === 0
+          ? true
+          : Boolean(
+              evaluation?.grammarCorrect
+            );
+
+
+      /* ---------------------------------------------
+         ANSWER STATUS
+      --------------------------------------------- */
+
+      const answerCorrect =
+        Boolean(
+          evaluation?.answerCorrect
+        );
+
+
+      /* ---------------------------------------------
+         FINAL RESPONSE
+      --------------------------------------------- */
+
+      return res.json({
+
+        success: true,
+
+        questionId:
+          questionId ?? null,
+
+        marks,
+
+        maxMarks:
+          marksLimit,
+
+        answerCorrect,
+
+        grammarCorrect,
+
+        mistakes,
+
+        correction:
+          evaluation?.correction ||
+          "",
+
+        feedback:
+          evaluation?.feedback ||
+          `You scored ${marks} out of ${marksLimit} marks.`,
+
+        userAnswer:
+          String(message).trim(),
+
+      });
+
+    }
+
+    catch (err) {
+
+      console.log(
+        "❌ Final Challenge 4 Check Error:",
+        err
+      );
+
+      return res.status(500).json({
+
+        success: false,
+
+        message:
+          "Unable to evaluate the answer right now.",
+
+      });
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   SAVE FINAL CHALLENGE 4 RESULT
+   TOPIC 4: ON MY CALENDAR
+========================================================= */
+
+app.post(
+  "/api/final-challenge/save-result",
+  async (req, res) => {
+
+    try {
+
+      const {
+        userName,
+        topicId,
+        lessonId,
+        totalMarks,
+        answers,
+      } = req.body;
+
+
+      /* ---------------------------------------------
+         MONGODB CHECK
+      --------------------------------------------- */
+
+      if (!isMongoConnected()) {
+
+        return res.status(503).json({
+          success: false,
+          message:
+            "MongoDB is not connected.",
+        });
+
+      }
+
+
+      /* ---------------------------------------------
+         ANSWERS VALIDATION
+      --------------------------------------------- */
+
+      if (
+        !Array.isArray(answers) ||
+        answers.length === 0
+      ) {
+
+        return res.status(400).json({
+          success: false,
+          message:
+            "Final Challenge answers are required.",
+        });
+
+      }
+
+
+      /* ---------------------------------------------
+         FINAL CHALLENGE 4 TOTAL
+
+         5 × 5 = 25
+      --------------------------------------------- */
+
+      const FINAL_TOTAL_MARKS = 25;
+
+
+      /* ---------------------------------------------
+         TOTAL MARKS
+
+         Final Challenge 4 is always /25.
+      --------------------------------------------- */
+
+      const calculatedTotalMarks =
+        FINAL_TOTAL_MARKS;
+
+
+      /* ---------------------------------------------
+         OBTAINED MARKS
+      --------------------------------------------- */
+
+      let obtainedMarks = 0;
+
+
+      answers.forEach(
+        (answer) => {
+
+          const questionMax =
+            Number(
+              answer?.max_marks
+            ) || 5;
+
+
+          let questionMarks =
+            Number(
+              answer?.marks
+            );
+
+
+          if (
+            !Number.isFinite(
+              questionMarks
+            )
+          ) {
+
+            questionMarks = 0;
+
+          }
+
+
+          questionMarks =
+            Math.max(
+              0,
+              questionMarks
+            );
+
+
+          questionMarks =
+            Math.min(
+              questionMarks,
+              questionMax
+            );
+
+
+          obtainedMarks +=
+            questionMarks;
+
+        }
+      );
+
+
+      /* ---------------------------------------------
+         NEVER EXCEED 25
+      --------------------------------------------- */
+
+      obtainedMarks =
+        Math.min(
+          Math.max(
+            obtainedMarks,
+            0
+          ),
+          FINAL_TOTAL_MARKS
+        );
+
+
+      /* ---------------------------------------------
+         PERCENTAGE
+      --------------------------------------------- */
+
+      const percentage =
+        Number(
+          (
+            (
+              obtainedMarks /
+              calculatedTotalMarks
+            ) * 100
+          ).toFixed(2)
+        );
+
+
+      /* ---------------------------------------------
+         GRADE
+      --------------------------------------------- */
+
+      let grade = "";
+
+
+      if (
+        percentage >= 90
+      ) {
+
+        grade = "Excellent";
+
+      } else if (
+        percentage >= 80
+      ) {
+
+        grade = "Very Good";
+
+      } else if (
+        percentage >= 70
+      ) {
+
+        grade = "Good";
+
+      } else if (
+        percentage >= 60
+      ) {
+
+        grade = "Keep Practicing";
+
+      } else {
+
+        grade = "Needs Improvement";
+
+      }
+
+
+      /* ---------------------------------------------
+         COLLECT GRAMMAR MISTAKES
+      --------------------------------------------- */
+
+      const grammarMistakes = [];
+
+
+      answers.forEach(
+        (answer) => {
+
+          const questionId =
+            Number(
+              answer?.question_id
+            ) || 0;
+
+
+          if (
+            Array.isArray(
+              answer?.mistakes
+            )
+          ) {
+
+            answer.mistakes.forEach(
+              (mistake) => {
+
+                if (
+                  mistake &&
+                  (
+                    mistake.mistake ||
+                    mistake.correction ||
+                    mistake.urduExplanation
+                  )
+                ) {
+
+                  grammarMistakes.push({
+
+                    question_id:
+                      questionId,
+
+                    mistake:
+                      mistake.mistake ||
+                      "",
+
+                    correction:
+                      mistake.correction ||
+                      "",
+
+                    urdu_explanation:
+                      mistake.urduExplanation ||
+                      "",
+
+                  });
+
+                }
+
+              }
+            );
+
+          }
+
+
+          /* -----------------------------------------
+             OLD SINGLE MISTAKE SUPPORT
+          ----------------------------------------- */
+
+          if (
+            answer?.mistake &&
+            !Array.isArray(
+              answer?.mistakes
+            )
+          ) {
+
+            grammarMistakes.push({
+
+              question_id:
+                questionId,
+
+              mistake:
+                answer.mistake,
+
+              correction:
+                answer.correction ||
+                "",
+
+              urdu_explanation:
+                answer.urdu_explanation ||
+                "",
+
+            });
+
+          }
+
+        }
+      );
+
+
+      /* ---------------------------------------------
+         PREPARE ANSWER DATA
+      --------------------------------------------- */
+
+      const answerData =
+        answers.map(
+          (answer) => {
+
+            const maxMarks =
+              Number(
+                answer?.max_marks
+              ) || 5;
+
+
+            let marks =
+              Number(
+                answer?.marks
+              );
+
+
+            if (
+              !Number.isFinite(
+                marks
+              )
+            ) {
+
+              marks = 0;
+
+            }
+
+
+            marks =
+              Math.max(
+                0,
+                Math.min(
+                  marks,
+                  maxMarks
+                )
+              );
+
+
+            const mistakes =
+              Array.isArray(
+                answer?.mistakes
+              )
+
+                ? answer.mistakes
+                    .map(
+                      (mistake) => ({
+
+                        mistake:
+                          mistake?.mistake ||
+                          "",
+
+                        correction:
+                          mistake?.correction ||
+                          "",
+
+                        urduExplanation:
+                          mistake?.urduExplanation ||
+                          "",
+
+                      })
+                    )
+                    .filter(
+                      (mistake) =>
+                        mistake.mistake ||
+                        mistake.correction ||
+                        mistake.urduExplanation
+                    )
+
+                : [];
+
+
+            return {
+
+              question_id:
+                Number(
+                  answer?.question_id
+                ) || 0,
+
+              question:
+                answer?.question ||
+                "",
+
+              category:
+                answer?.category ||
+                "",
+
+              user_answer:
+                answer?.user_answer ||
+                "",
+
+              marks,
+
+              max_marks:
+                maxMarks,
+
+              grammar_correct:
+                answer?.grammar_correct !==
+                false,
+
+              answer_correct:
+                answer?.answer_correct ===
+                true,
+
+              mistake:
+                answer?.mistake ||
+                "",
+
+              correction:
+                answer?.correction ||
+                "",
+
+              urdu_explanation:
+                answer?.urdu_explanation ||
+                "",
+
+              feedback:
+                answer?.feedback ||
+                "",
+
+              mistakes,
+
+            };
+
+          }
+        );
+
+
+      /* ---------------------------------------------
+         SAVE TO MONGODB
+      --------------------------------------------- */
+
+      const result =
+        await FinalChallengeResult.create({
+
+          user_name:
+            userName ||
+            "Student",
+
+          /* Topic 4 */
+          topic_id:
+            Number(topicId) || 4,
+
+          /* Final Challenge 4 */
+          lesson_id:
+            Number(lessonId) || 4,
+
+          total_marks:
+            calculatedTotalMarks,
+
+          obtained_marks:
+            obtainedMarks,
+
+          percentage,
+
+          grade,
+
+          answers:
+            answerData,
+
+          grammar_mistakes:
+            grammarMistakes,
+
+        });
+
+
+      /* ---------------------------------------------
+         SERVER LOG
+      --------------------------------------------- */
+
+      console.log(
+        "========================================="
+      );
+
+      console.log(
+        "✅ FINAL CHALLENGE 4 SAVED TO MONGODB"
+      );
+
+      console.log(
+        "Result ID:",
+        result._id.toString()
+      );
+
+      console.log(
+        "Student:",
+        userName || "Student"
+      );
+
+      console.log(
+        "Topic:",
+        Number(topicId) || 4
+      );
+
+      console.log(
+        "Lesson:",
+        Number(lessonId) || 4
+      );
+
+      console.log(
+        "Marks:",
+        `${obtainedMarks}/${calculatedTotalMarks}`
+      );
+
+      console.log(
+        "Percentage:",
+        `${percentage}%`
+      );
+
+      console.log(
+        "Grade:",
+        grade
+      );
+
+      console.log(
+        "Answers:",
+        answerData.length
+      );
+
+      console.log(
+        "Grammar Mistakes:",
+        grammarMistakes.length
+      );
+
+      console.log(
+        "========================================="
+      );
+
+
+      /* ---------------------------------------------
+         RESPONSE
+      --------------------------------------------- */
+
+      return res.json({
+
+        success: true,
+
+        resultId:
+          result._id,
+
+        totalMarks:
+          calculatedTotalMarks,
+
+        obtainedMarks,
+
+        percentage,
+
+        grade,
+
+        grammarMistakes,
+
+        message:
+          "Final Challenge 4 result saved successfully.",
+
+      });
+
+    }
+
+    catch (err) {
+
+      console.log(
+        "❌ Final Challenge 4 Save Error:",
+        err
+      );
+
+      return res.status(500).json({
+
+        success: false,
+
+        message:
+          "Unable to save Final Challenge 4 result.",
+
+      });
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   GET FINAL CHALLENGE RESULT BY ID
+========================================================= */
+
+app.get(
+  "/api/final-challenge/result/:id",
+  async (req, res) => {
+
+    try {
+
+      if (!isMongoConnected()) {
+
+        return res.status(503).json({
+          success: false,
+          message:
+            "MongoDB is not connected.",
+        });
+
+      }
+
+
+      const result =
+        await FinalChallengeResult.findById(
+          req.params.id
+        );
+
+
+      if (!result) {
+
+        return res.status(404).json({
+          success: false,
+          message:
+            "Final Challenge result not found.",
+        });
+
+      }
+
+
+      return res.json({
+
+        success: true,
+
+        result,
+
+      });
+
+    }
+
+    catch (err) {
+
+      console.log(
+        "❌ Final Challenge Result Error:",
+        err
+      );
+
+
+      return res.status(500).json({
+
+        success: false,
+
+        message:
+          "Unable to load final challenge result.",
+
+      });
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   GET LATEST FINAL CHALLENGE RESULT
+========================================================= */
+
+app.get(
+  "/api/final-challenge/latest/:userName",
+  async (req, res) => {
+
+    try {
+
+      if (!isMongoConnected()) {
+
+        return res.status(503).json({
+          success: false,
+          message:
+            "MongoDB is not connected.",
+        });
+
+      }
+
+
+      const result =
+        await FinalChallengeResult
+          .findOne({
+            user_name:
+              req.params.userName,
+          })
+          .sort({
+            created_at: -1,
+          });
+
+
+      if (!result) {
+
+        return res.status(404).json({
+          success: false,
+          message:
+            "No final challenge result found.",
+        });
+
+      }
+
+
+      return res.json({
+
+        success: true,
+
+        result,
+
+      });
+
+    }
+
+    catch (err) {
+
+      console.log(
+        "❌ Latest Result Error:",
+        err
+      );
+
+
+      return res.status(500).json({
+
+        success: false,
+
+        message:
+          "Unable to load latest result.",
+
+      });
+
+    }
+
+  }
+);
+
 
 
 /* =========================================================

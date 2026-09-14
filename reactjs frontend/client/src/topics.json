@@ -16,245 +16,702 @@
                 "title": "Which Sentence Is Correct?",
                 "rounds": [
                   {
-  "round": 1,
-  "situation": "Sara loves drawing. She does it every weekend.",
-  "options": [
-    "Sara like drawing because it are fun.",
-    "Sara likes drawing because it is fun."
-  ],
-  "correctAnswer": 1
-},
-                {
-  "round": 2,
-  "situation": "Ali enjoys playing football after school.",
-  "options": [
-    "Ali enjoy playing football because it makes him happy.",
-    "Ali enjoys playing football because it makes him happy."
-  ],
-  "correctAnswer": 1
-},
-                 {
-  "round": 3,
-  "situation": "Ryan loves swimming. He goes to the pool twice a week.",
-  "options": [
-    "Ryan goes swimming twice a week because it helps him stay healthy.",
-    "Ryan go swimming twice a week because it help him stay healthy."
-  ],
-  "correctAnswer": 0
-}
+                    "round": 1,
+                    "situation": "Sara loves drawing. She does it every weekend.",
+                    "options": [
+                      "Sara like drawing because it are fun.",
+                      "Sara likes drawing because it is fun."
+                    ],
+                    "correctAnswer": 1
+                  },
+                  {
+                    "round": 2,
+                    "situation": "Ali enjoys playing football after school.",
+                    "options": [
+                      "Ali enjoy playing football because it makes him happy.",
+                      "Ali enjoys playing football because it makes him happy."
+                    ],
+                    "correctAnswer": 1
+                  },
+                  {
+                    "round": 3,
+                    "situation": "Ryan loves swimming. He goes to the pool twice a week.",
+                    "options": [
+                      "Ryan goes swimming twice a week because it helps him stay healthy.",
+                      "Ryan go swimming twice a week because it help him stay healthy."
+                    ],
+                    "correctAnswer": 0
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "type": "hobbyRanking",
+                "title": "Hobby Ranking Challenge",
+                "content": {
+                  "rounds": [
+                    {
+                      "round": 1,
+                      "type": "ranking",
+                      "title": "Rank Your Favourite Hobbies",
+                      "intro": {
+                        "title": "Rank Your Favourite Hobbies",
+                        "description": "Drag the hobbies into the order you like them. Put your favourite hobby at number one."
+                      },
+                      "hobbies": [
+                        "Drawing",
+                        "Playing Football",
+                        "Listening to Music",
+                        "Reading Books",
+                        "Playing Games"
+                      ]
+                    },
+                    {
+                      "round": 2,
+                      "type": "conversation",
+                      "title": "Let's Talk About Your Favourite Hobby",
+                      "intro": {
+                        "title": "Let's Talk About Your Favourite Hobby",
+                        "description": "Choose your favourite hobby and answer the questions in complete English sentences."
+                      },
+                      "questions": [
+                        "What do you like about your favourite hobby?",
+                        "When do you usually enjoy your favourite hobby?",
+                        "How does your favourite hobby make you feel?"
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "id": 3,
+                "type": "sentenceRepairLab",
+                "title": "Sentence Repair Lab",
+                "content": {
+                  "intro": {
+                    "title": "Sentence Repair Lab!",
+                    "description": "Today we're going to repair sentences, practise speaking, and become sentence detectives!"
+                  },
+                  "rounds": [
+                    {
+                      "round": 1,
+                      "type": "findCorrectWord",
+                      "title": "Find the Correct Word",
+                      "description": "Choose the correct word to repair the sentence.",
+                      "questions": [
+                        {
+                          "id": 1,
+                          "sentence": "I like ___ football.",
+                          "options": [
+                            "play",
+                            "playing",
+                            "played"
+                          ],
+                          "answer": "playing",
+                          "correction": "Like ke baad yahan playing use hoga. Isliye correct sentence hai: I like playing football. Dobara try karo."
+                        },
+                        {
+                          "id": 2,
+                          "sentence": "She ___ reading books.",
+                          "options": [
+                            "enjoy",
+                            "enjoys",
+                            "enjoying"
+                          ],
+                          "answer": "enjoys",
+                          "correction": "She ke saath present tense mein enjoys use hota hai. Correct answer enjoys hai. Dobara try karo."
+                        },
+                        {
+                          "id": 3,
+                          "sentence": "He ___ listening to music.",
+                          "options": [
+                            "like",
+                            "likes",
+                            "liking"
+                          ],
+                          "answer": "likes",
+                          "correction": "He ke saath present tense mein likes use hota hai. Correct answer likes hai. Dobara try karo."
+                        },
+                        {
+                          "id": 4,
+                          "sentence": "I am ___ games after school.",
+                          "options": [
+                            "play",
+                            "playing",
+                            "plays"
+                          ],
+                          "answer": "playing",
+                          "correction": "I am ke baad verb ka ing form use hota hai. Isliye playing correct hai. Dobara try karo."
+                        },
+                        {
+                          "id": 5,
+                          "sentence": "My favourite hobby ___ drawing.",
+                          "options": [
+                            "are",
+                            "be",
+                            "is"
+                          ],
+                          "answer": "is",
+                          "correction": "My favourite hobby ek singular subject hai, isliye is use hoga. Dobara try karo."
+                        }
+                      ]
+                    },
+                    {
+                      "round": 2,
+                      "type": "talkToTeacher",
+                      "title": "Talk to Miss Uroosa",
+                      "description": "Listen to Miss Uroosa and answer the questions using your microphone.",
+                      "questions": [
+                        {
+                          "id": 1,
+                          "question": "What is your favourite hobby?"
+                        },
+                        {
+                          "id": 2,
+                          "question": "What do you like doing in your free time?"
+                        },
+                        {
+                          "id": 3,
+                          "question": "What hobby do you enjoy on weekends?"
+                        },
+                        {
+                          "id": 4,
+                          "question": "Why do you like your favourite hobby?"
+                        },
+                        {
+                          "id": 5,
+                          "question": "Who do you like doing your hobby with?"
+                        }
+                      ]
+                    },
+                    {
+                      "round": 3,
+                      "type": "sentenceDetective",
+                      "title": "Sentence Detective",
+                      "description": "Find the grammatically correct sentence.",
+                      "questions": [
+                        {
+                          "id": 1,
+                          "sentence": "She go to school every day.",
+                          "options": [
+                            "She go to school every day.",
+                            "She goes to school every day.",
+                            "She going to school every day."
+                          ],
+                          "answer": "She goes to school every day.",
+                          "correction": "She ke saath present tense mein goes use hota hai. Correct sentence hai: She goes to school every day. Dobara try karo."
+                        },
+                        {
+                          "id": 2,
+                          "sentence": "He play football after school.",
+                          "options": [
+                            "He plays football after school.",
+                            "He play football after school.",
+                            "He playing football after school."
+                          ],
+                          "answer": "He plays football after school.",
+                          "correction": "He ke saath present tense mein plays use hota hai. Correct sentence hai: He plays football after school. Dobara try karo."
+                        },
+                        {
+                          "id": 3,
+                          "sentence": "I likes reading books.",
+                          "options": [
+                            "I likes reading books.",
+                            "I like reading books.",
+                            "I liking reading books."
+                          ],
+                          "answer": "I like reading books.",
+                          "correction": "I ke saath like use hota hai, likes nahi. Correct sentence hai: I like reading books. Dobara try karo."
+                        },
+                        {
+                          "id": 4,
+                          "sentence": "They is playing games.",
+                          "options": [
+                            "They is playing games.",
+                            "They are playing games.",
+                            "They am playing games."
+                          ],
+                          "answer": "They are playing games.",
+                          "correction": "They ke saath are use hota hai. Correct sentence hai: They are playing games. Dobara try karo."
+                        },
+                        {
+                          "id": 5,
+                          "sentence": "My friend enjoy music.",
+                          "options": [
+                            "My friend enjoy music.",
+                            "My friend enjoying music.",
+                            "My friend enjoys music."
+                          ],
+                          "answer": "My friend enjoys music.",
+                          "correction": "My friend singular hai, isliye enjoys use hoga. Correct sentence hai: My friend enjoys music. Dobara try karo."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": 2,
+          "title": "Favourite Person",
+          "type": "favouritePerson",
+          "content": {
+            "activities": [
+              {
+                "id": 1,
+                "type": "guessFavouritePerson",
+                "title": "Guess The Favourite Person",
+                "intro": {
+                  "title": "Guess The Favourite Person",
+                  "description": "Read the clues carefully and guess who the special person is."
+                },
+                "rounds": [
+                  {
+                    "round": 1,
+                    "clue": "This person takes care of me, helps me every day, and loves me very much.",
+                    "options": [
+                      "My mother",
+                      "My teacher",
+                      "My friend"
+                    ],
+                    "correctAnswer": 0,
+                    "feedback": "Excellent! Your mother is someone very special who takes care of you."
+                  },
+                  {
+                    "round": 2,
+                    "clue": "This person teaches me new things, helps me learn, and is kind to me at school.",
+                    "options": [
+                      "My brother",
+                      "My teacher",
+                      "My neighbour"
+                    ],
+                    "correctAnswer": 1,
+                    "feedback": "Correct! A teacher helps us learn new things."
+                  },
+                  {
+                    "round": 3,
+                    "clue": "This person plays with me, makes me laugh, and is always there when I need a friend.",
+                    "options": [
+                      "My friend",
+                      "My doctor",
+                      "My teacher"
+                    ],
+                    "correctAnswer": 0,
+                    "feedback": "Great job! A good friend makes us happy and supports us."
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "type": "WhyFavouritePerson",
+                "title": "Why Is This Person Special?",
+                "intro": {
+                  "title": "Why Is This Person Special?",
+                  "description": "Choose the best sentence to explain why your favourite person is special."
+                },
+                "rounds": [
+                  {
+                    "round": 1,
+                    "question": "Why is your mother special to you?",
+                    "options": [
+                      "She always helps and cares for me.",
+                      "She never talks to me.",
+                      "She does not help me."
+                    ],
+                    "correctAnswer": 0,
+                    "feedback": "Excellent! That is a good reason."
+                  },
+                  {
+                    "round": 2,
+                    "question": "Why is your teacher special to you?",
+                    "options": [
+                      "My teacher helps me learn new things.",
+                      "My teacher never teaches me.",
+                      "My teacher does not help me."
+                    ],
+                    "correctAnswer": 0,
+                    "feedback": "Correct! Teachers help us learn and grow."
+                  },
+                  {
+                    "round": 3,
+                    "question": "Why is your friend special to you?",
+                    "options": [
+                      "My friend plays with me and makes me happy.",
+                      "My friend never talks to me.",
+                      "My friend always ignores me."
+                    ],
+                    "correctAnswer": 0,
+                    "feedback": "Wonderful! Friends can make us happy and support us."
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "type": "favouritePersonMemoryGame",
+                "title": "Favourite Person Memory Game",
+                "intro": {
+                  "title": "Let's Play a Memory Game!",
+                  "description": "Choose a mystery card and tell me something about your favourite person."
+                },
+                "memoryCards": [
+                  {
+                    "id": 1,
+                    "icon": "🍕",
+                    "title": "Favourite Food",
+                    "question": "What food does your favourite person like?"
+                  },
+                  {
+                    "id": 2,
+                    "icon": "⚽",
+                    "title": "Favourite Hobby",
+                    "question": "What does your favourite person like to do?"
+                  },
+                  {
+                    "id": 3,
+                    "icon": "❤️",
+                    "title": "Personality",
+                    "question": "What is your favourite person like?"
+                  },
+                  {
+                    "id": 4,
+                    "icon": "📚",
+                    "title": "Something They Do",
+                    "question": "What does your favourite person do for you?"
+                  },
+                  {
+                    "id": 5,
+                    "icon": "🎵",
+                    "title": "Something They Like",
+                    "question": "What is something your favourite person likes?"
+                  },
+                  {
+                    "id": 6,
+                    "icon": "🌸",
+                    "title": "Special Thing",
+                    "question": "What makes your favourite person special?"
+                  }
+                ],
+                "feedback": {
+                  "success": "Wonderful speaking! 💗",
+                  "nextCard": "Great job! Choose another card.",
+                  "teacherSuccess": "Wonderful speaking! Great job!"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": 3,
+          "title": "Favourite Place",
+          "type": "favouritePlace",
+          "content": {
+            "activities": [
+              {
+                "id": 1,
+                "type": "talkWithTeacher",
+                "title": "Talk With Teacher",
+                "intro": {
+                  "title": "Talk About Your Favourite Place",
+                  "description": "Talk with your teacher about a place you really like and answer the questions in complete English sentences."
+                },
+                "questions": [
+                  "What is your favourite place?",
+                  "Where is your favourite place?",
+                  "What do you like about this place?",
+                  "Why do you enjoy going there?"
+                ]
+              },
+              {
+                "id": 2,
+                "type": "mysteryPlace",
+                "title": "Mystery Place Detective",
+                "intro": {
+                  "title": "Mystery Place Detective",
+                  "description": "Read the clues carefully and guess the place."
+                },
+                "rounds": [
+                  {
+                    "round": 1,
+                    "clue": "There are many books here. You can sit quietly and read stories.",
+                    "options": [
+                      "Library",
+                      "Park",
+                      "Restaurant"
+                    ],
+                    "correctAnswer": 0,
+                    "feedback": "Excellent! A library is a quiet place where we can read books."
+                  },
+                  {
+                    "round": 2,
+                    "clue": "You can see trees, flowers and people playing here. It is a great place to relax.",
+                    "options": [
+                      "Hospital",
+                      "Park",
+                      "School"
+                    ],
+                    "correctAnswer": 1,
+                    "feedback": "Correct! A park is a lovely place to relax and play."
+                  },
+                  {
+                    "round": 3,
+                    "clue": "People come here to learn new things. There are teachers, classrooms and students.",
+                    "options": [
+                      "School",
+                      "Beach",
+                      "Market"
+                    ],
+                    "correctAnswer": 0,
+                    "feedback": "Great job! A school is a place where students learn."
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "type": "favouritePlaceStory",
+                "title": "My Favourite Place Story Challenge",
+                "intro": {
+                  "title": "My Favourite Place Story Challenge",
+                  "description": "Create a short story about your favourite place using simple English sentences."
+                },
+                "prompt": "Talk about your favourite place in 4 or 5 simple English sentences.",
+                "sentenceHelp": [
+                  "My favourite place is ____.",
+                  "It is in ____.",
+                  "I like this place because ____.",
+                  "I usually go there with ____.",
+                  "I feel ____ when I am there."
                 ]
               }
             ]
           }
         },
-       {
+        {
+          "id": 4,
+          "title": "Final Challenge",
+          "type": "finalChallenge1"
+        }
+      ]
+    },
+   {
   "id": 2,
-  "title": "Favourite Person",
-  "type": "favouritePerson",
+  "title": "All About My Partner",
+  "subtopics": [
+    {
+      "id": 1,
+      "title": "Physical Appearance",
+      "type": "physicalAppearance",
+      "content": {
+        "activities": [
+        {
+  "id": 1,
+  "type": "spotTheFeature",
+  "title": "Spot The Feature",
+  "intro": {
+    "title": "Spot The Feature",
+    "description": "Look carefully at the characters and find the correct character with the feature in the question."
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "question": "Who has long hair?",
+      "answer": "Aisha",
+      "correctRemark": "Excellent! Aisha has long hair."
+    },
+    {
+      "round": 2,
+      "question": "Who has curly hair?",
+      "answer": "Rohan",
+      "correctRemark": "Excellent! Rohan has curly hair."
+    },
+    {
+      "round": 3,
+      "question": "Who has long hair and wears glasses?",
+      "answer": "Maya",
+      "correctRemark": "Excellent! Maya has long hair and wears glasses."
+    },
+    {
+      "round": 4,
+      "question": "Who wears glasses?",
+      "answer": "Arjun",
+      "correctRemark": "Excellent! Arjun wears glasses."
+    },
+    {
+      "round": 5,
+      "question": "Who has short hair?",
+      "answer": "Rohan",
+      "correctRemark": "Excellent! Rohan has short hair."
+    }
+  ]
+},
+          {
+            "id": 2,
+            "type": "buildYourPartner",
+            "title": "Build Your Partner",
+            "intro": {
+              "title": "Build Your Partner",
+              "description": "Choose the features that match your partner."
+            },
+            "categories": [
+              {
+                "id": 1,
+                "title": "Hair",
+                "options": [
+                  "Short hair",
+                  "Long hair",
+                  "Curly hair",
+                  "Straight hair"
+                ]
+              },
+              {
+                "id": 2,
+                "title": "Eyes",
+                "options": [
+                  "Big eyes",
+                  "Small eyes",
+                  "Brown eyes",
+                  "Black eyes"
+                ]
+              },
+              {
+                "id": 3,
+                "title": "Height",
+                "options": [
+                  "Tall",
+                  "Short",
+                  "Medium height"
+                ]
+              },
+              {
+                "id": 4,
+                "title": "Other Features",
+                "options": [
+                  "Glasses",
+                  "Dimples",
+                  "Freckles",
+                  "No glasses"
+                ]
+              }
+            ],
+            "feedback": {
+              "success": "Great choices! You have built your partner.",
+              "next": "Now let's describe your partner."
+            }
+          },
+          {
+            "id": 3,
+            "type": "describeYourPartner",
+            "title": "Describe Your Partner",
+            "intro": {
+              "title": "Describe Your Partner",
+              "description": "Choose a person and describe their physical appearance using simple English sentences."
+            },
+            "characters": [
+              {
+                "id": 1,
+                "name": "Mother",
+                "image": "mother.png"
+              },
+              {
+                "id": 2,
+                "name": "Father",
+                "image": "father.png"
+              },
+              {
+                "id": 3,
+                "name": "Sister",
+                "image": "sister.png"
+              },
+              {
+                "id": 4,
+                "name": "Brother",
+                "image": "brother.png"
+              },
+              {
+                "id": 5,
+                "name": "Best Friend",
+                "image": "bestfriend.png"
+              },
+              {
+                "id": 6,
+                "name": "Cousin",
+                "image": "cousin.png"
+              }
+            ],
+            "prompt": "Choose a person and describe their physical appearance in 3 to 5 simple English sentences.",
+            "questions": [
+              "What is their hair like?",
+              "What colour are their eyes?",
+              "Are they tall, short, or medium height?",
+              "Do they wear glasses?",
+              "What other feature can you describe?"
+            ],
+            "sentenceHelp": [
+              "My _____ has _____ hair.",
+              "Their eyes are _____.",
+              "They are _____.",
+              "They wear _____.",
+              "They have _____."
+            ],
+            "feedback": {
+              "success": "Wonderful! You described your partner clearly.",
+              "tryAgain": "Good try! Let's make your sentences clearer."
+            }
+          }
+        ]
+      }
+    },
+   {
+  "id": 2,
+  "title": "Personality Traits",
+  "type": "personalityTraits",
   "content": {
     "activities": [
       {
         "id": 1,
-        "type": "guessFavouritePerson",
-        "title": "Guess The Favourite Person",
-        "intro": {
-          "title": "Guess The Favourite Person",
-          "description": "Read the clues carefully and guess who the special person is."
-        },
-        "rounds": [
-          {
-            "round": 1,
-            "clue": "This person takes care of me, helps me every day, and loves me very much.",
-            "options": [
-              "My mother",
-              "My teacher",
-              "My friend"
-            ],
-            "correctAnswer": 0,
-            "feedback": "Excellent! Your mother is someone very special who takes care of you."
-          },
-          {
-            "round": 2,
-            "clue": "This person teaches me new things, helps me learn, and is kind to me at school.",
-            "options": [
-              "My brother",
-              "My teacher",
-              "My neighbour"
-            ],
-            "correctAnswer": 1,
-            "feedback": "Correct! A teacher helps us learn new things."
-          },
-          {
-            "round": 3,
-            "clue": "This person plays with me, makes me laugh, and is always there when I need a friend.",
-            "options": [
-              "My friend",
-              "My doctor",
-              "My teacher"
-            ],
-            "correctAnswer": 0,
-            "feedback": "Great job! A good friend makes us happy and supports us."
-          }
-        ]
+        "title": "Trait Detective",
+        "type": "trait-detective",
+        "component": "TraitDetectiveActivity",
+        "introComponent": "TraitDetectiveIntro",
+        "description": "Read the clue and find the character whose personality matches it.",
+        "learningGoal": "Identify personality traits from simple clues."
       },
 
       {
         "id": 2,
-        "type": "WhyFavouritePerson",
-        "title": "Why Is This Person Special?",
-        "intro": {
-          "title": "Why Is This Person Special?",
-          "description": "Choose the best sentence to explain why your favourite person is special."
-        },
-        "rounds": [
-          {
-            "round": 1,
-            "question": "Why is your mother special to you?",
-            "options": [
-              "She always helps and cares for me.",
-              "She never talks to me.",
-              "She does not help me."
-            ],
-            "correctAnswer": 0,
-            "feedback": "Excellent! That is a good reason."
-          },
-          {
-            "round": 2,
-            "question": "Why is your teacher special to you?",
-            "options": [
-              "My teacher helps me learn new things.",
-              "My teacher never teaches me.",
-              "My teacher does not help me."
-            ],
-            "correctAnswer": 0,
-            "feedback": "Correct! Teachers help us learn and grow."
-          },
-          {
-            "round": 3,
-            "question": "Why is your friend special to you?",
-            "options": [
-              "My friend plays with me and makes me happy.",
-              "My friend never talks to me.",
-              "My friend always ignores me."
-            ],
-            "correctAnswer": 0,
-            "feedback": "Wonderful! Friends can make us happy and support us."
-          }
-        ]
+        "title": "Personality Backpack",
+        "type": "personality-backpack",
+        "component": "PersonalityBackpackActivity",
+        "introComponent": "PersonalityBackpackIntro",
+        "description": "Read the situation and choose the personality trait that belongs in the backpack.",
+        "learningGoal": "Match actions and behaviours with personality traits."
       },
 
       {
         "id": 3,
-        "type": "CompleteTheSentence",
-        "title": "Complete The Sentence",
-        "intro": {
-          "title": "Complete The Sentence",
-          "description": "Choose the words that make a correct sentence about your favourite person."
-        },
-        "rounds": [
-          {
-            "round": 1,
-            "sentence": "My favourite person is my ____.",
-            "options": [
-              "mother",
-              "table",
-              "school"
-            ],
-            "correctAnswer": 0,
-            "feedback": "Great! You completed the sentence correctly."
-          },
-          {
-            "round": 2,
-            "sentence": "She always ____ me when I need help.",
-            "options": [
-              "helps",
-              "helping",
-              "help"
-            ],
-            "correctAnswer": 0,
-            "feedback": "Excellent! 'She always helps me' is correct."
-          },
-          {
-            "round": 3,
-            "sentence": "I love my favourite person because she is very ____.",
-            "options": [
-              "kind",
-              "angry",
-              "late"
-            ],
-            "correctAnswer": 0,
-            "feedback": "Perfect! 'Kind' is a good word to describe someone special."
-          }
-        ]
-      },
-
-      {
-        "id": 4,
-        "type": "SpeakAboutFavouritePerson",
-        "title": "Talk About Your Favourite Person",
-        "intro": {
-          "title": "Talk About Your Favourite Person",
-          "description": "Think about your favourite person and answer the questions in complete English sentences."
-        },
-        "questions": [
-          "Who is your favourite person?",
-          "What is this person's name?",
-          "Why do you like this person?"
-        ]
-      },
-
-      {
-        "id": 5,
-        "type": "FavouritePersonEssay",
-        "title": "My Favourite Person",
-        "intro": {
-          "title": "My Favourite Person",
-          "description": "Speak or write a short paragraph about your favourite person."
-        },
-        "prompt": "Talk about your favourite person in 4 or 5 simple English sentences.",
-        "sentenceHelp": [
-          "My favourite person is ____.",
-          "His/Her name is ____.",
-          "He/She is very ____.",
-          "He/She always helps me.",
-          "I love my favourite person because ____."
-        ]
+        "title": "Personality Potion",
+        "type": "personality-potion",
+        "component": "PersonalityPotionActivity",
+        "introComponent": "PersonalityPotionIntro",
+        "description": "Read the situation and choose the personality trait that belongs in the potion.",
+        "learningGoal": "Use context to identify suitable personality traits."
       }
     ]
   }
 },
-        {
-          "id": 3,
-          "title": "Favourite Place"
-        },
-        {
-          "id": 4,
-          "title": "Final Challenge"
-        }
-      ]
+    {
+      "id": 3,
+      "title": "Likes And Dislikes",
+      "type": "likesAndDislikes"
     },
     {
-      "id": 2,
-      "title": "All About My Partner",
-      "subtopics": [
-        {
-          "id": 1,
-          "title": "Physical Appearance"
-        },
-        {
-          "id": 2,
-          "title": "Personality Traits"
-        },
-        {
-          "id": 3,
-          "title": "Likes And Dislikes"
-        },
-        {
-          "id": 4,
-          "title": "Final Challenge"
-        }
-      ]
-    },
+      "id": 4,
+      "title": "Final Challenge",
+        "type": "finalChallenge2"
+    }
+  ]
+},
     {
       "id": 3,
       "title": "Let's Order",
@@ -538,19 +995,23 @@
       "subtopics": [
         {
           "id": 1,
-          "title": "Days And Months"
+          "title": "Days And Months",
+          "type":"daysAndMonths"
         },
         {
           "id": 2,
-          "title": "My Daily Routine"
+          "title": "My Daily Routine",
+          "type": "dailyRoutine"
         },
         {
           "id": 3,
-          "title": "Making Plans"
+          "title": "Making Plans",
+          "type": "makingPlans"
         },
         {
           "id": 4,
-          "title": "Final Challenge"
+          "title": "Final Challenge",
+          "type":  "finalChallenge4"
         }
       ]
     }

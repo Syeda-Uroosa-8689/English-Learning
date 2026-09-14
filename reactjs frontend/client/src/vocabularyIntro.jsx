@@ -21,9 +21,9 @@ function VocabularyIntro({ onNext }) {
 
                 onNext();
 
-            }, 500);
+            }, 300);
 
-        }, 4000);
+        }, 1500);
 
 
         return () => {

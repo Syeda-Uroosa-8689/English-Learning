@@ -1,0 +1,2702 @@
+/* =========================================================
+PLAN IT TOGETHER
+Warm Sample-Matching Game Layout
+========================================================= */
+
+* {
+box-sizing: border-box;
+}
+
+/* =====================================================
+OUTER PAGE BACKGROUND
+chatbg.jpeg + blur
+===================================================== */
+
+.plan-together-page {
+position: relative;
+min-height: 100vh;
+width: 100%;
+overflow: hidden;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+padding: 20px;
+
+background: transparent;
+}
+
+/* Blurred chat background */
+.plan-together-page::before {
+content: "";
+position: absolute;
+inset: -25px;
+
+background-image: url("../../assets/chatbg.jpeg");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+
+filter: blur(7px);
+transform: scale(1.08);
+
+z-index: 0;
+}
+
+/* Dark soft overlay */
+.plan-together-page::after {
+content: "";
+position: absolute;
+inset: 0;
+
+background: rgba(35, 24, 18, 0.30);
+
+z-index: 1;
+}
+
+/* =====================================================
+MAIN GAME CONTAINER
+===================================================== */
+
+.plan-game-container {
+position: relative;
+z-index: 2;
+
+width: min(1530px, 96vw);
+height: min(900px, 94vh);
+
+min-height: 650px;
+
+overflow: hidden;
+
+border-radius: 24px;
+
+background-image: url("../../assets/planTogetherBg.png");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+
+box-shadow:
+0 18px 45px rgba(45, 29, 18, 0.30),
+0 5px 15px rgba(45, 29, 18, 0.18);
+}
+
+/* =========================================================
+TOP BAR
+========================================================= */
+
+.plan-top-bar {
+position: absolute;
+
+top: 0;
+left: 0;
+right: 0;
+
+height: 64px;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+background:
+linear-gradient(
+180deg,
+#8d5b38,
+#704426
+);
+
+border-bottom: 4px solid #c18a51;
+
+box-shadow:
+0 3px 8px rgba(67, 39, 19, 0.20);
+
+z-index: 30;
+}
+
+.plan-title {
+color: #fff9e9;
+
+font-size: clamp(20px, 2vw, 29px);
+
+font-weight: 1000;
+
+letter-spacing: 0.7px;
+
+text-shadow:
+0 2px 0 rgba(63, 36, 17, 0.35);
+}
+
+.plan-top-btn {
+position: absolute;
+
+top: 12px;
+
+height: 40px;
+
+padding: 0 16px;
+
+border-radius: 17px;
+
+border: 3px solid #f7dfb0;
+
+color: #fffdf4;
+
+font-size: 16px;
+
+font-weight: 900;
+
+cursor: pointer;
+
+background:
+linear-gradient(
+180deg,
+#b87943,
+#89542f
+);
+
+box-shadow:
+inset 0 1px 0 rgba(255, 255, 255, 0.35),
+0 4px 0 rgba(81, 43, 21, 0.35),
+0 5px 8px rgba(67, 39, 19, 0.16);
+
+transition:
+transform 0.15s ease,
+filter 0.15s ease;
+}
+
+.plan-top-btn:hover {
+filter: brightness(1.08);
+}
+
+.plan-top-btn:active {
+transform: translateY(3px);
+}
+
+.plan-back-btn {
+left: 14px;
+}
+
+.plan-skip-btn {
+right: 14px;
+}
+
+.back-arrow {
+display: inline-block;
+
+font-size: 29px;
+
+line-height: 0;
+
+margin-right: 5px;
+
+vertical-align: -2px;
+}
+
+/* =========================================================
+INTRO SCREEN
+========================================================= */
+
+.plan-intro-screen {
+position: absolute;
+
+inset: 0;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+overflow: hidden;
+}
+
+/* =========================================================
+INTRO TEACHER
+========================================================= */
+
+.intro-teacher-section {
+position: absolute;
+
+left: 0;
+bottom: 0;
+
+width: 42%;
+height: 92%;
+
+display: flex;
+align-items: flex-end;
+justify-content: center;
+}
+
+.intro-teacher {
+width: min(455px, 36vw);
+
+max-height: 90%;
+
+object-fit: contain;
+
+filter:
+drop-shadow(
+0 12px 12px rgba(65, 38, 20, 0.20)
+);
+}
+
+/* =========================================================
+INTRO CONTENT
+========================================================= */
+
+.intro-content {
+position: absolute;
+
+right: 6%;
+top: 7%;
+
+width: 59%;
+
+height: 84%;
+
+display: flex;
+flex-direction: column;
+
+align-items: center;
+justify-content: center;
+}
+
+/* =========================================================
+CALENDAR TITLE ICON
+========================================================= */
+
+.calendar-title-icon {
+position: relative;
+
+z-index: 4;
+
+margin-bottom: -35px;
+}
+
+.calendar-title-icon img {
+width: 105px;
+height: 105px;
+
+object-fit: contain;
+
+filter:
+drop-shadow(
+0 6px 5px rgba(72, 42, 18, 0.18)
+);
+}
+
+/* =========================================================
+INTRO CLOUD
+========================================================= */
+
+.intro-title-cloud {
+position: relative;
+
+width: min(580px, 46vw);
+
+min-height: 300px;
+
+padding: 68px 50px 45px;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+text-align: center;
+
+background: #fff5d8;
+
+border: 6px solid #d99232;
+
+border-radius:
+48% 52% 47% 53% /
+43% 44% 56% 57%;
+
+box-shadow:
+0 9px 0 rgba(181, 105, 22, 0.24),
+0 16px 28px rgba(76, 43, 17, 0.16);
+}
+
+.intro-title-cloud::before,
+.intro-title-cloud::after {
+content: "";
+
+position: absolute;
+
+background: #fff5d8;
+
+border: 5px solid #d99232;
+
+border-radius: 50%;
+}
+
+.intro-title-cloud::before {
+width: 95px;
+height: 90px;
+
+left: 22px;
+bottom: 12px;
+}
+
+.intro-title-cloud::after {
+width: 75px;
+height: 70px;
+
+right: 28px;
+top: 12px;
+}
+
+.intro-title-cloud h1 {
+position: relative;
+
+z-index: 3;
+
+margin: 0;
+
+color: #694326;
+
+font-size: clamp(40px, 4.1vw, 68px);
+
+line-height: 1.05;
+
+font-weight: 1000;
+
+letter-spacing: 1px;
+
+text-shadow:
+0 3px 0 rgba(0, 0, 0, 0.08);
+}
+
+.cloud-decoration {
+position: absolute;
+
+z-index: 8;
+
+font-size: 28px;
+}
+
+.cloud-heart-left {
+left: 72px;
+top: 84px;
+
+color: #e45d55;
+}
+
+.cloud-heart-right {
+right: 68px;
+bottom: 82px;
+
+color: #bd7b32;
+}
+
+/* =========================================================
+INTRO SUBTITLE
+========================================================= */
+
+.intro-subtitle {
+margin: 17px 0 12px;
+
+color: #4c3625;
+
+font-size: clamp(17px, 1.5vw, 24px);
+
+font-weight: 800;
+
+text-align: center;
+}
+
+/* =========================================================
+LET'S GO
+========================================================= */
+
+.lets-go-btn {
+min-width: 250px;
+
+padding: 14px 40px;
+
+border-radius: 28px;
+
+border: 4px solid #c77c13;
+
+background:
+linear-gradient(
+#ffdc55,
+#f5ad1c
+);
+
+color: #54371e;
+
+font-size: 25px;
+
+font-weight: 1000;
+
+cursor: pointer;
+
+box-shadow:
+0 5px 0 #a86409,
+0 9px 15px rgba(88, 51, 15, 0.22);
+
+transition:
+transform 0.16s ease,
+filter 0.16s ease;
+}
+
+.lets-go-btn:hover {
+filter: brightness(1.06);
+}
+
+.lets-go-btn:active {
+transform: translateY(4px);
+
+box-shadow:
+0 2px 0 #a86409;
+}
+
+/* =========================================================
+ACTIVITY AREA
+========================================================= */
+
+.plan-activity-area {
+position: absolute;
+
+inset: 0;
+
+padding-top: 64px;
+
+overflow: hidden;
+}
+
+/* =========================================================
+TEACHER
+FIXED:
+Teacher now sits beside the LEFT speech bubble,
+instead of down near the bottom.
+========================================================= */
+
+.plan-teacher-area {
+position: absolute;
+
+left: 18px;
+
+/*
+IMPORTANT:
+Move teacher UP beside the teacher bubble.
+*/
+top: 70px;
+
+width: 190px;
+
+height: 205px;
+
+z-index: 26;
+
+display: flex;
+align-items: flex-start;
+justify-content: center;
+}
+
+.plan-teacher {
+/*
+Bigger teacher image.
+*/
+width: 190px;
+
+height: 205px;
+
+max-height: none;
+
+object-fit: contain;
+
+object-position: center top;
+
+filter:
+drop-shadow(
+0 9px 10px rgba(60, 36, 20, 0.22)
+);
+}
+
+/* Teacher name stays below teacher */
+.teacher-name-tag {
+position: absolute;
+
+left: 50%;
+
+/*
+Put name directly underneath
+the moved-up teacher.
+*/
+bottom: -8px;
+
+transform: translateX(-50%);
+
+white-space: nowrap;
+
+padding: 5px 14px;
+
+border-radius: 13px;
+
+color: #fffdf5;
+
+background:
+linear-gradient(
+#9b683d,
+#754827
+);
+
+font-size: 14px;
+
+font-weight: 900;
+
+border: 2px solid #f3d59d;
+
+box-shadow:
+0 3px 6px rgba(0, 0, 0, 0.18);
+
+z-index: 30;
+}
+
+/* =========================================================
+TEACHER SPEECH BUBBLE
+========================================================= */
+
+.teacher-speech {
+position: absolute;
+
+/*
+Bubble remains immediately to
+the RIGHT of teacher.
+*/
+left: 180px;
+
+top: 76px;
+
+width: min(385px, 31vw);
+
+min-height: 110px;
+
+padding: 20px 25px;
+
+display: flex;
+align-items: center;
+
+background:
+linear-gradient(
+180deg,
+#fffdf5,
+#fff5d9
+);
+
+color: #3f3024;
+
+border: 3px solid #795638;
+
+border-radius: 24px;
+
+font-size: clamp(16px, 1.4vw, 21px);
+
+line-height: 1.4;
+
+font-weight: 800;
+
+box-shadow:
+0 7px 0 rgba(113, 72, 37, 0.16),
+0 9px 16px rgba(61, 39, 20, 0.17);
+
+z-index: 25;
+}
+
+/* Teacher bubble tail points LEFT toward teacher */
+
+.teacher-speech::before {
+content: "";
+
+position: absolute;
+
+left: -22px;
+
+top: 29px;
+
+width: 0;
+height: 0;
+
+border-top: 14px solid transparent;
+border-bottom: 14px solid transparent;
+
+border-right: 24px solid #795638;
+}
+
+.teacher-speech::after {
+content: "";
+
+position: absolute;
+
+left: -17px;
+
+top: 30px;
+
+width: 0;
+height: 0;
+
+border-top: 13px solid transparent;
+border-bottom: 13px solid transparent;
+
+border-right: 21px solid #fffdf5;
+}
+
+/* =========================================================
+WEEKEND CALENDAR
+========================================================= */
+
+.weekend-calendar {
+position: absolute;
+
+right: 325px;
+top: 88px;
+
+width: 230px;
+height: 230px;
+
+object-fit: contain;
+
+transform: rotate(3deg);
+
+filter:
+drop-shadow(
+0 9px 9px rgba(66, 39, 20, 0.20)
+);
+
+z-index: 6;
+}
+
+/* =========================================================
+CHILD SPEECH
+========================================================= */
+
+.child-speech {
+position: absolute;
+
+/*
+Keep bubble where it already was.
+*/
+right: 285px;
+
+top: 330px;
+
+width: 295px;
+
+min-height: 105px;
+
+padding: 20px 25px;
+
+display: flex;
+align-items: center;
+
+background:
+linear-gradient(
+180deg,
+#fffefa,
+#f9efd7
+);
+
+border: 3px solid #85633f;
+
+border-radius: 22px;
+
+color: #3e3025;
+
+font-size: 18px;
+
+font-weight: 800;
+
+line-height: 1.4;
+
+box-shadow:
+0 6px 0 rgba(103, 67, 34, 0.13),
+0 8px 14px rgba(55, 34, 17, 0.14);
+
+z-index: 18;
+}
+
+/* =========================================================
+CHILD BUBBLE ARROW
+FIXED:
+Arrow now comes from RIGHT side,
+pointing toward the child character.
+========================================================= */
+
+.child-speech::before {
+content: "";
+
+position: absolute;
+
+/*
+RIGHT SIDE ARROW
+*/
+right: -22px;
+
+left: auto;
+
+top: 29px;
+
+width: 0;
+height: 0;
+
+border-top: 13px solid transparent;
+border-bottom: 13px solid transparent;
+
+border-left: 24px solid #85633f;
+
+border-right: none;
+}
+
+.child-speech::after {
+content: "";
+
+position: absolute;
+
+/*
+Inner cream arrow.
+*/
+right: -17px;
+
+left: auto;
+
+top: 30px;
+
+width: 0;
+height: 0;
+
+border-top: 12px solid transparent;
+border-bottom: 12px solid transparent;
+
+border-left: 21px solid #fffefa;
+
+border-right: none;
+}
+
+/* =========================================================
+SUCCESS CHECK
+========================================================= */
+
+.success-check {
+position: absolute;
+
+right: -10px;
+bottom: -9px;
+
+width: 33px;
+height: 33px;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+border-radius: 50%;
+
+background: #4caf62;
+
+color: white;
+
+font-size: 22px;
+
+font-weight: 1000;
+
+border: 3px solid white;
+
+box-shadow:
+0 3px 6px rgba(30, 100, 40, 0.2);
+}
+
+/* =========================================================
+SELECTED CHILD CHARACTER
+FIXED:
+Character is BIG and sits beside the
+RIGHT side of the child bubble.
+========================================================= */
+
+.selected-child-character {
+position: absolute;
+
+/*
+Bubble right edge is around 285px.
+Character is placed just beside it.
+*/
+right: 52px;
+
+/*
+Align character with bubble.
+*/
+top: 300px;
+
+/*
+Bigger character.
+*/
+width: 190px;
+
+height: 275px;
+
+display: flex;
+
+align-items: flex-end;
+
+justify-content: center;
+
+pointer-events: none;
+
+/*
+Character must appear above the bubble/background.
+*/
+z-index: 27;
+
+animation:
+selectedChildCharacterIn 0.35s ease-out;
+}
+
+.selected-child-character img {
+width: 100%;
+
+height: 100%;
+
+object-fit: contain;
+
+object-position: bottom center;
+
+display: block;
+
+filter:
+drop-shadow(
+0 7px 9px rgba(50, 31, 18, 0.22)
+);
+}
+
+/* =========================================================
+CHARACTER ENTRY ANIMATION
+========================================================= */
+
+@keyframes selectedChildCharacterIn {
+
+from {
+opacity: 0;
+
+transform:
+  translateX(22px)
+  scale(0.90);
+
+}
+
+to {
+opacity: 1;
+
+transform:
+  translateX(0)
+  scale(1);
+
+}
+
+}
+
+/* =========================================================
+OUR PLAN CARD
+========================================================= */
+
+.our-plan-card {
+position: absolute;
+
+right: 25px;
+top: 78px;
+
+width: 255px;
+
+min-height: 455px;
+
+padding: 13px 14px 14px;
+
+background:
+linear-gradient(
+180deg,
+#fffdf2,
+#fff1d0
+);
+
+border: 4px solid #a77b4c;
+
+border-radius: 21px;
+
+box-shadow:
+0 8px 0 rgba(107, 68, 35, 0.14),
+0 10px 18px rgba(72, 42, 18, 0.18);
+
+z-index: 8;
+}
+
+.our-plan-header {
+height: 46px;
+
+display: flex;
+align-items: center;
+justify-content: space-between;
+
+padding: 0 12px;
+
+border-radius: 15px;
+
+color: #674425;
+
+background:
+linear-gradient(
+180deg,
+#f6d98f,
+#edc56d
+);
+
+border: 2px solid #c39245;
+
+font-size: 20px;
+
+font-weight: 1000;
+
+letter-spacing: 0.3px;
+}
+
+.mini-sparkle {
+color: #d38a20;
+
+font-size: 18px;
+}
+
+.plan-day {
+margin-top: 9px;
+
+padding: 8px;
+
+text-align: center;
+
+border-radius: 13px;
+
+background:
+linear-gradient(
+#f8e6b3,
+#f1d48b
+);
+
+color: #654323;
+
+font-size: 17px;
+
+font-weight: 1000;
+
+border: 2px solid #d0a052;
+}
+
+.plan-info-row {
+min-height: 70px;
+
+display: flex;
+align-items: center;
+
+margin-top: 7px;
+
+padding: 7px;
+
+border-radius: 12px;
+
+background: rgba(255, 255, 255, 0.78);
+
+border: 1px solid rgba(177, 137, 81, 0.30);
+}
+
+.plan-info-icon {
+width: 35px;
+
+flex-shrink: 0;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+font-size: 25px;
+}
+
+.plan-info-content {
+display: flex;
+flex-direction: column;
+
+gap: 2px;
+
+min-width: 0;
+}
+
+.plan-info-content span {
+color: #876b4e;
+
+font-size: 12px;
+
+font-weight: 800;
+}
+
+.plan-info-content strong {
+color: #5c412b;
+
+font-size: 15px;
+
+font-weight: 900;
+
+word-break: break-word;
+}
+
+.plan-place-image {
+width: 100%;
+
+height: 105px;
+
+object-fit: contain;
+
+margin-top: 8px;
+}
+
+/* =========================================================
+TIME SELECTION
+========================================================= */
+
+.time-selection-area {
+position: absolute;
+
+left: 25px;
+bottom: 84px;
+
+width: 500px;
+
+min-height: 180px;
+
+padding: 17px 20px;
+
+background:
+rgba(255, 247, 222, 0.96);
+
+border: 3px solid #a67b4e;
+
+border-radius: 19px;
+
+box-shadow:
+0 7px 14px rgba(67, 39, 19, 0.15);
+
+z-index: 15;
+}
+
+.time-selection-title {
+color: #654323;
+
+font-size: 18px;
+
+font-weight: 1000;
+
+text-align: center;
+
+margin-bottom: 8px;
+}
+
+.time-selection-content {
+display: flex;
+align-items: center;
+justify-content: center;
+
+gap: 20px;
+}
+
+.digital-time-box {
+min-width: 180px;
+
+padding: 10px 18px;
+
+border-radius: 13px;
+
+border: 3px solid #d49a28;
+
+background: #fffdf4;
+
+color: #5a3f27;
+
+font-size: 20px;
+
+font-weight: 1000;
+
+text-align: center;
+}
+
+.large-clock {
+width: 125px;
+height: 125px;
+
+object-fit: contain;
+}
+
+.time-options {
+display: flex;
+
+justify-content: center;
+
+gap: 8px;
+
+margin-top: 4px;
+}
+
+.time-option {
+padding: 8px 12px;
+
+border-radius: 11px;
+
+border: 2px solid #d49a28;
+
+background: #fffdf5;
+
+color: #62462b;
+
+font-size: 13px;
+
+font-weight: 900;
+
+cursor: pointer;
+
+transition:
+transform 0.15s ease,
+background 0.15s ease;
+}
+
+.time-option:hover {
+transform: translateY(-2px);
+}
+
+.selected-time-option {
+background: #ffe7a4;
+}
+
+/* =========================================================
+ACTIVITY SELECTION
+========================================================= */
+
+.activity-selection-area {
+position: absolute;
+
+left: 515px;
+bottom: 85px;
+
+width: 510px;
+
+padding: 14px 14px 15px;
+
+border-radius: 19px;
+
+background:
+rgba(255, 249, 229, 0.97);
+
+border: 3px solid #a67b4e;
+
+box-shadow:
+0 7px 14px rgba(69, 39, 17, 0.15);
+
+z-index: 16;
+}
+
+.activity-selection-title {
+text-align: center;
+
+color: #654323;
+
+font-size: 18px;
+
+font-weight: 1000;
+
+margin-bottom: 10px;
+}
+
+.activity-options {
+display: grid;
+
+grid-template-columns: repeat(4, 1fr);
+
+gap: 7px;
+}
+
+.activity-option {
+min-height: 115px;
+
+padding: 8px;
+
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+
+gap: 4px;
+
+border-radius: 13px;
+
+border: 3px solid #d39a27;
+
+background: #fffdf5;
+
+cursor: pointer;
+
+color: #5b4028;
+
+font-size: 13px;
+
+font-weight: 900;
+
+transition:
+transform 0.15s ease,
+box-shadow 0.15s ease;
+}
+
+.activity-option:hover {
+transform: translateY(-4px);
+
+box-shadow:
+0 5px 10px rgba(80, 47, 16, 0.14);
+}
+
+.activity-option img {
+width: 50px;
+height: 50px;
+
+object-fit: contain;
+}
+
+/* =========================================================
+PLAN CHANGE
+========================================================= */
+
+.plan-change-overlay {
+position: absolute;
+
+inset: 0;
+
+z-index: 25;
+
+pointer-events: none;
+}
+
+.plan-step-5 .plan-activity-area,
+.plan-step-6 .plan-activity-area {
+background:
+rgba(255, 178, 125, 0.10);
+}
+
+.plan-change-banner {
+position: absolute;
+
+left: 17px;
+top: 74px;
+
+min-width: 310px;
+
+height: 58px;
+
+display: flex;
+align-items: center;
+
+padding: 0 23px;
+
+border-radius: 17px;
+
+background:
+linear-gradient(
+180deg,
+#df7148,
+#bd4d31
+);
+
+border: 3px solid #9f3d28;
+
+color: white;
+
+font-size: 23px;
+
+font-weight: 1000;
+
+box-shadow:
+0 5px 10px rgba(125, 29, 39, 0.18);
+}
+
+.warning-symbol {
+width: 31px;
+height: 31px;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+margin-right: 10px;
+
+border-radius: 8px;
+
+background: white;
+
+color: #c44c31;
+
+font-size: 21px;
+
+font-weight: 1000;
+}
+
+.change-decoration {
+position: absolute;
+
+color: #d56b42;
+
+font-size: 30px;
+}
+
+.change-one {
+left: 335px;
+top: 72px;
+
+transform: rotate(25deg);
+}
+
+.change-two {
+left: 375px;
+top: 83px;
+
+transform: rotate(-15deg);
+}
+
+/* =========================================================
+MICROPHONE
+========================================================= */
+
+.mic-area {
+position: absolute;
+
+left: 50%;
+
+bottom: 38px;
+
+transform: translateX(-50%);
+
+display: flex;
+flex-direction: column;
+
+align-items: center;
+
+z-index: 28;
+}
+
+.mic-button {
+position: relative;
+
+width: 92px;
+height: 92px;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+border-radius: 50%;
+
+border: 5px solid #fff8e8;
+
+background:
+radial-gradient(
+circle at 35% 25%,
+#b9824d,
+#86552f 67%,
+#633d24
+);
+
+cursor: pointer;
+
+box-shadow:
+0 6px 12px rgba(65, 38, 20, 0.30),
+0 0 0 5px rgba(236, 190, 105, 0.38);
+
+transition:
+transform 0.18s ease;
+}
+
+.mic-button:hover {
+transform: scale(1.05);
+}
+
+.mic-button:active {
+transform: scale(0.97);
+}
+
+.mic-icon {
+position: relative;
+
+z-index: 5;
+
+font-size: 43px;
+
+filter:
+drop-shadow(
+0 2px 2px rgba(0, 0, 0, 0.2)
+);
+}
+
+.mic-ring {
+position: absolute;
+
+border-radius: 50%;
+
+border: 3px solid rgba(246, 214, 139, 0.85);
+
+pointer-events: none;
+}
+
+.ring-one {
+inset: -8px;
+}
+
+.ring-two {
+inset: -14px;
+
+border-color: rgba(255, 245, 216, 0.65);
+}
+
+.mic-listening {
+animation:
+micPulse 0.9s infinite alternate;
+}
+
+.mic-listening .ring-one {
+animation:
+ringPulse 0.9s infinite alternate;
+}
+
+.mic-listening .ring-two {
+animation:
+ringPulse 1.1s infinite alternate;
+}
+
+@keyframes micPulse {
+from {
+transform: scale(1);
+}
+
+to {
+transform: scale(1.08);
+}
+}
+
+@keyframes ringPulse {
+from {
+opacity: 0.35;
+transform: scale(0.95);
+}
+
+to {
+opacity: 1;
+transform: scale(1.06);
+}
+}
+
+.mic-label {
+margin-top: 9px;
+
+color: #5d432c;
+
+font-size: 14px;
+
+font-weight: 900;
+
+text-shadow:
+0 1px rgba(255, 255, 255, 0.8);
+}
+
+/* =========================================================
+PROGRESS DOTS
+========================================================= */
+
+.progress-dots {
+position: absolute;
+
+bottom: 14px;
+left: 50%;
+
+transform: translateX(-50%);
+
+display: flex;
+
+align-items: center;
+
+gap: 9px;
+
+z-index: 35;
+}
+
+.progress-dot {
+width: 10px;
+height: 10px;
+
+border-radius: 50%;
+
+border: 2px solid #9a8065;
+
+background: rgba(255, 250, 232, 0.9);
+
+transition:
+background 0.2s ease,
+transform 0.2s ease;
+}
+
+.progress-dot.completed {
+background: #66ad6e;
+
+border-color: #3c8050;
+}
+
+.progress-dot.active {
+background: #b97a37;
+
+border-color: #805125;
+
+transform: scale(1.25);
+}
+
+/* =========================================================
+FINAL SCREEN
+========================================================= */
+
+.plan-complete-screen {
+position: absolute;
+
+inset: 0;
+
+display: flex;
+align-items: flex-end;
+justify-content: center;
+}
+
+.complete-teacher-section {
+position: absolute;
+
+left: 4%;
+bottom: 0;
+
+width: 35%;
+
+height: 90%;
+
+display: flex;
+align-items: flex-end;
+justify-content: center;
+}
+
+.complete-teacher {
+width: min(390px, 31vw);
+
+max-height: 88%;
+
+object-fit: contain;
+
+filter:
+drop-shadow(
+0 10px 10px rgba(61, 35, 18, 0.20)
+);
+}
+
+.complete-content {
+position: absolute;
+
+right: 5%;
+top: 11%;
+
+width: 64%;
+
+height: 75%;
+
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.complete-cloud {
+position: relative;
+
+width: min(690px, 58vw);
+
+min-height: 480px;
+
+padding: 55px 55px 45px;
+
+display: flex;
+flex-direction: column;
+
+align-items: center;
+justify-content: center;
+
+text-align: center;
+
+background: #fff5d8;
+
+border: 5px solid #d89b36;
+
+border-radius:
+47% 53% 48% 52% /
+48% 43% 57% 52%;
+
+box-shadow:
+0 9px 0 rgba(190, 123, 24, 0.20),
+0 18px 28px rgba(68, 40, 18, 0.15);
+}
+
+.complete-sparkles {
+position: absolute;
+
+right: 75px;
+top: 48px;
+
+color: #dda03c;
+
+font-size: 42px;
+}
+
+.complete-cloud h1 {
+margin: 0 0 10px;
+
+color: #694426;
+
+font-size: clamp(34px, 3.6vw, 55px);
+
+font-weight: 1000;
+}
+
+.complete-cloud p {
+margin: 0 0 27px;
+
+color: #55402c;
+
+font-size: clamp(18px, 1.7vw, 25px);
+
+font-weight: 700;
+}
+
+.plan-complete-ribbon {
+padding: 12px 40px;
+
+border-radius: 12px;
+
+border: 3px solid #397448;
+
+background:
+linear-gradient(
+#62bb69,
+#39964e
+);
+
+color: white;
+
+font-size: 23px;
+
+font-weight: 1000;
+
+transform:
+rotate(-1deg);
+
+box-shadow:
+0 5px 0 #286e38;
+}
+
+.finish-btn {
+margin-top: 30px;
+
+min-width: 190px;
+
+padding: 13px 35px;
+
+border-radius: 26px;
+
+border: 4px solid #c67d0c;
+
+background:
+linear-gradient(
+#ffda49,
+#ffb715
+);
+
+color: #50371f;
+
+font-size: 23px;
+
+font-weight: 1000;
+
+cursor: pointer;
+
+box-shadow:
+0 5px 0 #a86408,
+0 9px 15px rgba(76, 45, 15, 0.18);
+
+transition:
+transform 0.15s ease;
+}
+
+.finish-btn:hover {
+transform: translateY(-2px);
+}
+
+.finish-btn:active {
+transform: translateY(3px);
+
+box-shadow:
+0 2px 0 #a86408;
+}
+
+/* =========================================================
+STEP-SPECIFIC LAYOUT
+========================================================= */
+
+.plan-step-3 .our-plan-card {
+right: 25px;
+}
+
+.plan-step-3 .time-selection-area {
+left: 30px;
+}
+
+.plan-step-4 .our-plan-card {
+right: 24px;
+}
+
+.plan-step-4 .teacher-speech {
+left: 180px;
+top: 76px;
+}
+
+.plan-step-5 .teacher-speech {
+left: 180px;
+top: 90px;
+}
+
+.plan-step-5 .our-plan-card {
+top: 85px;
+}
+
+.plan-step-6 .teacher-speech {
+left: 180px;
+top: 105px;
+}
+
+.plan-step-6 .our-plan-card {
+top: 85px;
+}
+
+.plan-step-7 .teacher-speech {
+left: 175px;
+top: 90px;
+
+width: 370px;
+}
+
+.plan-step-7 .child-speech {
+right: 285px;
+top: 285px;
+}
+
+/* =========================================================
+RESPONSIVE
+========================================================= */
+
+@media (max-width: 1200px) {
+
+.plan-game-container {
+width: 97vw;
+height: 94vh;
+}
+
+/* Teacher moved UP and enlarged */
+.plan-teacher-area {
+left: 8px;
+
+top: 68px;
+
+width: 170px;
+height: 190px;
+
+}
+
+.plan-teacher {
+width: 170px;
+height: 190px;
+
+max-height: none;
+
+}
+
+.teacher-name-tag {
+bottom: -7px;
+}
+
+.teacher-speech {
+left: 160px;
+
+width: 300px;
+
+font-size: 17px;
+
+}
+
+.our-plan-card {
+width: 220px;
+}
+
+.weekend-calendar {
+right: 240px;
+
+width: 175px;
+height: 175px;
+
+}
+
+.child-speech {
+right: 235px;
+}
+
+/* Bigger child character */
+.selected-child-character {
+right: 35px;
+
+top: 300px;
+
+width: 165px;
+height: 235px;
+
+}
+
+.activity-selection-area {
+left: 380px;
+
+width: 450px;
+
+}
+
+.time-selection-area {
+width: 430px;
+}
+}
+
+/* =========================================================
+900px
+========================================================= */
+
+@media (max-width: 900px) {
+
+.plan-game-container {
+min-height: 560px;
+}
+
+.plan-title {
+font-size: 20px;
+}
+
+.plan-top-btn {
+font-size: 14px;
+}
+
+/* Teacher */
+.plan-teacher-area {
+left: 4px;
+
+top: 60px;
+
+width: 145px;
+height: 170px;
+
+}
+
+.plan-teacher {
+width: 145px;
+height: 170px;
+
+max-height: none;
+
+}
+
+.teacher-name-tag {
+font-size: 11px;
+
+bottom: -6px;
+
+}
+
+.teacher-speech {
+left: 125px;
+
+width: 260px;
+
+font-size: 15px;
+
+}
+
+.our-plan-card {
+right: 12px;
+
+width: 200px;
+
+min-height: 390px;
+
+}
+
+.weekend-calendar {
+right: 190px;
+
+width: 145px;
+
+}
+
+.child-speech {
+right: 215px;
+
+width: 230px;
+
+font-size: 15px;
+
+}
+
+/* Child */
+.selected-child-character {
+right: 18px;
+
+top: 285px;
+
+width: 145px;
+height: 205px;
+
+}
+
+.time-selection-area {
+left: 15px;
+
+width: 370px;
+
+}
+
+.activity-selection-area {
+left: 300px;
+
+width: 390px;
+
+}
+
+.activity-option {
+min-height: 95px;
+}
+
+.activity-option img {
+width: 40px;
+height: 40px;
+}
+}
+
+/* =========================================================
+700px
+========================================================= */
+
+@media (max-width: 700px) {
+
+.plan-together-page {
+padding: 8px;
+}
+
+.plan-game-container {
+width: 100%;
+height: 96vh;
+
+border-radius: 16px;
+
+}
+
+.plan-title {
+font-size: 16px;
+}
+
+.plan-top-bar {
+height: 52px;
+}
+
+.plan-top-btn {
+top: 9px;
+
+height: 34px;
+
+padding: 0 9px;
+
+font-size: 12px;
+
+}
+
+.plan-activity-area {
+padding-top: 52px;
+}
+
+/* Teacher */
+.plan-teacher-area {
+left: 2px;
+
+top: 57px;
+
+width: 115px;
+
+height: 145px;
+
+}
+
+.plan-teacher {
+width: 115px;
+
+height: 145px;
+
+max-height: none;
+
+}
+
+.teacher-name-tag {
+font-size: 9px;
+
+bottom: -4px;
+
+padding: 4px 9px;
+
+}
+
+.teacher-speech {
+left: 98px;
+
+top: 60px;
+
+width: 215px;
+
+min-height: 75px;
+
+padding: 12px;
+
+font-size: 13px;
+
+border-radius: 18px;
+
+}
+
+.teacher-speech::before {
+left: -17px;
+
+top: 21px;
+
+border-top-width: 11px;
+border-bottom-width: 11px;
+
+border-right-width: 19px;
+
+}
+
+.teacher-speech::after {
+left: -13px;
+
+top: 22px;
+
+border-top-width: 10px;
+border-bottom-width: 10px;
+
+border-right-width: 17px;
+
+}
+
+.our-plan-card {
+right: 7px;
+
+top: 70px;
+
+width: 165px;
+
+min-height: 320px;
+
+padding: 8px;
+
+}
+
+.our-plan-header {
+font-size: 14px;
+}
+
+.plan-day {
+font-size: 13px;
+}
+
+.plan-info-row {
+min-height: 50px;
+}
+
+.plan-info-content strong {
+font-size: 11px;
+}
+
+.plan-place-image {
+height: 70px;
+}
+
+.weekend-calendar {
+right: 175px;
+
+top: 70px;
+
+width: 110px;
+
+}
+
+.child-speech {
+right: 175px;
+
+top: 150px;
+
+width: 175px;
+
+min-height: 75px;
+
+padding: 11px;
+
+font-size: 12px;
+
+}
+
+/* Child */
+.selected-child-character {
+right: 12px;
+
+top: 140px;
+
+width: 105px;
+
+height: 150px;
+
+}
+
+/* Right arrow on small screens */
+.child-speech::before {
+right: -18px;
+
+left: auto;
+
+top: 21px;
+
+border-top-width: 11px;
+border-bottom-width: 11px;
+
+border-left-width: 19px;
+
+border-right: none;
+
+}
+
+.child-speech::after {
+right: -14px;
+
+left: auto;
+
+top: 22px;
+
+border-top-width: 10px;
+border-bottom-width: 10px;
+
+border-left-width: 16px;
+
+border-right: none;
+
+}
+
+.mic-button {
+width: 70px;
+height: 70px;
+}
+
+.mic-icon {
+font-size: 30px;
+}
+
+.mic-label {
+font-size: 11px;
+}
+
+.progress-dots {
+gap: 5px;
+}
+
+.progress-dot {
+width: 7px;
+height: 7px;
+}
+
+.time-selection-area {
+left: 10px;
+
+bottom: 70px;
+
+width: 300px;
+
+}
+
+.large-clock {
+width: 80px;
+height: 80px;
+}
+
+.digital-time-box {
+min-width: 125px;
+
+font-size: 15px;
+
+}
+
+.activity-selection-area {
+left: 150px;
+
+bottom: 70px;
+
+width: 330px;
+
+}
+
+.activity-option {
+min-height: 80px;
+
+font-size: 10px;
+
+}
+
+.activity-option img {
+width: 30px;
+height: 30px;
+}
+
+.plan-change-banner {
+left: 10px;
+
+top: 60px;
+
+min-width: 230px;
+
+height: 45px;
+
+font-size: 17px;
+
+}
+
+.warning-symbol {
+width: 24px;
+height: 24px;
+
+font-size: 15px;
+
+}
+
+.complete-teacher-section {
+left: 0;
+
+width: 38%;
+
+}
+
+.complete-teacher {
+width: 150px;
+}
+
+.complete-content {
+right: 2%;
+
+width: 70%;
+
+}
+
+.complete-cloud {
+min-height: 330px;
+
+padding: 30px;
+
+}
+
+.complete-cloud h1 {
+font-size: 30px;
+}
+
+.complete-cloud p {
+font-size: 15px;
+}
+
+.plan-complete-ribbon {
+padding: 9px 20px;
+
+font-size: 15px;
+
+}
+
+.finish-btn {
+min-width: 130px;
+
+margin-top: 18px;
+
+padding: 9px 20px;
+
+font-size: 17px;
+
+}
+}
+
+/* =====================================================
+CHOOSE YOUR CHARACTER
+===================================================== */
+
+.character-selection-screen {
+position: absolute;
+inset: 0;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+padding: 30px;
+
+z-index: 30;
+}
+
+.character-selection-card {
+width: min(820px, 88%);
+
+padding: 32px 40px 38px;
+
+background: rgba(255, 248, 237, 0.98);
+
+border-radius: 28px;
+
+border: 3px solid rgba(111, 73, 45, 0.16);
+
+box-shadow:
+0 18px 40px rgba(65, 41, 24, 0.24),
+0 5px 14px rgba(65, 41, 24, 0.14);
+
+text-align: center;
+}
+
+.character-selection-title {
+margin: 0;
+
+color: #68462f;
+
+font-size: clamp(28px, 3vw, 40px);
+
+font-weight: 900;
+
+letter-spacing: 1px;
+
+line-height: 1.1;
+}
+
+.character-selection-subtitle {
+margin: 9px 0 28px;
+
+color: #87674d;
+
+font-size: 17px;
+
+font-weight: 600;
+}
+
+/* =====================================================
+BOY / GIRL CARDS
+===================================================== */
+
+.character-selection-options {
+display: flex;
+
+align-items: stretch;
+
+justify-content: center;
+
+gap: 30px;
+}
+
+.character-choice {
+width: 255px;
+
+height: 320px;
+
+padding: 12px 12px 15px;
+
+border: 3px solid #d8b48a;
+
+border-radius: 25px;
+
+background: #fffdf8;
+
+cursor: pointer;
+
+font-family: inherit;
+
+display: flex;
+
+flex-direction: column;
+
+align-items: center;
+
+justify-content: space-between;
+
+transition:
+transform 0.2s ease,
+box-shadow 0.2s ease,
+border-color 0.2s ease,
+background 0.2s ease;
+}
+
+.character-choice:hover {
+transform: translateY(-7px);
+
+border-color: #a16d45;
+
+background: #fff8ec;
+
+box-shadow:
+0 12px 25px rgba(72, 45, 27, 0.20);
+}
+
+.character-choice:active {
+transform: translateY(-2px) scale(0.98);
+}
+
+.character-choice-selected {
+border-color: #8b5d38;
+
+background: #fff5e5;
+
+box-shadow:
+0 12px 25px rgba(72, 45, 27, 0.18);
+}
+
+/* =====================================================
+CHARACTER IMAGE
+===================================================== */
+
+.character-choice-image {
+width: 100%;
+
+height: 245px;
+
+display: flex;
+
+align-items: flex-end;
+
+justify-content: center;
+
+overflow: hidden;
+}
+
+.character-choice-image img {
+width: 100%;
+
+height: 100%;
+
+object-fit: contain;
+
+object-position: bottom center;
+
+display: block;
+}
+
+.character-choice-name {
+color: #68462f;
+
+font-size: 20px;
+
+font-weight: 900;
+
+letter-spacing: 1px;
+
+padding-top: 8px;
+}
+
+/* =====================================================
+SELECTED CHARACTER
+===================================================== */
+
+.selected-child-character {
+position: absolute;
+
+right: 52px;
+
+top: 300px;
+
+width: 190px;
+
+height: 275px;
+
+z-index: 27;
+
+display: flex;
+
+align-items: flex-end;
+
+justify-content: center;
+
+pointer-events: none;
+
+animation:
+selectedChildCharacterIn 0.35s ease-out;
+}
+
+.selected-child-character img {
+width: 100%;
+
+height: 100%;
+
+object-fit: contain;
+
+object-position: bottom center;
+
+display: block;
+
+filter:
+drop-shadow(
+0 7px 9px rgba(50, 31, 18, 0.22)
+);
+}
+
+@keyframes selectedChildCharacterIn {
+
+from {
+opacity: 0;
+
+transform:
+  translateX(22px)
+  scale(0.90);
+
+}
+
+to {
+opacity: 1;
+
+transform:
+  translateX(0)
+  scale(1);
+
+}
+
+}
+
+/* =====================================================
+CHARACTER SCREEN RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+
+.character-selection-card {
+width: 92%;
+
+padding: 28px 25px 32px;
+
+}
+
+.character-choice {
+width: 225px;
+
+height: 285px;
+
+}
+
+.character-choice-image {
+height: 215px;
+}
+
+.selected-child-character {
+right: 18px;
+
+top: 285px;
+
+width: 145px;
+
+height: 205px;
+
+}
+}
+
+@media (max-width: 650px) {
+
+.character-selection-screen {
+padding: 15px;
+}
+
+.character-selection-card {
+width: 94%;
+
+padding: 24px 15px 28px;
+
+}
+
+.character-selection-title {
+font-size: 27px;
+}
+
+.character-selection-subtitle {
+font-size: 14px;
+
+margin-bottom: 20px;
+
+}
+
+.character-selection-options {
+gap: 12px;
+}
+
+.character-choice {
+width: 46%;
+
+height: 245px;
+
+border-radius: 20px;
+
+}
+
+.character-choice-image {
+height: 185px;
+}
+
+.character-choice-name {
+font-size: 17px;
+}
+
+.selected-child-character {
+right: 12px;
+
+top: 140px;
+
+width: 105px;
+
+height: 150px;
+
+}
+}
+
+@media (max-width: 450px) {
+
+.character-choice {
+height: 215px;
+
+padding: 8px;
+
+}
+
+.character-choice-image {
+height: 160px;
+}
+
+.character-choice-name {
+font-size: 15px;
+}
+
+.selected-child-character {
+right: 8px;
+
+top: 135px;
+
+width: 85px;
+
+height: 120px;
+
+}
+}

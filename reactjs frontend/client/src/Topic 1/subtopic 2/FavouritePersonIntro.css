@@ -2,68 +2,78 @@
       FAVOURITE PERSON ACTIVITY 1 INTRO
 =================================== */
 
-.favourite-person-activity1-intro-container{
+.favourite-person-activity1-intro-container {
 
-    position:fixed;
+    position: fixed;
 
-    inset:0;
+    inset: 0;
 
-    z-index:9999;
+    z-index: 9999;
 
-    display:flex;
+    display: flex;
 
-    justify-content:center;
+    justify-content: center;
 
-    align-items:center;
-background-image:url("../../assets/chatbg.jpeg");
+    align-items: center;
 
-    background-size:cover;
+    background-image: url("../../assets/chatbg.jpeg");
 
-    background-position:center;
+    background-size: cover;
 
-    background-repeat:no-repeat;
+    background-position: center;
 
-}
-
-
-.favourite-person-activity1-intro-container::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:rgba(0,0,0,.30);
-
-    backdrop-filter:blur(8px);
+    background-repeat: no-repeat;
 
 }
 
 
-.favourite-person-activity1-intro-popup{
+/* ===================================
+      DARK OVERLAY
+=================================== */
 
-    width:1000px;
+.favourite-person-activity1-intro-container::before {
 
-    height:420px;
+    content: "";
 
-    background:#D8B48A;
+    position: absolute;
 
-    display:flex;
+    inset: 0;
 
-    flex-direction:column;
+    background: rgba(0, 0, 0, 0.30);
 
-    justify-content:center;
+    backdrop-filter: blur(8px);
 
-    align-items:center;
+}
 
-    position:relative;
 
-    z-index:2;
+/* ===================================
+      INTRO POPUP
+=================================== */
 
-    box-shadow:0 30px 80px rgba(0,0,0,.30);
+.favourite-person-activity1-intro-popup {
 
-    clip-path:polygon(
+    width: 1000px;
+
+    height: 420px;
+
+    background: #D8B48A;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+
+    z-index: 2;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.30);
+
+    clip-path: polygon(
         8% 0%,
         92% 0%,
         100% 18%,
@@ -74,95 +84,91 @@ background-image:url("../../assets/chatbg.jpeg");
         0% 18%
     );
 
-    transform:scale(.5);
+    transform: scale(0.5);
 
-    opacity:0;
+    opacity: 0;
 
-    transition:.5s ease;
-
-}
-
-
-.favourite-person-activity1-intro-popup.show{
-
-    transform:scale(1);
-
-    opacity:1;
+    transition: 0.5s ease;
 
 }
 
 
-.favourite-person-activity1-intro-icon{
+/* ===================================
+      SHOW ANIMATION
+=================================== */
 
-    font-size:82px;
+.favourite-person-activity1-intro-popup.show {
 
-    margin-bottom:18px;
+    transform: scale(1);
 
-}
-
-
-.favourite-person-activity1-intro-popup h1{
-
-    margin:0;
-
-    font-size:72px;
-
-    font-weight:800;
-
-    color:#5A3620;
-
-    letter-spacing:2px;
+    opacity: 1;
 
 }
 
 
-.favourite-person-activity1-intro-popup p{
+/* ===================================
+      ICON
+=================================== */
 
-    width:70%;
+.favourite-person-activity1-intro-icon {
 
-    margin-top:25px;
+    font-size: 82px;
 
-    text-align:center;
-
-    font-size:24px;
-
-    line-height:1.6;
-
-    color:#5A3620;
+    margin-bottom: 18px;
 
 }
 
 
-@media(max-width:768px){
+/* ===================================
+      TITLE
+=================================== */
 
-    .favourite-person-activity1-intro-popup{
+.favourite-person-activity1-intro-popup h1 {
 
-        width:90%;
+    margin: 0;
 
-        height:260px;
+    font-size: 64px;
+
+    font-weight: 800;
+
+    color: #5A3620;
+
+    letter-spacing: 2px;
+
+    text-align: center;
+
+    line-height: 1.15;
+
+}
+
+
+/* ===================================
+      RESPONSIVE
+=================================== */
+
+@media (max-width: 768px) {
+
+    .favourite-person-activity1-intro-popup {
+
+        width: 90%;
+
+        height: 260px;
 
     }
 
 
-    .favourite-person-activity1-intro-icon{
+    .favourite-person-activity1-intro-icon {
 
-        font-size:48px;
-
-    }
-
-
-    .favourite-person-activity1-intro-popup h1{
-
-        font-size:36px;
+        font-size: 48px;
 
     }
 
 
-    .favourite-person-activity1-intro-popup p{
+    .favourite-person-activity1-intro-popup h1 {
 
-        width:90%;
+        font-size: 36px;
 
-        font-size:18px;
+        letter-spacing: 1px;
 
     }
 

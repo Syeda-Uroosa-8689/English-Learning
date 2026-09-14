@@ -1,0 +1,1304 @@
+/* =====================================================
+   PHYSICAL APPEARANCE
+   ACTIVITY 1 - SPOT THE FEATURE
+   FINAL LAYOUT
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.physical-appearance-activity1-page {
+
+    width: 100%;
+    min-height: 100vh;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    padding: 24px;
+
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.physical-appearance-activity1-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(5px);
+
+}
+
+
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.physical-appearance-activity1-card {
+
+    width: min(1250px, 94vw);
+
+    min-height: 720px;
+
+    max-height: 92vh;
+
+    background-image:
+        url("../../assets/partner.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    border-radius: 30px;
+
+    position: relative;
+
+    z-index: 5;
+
+    padding: 28px 38px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.25);
+
+    overflow: hidden;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.physical-appearance-activity1-header {
+
+    display: grid;
+
+    grid-template-columns:
+        130px 1fr 130px;
+
+    align-items: center;
+
+    gap: 20px;
+
+    flex-shrink: 0;
+
+}
+
+
+/* =====================================================
+   HEADER CENTER
+===================================================== */
+
+.physical-appearance-header-center {
+
+    text-align: center;
+
+}
+
+
+.physical-appearance-header-center h1 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 34px;
+
+    font-weight: 800;
+
+}
+
+
+.physical-appearance-header-center span {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color: #8B5E3C;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+}
+
+
+/* =====================================================
+   HEADER LEFT
+===================================================== */
+
+.physical-appearance-header-left {
+
+    display: flex;
+
+    justify-content: flex-start;
+
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.physical-appearance-back-btn {
+
+    width: 120px;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #8B5E3C;
+
+    color: #FFFFFF;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+
+}
+
+
+.physical-appearance-back-btn:hover {
+
+    background: #6C452A;
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =====================================================
+   HEADER RIGHT
+===================================================== */
+
+.physical-appearance-header-right {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+}
+
+
+/* =====================================================
+   SKIP BUTTON
+===================================================== */
+
+.physical-appearance-skip-btn {
+
+    width: 120px;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #8B5E3C;
+
+    color: #FFFFFF;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+
+}
+
+
+.physical-appearance-skip-btn:hover {
+
+    background: #6C452A;
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =====================================================
+   MAIN ACTIVITY CONTENT
+===================================================== */
+
+.physical-appearance-activity-content {
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        34% 66%;
+
+    column-gap: 25px;
+
+    padding:
+        12px 25px 10px;
+
+}
+
+
+/* =====================================================
+   TEACHER SECTION
+===================================================== */
+
+.physical-appearance-teacher-section {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 0;
+
+    height: 100%;
+
+}
+
+
+/* =====================================================
+   TEACHER STAGE
+===================================================== */
+
+.physical-appearance-teacher-stage {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-end;
+
+}
+
+
+/* =====================================================
+   TEACHER IMAGE
+===================================================== */
+
+.physical-appearance-teacher-img {
+
+    width: 245px;
+
+    max-width: 100%;
+
+    max-height: 320px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    display: block;
+
+}
+
+
+/* =====================================================
+   TEACHER BUBBLE
+===================================================== */
+
+.physical-appearance-teacher-bubble {
+
+    position: relative;
+
+    width: 90%;
+
+    max-width: 330px;
+
+    margin-top: -4px;
+
+    padding: 15px 18px;
+
+    background: #FFFFFF;
+
+    border-radius: 18px;
+
+    border:
+        2px solid #E8EEF8;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.12);
+
+    animation:
+        physicalTeacherBubbleIn
+        0.35s
+        ease;
+
+}
+
+
+/* =====================================================
+   BUBBLE ARROW
+===================================================== */
+
+.physical-appearance-teacher-bubble::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -10px;
+
+    left: 50%;
+
+    width: 18px;
+
+    height: 18px;
+
+    background: #FFFFFF;
+
+    border-left:
+        2px solid #E8EEF8;
+
+    border-top:
+        2px solid #E8EEF8;
+
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+
+}
+
+
+/* =====================================================
+   TEACHER NAME
+===================================================== */
+
+.physical-appearance-teacher-name {
+
+    position: relative;
+
+    color: #FCBE23;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    text-align: center;
+
+    margin-bottom: 6px;
+
+}
+
+
+/* =====================================================
+   TEACHER TEXT
+===================================================== */
+
+.physical-appearance-teacher-text {
+
+    position: relative;
+
+    color: #374151;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    font-weight: 600;
+
+    text-align: center;
+
+}
+
+
+/* =====================================================
+   TEACHER STATS
+===================================================== */
+
+.physical-appearance-teacher-stats {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 15px;
+
+}
+
+
+/* =====================================================
+   ROUND BADGE
+===================================================== */
+
+.physical-appearance-round-badge {
+
+    padding:
+        8px 16px;
+
+    border-radius: 22px;
+
+    background: #FFF3E6;
+
+    border:
+        2px solid #E7D4BF;
+
+    color: #7A4C2C;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+}
+
+
+/* =====================================================
+   SCORE BADGE
+===================================================== */
+
+.physical-appearance-score-badge {
+
+    padding:
+        8px 16px;
+
+    border-radius: 22px;
+
+    background: #FFF3E6;
+
+    border:
+        2px solid #E7D4BF;
+
+    color: #7A4C2C;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+}
+
+
+/* =====================================================
+   MAIN RIGHT SECTION
+===================================================== */
+
+.physical-appearance-main-section {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    min-width: 0;
+
+}
+
+
+/* =====================================================
+   QUESTION CARD
+===================================================== */
+
+.physical-appearance-question-card {
+
+    width: 100%;
+
+    max-width: 720px;
+
+    padding:
+        18px 24px;
+
+    text-align: center;
+
+    background:
+        rgba(255, 248, 239, 0.96);
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 8px 22px rgba(80, 50, 30, 0.08);
+
+    margin-bottom: 18px;
+
+}
+
+
+/* =====================================================
+   QUESTION LABEL
+===================================================== */
+
+.physical-appearance-question-label {
+
+    color: #8B5E3C;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+    margin-bottom: 6px;
+
+}
+
+
+/* =====================================================
+   QUESTION
+===================================================== */
+
+.physical-appearance-question-card h2 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 27px;
+
+    line-height: 1.35;
+
+    font-weight: 800;
+
+}
+
+
+.physical-appearance-question-card p {
+
+    margin:
+        7px 0 0;
+
+    color: #7A4C2C;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+
+/* =====================================================
+   CHARACTER GRID
+===================================================== */
+
+.physical-appearance-character-grid {
+
+    width: 100%;
+
+    max-width: 720px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+
+}
+
+
+/* =====================================================
+   CHARACTER CARD
+===================================================== */
+
+.physical-appearance-character-card {
+
+    min-width: 0;
+
+    border:
+        3px solid transparent;
+
+    padding: 9px;
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border-radius: 18px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    box-shadow:
+        0 7px 18px rgba(80, 50, 30, 0.10);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+
+}
+
+
+/* =====================================================
+   HOVER
+===================================================== */
+
+.physical-appearance-character-card:hover:not(:disabled) {
+
+    transform:
+        translateY(-4px);
+
+    border-color:
+        #D8B48A;
+
+    box-shadow:
+        0 12px 25px
+        rgba(80, 50, 30, 0.15);
+
+}
+
+
+/* =====================================================
+   DISABLED
+===================================================== */
+
+.physical-appearance-character-card:disabled {
+
+    cursor: default;
+
+}
+
+
+/* =====================================================
+   CHARACTER PICTURE
+===================================================== */
+
+.physical-appearance-character-picture {
+
+    width: 100%;
+
+    height: 190px;
+
+    border-radius: 13px;
+
+    background:
+        #F8F3ED;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    overflow: hidden;
+
+}
+
+
+/* =====================================================
+   IMAGE
+===================================================== */
+
+.physical-appearance-character-picture img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+
+}
+
+
+/* =====================================================
+   CHARACTER NAME
+===================================================== */
+
+.physical-appearance-character-name {
+
+    padding-top: 8px;
+
+    color: #5A3620;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    text-align: center;
+
+}
+
+
+/* =====================================================
+   CORRECT
+===================================================== */
+
+.physical-appearance-character-card.correct {
+
+    border-color:
+        #65B87A;
+
+    background:
+        #F1FFF4;
+
+    box-shadow:
+        0 8px 22px
+        rgba(70, 150, 90, 0.18);
+
+}
+
+
+/* =====================================================
+   WRONG
+===================================================== */
+
+.physical-appearance-character-card.wrong {
+
+    border-color:
+        #D98282;
+
+    background:
+        #FFF3F3;
+
+}
+
+
+/* =====================================================
+   FEEDBACK
+===================================================== */
+
+.physical-appearance-feedback {
+
+    width: 100%;
+
+    max-width: 650px;
+
+    margin-top: 15px;
+
+    padding:
+        11px 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    border-radius: 16px;
+
+}
+
+
+/* =====================================================
+   FEEDBACK ICON
+===================================================== */
+
+.feedback-icon {
+
+    font-size: 27px;
+
+}
+
+
+/* =====================================================
+   FEEDBACK TEXT
+===================================================== */
+
+.physical-appearance-feedback strong {
+
+    font-size: 17px;
+
+}
+
+
+.physical-appearance-feedback p {
+
+    margin:
+        3px 0 0;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+
+/* =====================================================
+   CORRECT FEEDBACK
+===================================================== */
+
+.correct-feedback {
+
+    background:
+        #EFFBF2;
+
+    border:
+        1px solid #BDE5C7;
+
+    color:
+        #28713E;
+
+}
+
+
+/* =====================================================
+   WRONG FEEDBACK
+===================================================== */
+
+.wrong-feedback {
+
+    background:
+        #FFF5F1;
+
+    border:
+        1px solid #EBCDBF;
+
+    color:
+        #81543E;
+
+}
+
+
+/* =====================================================
+   NEXT BUTTON
+===================================================== */
+
+.physical-appearance-next-button {
+
+    margin-top: 14px;
+
+    width: 190px;
+
+    height: 48px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        #8B5E3C;
+
+    color:
+        #FFFFFF;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 16px
+        rgba(100, 60, 30, 0.20);
+
+    transition:
+        0.2s ease;
+
+}
+
+
+.physical-appearance-next-button:hover {
+
+    background:
+        #70472D;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* =====================================================
+   TEACHER BUBBLE ANIMATION
+===================================================== */
+
+@keyframes physicalTeacherBubbleIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(8px)
+            scale(0.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =====================================================
+   LARGE TABLET
+===================================================== */
+
+@media (max-width: 1050px) {
+
+    .physical-appearance-activity1-card {
+
+        max-height: none;
+
+    }
+
+
+    .physical-appearance-activity-content {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 20px;
+
+        overflow-y: auto;
+
+    }
+
+
+    .physical-appearance-teacher-section {
+
+        height: auto;
+
+        flex-direction: row;
+
+        align-items: center;
+
+        gap: 18px;
+
+    }
+
+
+    .physical-appearance-teacher-img {
+
+        width: 160px;
+
+        max-height: 230px;
+
+    }
+
+
+    .physical-appearance-teacher-bubble {
+
+        margin-top: 0;
+
+        width: 360px;
+
+    }
+
+
+    .physical-appearance-teacher-stats {
+
+        margin-top: 0;
+
+        flex-direction: column;
+
+    }
+
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .physical-appearance-activity1-page {
+
+        padding: 14px;
+
+    }
+
+
+    .physical-appearance-activity1-card {
+
+        width: 96vw;
+
+        min-height: 94vh;
+
+        padding:
+            20px;
+
+        border-radius: 24px;
+
+    }
+
+
+    .physical-appearance-activity1-header {
+
+        grid-template-columns:
+            110px 1fr 110px;
+
+        gap: 10px;
+
+    }
+
+
+    .physical-appearance-header-center h1 {
+
+        font-size: 27px;
+
+    }
+
+
+    .physical-appearance-header-center span {
+
+        font-size: 13px;
+
+    }
+
+
+    .physical-appearance-character-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .physical-appearance-character-picture {
+
+        height: 180px;
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .physical-appearance-activity1-card {
+
+        padding: 16px;
+
+        border-radius: 20px;
+
+    }
+
+
+    .physical-appearance-activity1-header {
+
+        grid-template-columns:
+            1fr 1fr;
+
+        grid-template-rows:
+            auto auto;
+
+    }
+
+
+    .physical-appearance-header-center {
+
+        grid-column:
+            1 / 3;
+
+        grid-row: 1;
+
+        order: 1;
+
+    }
+
+
+    .physical-appearance-header-left {
+
+        grid-column: 1;
+
+        grid-row: 2;
+
+        order: 2;
+
+    }
+
+
+    .physical-appearance-header-right {
+
+        grid-column: 2;
+
+        grid-row: 2;
+
+        order: 3;
+
+    }
+
+
+    .physical-appearance-back-btn,
+    .physical-appearance-skip-btn {
+
+        width: 100%;
+
+        height: 42px;
+
+        font-size: 14px;
+
+    }
+
+
+    .physical-appearance-header-center h1 {
+
+        font-size: 23px;
+
+    }
+
+
+    .physical-appearance-header-center span {
+
+        font-size: 12px;
+
+    }
+
+
+    .physical-appearance-activity-content {
+
+        padding:
+            12px 0 5px;
+
+    }
+
+
+    .physical-appearance-teacher-section {
+
+        flex-direction: column;
+
+        gap: 8px;
+
+    }
+
+
+    .physical-appearance-teacher-img {
+
+        width: 135px;
+
+        max-height: 185px;
+
+    }
+
+
+    .physical-appearance-teacher-bubble {
+
+        width: 95%;
+
+        max-width: 330px;
+
+    }
+
+
+    .physical-appearance-teacher-stats {
+
+        flex-direction: row;
+
+        margin-top: 4px;
+
+    }
+
+
+    .physical-appearance-question-card {
+
+        padding:
+            16px 14px;
+
+        margin-bottom: 14px;
+
+    }
+
+
+    .physical-appearance-question-card h2 {
+
+        font-size: 21px;
+
+    }
+
+
+    .physical-appearance-character-grid {
+
+        gap: 9px;
+
+    }
+
+
+    .physical-appearance-character-card {
+
+        padding: 7px;
+
+        border-radius: 15px;
+
+    }
+
+
+    .physical-appearance-character-picture {
+
+        height: 145px;
+
+        border-radius: 11px;
+
+    }
+
+
+    .physical-appearance-character-name {
+
+        font-size: 14px;
+
+        padding-top: 7px;
+
+    }
+
+
+    .physical-appearance-feedback {
+
+        margin-top: 12px;
+
+        padding:
+            10px 12px;
+
+    }
+
+
+    .physical-appearance-next-button {
+
+        width: 180px;
+
+    }
+
+}

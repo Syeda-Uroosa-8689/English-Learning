@@ -1,0 +1,123 @@
+/* ===================================
+   FAVOURITE PLACE ACTIVITY 1 INTRO
+=================================== */
+
+.favourite-place-intro-container {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: url("../../assets/chatbg.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+/* ===================================
+   DARK BLURRED OVERLAY
+=================================== */
+
+.favourite-place-intro-container::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.30);
+
+  backdrop-filter: blur(8px);
+}
+
+
+/* ===================================
+   INTRO POPUP
+=================================== */
+
+.favourite-place-intro-popup {
+  width: 1000px;
+  height: 420px;
+
+  background: #D8B48A;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  z-index: 2;
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.30);
+
+  clip-path: polygon(
+    8% 0%,
+    92% 0%,
+    100% 18%,
+    100% 82%,
+    92% 100%,
+    8% 100%,
+    0% 82%,
+    0% 18%
+  );
+
+  transform: scale(0.5);
+  opacity: 0;
+
+  transition: 0.5s ease;
+}
+
+
+/* ===================================
+   POPUP SHOW ANIMATION
+=================================== */
+
+.favourite-place-intro-popup.show {
+  transform: scale(1);
+  opacity: 1;
+}
+
+
+/* ===================================
+   TITLE
+=================================== */
+
+.favourite-place-intro-popup h1 {
+  margin: 0;
+
+  padding: 0 50px;
+
+  font-size: 64px;
+  font-weight: 800;
+
+  color: #5A3620;
+
+  letter-spacing: 2px;
+
+  text-align: center;
+
+  line-height: 1.2;
+}
+
+
+/* ===================================
+   RESPONSIVE
+=================================== */
+
+@media (max-width: 768px) {
+
+  .favourite-place-intro-popup {
+    width: 90%;
+    height: 260px;
+  }
+
+  .favourite-place-intro-popup h1 {
+    font-size: 36px;
+    padding: 0 25px;
+  }
+
+}

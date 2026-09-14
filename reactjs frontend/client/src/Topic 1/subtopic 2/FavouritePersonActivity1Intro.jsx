@@ -16,10 +16,10 @@ function FavouritePersonActivity1Intro({ onFinish }) {
             setShow(false);
 
             setTimeout(() => {
-                onFinish();
-            }, 500);
+                onFinish?.();
+            }, 300);
 
-        }, 4000);
+        }, 1500);
 
         return () => {
             clearTimeout(showTimer);
@@ -27,7 +27,6 @@ function FavouritePersonActivity1Intro({ onFinish }) {
         };
 
     }, [onFinish]);
-
 
     return (
 
@@ -41,22 +40,19 @@ function FavouritePersonActivity1Intro({ onFinish }) {
                 }
             >
 
-                <div className="favourite-person-activity1-intro-icon">
-                    
-                </div>
+              
 
                 <h1>
-                    Guess the Favourite 
-                    <br />Person
+                    Guess the Favourite
+                    <br />
+                    Person
                 </h1>
-
 
             </div>
 
         </div>
 
     );
-
 }
 
 export default FavouritePersonActivity1Intro;

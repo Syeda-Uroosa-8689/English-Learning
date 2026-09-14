@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import RestaurantIntro from "./RestaurantIntro";
 
@@ -17,8 +17,10 @@ import MoodConversationActivity from "./MoodConversationActivity";
 import RestaurantQuizIntro from "./RestaurantQuizIntro";
 import RestaurantQuizActivity from "./RestaurantQuizActivity";
 
-import LessonComplete from "./LessonComplete";
 
+/* =========================================
+   RESTAURANT CONVERSATION FLOW
+========================================= */
 
 function RestaurantConversationFlow({
 
@@ -32,28 +34,31 @@ function RestaurantConversationFlow({
 }) {
 
 
-    /*
-    ==================================================
-                    FLOW STEPS
-    ==================================================
+    /* =========================================
+       FLOW STEPS
 
-    -1 = Restaurant Intro
-     0 = AI Waiter
-     1 = Menu Matching
-     2 = Arrange Conversation
-     3 = Mood Conversation
-     4 = Restaurant Quiz
-     5 = Lesson Completed
-    */
+       -1 = Restaurant Intro
+        0 = AI Waiter
+        1 = Menu Matching
+        2 = Arrange Conversation
+        3 = Mood Conversation
+        4 = Restaurant Quiz
+    ========================================= */
 
-    const [currentStep, setCurrentStep] = useState(-1);
+    const [currentStep, setCurrentStep] =
+        useState(-1);
 
 
-    /*
-    ==================================================
-                    INTRO STATES
-    ==================================================
-    */
+    /* =========================================
+       PREVENT DOUBLE FINISH
+    ========================================= */
+
+    const isFinishedRef = useRef(false);
+
+
+    /* =========================================
+       INTRO STATES
+    ========================================= */
 
     const [showAIIntro, setShowAIIntro] =
         useState(false);
@@ -71,18 +76,37 @@ function RestaurantConversationFlow({
         useState(false);
 
 
-    /*
-    ==================================================
-                    NEXT STEP
-    ==================================================
-    */
+    /* =========================================
+       COMPLETE LESSON
+
+       CALL ONLY ONCE
+    ========================================= */
+
+    const handleLessonFinish = () => {
+
+        if (isFinishedRef.current) {
+            return;
+        }
+
+        isFinishedRef.current = true;
+
+        if (typeof onFinish === "function") {
+            onFinish();
+        }
+
+    };
+
+
+    /* =========================================
+       NEXT STEP
+    ========================================= */
 
     const nextStep = () => {
 
 
-        /* ------------------------------------------
-                    AI WAITER → MENU
-        ------------------------------------------ */
+        /* =====================================
+           AI WAITER → MENU
+        ===================================== */
 
         if (currentStep === 0) {
 
@@ -95,9 +119,9 @@ function RestaurantConversationFlow({
         }
 
 
-        /* ------------------------------------------
-                    MENU → ARRANGE
-        ------------------------------------------ */
+        /* =====================================
+           MENU → ARRANGE
+        ===================================== */
 
         if (currentStep === 1) {
 
@@ -110,9 +134,9 @@ function RestaurantConversationFlow({
         }
 
 
-        /* ------------------------------------------
-                    ARRANGE → MOOD
-        ------------------------------------------ */
+        /* =====================================
+           ARRANGE → MOOD
+        ===================================== */
 
         if (currentStep === 2) {
 
@@ -125,9 +149,9 @@ function RestaurantConversationFlow({
         }
 
 
-        /* ------------------------------------------
-                    MOOD → QUIZ
-        ------------------------------------------ */
+        /* =====================================
+           MOOD → QUIZ
+        ===================================== */
 
         if (currentStep === 3) {
 
@@ -140,95 +164,82 @@ function RestaurantConversationFlow({
         }
 
 
-        /* ------------------------------------------
-                    QUIZ → COMPLETE
-        ------------------------------------------ */
+        /* =====================================
+           QUIZ → APP LESSON COMPLETE
+        ===================================== */
 
         if (currentStep === 4) {
 
-            setCurrentStep(5);
+            handleLessonFinish();
 
             return;
-
-        }
-
-
-        /*
-            Safety fallback
-        */
-
-        if (currentStep < 4) {
-
-            setCurrentStep(
-                prev => prev + 1
-            );
 
         }
 
     };
 
 
-    /*
-    ==================================================
-                        RETURN
-    ==================================================
-    */
+    /* =========================================
+       QUIZ SKIP → APP LESSON COMPLETE
+    ========================================= */
+
+    const handleQuizSkip = () => {
+
+        handleLessonFinish();
+
+    };
+
 
     return (
 
         <div className="restaurant-flow">
 
 
-            {/* ========================================
-                    RESTAURANT INTRO
-            ======================================== */}
+            {/* =====================================
+               RESTAURANT INTRO
+            ===================================== */}
 
-            {
-                currentStep === -1 && (
+            {currentStep === -1 && (
 
-                    <RestaurantIntro
+                <RestaurantIntro
 
-                        onFinish={() => {
+                    onFinish={() => {
 
-                            setShowAIIntro(true);
+                        setShowAIIntro(true);
 
-                        }}
+                    }}
 
-                    />
+                />
 
-                )
-            }
+            )}
 
 
-            {/* ========================================
-                    AI WAITER INTRO
-            ======================================== */}
+            {/* =====================================
+               AI WAITER INTRO
+            ===================================== */}
 
-            {
-                showAIIntro && (
+            {showAIIntro && (
 
-                    <AIWaiterChatIntro
+                <AIWaiterChatIntro
 
-                        onFinish={() => {
+                    onFinish={() => {
 
-                            setShowAIIntro(false);
+                        setShowAIIntro(false);
 
-                            setCurrentStep(0);
+                        setCurrentStep(0);
 
-                        }}
+                    }}
 
-                    />
+                />
 
-                )
-            }
+            )}
 
 
-            {/* ========================================
-                    AI WAITER ACTIVITY
-            ======================================== */}
+            {/* =====================================
+               AI WAITER ACTIVITY
+            ===================================== */}
 
-            {
-                currentStep === 0 &&
+            {currentStep === 0 &&
                 !showAIIntro &&
                 !showMenuIntro && (
 
@@ -246,39 +257,35 @@ function RestaurantConversationFlow({
 
                     />
 
-                )
-            }
+                )}
 
 
-            {/* ========================================
-                    MENU MATCHING INTRO
-            ======================================== */}
+            {/* =====================================
+               MENU MATCHING INTRO
+            ===================================== */}
 
-            {
-                showMenuIntro && (
+            {showMenuIntro && (
 
-                    <MenuMatchingIntro
+                <MenuMatchingIntro
 
-                        onFinish={() => {
+                    onFinish={() => {
 
-                            setShowMenuIntro(false);
+                        setShowMenuIntro(false);
 
-                            setCurrentStep(1);
+                        setCurrentStep(1);
 
-                        }}
+                    }}
 
-                    />
+                />
 
-                )
-            }
+            )}
 
 
-            {/* ========================================
-                    MENU MATCHING ACTIVITY
-            ======================================== */}
+            {/* =====================================
+               MENU MATCHING ACTIVITY
+            ===================================== */}
 
-            {
-                currentStep === 1 &&
+            {currentStep === 1 &&
                 !showMenuIntro &&
                 !showArrangeIntro && (
 
@@ -290,39 +297,35 @@ function RestaurantConversationFlow({
 
                     />
 
-                )
-            }
+                )}
 
 
-            {/* ========================================
-                    ARRANGE CONVERSATION INTRO
-            ======================================== */}
+            {/* =====================================
+               ARRANGE CONVERSATION INTRO
+            ===================================== */}
 
-            {
-                showArrangeIntro && (
+            {showArrangeIntro && (
 
-                    <ArrangeConversationIntro
+                <ArrangeConversationIntro
 
-                        onFinish={() => {
+                    onFinish={() => {
 
-                            setShowArrangeIntro(false);
+                        setShowArrangeIntro(false);
 
-                            setCurrentStep(2);
+                        setCurrentStep(2);
 
-                        }}
+                    }}
 
-                    />
+                />
 
-                )
-            }
+            )}
 
 
-            {/* ========================================
-                    ARRANGE CONVERSATION ACTIVITY
-            ======================================== */}
+            {/* =====================================
+               ARRANGE CONVERSATION ACTIVITY
+            ===================================== */}
 
-            {
-                currentStep === 2 &&
+            {currentStep === 2 &&
                 !showArrangeIntro &&
                 !showMoodIntro && (
 
@@ -334,39 +337,35 @@ function RestaurantConversationFlow({
 
                     />
 
-                )
-            }
+                )}
 
 
-            {/* ========================================
-                    MOOD CONVERSATION INTRO
-            ======================================== */}
+            {/* =====================================
+               MOOD CONVERSATION INTRO
+            ===================================== */}
 
-            {
-                showMoodIntro && (
+            {showMoodIntro && (
 
-                    <MoodConversationIntro
+                <MoodConversationIntro
 
-                        onFinish={() => {
+                    onFinish={() => {
 
-                            setShowMoodIntro(false);
+                        setShowMoodIntro(false);
 
-                            setCurrentStep(3);
+                        setCurrentStep(3);
 
-                        }}
+                    }}
 
-                    />
+                />
 
-                )
-            }
+            )}
 
 
-            {/* ========================================
-                    MOOD CONVERSATION ACTIVITY
-            ======================================== */}
+            {/* =====================================
+               MOOD CONVERSATION ACTIVITY
+            ===================================== */}
 
-            {
-                currentStep === 3 &&
+            {currentStep === 3 &&
                 !showMoodIntro &&
                 !showQuizIntro && (
 
@@ -378,75 +377,48 @@ function RestaurantConversationFlow({
 
                     />
 
-                )
-            }
+                )}
 
 
-            {/* ========================================
-                    RESTAURANT QUIZ INTRO
-            ======================================== */}
+            {/* =====================================
+               RESTAURANT QUIZ INTRO
+            ===================================== */}
 
-            {
-                showQuizIntro && (
+            {showQuizIntro && (
 
-                    <RestaurantQuizIntro
+                <RestaurantQuizIntro
 
-                        onFinish={() => {
+                    onFinish={() => {
 
-                            setShowQuizIntro(false);
+                        setShowQuizIntro(false);
 
-                            setCurrentStep(4);
+                        setCurrentStep(4);
 
-                        }}
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =====================================
+               RESTAURANT QUIZ ACTIVITY
+            ===================================== */}
+
+            {currentStep === 4 &&
+                !showQuizIntro && (
+
+                    <RestaurantQuizActivity
+
+                        onNext={nextStep}
+
+                        onBack={onBack}
+
+                        onSkip={handleQuizSkip}
 
                     />
 
-                )
-            }
-
-
-            {/* ========================================
-                    RESTAURANT QUIZ ACTIVITY
-            ======================================== */}
-{
-    currentStep === 4 &&
-    !showQuizIntro && (
-
-        <RestaurantQuizActivity
-
-            onNext={nextStep}
-
-            onBack={onBack}
-
-            onSkip={() => {
-
-                setCurrentStep(5);
-
-            }}
-
-        />
-
-    )
-}
-            {/* ========================================
-                    LESSON COMPLETE POPUP
-            ======================================== */}
-{
-    currentStep === 5 && (
-
-        <LessonComplete
-
-            onFinish={() => {
-
-                onFinish();
-
-            }}
-
-        />
-
-    )
-}
-
+                )}
 
         </div>
 

@@ -1,0 +1,3135 @@
+/* =====================================================
+   MAIN PAGE
+===================================================== */
+
+.spm-page {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    font-family: "Poppins", sans-serif;
+
+    background: #5f4637;
+}
+
+
+/* =====================================================
+   BLURRED BACKGROUND
+===================================================== */
+
+.spm-background {
+    position: absolute;
+    inset: -20px;
+
+    background-image: url("../../assets/chatbg.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    filter: blur(8px);
+
+    transform: scale(1.08);
+}
+
+.spm-background::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(48, 30, 20, 0.28);
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+
+.spm-main-container {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(1420px, 92vw);
+    height: min(900px, 92vh);
+
+    margin: 4vh auto;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background-image: url("../../assets/partner.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border: 2px solid rgba(255, 255, 255, 0.75);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.4);
+}
+
+
+/* =====================================================
+   WARM PATTERN
+===================================================== */
+
+.spm-main-container::before {
+    content: "♡  ✦  ♡  ✧  ♡  ✦  ♡  ✧";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 10px;
+
+    color: rgba(151, 110, 66, 0.16);
+
+    font-size: 42px;
+
+    letter-spacing: 40px;
+
+    white-space: nowrap;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   TOP BUTTONS
+===================================================== */
+
+.spm-top-button {
+    position: absolute;
+
+    top: 30px;
+
+    z-index: 50;
+
+    border: none;
+
+    border-radius: 16px;
+
+    padding: 15px 25px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #704927,
+            #54321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.18),
+        0 6px 0 rgba(58,31,13,.3);
+
+    transition: .2s ease;
+}
+
+.spm-top-button:hover {
+    transform: translateY(-2px);
+}
+
+.spm-back-button {
+    left: 38px;
+}
+
+.spm-skip-button {
+    right: 38px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.spm-header {
+    position: relative;
+
+    z-index: 5;
+
+    text-align: center;
+
+    padding-top: 42px;
+}
+
+.spm-header h1 {
+    margin: 0;
+
+    color: #382113;
+
+    font-size: clamp(30px, 3.2vw, 52px);
+
+    font-weight: 900;
+
+    letter-spacing: -1px;
+}
+
+.spm-header p {
+    margin: 8px 0 0;
+
+    color: #5d4637;
+
+    font-size: clamp(15px, 1.45vw, 23px);
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   INTRO LAYOUT
+===================================================== */
+
+.spm-intro-layout {
+    position: absolute;
+
+    top: 145px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 91%;
+
+    height: calc(100% - 175px);
+
+    display: grid;
+
+    grid-template-columns: 38% 62%;
+
+    gap: 18px;
+}
+
+
+/* =====================================================
+   INTRO LEFT
+===================================================== */
+
+.spm-intro-left {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =====================================================
+   TEACHER ROW
+===================================================== */
+
+.spm-intro-teacher-row {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =====================================================
+   SPACESHIP TEACHER
+===================================================== */
+
+.spm-teacher-box {
+    position: relative;
+
+    z-index: 3;
+
+    width: 48%;
+
+    padding-bottom: 35px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+}
+
+.spm-teacher-image {
+    width: 100%;
+
+    max-height: 250px;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+.spm-teacher-name {
+    position: absolute;
+
+    z-index: 10;
+
+    left: 50%;
+
+    bottom: 0;
+
+    transform: translateX(-50%);
+
+    width: 210px;
+
+    padding: 12px 15px;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321c
+        );
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.15),
+        0 7px 18px rgba(72,41,20,.28);
+}
+
+
+/* =====================================================
+   SPEECH BUBBLE
+===================================================== */
+
+.spm-speech-bubble {
+    position: relative;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7ecdc
+        );
+
+    border: 2px solid rgba(154,113,72,.35);
+
+    border-radius: 28px;
+
+    color: #3f2a1c;
+
+    box-shadow:
+        0 10px 30px rgba(88,51,24,.15);
+}
+
+.spm-speech-bubble::before {
+    content: "";
+
+    position: absolute;
+
+    left: -18px;
+
+    bottom: 45px;
+
+    width: 34px;
+    height: 34px;
+
+    background: #fbf4e8;
+
+    border-left: 2px solid rgba(154,113,72,.35);
+
+    border-bottom: 2px solid rgba(154,113,72,.35);
+
+    transform: rotate(45deg);
+
+    z-index: -1;
+}
+
+.spm-intro-bubble {
+    width: 48%;
+
+    min-width: 225px;
+
+    margin-left: -10px;
+
+    padding: 22px 20px;
+}
+
+.spm-intro-bubble p {
+    margin: 0 0 12px;
+
+    text-align: center;
+
+    font-size: clamp(12px,1vw,17px);
+
+    line-height: 1.5;
+
+    font-weight: 700;
+}
+
+.spm-intro-bubble p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =====================================================
+   INTRO RULES
+===================================================== */
+
+.spm-intro-rules {
+    width: 90%;
+
+    margin-top: 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.spm-intro-rules div {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #4d3626;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   INTRO STATS
+===================================================== */
+
+.spm-intro-stats {
+    width: min(360px,92%);
+
+    margin-top: 17px;
+
+    padding: 15px 22px;
+
+    display: flex;
+
+    justify-content: space-around;
+
+    align-items: center;
+
+    background: rgba(255,252,245,.88);
+
+    border: 2px solid rgba(159,116,69,.24);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 8px 25px rgba(101,61,31,.1);
+}
+
+.spm-stat {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 3px;
+}
+
+.spm-stat-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+}
+
+.spm-star-icon {
+    background: #ffe3a0;
+
+    box-shadow:
+        inset 0 0 0 2px #e2ad42;
+}
+
+.spm-clue-icon {
+    background: #e7d7f2;
+
+    box-shadow:
+        inset 0 0 0 2px #a873c5;
+}
+
+.spm-stat strong {
+    color: #3f291b;
+
+    font-size: 22px;
+}
+
+.spm-stat span {
+    color: #745846;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+.spm-stat-divider {
+    width: 1px;
+
+    height: 65px;
+
+    background: #d9c7b2;
+}
+
+
+/* =====================================================
+   INTRO RIGHT
+===================================================== */
+
+.spm-intro-space-side {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.spm-intro-space-image-wrap {
+    position: relative;
+
+    width: 100%;
+
+    height: calc(100% - 100px);
+
+    padding: 10px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background: #fffaf1;
+
+    border: 2px solid rgba(166,120,75,.28);
+
+    box-shadow:
+        0 12px 30px rgba(87,52,29,.15);
+}
+
+.spm-intro-space-image {
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 20px;
+}
+
+.spm-intro-floating-ship {
+    position: absolute;
+
+    z-index: 5;
+
+    width: 24%;
+
+    left: 42%;
+
+    top: 36%;
+
+    transform: translate(-50%,-50%);
+
+    filter:
+        drop-shadow(
+            0 10px 12px rgba(0,0,0,.3)
+        );
+
+    animation:
+        spmFloatShip 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes spmFloatShip {
+
+    from {
+        transform:
+            translate(-50%,-50%)
+            translateY(0);
+    }
+
+    to {
+        transform:
+            translate(-50%,-50%)
+            translateY(-8px);
+    }
+}
+
+.spm-intro-planet {
+    position: absolute;
+
+    z-index: 4;
+
+    width: 15%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 8px 10px rgba(0,0,0,.25)
+        );
+}
+
+.spm-intro-planet-1 {
+    left: 15%;
+    top: 13%;
+}
+
+.spm-intro-planet-2 {
+    right: 12%;
+    top: 12%;
+}
+
+.spm-intro-planet-3 {
+    right: 15%;
+    bottom: 12%;
+}
+
+
+/* =====================================================
+   START BUTTON
+===================================================== */
+
+.spm-start-exploring {
+    position: absolute;
+
+    bottom: 8px;
+
+    z-index: 20;
+
+    border: none;
+
+    min-width: 370px;
+
+    padding: 18px 40px;
+
+    border-radius: 21px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: clamp(18px,2vw,28px);
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.25),
+        0 8px 0 rgba(67,36,17,.55);
+
+    transition: .2s ease;
+}
+
+.spm-start-exploring:hover {
+    transform: translateY(-3px);
+}
+
+
+/* =====================================================
+   ACTIVITY LAYOUT
+===================================================== */
+
+.spm-activity-layout {
+    position: absolute;
+
+    top: 145px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 91%;
+
+    height: calc(100% - 175px);
+}
+
+
+/* =====================================================
+   ACTIVITY CARD
+===================================================== */
+
+.spm-activity-card {
+    position: relative;
+
+    width: 100%;
+
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background: #6a4328;
+
+    box-shadow:
+        0 18px 45px rgba(64,35,16,.3);
+}
+
+
+/* =====================================================
+   SPACE BACKGROUND
+===================================================== */
+
+.spm-space-bg-image {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    opacity: .82;
+}
+
+
+/* =====================================================
+   ROUND BADGE
+===================================================== */
+
+.spm-round-badge {
+    position: absolute;
+
+    z-index: 30;
+
+    top: 18px;
+
+    left: 20px;
+
+    min-width: 125px;
+
+    padding: 10px 16px;
+
+    border-radius: 17px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f0dfc5
+        );
+
+    color: #49301f;
+
+    box-shadow:
+        0 7px 18px rgba(0,0,0,.25);
+}
+
+.spm-round-badge span {
+    display: block;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.4px;
+}
+
+.spm-round-badge strong {
+    display: block;
+
+    font-size: 24px;
+
+    font-weight: 900;
+
+    line-height: 1.1;
+}
+
+.spm-round-badge small {
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   SCORE
+===================================================== */
+
+.spm-score-panel {
+    position: absolute;
+
+    z-index: 30;
+
+    top: 18px;
+
+    right: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 7px 12px;
+
+    border-radius: 19px;
+
+    background: rgba(255,255,255,.95);
+
+    box-shadow:
+        0 7px 18px rgba(0,0,0,.25);
+}
+
+.spm-score-item {
+    min-width: 62px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.spm-score-item span {
+    font-size: 18px;
+}
+
+.spm-score-item strong {
+    color: #4b3424;
+
+    font-size: 20px;
+
+    line-height: 1;
+}
+
+.spm-score-item small {
+    color: #806b5b;
+
+    font-size: 8px;
+
+    font-weight: 800;
+}
+
+.spm-score-divider {
+    width: 1px;
+
+    height: 40px;
+
+    background: #d5c5b4;
+}
+
+
+/* =====================================================
+   MISSION CARD
+===================================================== */
+
+.spm-mission-card {
+    position: absolute;
+
+    z-index: 25;
+
+    top: 5px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: min(360px,42%);
+
+    padding: 8px 14px;
+
+    border-radius: 15px;
+
+    background: rgba(255,253,248,.96);
+
+    text-align: center;
+
+    box-shadow:
+        0 7px 20px rgba(0,0,0,.25);
+}
+
+.spm-mission-card span {
+    display: block;
+
+    color: #806c5b;
+
+    font-size: 7px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.2px;
+}
+
+.spm-mission-card strong {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #4a3020;
+
+    font-size: 11px;
+
+    line-height: 1.25;
+}
+
+.spm-listen-button {
+    margin-top: 4px;
+
+    width: 26px;
+    height: 26px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f0dfbd;
+
+    cursor: pointer;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   PLANETS
+===================================================== */
+
+.spm-planets {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 8;
+
+    pointer-events: none;
+}
+
+.spm-planet {
+    position: absolute;
+
+    width: 145px;
+    height: 145px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    transition: .25s ease;
+}
+
+.spm-planet:hover {
+    transform: scale(1.08);
+}
+
+.spm-planet img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+
+    filter:
+        drop-shadow(
+            0 10px 18px rgba(0,0,0,.35)
+        );
+}
+
+.spm-planet-art {
+    left: 10%;
+    top: 24%;
+}
+
+.spm-planet-sports {
+    left: 40%;
+    top: 18%;
+}
+
+.spm-planet-food {
+    right: 10%;
+    top: 28%;
+}
+
+.spm-planet-books {
+    left: 27%;
+    bottom: 11%;
+}
+
+.spm-planet-label {
+    position: absolute;
+
+    left: 50%;
+
+    bottom: -12px;
+
+    transform: translateX(-50%);
+
+    min-width: 100px;
+
+    padding: 6px 10px;
+
+    border-radius: 13px;
+
+    background: rgba(255,253,248,.96);
+
+    color: #4b3425;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 5px 13px rgba(0,0,0,.25);
+}
+
+
+/* =====================================================
+   SPACESHIP
+===================================================== */
+
+.spm-spaceship {
+    position: absolute;
+
+    z-index: 25;
+
+    left: 50%;
+
+    bottom: 4%;
+
+    transform: translateX(-50%);
+
+    width: 145px;
+
+    pointer-events: none;
+
+    filter:
+        drop-shadow(
+            0 12px 18px rgba(0,0,0,.4)
+        );
+
+    transition:
+        left 1.2s cubic-bezier(.22,.61,.36,1),
+        bottom 1.2s cubic-bezier(.22,.61,.36,1),
+        transform 1.2s cubic-bezier(.22,.61,.36,1);
+
+    animation:
+        spmShipFloat 2s ease-in-out infinite alternate;
+}
+
+.spm-spaceship.spm-ship-to-art {
+    left: 17%;
+    bottom: 62%;
+}
+
+.spm-spaceship.spm-ship-to-sports {
+    left: 47%;
+    bottom: 68%;
+}
+
+.spm-spaceship.spm-ship-to-food {
+    left: 83%;
+    bottom: 57%;
+}
+
+.spm-spaceship.spm-ship-to-books {
+    left: 34%;
+    bottom: 27%;
+}
+
+.spm-spaceship img {
+    width: 100%;
+
+    display: block;
+}
+
+@keyframes spmShipFloat {
+
+    from {
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+
+    to {
+        transform:
+            translateX(-50%)
+            translateY(-8px);
+    }
+}
+
+
+/* =====================================================
+   OBSTACLE
+===================================================== */
+
+.spm-obstacle {
+    position: absolute;
+
+    z-index: 40;
+
+    left: 50%;
+    top: 50%;
+
+    width: 65px;
+    height: 65px;
+
+    transform: translate(-50%,-50%);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    animation:
+        spmObstacle .4s ease;
+}
+
+.spm-obstacle img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+@keyframes spmObstacle {
+
+    0% {
+        transform:
+            translate(-50%,-50%)
+            scale(.5);
+    }
+
+    60% {
+        transform:
+            translate(-50%,-50%)
+            scale(1.15);
+    }
+
+    100% {
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+}
+
+
+/* =====================================================
+   CRYSTAL
+===================================================== */
+
+.spm-crystal {
+    position: absolute;
+
+    z-index: 45;
+
+    left: 50%;
+    top: 45%;
+
+    width: 65px;
+    height: 65px;
+
+    transform: translate(-50%,-50%);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    animation:
+        spmCrystalCollect 1.2s ease forwards;
+}
+
+.spm-crystal img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 0 15px rgba(255,221,105,.8)
+        );
+}
+
+@keyframes spmCrystalCollect {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-50%,-50%)
+            scale(.4);
+    }
+
+    30% {
+        opacity: 1;
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.15);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(-50%,-180%)
+            scale(.7);
+    }
+}
+
+
+/* =====================================================
+   CRYSTAL COUNTER
+===================================================== */
+
+.spm-crystal-counter {
+    position: absolute;
+
+    z-index: 40;
+
+    left: 20px;
+    bottom: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 9px 14px;
+
+    border-radius: 17px;
+
+    background: rgba(255,253,248,.95);
+
+    color: #493322;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 7px 18px rgba(0,0,0,.25);
+}
+
+.spm-crystal-counter span {
+    font-size: 19px;
+}
+
+
+/* =====================================================
+   ROUND 2 CARD
+===================================================== */
+
+.spm-round2-card {
+
+    background-image:
+        linear-gradient(
+            rgba(38,20,65,.16),
+            rgba(38,20,65,.16)
+        ),
+        url("../../assets/spaceBackground.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =====================================================
+   ROUND 2 CONTENT
+===================================================== */
+
+.spm-round2-content {
+
+    position: relative;
+
+    z-index: 10;
+
+    width: min(920px, 86%);
+
+    min-height: 430px;
+
+    display: grid;
+
+    grid-template-columns: 32% 68%;
+
+    align-items: center;
+
+    gap: 25px;
+
+    padding: 28px 35px;
+
+    box-sizing: border-box;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,253,248,.98),
+            rgba(248,234,215,.98)
+        );
+
+    border: 2px solid rgba(255,255,255,.8);
+
+    box-shadow:
+        0 20px 55px rgba(31,18,55,.35);
+}
+
+
+/* =====================================================
+   ROUND 2 ALIEN
+===================================================== */
+
+.spm-round2-alien {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+}
+
+.spm-round2-alien img {
+
+    width: 210px;
+
+    max-width: 100%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 12px 15px rgba(50,30,70,.25)
+        );
+
+    animation:
+        spmAlienFloat 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes spmAlienFloat {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* =====================================================
+   ALIEN BUBBLE
+===================================================== */
+
+.spm-round2-alien-bubble {
+
+    position: relative;
+
+    max-width: 190px;
+
+    padding: 12px 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    border-radius: 18px;
+
+    background: #eadcf3;
+
+    border: 2px solid #c5a8d8;
+
+    color: #543c66;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 7px 18px rgba(72,45,92,.15);
+}
+
+.spm-round2-alien-bubble::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -10px;
+
+    left: 50%;
+
+    width: 18px;
+    height: 18px;
+
+    background: #eadcf3;
+
+    border-left: 2px solid #c5a8d8;
+    border-top: 2px solid #c5a8d8;
+
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+}
+
+.spm-alien-emoji {
+    font-size: 18px;
+}
+
+
+/* =====================================================
+   ROUND 2 QUESTION
+===================================================== */
+
+.spm-round2-question {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+.spm-round2-label {
+
+    margin-bottom: 10px;
+
+    color: #806653;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.5px;
+}
+
+
+/* =====================================================
+   WRONG SENTENCE
+===================================================== */
+
+.spm-round2-wrong {
+
+    width: 100%;
+
+    padding: 18px 20px;
+
+    box-sizing: border-box;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffe8e4,
+            #ffdcd7
+        );
+
+    border: 2px solid #efb9b0;
+
+    color: #a4473c;
+
+    font-size: 22px;
+
+    font-weight: 900;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.6);
+}
+
+
+/* =====================================================
+   QUESTION TITLE
+===================================================== */
+
+.spm-round2-question-title {
+
+    margin-top: 22px;
+
+    margin-bottom: 14px;
+
+    color: #432a19;
+
+    font-size: 17px;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   OPTIONS
+===================================================== */
+
+.spm-round2-options {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 14px;
+}
+
+.spm-round2-option {
+
+    min-height: 68px;
+
+    padding: 12px 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border: 2px solid #dfc6a5;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffaf1,
+            #f0dfc5
+        );
+
+    color: #49301f;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 12px rgba(83,49,25,.12);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+.spm-round2-option:hover:not(:disabled) {
+
+    transform: translateY(-4px);
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #ead4b4
+        );
+
+    box-shadow:
+        0 9px 20px rgba(83,49,25,.2);
+}
+
+.spm-round2-option:disabled {
+
+    cursor: default;
+
+    opacity: .72;
+}
+
+
+/* =====================================================
+   OPTION LETTER
+===================================================== */
+
+.spm-option-letter {
+
+    flex-shrink: 0;
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #8a5a32;
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   TEACHER REMARK
+===================================================== */
+
+.spm-round2-remark {
+
+    width: 100%;
+
+    margin-top: 16px;
+
+    padding: 11px 14px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #e7f2dc,
+            #d7eac9
+        );
+
+    border: 2px solid #b9d59e;
+
+    color: #557b3e;
+
+    text-align: left;
+
+    animation:
+        spmRemarkIn .3s ease;
+}
+
+@keyframes spmRemarkIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.spm-remark-icon {
+
+    width: 35px;
+    height: 35px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ffe3a0;
+
+    font-size: 18px;
+}
+
+.spm-round2-remark strong {
+
+    display: block;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .7px;
+}
+
+.spm-round2-remark p {
+
+    margin: 2px 0 0;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   ROUND 2 PROGRESS
+===================================================== */
+
+.spm-round2-progress {
+
+    position: absolute;
+
+    z-index: 30;
+
+    left: 50%;
+
+    bottom: 18px;
+
+    transform: translateX(-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 8px 14px;
+
+    border-radius: 18px;
+
+    background: rgba(255,253,248,.94);
+
+    box-shadow:
+        0 7px 18px rgba(0,0,0,.2);
+}
+
+.spm-progress-dot {
+
+    width: 27px;
+    height: 27px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e2d3c1;
+
+    color: #816c59;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    transition: .3s ease;
+}
+
+.spm-progress-dot.active {
+
+    background: #8a5a32;
+
+    color: white;
+
+    transform: scale(1.12);
+
+    box-shadow:
+        0 0 0 4px rgba(138,90,50,.18);
+}
+
+.spm-progress-dot.completed {
+
+    background: #b9d59e;
+
+    color: #557b3e;
+}
+
+
+/* =====================================================
+   ROUND 2 CONFETTI
+===================================================== */
+
+.spm-round2-confetti {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 80;
+
+    pointer-events: none;
+
+    overflow: hidden;
+}
+
+.spm-round2-confetti span {
+
+    position: absolute;
+
+    left: calc(
+        (var(--i) * 3.1%) + 2%
+    );
+
+    top: -40px;
+
+    font-size: 22px;
+
+    animation:
+        spmConfettiFall
+        1.7s
+        ease-out
+        forwards;
+
+    animation-delay:
+        calc(var(--i) * 0.025s);
+
+    opacity: 0;
+}
+
+@keyframes spmConfettiFall {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(-20px)
+            rotate(0deg)
+            scale(.7);
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translateY(600px)
+            rotate(360deg)
+            scale(1);
+    }
+}
+
+
+/* =====================================================
+   ROUND 3 — FINAL CARD
+   AUTOMATICALLY DETECTS ROUND 3
+===================================================== */
+
+/*
+   Round 3 ke parent brown card ke andar
+   .spm-final-card hota hai.
+
+   Isliye :has() ke through sirf Round 3 ka
+   brown area space background banega.
+*/
+
+.spm-activity-card:has(.spm-final-card) {
+
+    background-image:
+        linear-gradient(
+            rgba(28, 16, 48, 0.12),
+            rgba(28, 16, 48, 0.12)
+        ),
+        url("../../assets/spaceBackground.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+}
+
+
+/* =====================================================
+   ROUND 3 — FINAL CARD
+===================================================== */
+
+.spm-final-card {
+
+    position: absolute;
+
+    z-index: 20;
+
+    /* EXACT CENTER */
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: min(820px, 78%);
+
+    min-height: 300px;
+
+    padding: 28px 35px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 35px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,253,248,.98),
+            rgba(248,234,215,.98)
+        );
+
+    border: 2px solid rgba(255,255,255,.9);
+
+    box-shadow:
+        0 20px 55px rgba(25,15,40,.35);
+}
+
+
+/* =====================================================
+   ROUND 3 — PLANET
+===================================================== */
+
+.spm-final-planet {
+
+    flex: 0 0 250px;
+
+    width: 250px;
+
+    height: 220px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 12px 18px rgba(50,30,70,.3)
+        );
+
+    animation:
+        spmFinalPlanetFloat 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes spmFinalPlanetFloat {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* =====================================================
+   ROUND 3 — CONTENT
+===================================================== */
+
+.spm-final-content {
+
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   ROUND 3 — TITLE
+===================================================== */
+
+.spm-final-content h2 {
+
+    margin: 0 0 8px;
+
+    color: #432a19;
+
+    font-size: 28px;
+
+    line-height: 1.2;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   ROUND 3 — SUBTITLE
+===================================================== */
+
+.spm-final-content p {
+
+    margin: 0 0 14px;
+
+    color: #765741;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   ROUND 3 — SPEAKING EXAMPLE
+===================================================== */
+
+.spm-speaking-example {
+
+    width: 100%;
+
+    margin: 8px 0 18px;
+
+    padding: 14px 18px;
+
+    box-sizing: border-box;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f4e4c5,
+            #edd8b2
+        );
+
+    border: 1px solid rgba(190,145,83,.25);
+
+    color: #543a28;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    font-weight: 800;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.45);
+}
+
+
+/* =====================================================
+   ROUND 3 — MIC BUTTON
+===================================================== */
+
+.spm-mic-button {
+
+    border: none;
+
+    padding: 13px 28px;
+
+    min-width: 165px;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.2),
+        0 5px 0 rgba(67,36,17,.45);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.spm-mic-button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.2),
+        0 7px 0 rgba(67,36,17,.45);
+}
+
+.spm-mic-button.spm-listening {
+
+    animation:
+        spmMicPulse 1s infinite;
+}
+
+@keyframes spmMicPulse {
+
+    50% {
+        transform: scale(1.06);
+    }
+}
+
+
+/* =====================================================
+   SPOKEN ANSWER
+===================================================== */
+
+.spm-spoken-answer {
+
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 10px 13px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #e7f4dc,
+            #dcefd0
+        );
+
+    border: 1px solid #b9d59e;
+
+    color: #4d7938;
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+.spm-spoken-answer span {
+
+    color: #493d31;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   FEEDBACK
+===================================================== */
+
+.spm-feedback {
+
+    position: absolute;
+
+    z-index: 90;
+
+    left: 50%;
+
+    bottom: 20px;
+
+    transform: translateX(-50%);
+
+    padding: 10px 18px;
+
+    border-radius: 14px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 7px 18px rgba(0,0,0,.2);
+}
+
+.spm-feedback-correct {
+
+    background: #e3f1d8;
+
+    color: #4d7c36;
+}
+
+.spm-feedback-wrong {
+
+    background: #ffe0dc;
+
+    color: #a4473c;
+}
+
+
+/* =====================================================
+   POPUP
+===================================================== */
+
+.spm-popup-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(28,18,10,.48);
+
+    backdrop-filter: blur(7px);
+}
+
+.spm-result-popup {
+
+    width: min(460px,88%);
+
+    padding: 30px 35px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f8ead5
+        );
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.35);
+
+    animation:
+        spmPopupIn .35s ease;
+}
+
+@keyframes spmPopupIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(.8)
+            translateY(20px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+.spm-result-icon {
+
+    width: 78px;
+
+    height: 78px;
+
+    margin: 0 auto 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 22px;
+
+    background: #f3dfbd;
+
+    font-size: 42px;
+}
+
+.spm-result-popup h2 {
+
+    margin: 14px 0 10px;
+
+    color: #432a19;
+
+    font-size: 28px;
+
+    font-weight: 900;
+}
+
+.spm-result-popup p {
+
+    margin: 0;
+
+    color: #765741;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   REVEALED
+===================================================== */
+
+.spm-revealed-preferences {
+
+    margin: 18px auto;
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+}
+
+.spm-revealed-item {
+
+    padding: 9px 15px;
+
+    border-radius: 14px;
+
+    background: #e8d8c3;
+
+    color: #493b2d;
+
+    font-size: 12px;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   NEXT
+===================================================== */
+
+.spm-next-button {
+
+    width: 100%;
+
+    border: none;
+
+    padding: 14px 22px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 0 rgba(67,36,17,.5);
+
+    transition: .2s ease;
+}
+
+.spm-next-button:hover {
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width:1100px) {
+
+    .spm-main-container {
+        width: 95vw;
+    }
+
+    .spm-intro-layout {
+        grid-template-columns: 40% 60%;
+    }
+
+    .spm-teacher-name {
+        width: 180px;
+
+        font-size: 16px;
+    }
+
+    .spm-planet {
+        width: 120px;
+        height: 120px;
+    }
+
+    .spm-round2-content {
+        width: 90%;
+    }
+
+    .spm-round2-alien img {
+        width: 175px;
+    }
+
+    .spm-final-card {
+        width: 82%;
+    }
+}
+
+
+/* =====================================================
+   SMALL TABLET
+===================================================== */
+
+@media (max-width:850px) {
+
+    .spm-main-container {
+
+        height: 94vh;
+
+        margin: 3vh auto;
+    }
+
+    .spm-header {
+        padding-top: 80px;
+    }
+
+    .spm-intro-layout {
+
+        top: 155px;
+
+        width: 95%;
+
+        grid-template-columns: 1fr;
+
+        overflow-y: auto;
+    }
+
+    .spm-intro-left {
+        min-height: 400px;
+    }
+
+    .spm-intro-space-side {
+        min-height: 470px;
+    }
+
+    .spm-activity-layout {
+
+        top: 155px;
+
+        width: 95%;
+
+        height: calc(100% - 170px);
+    }
+
+    .spm-round2-content {
+
+        width: 88%;
+
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+
+        padding: 25px;
+
+        min-height: auto;
+
+        max-height: 82%;
+
+        overflow-y: auto;
+    }
+
+    .spm-round2-alien img {
+
+        width: 130px;
+    }
+
+    .spm-round2-alien-bubble {
+
+        max-width: 220px;
+    }
+
+    .spm-grammar-options {
+
+        grid-template-columns: 1fr;
+    }
+
+    .spm-partner-options {
+
+        grid-template-columns: 1fr;
+    }
+
+    .spm-grammar-card,
+    .spm-final-card {
+
+        width: 90%;
+    }
+
+
+    /* ================================================
+       ROUND 3 TABLET
+    ================================================ */
+
+    .spm-final-card {
+
+        top: 50%;
+
+        left: 50%;
+
+        transform: translate(-50%, -50%);
+
+        width: 88%;
+
+        min-height: 280px;
+
+        padding: 22px 25px;
+
+        gap: 20px;
+    }
+
+    .spm-final-planet {
+
+        flex: 0 0 180px;
+
+        width: 180px;
+
+        height: 170px;
+    }
+
+    .spm-final-content h2 {
+        font-size: 23px;
+    }
+
+    .spm-final-content p {
+        font-size: 12px;
+    }
+
+    .spm-speaking-example {
+        font-size: 11px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width:600px) {
+
+    .spm-main-container {
+
+        width: 100vw;
+
+        height: 100vh;
+
+        margin: 0;
+
+        border-radius: 0;
+    }
+
+    .spm-top-button {
+
+        top: 18px;
+
+        padding: 10px 14px;
+
+        font-size: 12px;
+    }
+
+    .spm-back-button {
+        left: 14px;
+    }
+
+    .spm-skip-button {
+        right: 14px;
+    }
+
+    .spm-header {
+
+        padding: 68px 15px 0;
+    }
+
+    .spm-header h1 {
+        font-size: 25px;
+    }
+
+    .spm-header p {
+        font-size: 12px;
+    }
+
+    .spm-intro-layout {
+
+        top: 135px;
+
+        height: calc(100% - 145px);
+    }
+
+    .spm-intro-teacher-row {
+        transform: scale(.9);
+    }
+
+    .spm-teacher-name {
+
+        width: 165px;
+
+        padding: 9px 12px;
+
+        font-size: 14px;
+    }
+
+    .spm-intro-bubble {
+
+        min-width: 0;
+
+        padding: 16px;
+    }
+
+    .spm-intro-bubble p {
+        font-size: 10px;
+    }
+
+    .spm-intro-stats {
+        padding: 12px 15px;
+    }
+
+    .spm-stat-icon {
+
+        width: 42px;
+        height: 42px;
+
+        font-size: 20px;
+    }
+
+    .spm-stat strong {
+        font-size: 18px;
+    }
+
+    .spm-stat span {
+        font-size: 9px;
+    }
+
+    .spm-intro-space-image-wrap {
+        height: 300px;
+    }
+
+    .spm-start-exploring {
+
+        min-width: 245px;
+
+        padding: 14px 22px;
+
+        font-size: 18px;
+    }
+
+    .spm-activity-layout {
+
+        top: 135px;
+
+        width: 96%;
+
+        height: calc(100% - 150px);
+    }
+
+    .spm-round-badge {
+
+        top: 9px;
+
+        left: 9px;
+
+        min-width: 85px;
+
+        padding: 7px;
+    }
+
+    .spm-round-badge strong {
+        font-size: 19px;
+    }
+
+    .spm-round-badge span {
+        font-size: 7px;
+    }
+
+    .spm-round-badge small {
+        font-size: 7px;
+    }
+
+    .spm-score-panel {
+
+        top: 9px;
+
+        right: 9px;
+
+        padding: 5px 7px;
+    }
+
+    .spm-score-item {
+        min-width: 43px;
+    }
+
+    .spm-score-item span {
+        font-size: 15px;
+    }
+
+    .spm-score-item strong {
+        font-size: 17px;
+    }
+
+    .spm-score-item small {
+        font-size: 7px;
+    }
+
+    .spm-planet {
+
+        width: 85px;
+
+        height: 85px;
+    }
+
+    .spm-planet-art {
+
+        left: 5%;
+
+        top: 25%;
+    }
+
+    .spm-planet-sports {
+
+        left: 37%;
+
+        top: 21%;
+    }
+
+    .spm-planet-food {
+
+        right: 5%;
+
+        top: 29%;
+    }
+
+    .spm-planet-books {
+
+        left: 24%;
+
+        bottom: 23%;
+    }
+
+    .spm-planet-label {
+
+        min-width: 68px;
+
+        padding: 4px 6px;
+
+        font-size: 7px;
+    }
+
+    .spm-mission-card {
+
+        width: 64%;
+
+        top: 58px;
+
+        padding: 6px 8px;
+    }
+
+    .spm-mission-card strong {
+        font-size: 8px;
+    }
+
+    .spm-spaceship {
+        width: 95px;
+    }
+
+    .spm-crystal-counter {
+
+        left: 9px;
+
+        bottom: 9px;
+
+        padding: 6px 9px;
+
+        font-size: 8px;
+    }
+
+
+    /* =================================================
+       ROUND 2 MOBILE
+    ================================================= */
+
+    .spm-round2-content {
+
+        width: 92%;
+
+        min-height: auto;
+
+        max-height: 77%;
+
+        padding: 17px 14px;
+
+        grid-template-columns: 1fr;
+
+        gap: 7px;
+
+        overflow-y: auto;
+
+        border-radius: 22px;
+    }
+
+    .spm-round2-alien {
+
+        gap: 5px;
+    }
+
+    .spm-round2-alien img {
+
+        width: 92px;
+    }
+
+    .spm-round2-alien-bubble {
+
+        max-width: 180px;
+
+        padding: 7px 10px;
+
+        font-size: 8px;
+    }
+
+    .spm-alien-emoji {
+        font-size: 14px;
+    }
+
+    .spm-round2-label {
+
+        margin-bottom: 6px;
+
+        font-size: 7px;
+    }
+
+    .spm-round2-wrong {
+
+        padding: 10px;
+
+        font-size: 14px;
+
+        border-radius: 14px;
+    }
+
+    .spm-round2-question-title {
+
+        margin-top: 10px;
+
+        margin-bottom: 7px;
+
+        font-size: 10px;
+    }
+
+    .spm-round2-options {
+
+        grid-template-columns: 1fr;
+
+        gap: 7px;
+    }
+
+    .spm-round2-option {
+
+        min-height: 43px;
+
+        padding: 7px 9px;
+
+        border-radius: 13px;
+
+        font-size: 9px;
+    }
+
+    .spm-option-letter {
+
+        width: 24px;
+
+        height: 24px;
+
+        border-radius: 7px;
+
+        font-size: 9px;
+    }
+
+    .spm-round2-remark {
+
+        margin-top: 8px;
+
+        padding: 7px 9px;
+
+        border-radius: 12px;
+    }
+
+    .spm-remark-icon {
+
+        width: 28px;
+
+        height: 28px;
+
+        font-size: 14px;
+    }
+
+    .spm-round2-remark strong {
+        font-size: 8px;
+    }
+
+    .spm-round2-remark p {
+        font-size: 8px;
+    }
+
+    .spm-round2-progress {
+
+        bottom: 7px;
+
+        gap: 7px;
+
+        padding: 5px 8px;
+
+        border-radius: 14px;
+    }
+
+    .spm-progress-dot {
+
+        width: 21px;
+
+        height: 21px;
+
+        font-size: 8px;
+    }
+
+
+    /* =================================================
+       ROUND 3 — FINAL MOBILE
+    ================================================= */
+
+    .spm-final-card {
+
+        position: absolute;
+
+        top: 50%;
+
+        left: 50%;
+
+        transform: translate(-50%, -50%);
+
+        width: 90%;
+
+        max-width: 430px;
+
+        max-height: 82%;
+
+        min-height: auto;
+
+        padding: 18px;
+
+        flex-direction: column;
+
+        gap: 8px;
+
+        overflow-y: auto;
+
+        border-radius: 21px;
+    }
+
+    .spm-final-planet {
+
+        flex: 0 0 auto;
+
+        width: 110px;
+
+        height: 95px;
+
+        max-width: 110px;
+    }
+
+    .spm-final-content {
+
+        width: 100%;
+    }
+
+    .spm-final-content h2 {
+
+        font-size: 19px;
+
+        margin-bottom: 5px;
+    }
+
+    .spm-final-content p {
+
+        font-size: 10px;
+
+        margin-bottom: 8px;
+    }
+
+    .spm-speaking-example {
+
+        width: 100%;
+
+        margin: 5px 0 10px;
+
+        padding: 9px 10px;
+
+        font-size: 9px;
+
+        border-radius: 11px;
+    }
+
+    .spm-mic-button {
+
+        min-width: 135px;
+
+        padding: 9px 17px;
+
+        font-size: 10px;
+
+        border-radius: 13px;
+    }
+
+    .spm-spoken-answer {
+
+        margin-top: 8px;
+
+        padding: 7px;
+
+        font-size: 8px;
+    }
+
+
+    /* =================================================
+       FEEDBACK MOBILE
+    ================================================= */
+
+    .spm-feedback {
+
+        width: 80%;
+
+        bottom: 10px;
+
+        font-size: 9px;
+
+        text-align: center;
+    }
+
+
+    /* =================================================
+       RESULT MOBILE
+    ================================================= */
+
+    .spm-result-popup {
+
+        width: 88vw;
+
+        padding: 23px 20px;
+
+        border-radius: 23px;
+    }
+
+    .spm-result-popup h2 {
+        font-size: 21px;
+    }
+
+    .spm-result-popup p {
+        font-size: 11px;
+    }
+}

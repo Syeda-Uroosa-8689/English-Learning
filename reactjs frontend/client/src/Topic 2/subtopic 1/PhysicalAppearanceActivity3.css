@@ -1,0 +1,1830 @@
+/* =====================================================
+   PHYSICAL APPEARANCE
+   ACTIVITY 3 - DESCRIBE YOUR PARTNER
+   MATCHED EXACTLY WITH PROVIDED JSX
+   CONTENT / LOGIC NOT CHANGED
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.physical-appearance-activity3-page {
+
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    background-image:
+        url("../../assets/chatbg.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   BACKGROUND OVERLAY
+===================================================== */
+
+.physical-appearance-activity3-overlay {
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, 0.22);
+
+    backdrop-filter: blur(4px);
+
+    z-index: 1;
+}
+
+
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.physical-appearance-activity3-card {
+
+    width: min(1280px, 95vw);
+    height: min(900px, 94vh);
+
+    position: relative;
+    z-index: 5;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 24px 32px;
+
+    border-radius: 30px;
+
+    background-image:
+        url("../../assets/partner.jpeg");
+
+    background-size: cover;
+    background-position: center;
+
+    box-shadow:
+        0 22px 60px rgba(70, 42, 25, 0.25);
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.physical-appearance-activity3-header {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        130px 1fr 130px;
+
+    align-items: center;
+
+    gap: 15px;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   HEADER LEFT
+===================================================== */
+
+.physical-appearance-activity3-header-left {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+}
+
+
+/* =====================================================
+   HEADER CENTER
+===================================================== */
+
+.physical-appearance-activity3-header-center {
+
+    text-align: center;
+}
+
+
+.physical-appearance-activity3-header-center h1 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 32px;
+    line-height: 1.15;
+
+    font-weight: 900;
+}
+
+
+.physical-appearance-activity3-header-center span {
+
+    display: block;
+
+    margin-top: 6px;
+
+    color: #8B5E3C;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   HEADER RIGHT
+===================================================== */
+
+.physical-appearance-activity3-header-right {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+}
+
+
+/* =====================================================
+   BACK + SKIP BUTTONS
+===================================================== */
+
+.physical-appearance-activity3-back-btn,
+.physical-appearance-activity3-skip-btn {
+
+    width: 116px;
+    height: 42px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #8B5E3C;
+
+    color: #FFFFFF;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 12px rgba(100, 65, 40, 0.18);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.physical-appearance-activity3-back-btn:hover,
+.physical-appearance-activity3-skip-btn:hover {
+
+    background: #6C452A;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 17px rgba(100, 65, 40, 0.22);
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.physical-appearance-activity3-content {
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding:
+        15px 20px 5px;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   MAIN SECTION
+===================================================== */
+
+.physical-appearance-activity3-main-section {
+
+    width: 100%;
+    max-width: 850px;
+
+    min-height: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    overflow-y: auto;
+
+    padding:
+        5px 8px 10px;
+}
+
+
+/* =====================================================
+   SELECT PERSON CARD
+===================================================== */
+
+.physical-appearance-select-card {
+
+    width: 100%;
+
+    padding:
+        24px 28px;
+
+    text-align: center;
+
+    background:
+        rgba(255, 248, 239, 0.97);
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 10px 28px rgba(80, 50, 30, 0.10);
+}
+
+
+/* =====================================================
+   SELECT LABEL
+===================================================== */
+
+.physical-appearance-select-label {
+
+    margin-bottom: 6px;
+
+    color: #8B5E3C;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.6px;
+}
+
+
+/* =====================================================
+   SELECT TITLE
+===================================================== */
+
+.physical-appearance-select-card h2 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 27px;
+
+    line-height: 1.25;
+
+    font-weight: 900;
+}
+
+
+.physical-appearance-select-card p {
+
+    margin:
+        7px 0 20px;
+
+    color: #8A6348;
+
+    font-size: 13px;
+
+    line-height: 1.45;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   PARTNER GRID
+===================================================== */
+
+.partner-choice-grid {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 13px;
+}
+
+
+/* =====================================================
+   PARTNER CHOICE CARD
+===================================================== */
+
+.partner-choice-card {
+
+    min-height: 112px;
+
+    padding:
+        13px 12px;
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    border:
+        3px solid transparent;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255, 255, 255, 0.97);
+
+    color: #5A3620;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px rgba(80, 50, 30, 0.10);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.partner-choice-card:hover {
+
+    transform:
+        translateY(-4px);
+
+    border-color:
+        #D8B48A;
+
+    background:
+        #FFFCF8;
+
+    box-shadow:
+        0 12px 24px rgba(80, 50, 30, 0.15);
+}
+
+
+.partner-choice-card:active {
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =====================================================
+   PARTNER ICON
+===================================================== */
+
+.partner-choice-icon {
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        #FFF3E6;
+
+    border:
+        2px solid #E7D4BF;
+
+    font-size: 25px;
+
+    line-height: 1;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.partner-choice-card:hover
+.partner-choice-icon {
+
+    transform:
+        scale(1.08);
+
+    background:
+        #FFFFFF;
+}
+
+
+/* =====================================================
+   PARTNER NAME
+===================================================== */
+
+.partner-choice-name {
+
+    color: #5A3620;
+
+    font-size: 14px;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   PARTNER ARROW
+===================================================== */
+
+.partner-choice-arrow {
+
+    position: absolute;
+
+    right: 11px;
+    bottom: 9px;
+
+    color: #B58A67;
+
+    font-size: 16px;
+
+    font-weight: 900;
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.partner-choice-card:hover
+.partner-choice-arrow {
+
+    color: #8B5E3C;
+
+    transform:
+        translateX(3px);
+}
+
+
+/* =====================================================
+   SELECTED PARTNER
+===================================================== */
+
+.selected-partner-section {
+
+    width: 100%;
+    max-width: 720px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding:
+        11px 16px;
+
+    background:
+        rgba(255, 248, 239, 0.97);
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 7px 18px rgba(80, 50, 30, 0.08);
+}
+
+
+/* =====================================================
+   SELECTED PARTNER AVATAR
+===================================================== */
+
+.selected-partner-avatar {
+
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        #FFF3E6;
+
+    border:
+        2px solid #E7D4BF;
+
+    font-size: 28px;
+
+    box-shadow:
+        0 4px 10px rgba(80, 50, 30, 0.07);
+}
+
+
+/* =====================================================
+   SELECTED PARTNER LABEL
+===================================================== */
+
+.selected-partner-label {
+
+    margin-bottom: 2px;
+
+    color: #A07858;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.3px;
+}
+
+
+/* =====================================================
+   SELECTED PARTNER NAME
+===================================================== */
+
+.selected-partner-section h2 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 21px;
+
+    line-height: 1.2;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   QUESTION BOX
+===================================================== */
+
+.describe-question-box {
+
+    width: 100%;
+    max-width: 720px;
+
+    padding:
+        15px 20px;
+
+    text-align: center;
+
+    background:
+        rgba(255, 248, 239, 0.97);
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 8px 22px rgba(80, 50, 30, 0.09);
+}
+
+
+/* =====================================================
+   QUESTION SMALL LABEL
+===================================================== */
+
+.describe-question-small {
+
+    margin-bottom: 5px;
+
+    color: #8B5E3C;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.4px;
+}
+
+
+/* =====================================================
+   QUESTION
+===================================================== */
+
+.describe-question-box h2 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 24px;
+
+    line-height: 1.25;
+
+    font-weight: 900;
+}
+
+
+.describe-question-box p {
+
+    margin:
+        5px 0 0;
+
+    color: #8A6348;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   SPEAKING HINTS
+===================================================== */
+
+.speaking-hints {
+
+    width: 100%;
+    max-width: 720px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 9px;
+}
+
+
+/* =====================================================
+   SPEAKING HINT
+===================================================== */
+
+.speaking-hint {
+
+    min-height: 43px;
+
+    padding:
+        8px 7px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 13px;
+
+    background:
+        #FFF3E6;
+
+    color: #7A4C2C;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 4px 10px rgba(80, 50, 30, 0.06);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.speaking-hint:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        #FFFFFF;
+}
+
+
+/* =====================================================
+   SPEECH AREA
+===================================================== */
+
+.speech-area {
+
+    width: 100%;
+    max-width: 720px;
+
+    padding:
+        12px 14px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 8px 20px rgba(80, 50, 30, 0.08);
+}
+
+
+/* =====================================================
+   SPEECH STATUS
+===================================================== */
+
+.speech-status {
+
+    width: 100%;
+
+    margin-bottom: 7px;
+
+    text-align: center;
+
+    color: #8B5E3C;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =====================================================
+   SPOKEN TEXT BOX
+===================================================== */
+
+.spoken-text-box {
+
+    width: 100%;
+
+    min-height: 64px;
+
+    padding:
+        12px 14px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        #FFF8EF;
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 14px;
+
+    color: #5A3620;
+
+    font-size: 14px;
+
+    line-height: 1.45;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   SPEECH PLACEHOLDER
+===================================================== */
+
+.speech-placeholder {
+
+    color: #B79A83;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    font-style: italic;
+}
+
+
+/* =====================================================
+   MICROPHONE
+===================================================== */
+
+.activity3-mic {
+
+    width: 64px;
+    height: 64px;
+
+    margin-top: 10px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        3px solid #D6B38F;
+
+    border-radius: 50%;
+
+    background:
+        #FFF3E6;
+
+    color: #5A3620;
+
+    font-family: inherit;
+
+    font-size: 27px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px rgba(80, 50, 30, 0.12);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.activity3-mic:hover {
+
+    transform:
+        translateY(-3px) scale(1.03);
+
+    background:
+        #FFFFFF;
+
+    border-color:
+        #B98D68;
+
+    box-shadow:
+        0 11px 23px rgba(80, 50, 30, 0.16);
+}
+
+
+/* =====================================================
+   RECORDING MICROPHONE
+===================================================== */
+
+.activity3-mic.recording {
+
+    background:
+        #FCE5D9;
+
+    border-color:
+        #C98768;
+
+    animation:
+        activity3MicPulse
+        1.1s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes activity3MicPulse {
+
+    0%,
+    100% {
+
+        box-shadow:
+            0 7px 18px rgba(80, 50, 30, 0.12);
+    }
+
+    50% {
+
+        box-shadow:
+            0 0 0 8px rgba(201, 135, 104, 0.14),
+            0 10px 25px rgba(80, 50, 30, 0.15);
+    }
+}
+
+
+/* =====================================================
+   MIC HELP
+===================================================== */
+
+.mic-help {
+
+    margin-top: 5px;
+
+    color: #8A6348;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   SUBMIT BUTTON
+===================================================== */
+
+.activity3-submit-button {
+
+    width: 100%;
+    max-width: 720px;
+
+    min-height: 50px;
+
+    padding:
+        10px 18px;
+
+    border:
+        3px solid #8B5E3C;
+
+    border-radius: 15px;
+
+    background:
+        #8B5E3C;
+
+    color: #FFFFFF;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px rgba(80, 50, 30, 0.14);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.activity3-submit-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        #6C452A;
+
+    box-shadow:
+        0 10px 22px rgba(80, 50, 30, 0.20);
+}
+
+
+/* =====================================================
+   FEEDBACK
+===================================================== */
+
+.activity3-feedback {
+
+    width: 100%;
+    max-width: 720px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding:
+        11px 14px;
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 7px 18px rgba(80, 50, 30, 0.08);
+
+    animation:
+        activity3FeedbackIn
+        0.3s
+        ease;
+}
+
+
+/* =====================================================
+   SUCCESS FEEDBACK
+===================================================== */
+
+.activity3-feedback.success {
+
+    background:
+        #F1FAF3;
+
+    border-color:
+        #A8D5B2;
+}
+
+
+/* =====================================================
+   RETRY FEEDBACK
+===================================================== */
+
+.activity3-feedback.retry {
+
+    background:
+        #FFF8EF;
+
+    border-color:
+        #E5C49F;
+}
+
+
+/* =====================================================
+   FEEDBACK ICON
+===================================================== */
+
+.activity3-feedback-icon {
+
+    width: 43px;
+    height: 43px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        #FFFFFF;
+
+    border:
+        2px solid #E7D4BF;
+
+    font-size: 22px;
+}
+
+
+/* =====================================================
+   FEEDBACK TEXT
+===================================================== */
+
+.activity3-feedback strong {
+
+    display: block;
+
+    color: #5A3620;
+
+    font-size: 15px;
+
+    font-weight: 900;
+}
+
+
+.activity3-feedback p {
+
+    margin:
+        2px 0 0;
+
+    color: #8A6348;
+
+    font-size: 11px;
+
+    line-height: 1.35;
+
+    font-weight: 600;
+}
+
+
+@keyframes activity3FeedbackIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(7px)
+            scale(0.98);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* =====================================================
+   CONTINUE BUTTON
+===================================================== */
+
+.activity3-continue-button {
+
+    width: 100%;
+    max-width: 720px;
+
+    min-height: 48px;
+
+    padding:
+        9px 18px;
+
+    border:
+        2px solid #8B5E3C;
+
+    border-radius: 15px;
+
+    background:
+        #FFF3E6;
+
+    color: #6C452A;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 16px rgba(80, 50, 30, 0.10);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.activity3-continue-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        #FFFFFF;
+
+    box-shadow:
+        0 9px 20px rgba(80, 50, 30, 0.15);
+}
+
+
+/* =====================================================
+   LARGE TABLET
+===================================================== */
+
+@media (max-width: 1050px) {
+
+    .physical-appearance-activity3-card {
+
+        width: 95vw;
+
+        height: 94vh;
+
+        padding:
+            22px 26px;
+    }
+
+
+    .physical-appearance-activity3-content {
+
+        padding:
+            12px 10px 5px;
+    }
+
+
+    .physical-appearance-activity3-main-section {
+
+        max-width: 800px;
+    }
+
+
+    .partner-choice-grid {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .physical-appearance-activity3-page {
+
+        padding: 12px;
+    }
+
+
+    .physical-appearance-activity3-card {
+
+        width: 96vw;
+
+        height: 94vh;
+
+        padding:
+            20px;
+
+        border-radius: 25px;
+    }
+
+
+    .physical-appearance-activity3-header {
+
+        grid-template-columns:
+            105px 1fr 105px;
+    }
+
+
+    .physical-appearance-activity3-header-center h1 {
+
+        font-size: 27px;
+    }
+
+
+    .physical-appearance-activity3-header-center span {
+
+        font-size: 12px;
+    }
+
+
+    .physical-appearance-select-card {
+
+        padding:
+            20px;
+    }
+
+
+    .physical-appearance-select-card h2 {
+
+        font-size: 24px;
+    }
+
+
+    .partner-choice-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 11px;
+    }
+
+
+    .partner-choice-card {
+
+        min-height: 100px;
+    }
+
+
+    .physical-appearance-activity3-main-section {
+
+        max-width: 760px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .physical-appearance-activity3-page {
+
+        padding: 8px;
+
+        align-items: flex-start;
+    }
+
+
+    .physical-appearance-activity3-card {
+
+        width: 100%;
+
+        min-height: 98vh;
+
+        height: auto;
+
+        padding:
+            15px;
+
+        border-radius: 20px;
+    }
+
+
+    /* HEADER */
+
+    .physical-appearance-activity3-header {
+
+        grid-template-columns:
+            1fr 1fr;
+
+        grid-template-rows:
+            auto auto;
+
+        gap: 8px;
+    }
+
+
+    .physical-appearance-activity3-header-center {
+
+        grid-column:
+            1 / 3;
+
+        grid-row: 1;
+    }
+
+
+    .physical-appearance-activity3-header-left {
+
+        grid-column: 1;
+
+        grid-row: 2;
+    }
+
+
+    .physical-appearance-activity3-header-right {
+
+        grid-column: 2;
+
+        grid-row: 2;
+    }
+
+
+    .physical-appearance-activity3-back-btn,
+    .physical-appearance-activity3-skip-btn {
+
+        width: 100%;
+
+        height: 39px;
+
+        font-size: 13px;
+    }
+
+
+    .physical-appearance-activity3-header-center h1 {
+
+        font-size: 22px;
+    }
+
+
+    .physical-appearance-activity3-header-center span {
+
+        font-size: 10px;
+    }
+
+
+    /* CONTENT */
+
+    .physical-appearance-activity3-content {
+
+        padding:
+            10px 0 5px;
+
+        align-items: flex-start;
+
+        overflow-y: auto;
+    }
+
+
+    .physical-appearance-activity3-main-section {
+
+        width: 100%;
+
+        gap: 9px;
+
+        padding:
+            2px 2px 10px;
+
+        justify-content: flex-start;
+    }
+
+
+    /* SELECT CARD */
+
+    .physical-appearance-select-card {
+
+        padding:
+            15px 12px;
+
+        border-radius: 18px;
+    }
+
+
+    .physical-appearance-select-label {
+
+        font-size: 10px;
+    }
+
+
+    .physical-appearance-select-card h2 {
+
+        font-size: 20px;
+    }
+
+
+    .physical-appearance-select-card p {
+
+        margin:
+            5px 0 13px;
+
+        font-size: 10px;
+    }
+
+
+    /* PARTNERS */
+
+    .partner-choice-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 8px;
+    }
+
+
+    .partner-choice-card {
+
+        min-height: 82px;
+
+        padding:
+            8px 7px;
+
+        border-radius: 14px;
+
+        gap: 4px;
+    }
+
+
+    .partner-choice-icon {
+
+        width: 35px;
+        height: 35px;
+
+        font-size: 19px;
+    }
+
+
+    .partner-choice-name {
+
+        font-size: 11px;
+    }
+
+
+    .partner-choice-arrow {
+
+        right: 7px;
+
+        bottom: 5px;
+
+        font-size: 12px;
+    }
+
+
+    /* SELECTED PARTNER */
+
+    .selected-partner-section {
+
+        padding:
+            8px 11px;
+
+        gap: 9px;
+
+        border-radius: 15px;
+    }
+
+
+    .selected-partner-avatar {
+
+        width: 39px;
+        height: 39px;
+
+        font-size: 21px;
+    }
+
+
+    .selected-partner-label {
+
+        font-size: 8px;
+    }
+
+
+    .selected-partner-section h2 {
+
+        font-size: 16px;
+    }
+
+
+    /* QUESTION */
+
+    .describe-question-box {
+
+        padding:
+            11px 10px;
+
+        border-radius: 16px;
+    }
+
+
+    .describe-question-small {
+
+        font-size: 9px;
+
+        letter-spacing: 1px;
+    }
+
+
+    .describe-question-box h2 {
+
+        font-size: 18px;
+    }
+
+
+    .describe-question-box p {
+
+        margin-top: 3px;
+
+        font-size: 10px;
+    }
+
+
+    /* HINTS */
+
+    .speaking-hints {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 6px;
+    }
+
+
+    .speaking-hint {
+
+        min-height: 35px;
+
+        padding:
+            5px 4px;
+
+        border-radius: 10px;
+
+        font-size: 10px;
+    }
+
+
+    /* SPEECH AREA */
+
+    .speech-area {
+
+        padding:
+            9px;
+
+        border-radius: 16px;
+    }
+
+
+    .speech-status {
+
+        margin-bottom: 5px;
+
+        font-size: 9px;
+    }
+
+
+    .spoken-text-box {
+
+        min-height: 52px;
+
+        padding:
+            8px 9px;
+
+        border-radius: 11px;
+
+        font-size: 11px;
+    }
+
+
+    .speech-placeholder {
+
+        font-size: 9px;
+    }
+
+
+    /* MIC */
+
+    .activity3-mic {
+
+        width: 53px;
+        height: 53px;
+
+        margin-top: 7px;
+
+        font-size: 22px;
+
+        border-width: 2px;
+    }
+
+
+    .mic-help {
+
+        margin-top: 3px;
+
+        font-size: 8px;
+    }
+
+
+    /* SUBMIT */
+
+    .activity3-submit-button {
+
+        min-height: 43px;
+
+        padding:
+            8px 12px;
+
+        border-radius: 13px;
+
+        font-size: 12px;
+    }
+
+
+    /* FEEDBACK */
+
+    .activity3-feedback {
+
+        padding:
+            8px 10px;
+
+        gap: 8px;
+
+        border-radius: 14px;
+    }
+
+
+    .activity3-feedback-icon {
+
+        width: 34px;
+        height: 34px;
+
+        font-size: 17px;
+    }
+
+
+    .activity3-feedback strong {
+
+        font-size: 12px;
+    }
+
+
+    .activity3-feedback p {
+
+        font-size: 9px;
+    }
+
+
+    /* CONTINUE */
+
+    .activity3-continue-button {
+
+        min-height: 42px;
+
+        padding:
+            7px 12px;
+
+        border-radius: 13px;
+
+        font-size: 12px;
+    }
+}
+
+
+/* =====================================================
+   EXTRA SMALL MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .physical-appearance-activity3-card {
+
+        padding:
+            12px;
+    }
+
+
+    .physical-appearance-activity3-header-center h1 {
+
+        font-size: 19px;
+    }
+
+
+    .physical-appearance-select-card h2 {
+
+        font-size: 18px;
+    }
+
+
+    .partner-choice-card {
+
+        min-height: 76px;
+    }
+
+
+    .partner-choice-icon {
+
+        width: 31px;
+        height: 31px;
+
+        font-size: 17px;
+    }
+
+
+    .partner-choice-name {
+
+        font-size: 10px;
+    }
+
+
+    .describe-question-box h2 {
+
+        font-size: 16px;
+    }
+
+
+    .speaking-hint {
+
+        font-size: 9px;
+    }
+}

@@ -1,118 +1,792 @@
-import React, { useEffect, useState } from "react";
+import React, {
+    useEffect,
+    useState,
+    useRef
+} from "react";
+
 import teacher from "./assets/teacher1.png";
 import waiterImg from "./assets/waiter.png";
+import yaySound from "./assets/yay.mp3";
+
+import confetti from "canvas-confetti";
+
 
 function PracticeExercisePage({
+
     data,
     current,
     total,
     onNext,
     onSkip,
     onBack
+
 }) {
 
-    const [teacherText, setTeacherText] = useState("");
-    const [words, setWords] = useState([]);
-    const [filledSentence, setFilledSentence] = useState(
-        [...data.sentenceStructure]
-    );
 
-    // ==========================================
-    // WAITER VOICE
-    // ==========================================
+    /* ==========================================
+                    STATES
+    ========================================== */
 
-    const speakWaiter = (text) => {
+    const [teacherText, setTeacherText] =
+        useState("");
 
-        window.speechSynthesis.cancel();
+    const [words, setWords] =
+        useState([]);
 
-        const speech =
-            new SpeechSynthesisUtterance(text);
+    const [filledSentence, setFilledSentence] =
+        useState([
+            ...data.sentenceStructure
+        ]);
 
-        speech.rate = 0.9;
-        speech.pitch = 1;
-        speech.volume = 1;
+    const [celebrating, setCelebrating] =
+        useState(false);
 
-        const voices =
-            window.speechSynthesis.getVoices();
 
-        speech.voice =
-            voices.find(v =>
-                v.name.includes("Google UK English Male")
-            ) ||
-            voices.find(v =>
-                v.name.includes("Daniel")
-            ) ||
-            voices.find(v =>
-                /male/i.test(v.name)
-            ) ||
-            voices[0];
+    /* ==========================================
+                    REFS
+    ========================================== */
 
-        window.speechSynthesis.speak(speech);
+    const speechTimerRef =
+        useRef(null);
+
+    const nextTimerRef =
+        useRef(null);
+
+    const confettiFrameRef =
+        useRef(null);
+
+    const isMountedRef =
+        useRef(true);
+
+    const isProcessingRef =
+        useRef(false);
+
+    const audioRef =
+        useRef(null);
+
+
+    /* ==========================================
+                    CLEAR ALL
+    ========================================== */
+
+    const clearAllTimers = () => {
+
+        if (speechTimerRef.current) {
+
+            clearTimeout(
+                speechTimerRef.current
+            );
+
+            speechTimerRef.current =
+                null;
+
+        }
+
+
+        if (nextTimerRef.current) {
+
+            clearTimeout(
+                nextTimerRef.current
+            );
+
+            nextTimerRef.current =
+                null;
+
+        }
+
     };
 
 
-    // ==========================================
-    // TEACHER VOICE
-    // ==========================================
+    /* ==========================================
+                    STOP CONFETTI
+    ========================================== */
 
-    const speakTeacher = (text) => {
+    const stopConfetti = () => {
 
-        window.speechSynthesis.cancel();
+        if (confettiFrameRef.current) {
 
-        const speech =
-            new SpeechSynthesisUtterance(text);
+            cancelAnimationFrame(
+                confettiFrameRef.current
+            );
 
-        speech.rate = 0.95;
-        speech.pitch = 1.05;
-        speech.volume = 1;
+            confettiFrameRef.current =
+                null;
 
-        const voices =
-            window.speechSynthesis.getVoices();
+        }
 
-        speech.voice =
-            voices.find(v =>
-                v.name.includes("Zira")
-            ) ||
-            voices.find(v =>
-                v.name.includes("Samantha")
-            ) ||
-            voices.find(v =>
-                /female/i.test(v.name)
-            ) ||
-            voices[0];
-
-        window.speechSynthesis.speak(speech);
     };
 
 
-    // ==========================================
-    // LOAD EXERCISE
-    // ==========================================
+    /* ==========================================
+                    STOP AUDIO
+    ========================================== */
+
+    const stopAudio = () => {
+
+        if (audioRef.current) {
+
+            audioRef.current.pause();
+
+            audioRef.current.currentTime = 0;
+
+            audioRef.current =
+                null;
+
+        }
+
+    };
+
+
+    /* ==========================================
+                    MOUNT / UNMOUNT
+    ========================================== */
 
     useEffect(() => {
 
-        setTeacherText("");
+        isMountedRef.current = true;
 
-        setWords([...data.options]);
-
-        setFilledSentence(
-            [...data.sentenceStructure]
-        );
-
-        speakWaiter(data.waiter);
 
         return () => {
+
+            isMountedRef.current = false;
+
+            clearAllTimers();
+
+            stopConfetti();
+
+            stopAudio();
+
             window.speechSynthesis.cancel();
+
+        };
+
+    }, []);
+
+
+    /* ==========================================
+                FIND WAITER VOICE
+    ========================================== */
+
+    const getWaiterVoice = () => {
+
+        const voices =
+            window.speechSynthesis.getVoices();
+
+        return (
+
+            voices.find(v =>
+                /Google UK English Male/i.test(
+                    v.name
+                )
+            )
+
+            ||
+
+            voices.find(v =>
+                /Google US English Male/i.test(
+                    v.name
+                )
+            )
+
+            ||
+
+            voices.find(v =>
+                /Microsoft.*Guy/i.test(
+                    v.name
+                )
+            )
+
+            ||
+
+            voices.find(v =>
+                /Microsoft.*Ryan/i.test(
+                    v.name
+                )
+            )
+
+            ||
+
+            voices.find(v =>
+                /Daniel/i.test(
+                    v.name
+                )
+            )
+
+            ||
+
+            voices.find(v =>
+                /Alex/i.test(
+                    v.name
+                )
+            )
+
+            ||
+
+            voices.find(v =>
+                /English.*Male/i.test(
+                    v.name
+                )
+            )
+
+            ||
+
+            null
+
+        );
+
+    };
+
+
+    /* ==========================================
+                FIND TEACHER VOICE
+    ========================================== */
+
+    const getTeacherVoice = () => {
+
+        const voices =
+            window.speechSynthesis.getVoices();
+
+        return (
+
+            voices.find(v =>
+                /Google UK English Female/i.test(
+                    v.name
+                )
+            )
+
+            ||
+
+            voices.find(v =>
+                /Microsoft.*Jenny/i.test(
+                    v.name
+                )
+            )
+
+            ||
+
+            voices.find(v =>
+                /Microsoft.*Aria/i.test(
+                    v.name
+                )
+            )
+
+            ||
+
+            voices.find(v =>
+                /Samantha/i.test(
+                    v.name
+                )
+            )
+
+            ||
+
+            voices.find(v =>
+                /Zira/i.test(
+                    v.name
+                )
+            )
+
+            ||
+
+            null
+
+        );
+
+    };
+
+
+    /* ==========================================
+                    WAITER VOICE
+    ========================================== */
+
+    const speakWaiter = (text) => {
+
+        if (
+            !window.speechSynthesis ||
+            !text
+        ) {
+
+            return;
+
+        }
+
+
+        window.speechSynthesis.cancel();
+
+
+        const speech =
+            new SpeechSynthesisUtterance(
+                text
+            );
+
+
+        speech.lang = "en-US";
+
+        speech.rate = 0.95;
+
+        speech.pitch = 1;
+
+        speech.volume = 1;
+
+
+        const waiterVoice =
+            getWaiterVoice();
+
+
+        if (waiterVoice) {
+
+            speech.voice =
+                waiterVoice;
+
+        }
+
+
+        window.speechSynthesis.speak(
+            speech
+        );
+
+    };
+
+
+    /* ==========================================
+                    TEACHER VOICE
+    ========================================== */
+
+    const speakTeacher = (
+        text,
+        callback
+    ) => {
+
+        if (
+            !window.speechSynthesis ||
+            !text
+        ) {
+
+            callback?.();
+
+            return;
+
+        }
+
+
+        window.speechSynthesis.cancel();
+
+
+        const speech =
+            new SpeechSynthesisUtterance(
+                text
+            );
+
+
+        speech.lang = "en-US";
+
+        /* Faster teacher speech */
+
+        speech.rate = 1.05;
+
+        speech.pitch = 1.05;
+
+        speech.volume = 1;
+
+
+        const teacherVoice =
+            getTeacherVoice();
+
+
+        if (teacherVoice) {
+
+            speech.voice =
+                teacherVoice;
+
+        }
+
+
+        const finishSpeech = () => {
+
+            if (
+                !isMountedRef.current
+            ) {
+
+                return;
+
+            }
+
+
+            callback?.();
+
+        };
+
+
+        speech.onend =
+            finishSpeech;
+
+        speech.onerror =
+            finishSpeech;
+
+
+        window.speechSynthesis.speak(
+            speech
+        );
+
+    };
+
+
+    /* ==========================================
+                    CONFETTI
+                    FASTER
+    ========================================== */
+
+    const playConfetti = () => {
+
+        if (
+            !isMountedRef.current
+        ) {
+
+            return;
+
+        }
+
+
+        /* Earlier: 1800ms
+           Now: 1000ms */
+
+        const duration =
+            1000;
+
+
+        const end =
+            Date.now() + duration;
+
+
+        const frame = () => {
+
+            if (
+                !isMountedRef.current
+            ) {
+
+                return;
+
+            }
+
+
+            confetti({
+
+                particleCount: 4,
+
+                spread: 65,
+
+                startVelocity: 30,
+
+                origin: {
+
+                    x: Math.random(),
+
+                    y:
+                        Math.random() * 0.5
+
+                }
+
+            });
+
+
+            if (
+                Date.now() < end
+            ) {
+
+                confettiFrameRef.current =
+                    requestAnimationFrame(
+                        frame
+                    );
+
+            }
+
+            else {
+
+                confettiFrameRef.current =
+                    null;
+
+            }
+
+        };
+
+
+        frame();
+
+    };
+
+
+    /* ==========================================
+                    YAY SOUND
+    ========================================== */
+
+    const playYaySound = (
+        callback
+    ) => {
+
+        if (
+            !isMountedRef.current
+        ) {
+
+            return;
+
+        }
+
+
+        const audio =
+            new Audio(yaySound);
+
+
+        audioRef.current =
+            audio;
+
+
+        audio.volume =
+            1;
+
+
+        let finished =
+            false;
+
+
+        const finishSound = () => {
+
+            if (finished) {
+
+                return;
+
+            }
+
+
+            finished =
+                true;
+
+
+            audio.onended =
+                null;
+
+            audio.onerror =
+                null;
+
+
+            if (
+                audioRef.current ===
+                audio
+            ) {
+
+                audioRef.current =
+                    null;
+
+            }
+
+
+            if (
+                isMountedRef.current &&
+                callback
+            ) {
+
+                callback();
+
+            }
+
+        };
+
+
+        audio.onended =
+            finishSound;
+
+        audio.onerror =
+            finishSound;
+
+
+        audio.play().catch(
+            finishSound
+        );
+
+    };
+
+
+    /* ==========================================
+            CORRECT CELEBRATION
+    ========================================== */
+
+    const celebrateCorrectSentence = () => {
+
+        if (
+            !isMountedRef.current ||
+            isProcessingRef.current
+        ) {
+
+            return;
+
+        }
+
+
+        /* Prevent double next */
+
+        isProcessingRef.current =
+            true;
+
+
+        setCelebrating(
+            true
+        );
+
+
+        setTeacherText(
+            "Excellent! Correct sentence. ✨"
+        );
+
+
+        /*
+            STEP 1
+            CONFETTI + YAY TOGETHER
+        */
+
+        playConfetti();
+
+
+        playYaySound(() => {
+
+            if (
+                !isMountedRef.current
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+                STEP 2
+                YAY COMPLETE
+                → Teacher speaks
+            */
+
+            speakTeacher(
+
+                "Excellent! Correct sentence.",
+
+                () => {
+
+                    if (
+                        !isMountedRef.current
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    /*
+                        Small transition delay
+                        Earlier: 200ms
+                        Now: 100ms
+                    */
+
+                    nextTimerRef.current =
+                        setTimeout(() => {
+
+                            if (
+                                !isMountedRef.current
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            setCelebrating(
+                                false
+                            );
+
+
+                            isProcessingRef.current =
+                                false;
+
+
+                            onNext?.();
+
+                        }, 100);
+
+                }
+
+            );
+
+        });
+
+    };
+
+
+    /* ==========================================
+                    LOAD EXERCISE
+    ========================================== */
+
+    useEffect(() => {
+
+        clearAllTimers();
+
+        stopConfetti();
+
+
+        isProcessingRef.current =
+            false;
+
+
+        setTeacherText(
+            ""
+        );
+
+
+        setWords(
+            [...data.options]
+        );
+
+
+        setFilledSentence(
+            [
+                ...data.sentenceStructure
+            ]
+        );
+
+
+        setCelebrating(
+            false
+        );
+
+
+        speakWaiter(
+            data.waiter
+        );
+
+
+        return () => {
+
+            window.speechSynthesis.cancel();
+
+            clearAllTimers();
+
         };
 
     }, [data]);
 
 
-    // ==========================================
-    // DRAG & DROP
-    // ==========================================
+    /* ==========================================
+                    DRAG START
+    ========================================== */
 
-    const handleDragStart = (e, word) => {
+    const handleDragStart = (
+        e,
+        word
+    ) => {
+
+        if (
+            celebrating
+        ) {
+
+            return;
+
+        }
+
 
         e.dataTransfer.setData(
             "word",
@@ -122,119 +796,212 @@ function PracticeExercisePage({
     };
 
 
-    const handleDrop = (e, index) => {
+    /* ==========================================
+                    DROP
+    ========================================== */
+
+    const handleDrop = (
+        e,
+        index
+    ) => {
 
         e.preventDefault();
 
-        const word =
-            e.dataTransfer.getData("word");
 
-        if (!word) return;
+        if (
+            celebrating ||
+            isProcessingRef.current
+        ) {
+
+            return;
+
+        }
+
+
+        const word =
+            e.dataTransfer.getData(
+                "word"
+            );
+
+
+        if (!word) {
+
+            return;
+
+        }
+
+
+        if (
+            filledSentence[index] !==
+            "____"
+        ) {
+
+            return;
+
+        }
 
 
         const newSentence =
             [...filledSentence];
 
-        newSentence[index] = word;
 
-        setFilledSentence(newSentence);
+        newSentence[index] =
+            word;
 
 
-        // Remove selected word
-        const remaining =
+        setFilledSentence(
+            newSentence
+        );
+
+
+        setWords(
+
             words.filter(
                 w => w !== word
-            );
+            )
 
-        setWords(remaining);
-
-
-        // ======================================
-        // CHECK ANSWER
-        // ======================================
-
-        if (!newSentence.includes("____")) {
-
-            const userSentence =
-                newSentence.join(" ");
+        );
 
 
-            const correctSentence =
-                data.sentenceStructure
-                    .map((part, i) => {
+        /* ======================================
+                    CHECK ANSWER
+        ====================================== */
 
-                        if (part === "____") {
+        if (
+            !newSentence.includes(
+                "____"
+            )
+        ) {
+
+
+            const correctFilledWords =
+                data.sentenceStructure.map(
+                    (
+                        part,
+                        i
+                    ) => {
+
+                        if (
+                            part ===
+                            "____"
+                        ) {
 
                             const blankIndex =
-                                data.sentenceStructure
-                                    .slice(0, i)
+                                data
+                                    .sentenceStructure
+                                    .slice(
+                                        0,
+                                        i
+                                    )
                                     .filter(
-                                        x => x === "____"
+                                        x =>
+                                            x ===
+                                            "____"
                                     ).length;
 
-                            return data.correctWords[
-                                blankIndex
-                            ];
+
+                            return data
+                                .correctWords[
+                                    blankIndex
+                                ];
+
                         }
+
 
                         return part;
 
-                    })
-                    .join(" ");
+                    }
+                );
+
+
+            const correctSentence =
+                correctFilledWords.join(
+                    " "
+                );
 
 
             const isCorrect =
-                data.correctWords.every(
-                    word =>
-                        userSentence
+                newSentence.every(
+                    (
+                        part,
+                        i
+                    ) =>
+
+                        part
+                            .toLowerCase() ===
+
+                        correctFilledWords[
+                            i
+                        ]
                             .toLowerCase()
-                            .includes(
-                                word.toLowerCase()
-                            )
                 );
 
 
-            if (isCorrect) {
+            /* ==================================
+                    CORRECT
+            ================================== */
+
+            if (
+                isCorrect
+            ) {
+
+                celebrateCorrectSentence();
+
+            }
+
+
+            /* ==================================
+                    WRONG
+            ================================== */
+
+            else {
+
+
+                const wrongMessage =
+                    `Oops! Try again. The correct sentence is: ${correctSentence}`;
+
 
                 setTeacherText(
-                    "Excellent! Correct sentence. ✨"
+                    wrongMessage
                 );
+
 
                 speakTeacher(
-                    "Excellent! Correct sentence."
+                    wrongMessage
                 );
 
 
-                setTimeout(() => {
+                speechTimerRef.current =
+                    setTimeout(() => {
 
-                    onNext();
+                        if (
+                            !isMountedRef.current
+                        ) {
 
-                }, 1200);
+                            return;
 
-            } else {
-
-                setTeacherText(
-                    `Oops! Try again. The correct sentence is: ${correctSentence}`
-                );
-
-                speakTeacher(
-                    `Oops! Try again. The correct sentence is: ${correctSentence}`
-                );
+                        }
 
 
-                setTimeout(() => {
+                        setTeacherText(
+                            ""
+                        );
 
-                    setTeacherText("");
 
-                    setWords(
-                        [...data.options]
-                    );
+                        setWords(
+                            [
+                                ...data.options
+                            ]
+                        );
 
-                    setFilledSentence(
-                        [...data.sentenceStructure]
-                    );
 
-                }, 1800);
+                        setFilledSentence(
+                            [
+                                ...data.sentenceStructure
+                            ]
+                        );
+
+                    }, 1200);
 
             }
 
@@ -243,50 +1010,100 @@ function PracticeExercisePage({
     };
 
 
-    // ==========================================
-    // PROGRESS
-    // ==========================================
+    /* ==========================================
+                    BACK
+    ========================================== */
+
+    const handleBack = () => {
+
+        if (
+            celebrating
+        ) {
+
+            return;
+
+        }
+
+
+        clearAllTimers();
+
+        stopConfetti();
+
+        stopAudio();
+
+
+        window.speechSynthesis.cancel();
+
+
+        onBack?.();
+
+    };
+
+
+    /* ==========================================
+                    SKIP
+    ========================================== */
+
+    const handleSkip = () => {
+
+        if (
+            celebrating
+        ) {
+
+            return;
+
+        }
+
+
+        clearAllTimers();
+
+        stopConfetti();
+
+        stopAudio();
+
+
+        window.speechSynthesis.cancel();
+
+
+        onSkip?.();
+
+    };
+
+
+    /* ==========================================
+                    PROGRESS
+    ========================================== */
 
     const progress =
         (current / total) * 100;
 
-
-    // ==========================================
-    // PAGE
-    // ==========================================
 
     return (
 
         <div className="practice-exercise-page">
 
 
-            {/* =================================
-                BACK BUTTON
-            ================================= */}
-
             <button
                 className="practice-back-btn"
-                onClick={onBack}
+                onClick={handleBack}
+                disabled={celebrating}
             >
+
                 ← Back
+
             </button>
 
-
-            {/* =================================
-                SKIP BUTTON
-            ================================= */}
 
             <button
                 className="practice-skip-btn"
-                onClick={onSkip}
+                onClick={handleSkip}
+                disabled={celebrating}
             >
+
                 Skip →
+
             </button>
 
-
-            {/* =================================
-                HEADER
-            ================================= */}
 
             <div className="practice-title-box">
 
@@ -297,11 +1114,8 @@ function PracticeExercisePage({
             </div>
 
 
-            {/* =================================
-                PROGRESS
-            ================================= */}
-
             <div className="practice-progress-area">
+
 
                 <div className="practice-progress-count">
 
@@ -315,27 +1129,26 @@ function PracticeExercisePage({
                     <div
                         className="practice-progress-fill"
                         style={{
-                            width: `${progress}%`
+
+                            width:
+                                `${progress}%`
+
                         }}
                     />
 
                 </div>
 
+
             </div>
 
-
-            {/* =================================
-                MAIN CONTENT
-            ================================= */}
 
             <div className="practice-main-layout">
 
 
-                {/* =================================
-                    WAITER
-                ================================= */}
+                {/* WAITER */}
 
                 <div className="practice-waiter-section">
+
 
                     <img
                         src={waiterImg}
@@ -346,6 +1159,7 @@ function PracticeExercisePage({
 
                     <div className="practice-waiter-bubble">
 
+
                         <div className="character-name">
 
                             Waiter 🧑‍🍳
@@ -354,17 +1168,19 @@ function PracticeExercisePage({
 
 
                         <p>
+
                             {data.waiter}
+
                         </p>
 
+
                     </div>
+
 
                 </div>
 
 
-                {/* =================================
-                    CENTER EXERCISE CARD
-                ================================= */}
+                {/* EXERCISE */}
 
                 <div className="practice-card">
 
@@ -387,20 +1203,26 @@ function PracticeExercisePage({
 
                     <p className="practice-instruction">
 
-                        Drag the correct words into the blanks.
+                        Drag the correct words
+                        into the blanks.
 
                     </p>
 
 
-                    {/* SENTENCE */}
-
                     <div className="sentence-box">
 
+
                         {filledSentence.map(
-                            (part, index) => {
+
+                            (
+                                part,
+                                index
+                            ) => {
+
 
                                 if (
-                                    part === "____"
+                                    part ===
+                                    "____"
                                 ) {
 
                                     return (
@@ -420,7 +1242,9 @@ function PracticeExercisePage({
                                                     )
                                             }
                                         >
+
                                             ______
+
                                         </span>
 
                                     );
@@ -434,28 +1258,37 @@ function PracticeExercisePage({
                                         key={index}
                                         className="sentence-word"
                                     >
+
                                         {part}
+
                                     </span>
 
                                 );
 
                             }
+
                         )}
+
 
                     </div>
 
 
-                    {/* WORD OPTIONS */}
-
                     <div className="practice-word-container">
 
+
                         {words.map(
-                            (word, index) => (
+
+                            (
+                                word,
+                                index
+                            ) => (
 
                                 <div
                                     key={index}
                                     className="practice-word"
-                                    draggable
+                                    draggable={
+                                        !celebrating
+                                    }
                                     onDragStart={
                                         e =>
                                             handleDragStart(
@@ -464,11 +1297,15 @@ function PracticeExercisePage({
                                             )
                                     }
                                 >
+
                                     {word}
+
                                 </div>
 
                             )
+
                         )}
+
 
                     </div>
 
@@ -476,13 +1313,13 @@ function PracticeExercisePage({
                 </div>
 
 
-                {/* =================================
-                    TEACHER
-                ================================= */}
+                {/* TEACHER */}
 
                 <div className="practice-teacher-section">
 
+
                     <div className="practice-teacher-bubble">
+
 
                         <div className="character-name">
 
@@ -493,11 +1330,14 @@ function PracticeExercisePage({
 
                         <p>
 
-                            {teacherText ||
+                            {
+                                teacherText ||
+
                                 "Drag the correct words into the blanks. You can do it! ✨"
                             }
 
                         </p>
+
 
                     </div>
 
@@ -508,21 +1348,22 @@ function PracticeExercisePage({
                         className="practice-teacher-image"
                     />
 
+
                 </div>
+
 
             </div>
 
-
-            {/* =================================
-                BOTTOM TIP
-            ================================= */}
 
             <div className="practice-tip">
 
                 💡
 
                 <span>
-                    Listen carefully and speak clearly.
+
+                    Listen carefully and
+                    speak clearly.
+
                 </span>
 
             </div>
@@ -533,5 +1374,6 @@ function PracticeExercisePage({
     );
 
 }
+
 
 export default PracticeExercisePage;

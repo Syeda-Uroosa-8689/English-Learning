@@ -1,0 +1,1661 @@
+/* =====================================================
+   ROUTINE RUSH
+   Warm sample-style layout
+===================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+.routine-rush-page {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #30203d;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: "Trebuchet MS", "Arial Rounded MT Bold", Arial, sans-serif;
+}
+
+.routine-rush-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(30, 18, 35, 0.08);
+  pointer-events: none;
+}
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+
+.routine-rush-card {
+  position: relative;
+  z-index: 2;
+  width: min(1420px, 94vw);
+  height: min(900px, 94vh);
+  min-height: 650px;
+  overflow: hidden;
+  border-radius: 28px;
+  background-image: url("../../assets/calenderbg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+}
+
+.routine-rush-card::before {
+  content: "♡  ✦  ♡  ✧  ♡  ✦  ♡  ✧";
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+
+  color: rgba(151, 110, 66, 0.16);
+  font-size: 42px;
+  letter-spacing: 40px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.routine-header {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  height: 70px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0 38px;
+}
+
+.routine-btn {
+  border: none;
+  border-radius: 16px;
+  padding: 15px 25px;
+  background: linear-gradient(180deg, #704927, #54321b);
+  color: white;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.18),
+    0 6px 0 rgba(58, 31, 13, 0.3);
+  transition: 0.2s ease;
+}
+
+.routine-btn:hover {
+  transform: translateY(-2px);
+}
+
+.routine-btn:active {
+  transform: translateY(2px);
+}
+
+.back-btn,
+.skip-btn {
+  min-width: 110px;
+  justify-content: center;
+}
+
+.routine-title {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 0 20px;
+  white-space: nowrap;
+}
+
+.routine-title h1 {
+  margin: 0;
+  color: #382113;
+  font-size: clamp(30px, 3.2vw, 52px);
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.title-sun {
+  font-size: clamp(25px, 2.8vw, 42px);
+}
+
+.routine-subtitle {
+  position: absolute;
+  top: 92px;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  text-align: center;
+  color: #5d4637;
+  font-size: clamp(15px, 1.45vw, 23px);
+  font-weight: 700;
+  padding: 0 20px;
+}
+
+/* =====================================================
+   INTRO LAYOUT
+===================================================== */
+
+.routine-intro-layout {
+  position: absolute;
+  top: 145px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 91%;
+  height: calc(100% - 175px);
+  display: grid;
+  grid-template-columns: 38% 62%;
+  gap: 18px;
+}
+
+/* =====================================================
+   INTRO TEACHER SIDE
+===================================================== */
+
+.routine-intro-teacher-side {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.routine-intro-teacher-row {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.routine-teacher-box {
+  position: relative;
+  z-index: 3;
+  width: 47%;
+  padding-bottom: 32px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.routine-intro-teacher-image {
+  width: 100%;
+  max-height: 480px;
+  object-fit: contain;
+  object-position: bottom;
+  display: block;
+}
+
+.routine-intro-teacher-name {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 215px;
+  padding: 13px 18px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #8a5a32, #59321c);
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.15),
+    0 7px 18px rgba(72, 41, 20, 0.28);
+}
+
+/* =====================================================
+   SPEECH BUBBLE
+===================================================== */
+
+.routine-speech-bubble {
+  position: relative;
+  background: linear-gradient(180deg, #fffdf8, #f7ecdc);
+  border: 2px solid rgba(154, 113, 72, 0.35);
+  border-radius: 28px;
+  color: #3f2a1c;
+  box-shadow: 0 10px 30px rgba(88, 51, 24, 0.15);
+}
+
+.routine-speech-bubble::before {
+  content: "";
+  position: absolute;
+  left: -18px;
+  bottom: 45px;
+  width: 34px;
+  height: 34px;
+  background: #fbf4e8;
+  border-left: 2px solid rgba(154, 113, 72, 0.35);
+  border-bottom: 2px solid rgba(154, 113, 72, 0.35);
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+.routine-intro-bubble {
+  width: 48%;
+  min-width: 240px;
+  margin-left: -10px;
+  padding: 28px 25px;
+}
+
+.routine-intro-bubble p {
+  margin: 0 0 15px;
+  text-align: center;
+  font-size: clamp(14px, 1.15vw, 20px);
+  line-height: 1.55;
+  font-weight: 700;
+}
+
+.routine-intro-bubble p:last-child {
+  margin-bottom: 0;
+}
+
+.routine-repeat-button {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: none;
+  background: #f4dfbf;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+/* =====================================================
+   INTRO STATS
+===================================================== */
+
+.routine-intro-stats {
+  width: min(370px, 92%);
+  margin-top: 22px;
+  padding: 20px 25px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(255, 252, 245, 0.85);
+  border: 2px solid rgba(159, 116, 69, 0.24);
+  border-radius: 25px;
+  box-shadow: 0 8px 25px rgba(101, 61, 31, 0.1);
+}
+
+.routine-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.routine-stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.routine-star-icon {
+  background: #ffe3a0;
+  box-shadow: inset 0 0 0 2px #e2ad42;
+}
+
+.routine-round-icon {
+  background: #e7d7f2;
+  box-shadow: inset 0 0 0 2px #a873c5;
+}
+
+.routine-stat strong {
+  color: #3f291b;
+  font-size: 27px;
+}
+
+.routine-stat span {
+  color: #745846;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.routine-stat-divider {
+  width: 1px;
+  height: 85px;
+  background: #d9c7b2;
+}
+
+/* =====================================================
+   INTRO ROOM SIDE
+===================================================== */
+
+.routine-intro-room-side {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.routine-intro-room-image-wrap {
+  width: 100%;
+  height: calc(100% - 105px);
+  padding: 10px;
+  border-radius: 28px;
+  background: #fffaf1;
+  border: 2px solid rgba(166, 120, 75, 0.28);
+  box-shadow: 0 12px 30px rgba(87, 52, 29, 0.15);
+}
+
+.routine-intro-room-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.routine-start-challenge {
+  position: absolute;
+  bottom: 10px;
+  border: none;
+  min-width: 390px;
+  padding: 20px 42px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #8a5a32, #59321b);
+  color: white;
+  font-family: inherit;
+  font-size: clamp(18px, 2vw, 31px);
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.25),
+    0 8px 0 rgba(67, 36, 17, 0.55);
+  transition: 0.2s ease;
+}
+
+.routine-start-challenge:hover {
+  transform: translateY(-3px);
+}
+
+.routine-play-icon {
+  font-size: 35px;
+}
+
+/* =====================================================
+   ACTIVITY LAYOUT
+===================================================== */
+
+.routine-activity-layout {
+  position: absolute;
+  top: 145px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 91%;
+  height: calc(100% - 175px);
+}
+
+.routine-activity-room-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 28px;
+  background: #5d3721;
+  box-shadow: 0 18px 45px rgba(64, 35, 16, 0.3);
+}
+
+.routine-activity-room-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* =====================================================
+   ROUND BADGE
+===================================================== */
+
+.round-badge {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  padding: 10px 28px;
+  border-radius: 22px;
+  background: rgba(91, 38, 27, 0.95);
+  color: #fff9e8;
+  font-size: clamp(16px, 1.4vw, 23px);
+  font-weight: 900;
+  box-shadow: 0 5px 0 rgba(48, 20, 15, 0.5);
+  white-space: nowrap;
+}
+
+/* =====================================================
+   LEFT TEACHER
+===================================================== */
+
+.routine-teacher {
+  position: absolute;
+  left: 0.5%;
+  bottom: 4%;
+  z-index: 12;
+  width: 27%;
+  height: 67%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.teacher-speech {
+  position: absolute;
+  top: 0;
+  left: 22%;
+  width: 82%;
+  min-height: 40%;
+  padding: 22px 22px 28px;
+  border: 3px solid #e5a94d;
+  border-radius: 30px;
+  background: #fff6d8;
+  color: #3c2115;
+  text-align: center;
+  box-shadow: 0 5px 0 #9b4f26;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.teacher-speech p {
+  margin: 0;
+  font-size: clamp(12px, 1.15vw, 19px);
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.teacher-speech strong {
+  margin: 0;
+  font-size: clamp(17px, 1.6vw, 27px);
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.speech-tail {
+  position: absolute;
+  left: 12%;
+  bottom: -25px;
+  width: 45px;
+  height: 45px;
+  background: #fff6d8;
+  border-right: 3px solid #e5a94d;
+  border-bottom: 3px solid #e5a94d;
+  transform: rotate(45deg);
+}
+
+.teacher-image {
+  position: relative;
+  z-index: 3;
+  width: 78%;
+  height: 72%;
+  object-fit: contain;
+  object-position: bottom center;
+  margin-top: 22%;
+}
+
+.teacher-name {
+  position: relative;
+  z-index: 5;
+  margin-top: -2%;
+  padding: 10px 28px;
+  border: 3px solid #8b461d;
+  border-radius: 16px;
+  background: linear-gradient(#a85b2a, #713a1e);
+  color: #fff9e8;
+  font-size: clamp(17px, 1.8vw, 28px);
+  font-weight: 900;
+  white-space: nowrap;
+  box-shadow: 0 4px 0 #4d2415;
+}
+
+/* =====================================================
+   RIGHT TIMER
+===================================================== */
+
+.routine-timer {
+  position: absolute;
+  top: 10.5%;
+  right: 1.5%;
+  z-index: 15;
+  width: 22%;
+  min-width: 245px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.routine-timer img {
+  width: 75%;
+  max-width: 250px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 7px 0 rgba(72, 28, 22, 0.5));
+}
+
+.timer-value {
+  margin-top: -15%;
+  color: #fff9e8;
+  font-size: clamp(28px, 2.8vw, 46px);
+  font-weight: 900;
+  text-shadow: 3px 3px 0 #4d2415;
+  white-space: nowrap;
+}
+
+.timer-value span {
+  font-size: 0.55em;
+  margin-left: 5px;
+}
+
+.timer-label {
+  margin-top: 6px;
+  color: white;
+  font-size: clamp(16px, 1.5vw, 25px);
+  font-weight: 900;
+  text-shadow: 2px 2px 0 #3d1e2b;
+}
+
+.timer-bar {
+  width: 100%;
+  height: 22px;
+  margin-top: 8px;
+  padding: 3px;
+  border: 3px solid #713a1e;
+  border-radius: 20px;
+  background: #5a2b1d;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.timer-fill {
+  height: 100%;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #8bd42c, #45b51f);
+  transition: width 0.5s linear;
+}
+
+/* =====================================================
+   RIGHT DAY PROGRESS
+===================================================== */
+
+.routine-progress {
+  position: absolute;
+  top: 48%;
+  right: 1.5%;
+  z-index: 15;
+  width: 22%;
+  min-width: 245px;
+  padding: 20px 14px 14px;
+  border: 3px solid #e2a24e;
+  border-radius: 22px;
+  background: #fff2c8;
+  box-shadow: 0 6px 0 #8b461d;
+}
+
+.progress-title {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72%;
+  padding: 8px;
+  border: 3px solid #8fb4eb;
+  border-radius: 16px;
+  background: #315890;
+  color: white;
+  text-align: center;
+  font-size: clamp(14px, 1.5vw, 22px);
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.progress-line {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding: 0 5px;
+}
+
+.progress-line::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 50%;
+  height: 4px;
+  background: #b98a52;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.progress-line-fill {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  height: 4px;
+  background: #e2a32c;
+  transform: translateY(-50%);
+  z-index: 1;
+  transition: width 0.4s ease;
+}
+
+.progress-dot {
+  position: relative;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border: 3px solid #b98a52;
+  border-radius: 50%;
+  background: #fff8df;
+  color: #7d552e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.progress-dot.active {
+  background: #ffc62f;
+  border-color: #b66b16;
+  color: #6c3c13;
+}
+
+.progress-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+.progress-icons img {
+  width: 100%;
+  height: auto;
+  max-height: 52px;
+  object-fit: contain;
+}
+
+/* =====================================================
+   SCORE
+===================================================== */
+
+.routine-score {
+  position: absolute;
+  left: 1.8%;
+  bottom: 4%;
+  z-index: 15;
+  width: 11%;
+  min-width: 125px;
+  padding: 12px 10px 10px;
+  border: 3px solid #8b461d;
+  border-radius: 18px;
+  background: rgba(65, 32, 22, 0.88);
+  color: white;
+  text-align: center;
+  box-shadow: 0 5px 0 #4d2415;
+}
+
+.routine-score img {
+  width: 85%;
+  height: auto;
+  max-height: 110px;
+  object-fit: contain;
+  margin-top: -48%;
+  filter: drop-shadow(0 4px 0 rgba(0, 0, 0, 0.2));
+}
+
+.score-label {
+  padding: 5px;
+  border-radius: 10px;
+  background: #713a1e;
+  font-size: clamp(13px, 1.4vw, 20px);
+  font-weight: 900;
+}
+
+.score-value {
+  margin-top: 5px;
+  font-size: clamp(24px, 2.3vw, 36px);
+  font-weight: 900;
+}
+
+/* =====================================================
+   GAME AREA
+===================================================== */
+
+.routine-game-area {
+  position: absolute;
+  left: 17%;
+  right: 17%;
+  bottom: 7%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.question-title {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 14px;
+  padding: 10px 28px;
+  border: 3px solid #8b461d;
+  border-radius: 16px;
+  background: linear-gradient(#a85b2a, #713a1e);
+  color: #fff9e8;
+  font-size: clamp(18px, 2vw, 30px);
+  font-weight: 900;
+  text-align: center;
+  box-shadow: 0 4px 0 #4d2415;
+}
+
+.routine-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2%;
+}
+
+.routine-option {
+  position: relative;
+  min-width: 0;
+  min-height: 185px;
+  padding: 18px 10px 14px;
+  border: 3px solid #e3b96c;
+  border-radius: 24px;
+  background: #fff5d7;
+  color: #3d2114;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 5px 0 #b47a3d;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.routine-option:hover:not(:disabled) {
+  transform: translateY(-5px);
+  filter: brightness(1.04);
+}
+
+.routine-option:disabled {
+  cursor: default;
+}
+
+.routine-option img {
+  width: 75%;
+  height: 100px;
+  object-fit: contain;
+}
+
+.routine-option span:last-child {
+  font-size: clamp(14px, 1.4vw, 23px);
+  font-weight: 900;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.option-number {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 3px solid #0c5f90;
+  background: #1c91ca;
+  color: white;
+  font-size: 21px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.option-2 {
+  border-color: #4d9c20;
+  background: #8bd42c;
+}
+
+.option-3 {
+  border-color: #6c3b9b;
+  background: #a56bd5;
+}
+
+.routine-option.correct {
+  border-color: #55b83a;
+  background: #efffdc;
+  box-shadow:
+    0 5px 0 #368b28,
+    0 0 0 4px rgba(114, 207, 61, 0.3);
+}
+
+.routine-option.wrong {
+  border-color: #e2553f;
+  background: #fff0e8;
+  box-shadow:
+    0 5px 0 #a92d22,
+    0 0 0 4px rgba(226, 85, 63, 0.2);
+}
+
+/* =====================================================
+   FEEDBACK
+===================================================== */
+
+.routine-feedback {
+  position: absolute;
+  left: 50%;
+  bottom: -5%;
+  transform: translateX(-50%);
+  z-index: 30;
+  min-width: 320px;
+  max-width: 90%;
+  padding: 12px 18px;
+  border: 3px solid #55b83a;
+  border-radius: 16px;
+  background: #efffdc;
+  color: #3b6d1c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  font-size: clamp(13px, 1.4vw, 20px);
+  font-weight: 900;
+  box-shadow: 0 4px 0 #368b28;
+}
+
+.routine-feedback.feedback-wrong {
+  border-color: #e2553f;
+  background: #fff0e8;
+  color: #a92d22;
+  box-shadow: 0 4px 0 #a92d22;
+}
+
+.routine-feedback button {
+  border: none;
+  border-radius: 12px;
+  padding: 8px 18px;
+  background: #55b83a;
+  color: white;
+  font-weight: 900;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.routine-feedback.feedback-wrong button {
+  background: #e2553f;
+}
+
+/* =====================================================
+   BOTTOM INSTRUCTION
+===================================================== */
+
+.routine-instruction {
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  bottom: 1.5%;
+  z-index: 8;
+  padding: 10px 18px;
+  border: 3px solid rgba(255, 230, 164, 0.25);
+  border-radius: 20px;
+  background: rgba(54, 35, 45, 0.88);
+  color: #fff1c5;
+  font-size: clamp(13px, 1.4vw, 22px);
+  font-weight: 900;
+  text-align: center;
+}
+
+/* =====================================================
+   FINISH SCREEN
+===================================================== */
+
+.routine-rush-complete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.routine-rush-complete-content {
+  text-align: center;
+  color: #3d2114;
+}
+
+.complete-trophy {
+  width: 150px;
+  max-width: 40%;
+  height: auto;
+  object-fit: contain;
+}
+
+.routine-rush-complete h1 {
+  color: #8b461d;
+  font-size: clamp(28px, 4vw, 46px);
+  margin: 10px 0;
+}
+
+.routine-rush-complete p {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.final-score {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  margin: 20px auto;
+  border-radius: 16px;
+  background: #ffe5a1;
+  max-width: 280px;
+}
+
+.final-score span {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.final-score strong {
+  font-size: 36px;
+  color: #8b461d;
+}
+
+.routine-rush-complete .routine-btn {
+  display: block;
+  width: min(280px, 100%);
+  margin: 12px auto;
+  padding: 12px 24px;
+}
+
+.routine-rush-complete .primary {
+  background: linear-gradient(#a85b2a, #713a1e);
+  color: white;
+}
+
+.routine-rush-complete .secondary {
+  padding: 10px 20px;
+  font-size: 18px;
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1100px) {
+  .routine-rush-card {
+    width: 95vw;
+  }
+
+  .routine-intro-layout {
+    grid-template-columns: 40% 60%;
+  }
+
+  .routine-intro-teacher-name {
+    width: 190px;
+    font-size: 18px;
+  }
+
+  .routine-teacher {
+    width: 30%;
+  }
+
+  .routine-game-area {
+    left: 19%;
+    right: 19%;
+  }
+}
+
+/* =====================================================
+   SMALL TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+  .routine-rush-page {
+    min-height: 100vh;
+    padding: 0;
+    align-items: flex-start;
+  }
+
+  .routine-rush-card {
+    width: 100vw;
+    height: 100vh;
+    min-height: 700px;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .routine-header {
+    top: 18px;
+    padding: 0 14px;
+  }
+
+  .routine-title {
+    top: 0;
+  }
+
+  .routine-title h1 {
+    font-size: 25px;
+  }
+
+  .title-sun {
+    font-size: 22px;
+  }
+
+  .routine-btn {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .routine-subtitle {
+    top: 85px;
+    font-size: 14px;
+  }
+
+  .routine-intro-layout {
+    top: 135px;
+    width: 95%;
+    height: calc(100% - 150px);
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
+
+  .routine-intro-teacher-side {
+    min-height: 430px;
+  }
+
+  .routine-intro-room-side {
+    min-height: 480px;
+  }
+
+  .routine-intro-room-image-wrap {
+    height: 380px;
+  }
+
+  .routine-start-challenge {
+    min-width: 300px;
+    padding: 14px 22px;
+    font-size: 20px;
+  }
+
+  .routine-activity-layout {
+    top: 135px;
+    width: 96%;
+    height: calc(100% - 150px);
+  }
+
+  .routine-activity-room-card {
+    border-radius: 20px;
+  }
+
+  .routine-teacher {
+    width: 38%;
+    bottom: 260px;
+    height: 260px;
+  }
+
+  .teacher-speech {
+    left: 10%;
+    width: 105%;
+    min-height: 120px;
+    padding: 12px 8px;
+    border-radius: 20px;
+    gap: 5px;
+  }
+
+  .teacher-speech p {
+    font-size: 11px;
+  }
+
+  .teacher-speech strong {
+    font-size: 15px;
+  }
+
+  .teacher-image {
+    width: 85%;
+    height: 190px;
+    margin-top: 80px;
+  }
+
+  .teacher-name {
+    font-size: 13px;
+    padding: 7px 14px;
+  }
+
+  .routine-timer {
+    top: 15px;
+    right: 2%;
+    width: 28%;
+    min-width: 0;
+  }
+
+  .routine-progress {
+    top: 180px;
+    right: 2%;
+    width: 30%;
+    min-width: 0;
+    padding: 14px 6px 8px;
+  }
+
+  .routine-score {
+    left: 2%;
+    bottom: 12px;
+    width: 18%;
+    min-width: 0;
+    padding: 8px 5px;
+  }
+
+  .routine-game-area {
+    left: 3%;
+    right: 3%;
+    bottom: 45px;
+  }
+
+  .question-title {
+    font-size: 16px;
+    padding: 8px 14px;
+    margin-bottom: 10px;
+  }
+
+  .routine-options {
+    gap: 8px;
+  }
+
+  .routine-option {
+    min-height: 125px;
+    padding: 12px 5px;
+    border-radius: 16px;
+  }
+
+  .routine-option img {
+    width: 80%;
+    height: 65px;
+  }
+
+  .routine-option span:last-child {
+    font-size: 12px;
+  }
+
+  .option-number {
+    width: 28px;
+    height: 28px;
+    font-size: 15px;
+    top: 5px;
+    left: 5px;
+  }
+
+  .routine-feedback {
+    bottom: 0;
+    max-width: 90%;
+    min-width: 0;
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  .routine-instruction {
+    left: 22%;
+    right: 22%;
+    bottom: 12px;
+    font-size: 11px;
+    padding: 7px;
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+  .routine-rush-card {
+    min-height: 700px;
+  }
+
+  .routine-header {
+    top: 12px;
+    height: 55px;
+  }
+
+  .routine-title h1 {
+    font-size: 18px;
+  }
+
+  .title-sun {
+    font-size: 17px;
+  }
+
+  .routine-btn {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .routine-subtitle {
+    top: 70px;
+    font-size: 11px;
+  }
+
+  .routine-intro-layout {
+    top: 110px;
+    height: calc(100% - 120px);
+  }
+
+  .routine-intro-teacher-side {
+    min-height: 350px;
+  }
+
+  .routine-intro-teacher-row {
+    transform: scale(0.9);
+  }
+
+  .routine-intro-teacher-name {
+    width: 170px;
+    padding: 10px 14px;
+    font-size: 16px;
+  }
+
+  .routine-intro-bubble {
+    min-width: 200px;
+    padding: 20px 15px;
+  }
+
+  .routine-intro-bubble p {
+    font-size: 12px;
+  }
+
+  .routine-intro-stats {
+    width: 90%;
+    padding: 12px 15px;
+  }
+
+  .routine-stat-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+  }
+
+  .routine-stat strong {
+    font-size: 22px;
+  }
+
+  .routine-stat span {
+    font-size: 11px;
+  }
+
+  .routine-intro-room-side {
+    min-height: 400px;
+  }
+
+  .routine-intro-room-image-wrap {
+    height: 280px;
+  }
+
+  .routine-start-challenge {
+    min-width: 250px;
+    padding: 14px 20px;
+    font-size: 18px;
+  }
+
+  .routine-play-icon {
+    font-size: 25px;
+  }
+
+  .routine-activity-layout {
+    top: 110px;
+    width: 96%;
+    height: calc(100% - 120px);
+  }
+
+  .round-badge {
+    top: 10px;
+    font-size: 13px;
+    padding: 6px 18px;
+  }
+
+  .routine-timer {
+    top: 55px;
+    width: 28%;
+  }
+
+  .timer-value {
+    font-size: 20px;
+  }
+
+  .timer-label {
+    font-size: 10px;
+  }
+
+  .timer-bar {
+    height: 10px;
+  }
+
+  .routine-progress {
+    top: 170px;
+    width: 30%;
+    padding: 10px 4px 6px;
+  }
+
+  .progress-title {
+    font-size: 9px;
+    top: -12px;
+  }
+
+  .progress-dot {
+    width: 17px;
+    height: 17px;
+    font-size: 7px;
+    border-width: 2px;
+  }
+
+  .progress-line::before {
+    left: 9px;
+    right: 9px;
+    height: 2px;
+  }
+
+  .progress-line-fill {
+    left: 9px;
+    height: 2px;
+  }
+
+  .progress-icons img {
+    max-height: 28px;
+  }
+
+  .routine-teacher {
+    bottom: 235px;
+    width: 37%;
+    height: 220px;
+  }
+
+  .teacher-speech {
+    min-height: 95px;
+    padding: 8px 5px;
+    border-radius: 16px;
+  }
+
+  .teacher-speech p {
+    font-size: 9px;
+  }
+
+  .teacher-speech strong {
+    font-size: 12px;
+  }
+
+  .teacher-image {
+    height: 160px;
+  }
+
+  .teacher-name {
+    font-size: 10px;
+    padding: 5px 9px;
+  }
+
+  .routine-score {
+    bottom: 8px;
+    width: 18%;
+    padding: 6px 3px;
+  }
+
+  .routine-score img {
+    max-height: 45px;
+  }
+
+  .score-label {
+    font-size: 9px;
+  }
+
+  .score-value {
+    font-size: 18px;
+  }
+
+  .routine-game-area {
+    bottom: 40px;
+  }
+
+  .question-title {
+    font-size: 13px;
+    padding: 6px 9px;
+  }
+
+  .routine-option {
+    min-height: 105px;
+    padding: 8px 3px;
+    border-radius: 12px;
+  }
+
+  .routine-option img {
+    height: 50px;
+  }
+
+  .routine-option span:last-child {
+    font-size: 10px;
+  }
+
+  .option-number {
+    width: 23px;
+    height: 23px;
+    font-size: 12px;
+  }
+
+  .routine-instruction {
+    left: 20%;
+    right: 20%;
+    bottom: 8px;
+    font-size: 9px;
+    padding: 5px;
+  }
+
+  .routine-rush-complete h1 {
+    font-size: 28px;
+  }
+
+  .routine-rush-complete p {
+    font-size: 14px;
+  }
+
+  .final-score strong {
+    font-size: 30px;
+  }
+}
+
+
+/* =====================================================
+   FINAL ACTIVITY FIX
+   Activity directly inside main container
+===================================================== */
+
+/* Main page */
+.routine-rush-page {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Main container */
+.routine-rush-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Activity mode mein main container ka inner card remove */
+.routine-rush-card-activity {
+  padding: 0;
+}
+
+/* Activity layout ab main container ke andar
+   poori available space lega */
+.routine-activity-layout {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  transform: none;
+  overflow: hidden;
+  border-radius: 0;
+  background: #5d3721;
+  z-index: 10;
+}
+
+/* Activity background full container cover karega */
+.routine-activity-room-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  z-index: 0;
+}
+
+/* Activity ke saare elements background ke upar rahenge */
+.routine-activity-layout > *:not(.routine-activity-room-image) {
+  z-index: 2;
+}
+
+/* Header activity ke upar visible rahega */
+.routine-header {
+  z-index: 50;
+}
+
+/* Subtitle bhi visible rahega */
+.routine-subtitle {
+  z-index: 45;
+}
+
+/* Activity mode mein header background ko cover nahi karega */
+.routine-activity-mode .routine-header,
+.routine-activity-mode .routine-subtitle {
+  position: absolute;
+}
+
+/* Round badge */
+.routine-activity-layout .round-badge {
+  z-index: 30;
+}
+
+/* Teacher */
+.routine-activity-layout .routine-teacher {
+  z-index: 15;
+}
+
+/* Timer */
+.routine-activity-layout .routine-timer {
+  z-index: 15;
+}
+
+/* Progress */
+.routine-activity-layout .routine-progress {
+  z-index: 15;
+}
+
+/* Score */
+.routine-activity-layout .routine-score {
+  z-index: 15;
+}
+
+/* Game area */
+.routine-activity-layout .routine-game-area {
+  z-index: 20;
+}
+
+/* Instruction */
+.routine-activity-layout .routine-instruction {
+  z-index: 20;
+}
+
+/* Feedback */
+.routine-activity-layout .routine-feedback {
+  z-index: 40;
+}
+
+/* =====================================================
+   TABLET ACTIVITY FIX
+===================================================== */
+
+@media (max-width: 850px) {
+  .routine-activity-layout {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    border-radius: 0;
+  }
+
+  .routine-rush-card-activity {
+    width: 100vw;
+    height: 100vh;
+    min-height: 700px;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .routine-activity-room-image {
+    object-fit: cover;
+  }
+}
+
+/* =====================================================
+   MOBILE ACTIVITY FIX
+===================================================== */
+
+@media (max-width: 600px) {
+  .routine-activity-layout {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    border-radius: 0;
+  }
+
+  .routine-rush-card-activity {
+    width: 100vw;
+    height: 100vh;
+    min-height: 700px;
+    border-radius: 0;
+  }
+}
+
+

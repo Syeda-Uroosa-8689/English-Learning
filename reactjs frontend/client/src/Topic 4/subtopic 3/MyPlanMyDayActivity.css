@@ -1,0 +1,2538 @@
+/* =====================================================
+   MY PLAN, MY DAY
+   FULL SCREEN ACTIVITY
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+.my-plan-my-day-page {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    font-family: "Poppins", sans-serif;
+
+    background: #5f4637;
+}
+
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+.mpmd-background {
+    position: absolute;
+    inset: -20px;
+
+    background-image: url("../../assets/chatbg.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    filter: blur(8px);
+
+    transform: scale(1.08);
+}
+
+.mpmd-background::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(48, 30, 20, 0.28);
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+
+.mpmd-main-container {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(1420px, 92vw);
+
+    height: min(900px, 92vh);
+
+    margin: 4vh auto;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background-image: url("../../assets/partner.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border: 2px solid rgba(255, 255, 255, 0.75);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.4);
+}
+
+
+/* =====================================================
+   DECORATION
+===================================================== */
+
+.mpmd-main-container::before {
+    content: "♡  ✦  ♡  ✧  ♡  ✦  ♡  ✧";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 10px;
+
+    color: rgba(151, 110, 66, 0.16);
+
+    font-size: 42px;
+
+    letter-spacing: 40px;
+
+    white-space: nowrap;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   TOP BUTTONS
+===================================================== */
+
+.mpmd-top-button {
+    position: absolute;
+
+    top: 28px;
+
+    z-index: 50;
+
+    border: none;
+
+    border-radius: 16px;
+
+    padding: 14px 24px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #704927,
+            #54321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.18),
+        0 6px 0 rgba(58, 31, 13, 0.3);
+
+    transition: 0.2s ease;
+}
+
+.mpmd-top-button:hover {
+    transform: translateY(-2px);
+}
+
+.mpmd-back-button {
+    left: 38px;
+}
+
+.mpmd-skip-button {
+    right: 38px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.mpmd-header {
+    position: relative;
+
+    z-index: 10;
+
+    text-align: center;
+
+    padding-top: 36px;
+}
+
+.mpmd-header h1 {
+    margin: 0;
+
+    color: #382113;
+
+    font-size: clamp(30px, 3.2vw, 50px);
+
+    font-weight: 900;
+
+    line-height: 1.05;
+
+    letter-spacing: -1px;
+}
+
+.mpmd-header-icon {
+    margin-right: 10px;
+}
+
+.mpmd-header p {
+    margin: 7px 0 0;
+
+    color: #5d4637;
+
+    font-size: clamp(14px, 1.35vw, 21px);
+
+    font-weight: 600;
+
+    line-height: 1.2;
+}
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.mpmd-intro-layout {
+    position: absolute;
+
+    top: 135px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 91%;
+
+    height: calc(100% - 155px);
+
+    display: grid;
+
+    grid-template-columns: 38% 62%;
+
+    gap: 18px;
+}
+
+
+/* =====================================================
+   INTRO TEACHER
+===================================================== */
+
+.mpmd-intro-teacher-side {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.mpmd-intro-teacher-row {
+    position: relative;
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =====================================================
+   TEACHER
+===================================================== */
+
+.mpmd-teacher-box {
+    position: relative;
+
+    z-index: 3;
+
+    width: 47%;
+
+    padding-bottom: 30px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+}
+
+.mpmd-teacher-image {
+    width: 100%;
+
+    max-height: 430px;
+
+    object-fit: contain;
+
+    object-position: bottom;
+
+    display: block;
+}
+
+
+/* =====================================================
+   TEACHER NAME
+===================================================== */
+
+.mpmd-teacher-name {
+    position: absolute;
+
+    z-index: 10;
+
+    left: 50%;
+    bottom: 0;
+
+    transform: translateX(-50%);
+
+    width: 205px;
+
+    padding: 11px 16px;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321c
+        );
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.15),
+        0 7px 18px rgba(72, 41, 20, 0.28);
+}
+
+
+/* =====================================================
+   SPEECH BUBBLE
+===================================================== */
+
+.mpmd-speech-bubble {
+    position: relative;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7ecdc
+        );
+
+    border: 2px solid rgba(154, 113, 72, 0.35);
+
+    border-radius: 28px;
+
+    color: #3f2a1c;
+
+    box-shadow:
+        0 10px 30px rgba(88, 51, 24, 0.15);
+}
+
+.mpmd-speech-bubble::before {
+    content: "";
+
+    position: absolute;
+
+    left: -18px;
+
+    bottom: 45px;
+
+    width: 34px;
+    height: 34px;
+
+    background: #fbf4e8;
+
+    border-left: 2px solid rgba(154, 113, 72, 0.35);
+
+    border-bottom: 2px solid rgba(154, 113, 72, 0.35);
+
+    transform: rotate(45deg);
+
+    z-index: -1;
+}
+
+
+/* =====================================================
+   INTRO BUBBLE
+===================================================== */
+
+.mpmd-intro-bubble {
+    width: 48%;
+
+    min-width: 230px;
+
+    margin-left: -10px;
+
+    padding: 25px 23px;
+}
+
+.mpmd-intro-bubble p {
+    margin: 0 0 13px;
+
+    text-align: center;
+
+    font-size: clamp(13px, 1.05vw, 18px);
+
+    line-height: 1.5;
+
+    font-weight: 700;
+}
+
+.mpmd-intro-bubble p:last-child {
+    margin-bottom: 0;
+}
+
+.mpmd-green-text {
+    color: #4d8a49;
+}
+
+
+/* =====================================================
+   REPEAT
+===================================================== */
+
+.mpmd-repeat-button {
+    position: absolute;
+
+    top: 9px;
+    right: 10px;
+
+    border: none;
+
+    background: #f4dfbf;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =====================================================
+   INTRO STATS
+===================================================== */
+
+.mpmd-intro-stats {
+    width: min(360px, 92%);
+
+    margin-top: 20px;
+
+    padding: 17px 22px;
+
+    display: flex;
+
+    justify-content: space-around;
+
+    align-items: center;
+
+    background: rgba(255, 252, 245, 0.88);
+
+    border: 2px solid rgba(159, 116, 69, 0.24);
+
+    border-radius: 23px;
+
+    box-shadow:
+        0 8px 25px rgba(101, 61, 31, 0.1);
+}
+
+.mpmd-stat {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 4px;
+}
+
+.mpmd-stat-icon {
+    width: 54px;
+    height: 54px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 27px;
+}
+
+.mpmd-star-icon {
+    background: #ffe3a0;
+
+    box-shadow:
+        inset 0 0 0 2px #e2ad42;
+}
+
+.mpmd-calendar-icon {
+    background: #e7d7f2;
+
+    box-shadow:
+        inset 0 0 0 2px #a873c5;
+}
+
+.mpmd-stat strong {
+    color: #3f291b;
+
+    font-size: 24px;
+}
+
+.mpmd-stat span {
+    color: #745846;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.mpmd-stat-divider {
+    width: 1px;
+    height: 75px;
+
+    background: #d9c7b2;
+}
+
+
+/* =====================================================
+   INTRO CALENDAR
+===================================================== */
+
+.mpmd-intro-calendar-side {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    min-width: 0;
+}
+
+.mpmd-intro-calendar-image-wrap {
+    width: 100%;
+
+    height: calc(100% - 95px);
+
+    padding: 10px;
+
+    border-radius: 27px;
+
+    background: #fffaf1;
+
+    border: 2px solid rgba(166, 120, 75, 0.28);
+
+    box-shadow:
+        0 12px 30px rgba(87, 52, 29, 0.15);
+}
+
+.mpmd-intro-calendar-image {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: contain;
+
+    border-radius: 20px;
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+.mpmd-start-planning {
+    position: absolute;
+
+    bottom: 5px;
+
+    border: none;
+
+    min-width: 360px;
+
+    padding: 17px 35px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: clamp(17px, 1.8vw, 27px);
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 14px;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.25),
+        0 7px 0 rgba(67, 36, 17, 0.55);
+
+    transition: 0.2s ease;
+}
+
+.mpmd-start-planning:hover {
+    transform: translateY(-3px);
+}
+
+.mpmd-calendar-button-icon {
+    font-size: 30px;
+}
+
+
+/* =====================================================
+   ACTIVITY LAYOUT
+===================================================== */
+
+.mpmd-activity-layout {
+    position: absolute;
+
+    top: 125px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 91%;
+
+    height: calc(100% - 140px);
+
+    min-height: 0;
+}
+
+
+/* =====================================================
+   ACTIVITY CARD
+===================================================== */
+
+.mpmd-calendar-card {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 26px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffaf1,
+            #f3dfbd
+        );
+
+    border: 2px solid rgba(166, 120, 75, 0.28);
+
+    box-shadow:
+        0 18px 45px rgba(64, 35, 16, 0.3);
+}
+
+
+/* =====================================================
+   CARD HEADER
+===================================================== */
+
+.mpmd-calendar-card-header {
+    position: relative;
+
+    z-index: 10;
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321b
+        );
+
+    color: white;
+}
+
+.mpmd-calendar-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    font-size: clamp(17px, 1.55vw, 23px);
+
+    font-weight: 900;
+}
+
+.mpmd-calendar-title span {
+    font-size: 27px;
+}
+
+.mpmd-round-counter {
+    padding: 7px 14px;
+
+    border-radius: 25px;
+
+    background: rgba(255, 255, 255, 0.18);
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   CALENDAR BOARD
+===================================================== */
+
+.mpmd-calendar-board {
+    position: relative;
+
+    width: 100%;
+
+    height: 305px;
+
+    padding: 13px 24px 0;
+
+    overflow: hidden;
+}
+
+.mpmd-calendar-board-title {
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    color: #60402a;
+
+    font-size: 17px;
+
+    font-weight: 800;
+}
+
+.mpmd-calendar-board-title span {
+    padding: 4px 11px;
+
+    border-radius: 11px;
+
+    background: #f0dfbd;
+
+    color: #8a5a32;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   CALENDAR + PLAN SIDE PANEL
+===================================================== */
+
+.mpmd-calendar-content-row {
+    width: 100%;
+
+    height: 238px;
+
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) 210px;
+
+    gap: 14px;
+
+    align-items: stretch;
+}
+
+
+/* =====================================================
+   CALENDAR IMAGE
+===================================================== */
+
+.mpmd-calendar-content-row .mpmd-calendar-image-wrap {
+    position: relative;
+
+    width: 100%;
+
+    height: 238px;
+
+    padding: 8px;
+
+    border-radius: 18px;
+
+    background: #fffdf8;
+
+    border: 2px solid rgba(166, 120, 75, 0.28);
+
+    box-shadow:
+        0 7px 18px rgba(87, 52, 29, 0.12);
+
+    overflow: hidden;
+}
+
+.mpmd-calendar-image {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: contain;
+
+    border-radius: 13px;
+}
+
+
+/* =====================================================
+   PLAN SIDE AREA
+===================================================== */
+
+.mpmd-calendar-plan-area {
+    width: 100%;
+
+    height: 238px;
+
+    padding: 3px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 8px;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   PLAN TITLE
+===================================================== */
+
+.mpmd-plan-column-title {
+    flex-shrink: 0;
+
+    padding: 7px 8px;
+
+    border-radius: 11px;
+
+    background: #ead4ad;
+
+    color: #674324;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   EMPTY PLAN
+===================================================== */
+
+.mpmd-empty-plan {
+    min-height: 55px;
+
+    padding: 10px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 2px dashed #d4b991;
+
+    border-radius: 13px;
+
+    color: #9a7857;
+
+    background: rgba(255, 250, 241, 0.55);
+
+    text-align: center;
+
+    font-size: 9px;
+
+    line-height: 1.35;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   PLACED PLAN
+===================================================== */
+
+.mpmd-placed-plan {
+    width: 100%;
+
+    min-height: 58px;
+
+    flex-shrink: 0;
+
+    padding: 7px 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7ecdc
+        );
+
+    border: 2px solid #d8b48a;
+
+    box-shadow:
+        0 4px 12px rgba(87, 52, 29, 0.15);
+
+    animation: mpmdPlanIn 0.35s ease;
+}
+
+@keyframes mpmdPlanIn {
+    from {
+        opacity: 0;
+
+        transform:
+            translateX(18px)
+            scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateX(0)
+            scale(1);
+    }
+}
+
+
+/* =====================================================
+   PLAN EMOJI
+===================================================== */
+
+.mpmd-placed-plan-emoji {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #f0dfbd;
+
+    font-size: 21px;
+}
+
+
+/* =====================================================
+   PLAN TEXT
+===================================================== */
+
+.mpmd-placed-plan-text {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 2px;
+}
+
+.mpmd-placed-plan-text strong {
+    color: #5a3620;
+
+    font-size: 11px;
+
+    font-weight: 900;
+}
+
+.mpmd-placed-plan-text span {
+    color: #8a5a32;
+
+    font-size: 9px;
+
+    line-height: 1.2;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   OPTIONS
+===================================================== */
+
+.mpmd-options-section {
+    position: relative;
+
+    z-index: 5;
+
+    width: calc(100% - 350px);
+
+    margin-left: 350px;
+
+    padding: 7px 24px 0;
+}
+
+.mpmd-options-title {
+    margin-bottom: 8px;
+
+    color: #60402a;
+
+    text-align: center;
+
+    font-size: 15px;
+
+    font-weight: 900;
+}
+
+.mpmd-options-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 10px;
+}
+
+
+/* =====================================================
+   OPTION CARD
+===================================================== */
+
+.mpmd-option-card {
+    min-width: 0;
+
+    height: 92px;
+
+    padding: 8px 6px;
+
+    border: 2px solid #dfc6a3;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7ecdc
+        );
+
+    color: #5a3620;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    box-shadow:
+        0 5px 0 rgba(122, 82, 44, 0.16);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.mpmd-option-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #b88a55;
+}
+
+.mpmd-option-card:disabled {
+    cursor: default;
+}
+
+.mpmd-option-emoji {
+    font-size: 29px;
+
+    line-height: 1;
+}
+
+.mpmd-option-name {
+    max-width: 100%;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    text-align: center;
+
+    line-height: 1.2;
+}
+
+.mpmd-option-selected,
+.mpmd-option-correct {
+    border-color: #7ba65b;
+
+    background: #e5f2d9;
+
+    box-shadow:
+        0 5px 0 rgba(80, 124, 48, 0.22);
+}
+
+.mpmd-option-disabled {
+    opacity: 0.5;
+}
+
+
+/* =====================================================
+   TEACHER AREA
+===================================================== */
+
+.mpmd-activity-teacher-area {
+    position: absolute;
+
+    z-index: 30;
+
+    left: 10px;
+
+    bottom: 8px;
+
+    width: 350px;
+
+    height: 165px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    pointer-events: none;
+}
+
+.mpmd-activity-teacher-image {
+    width: 120px;
+
+    height: 160px;
+
+    object-fit: contain;
+
+    object-position: bottom;
+
+    flex-shrink: 0;
+
+    display: block;
+}
+
+
+/* =====================================================
+   ACTIVITY BUBBLE
+===================================================== */
+
+.mpmd-activity-bubble {
+    position: relative;
+
+    width: 225px;
+
+    min-height: 120px;
+
+    margin-left: -10px;
+
+    margin-bottom: 18px;
+
+    padding: 14px 15px;
+
+    border-radius: 24px;
+
+    pointer-events: auto;
+}
+
+.mpmd-activity-bubble::before {
+    left: -14px;
+
+    bottom: 34px;
+
+    width: 28px;
+    height: 28px;
+}
+
+
+/* =====================================================
+   ROUND LABEL
+===================================================== */
+
+.mpmd-round-label {
+    display: inline-block;
+
+    margin-bottom: 6px;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    background: #f0dfbd;
+
+    color: #75512e;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.7px;
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.mpmd-activity-message {
+    margin: 0;
+
+    color: #432d1e;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   SIDE FEEDBACK
+===================================================== */
+
+.mpmd-side-feedback {
+    position: absolute;
+
+    z-index: 40;
+
+    right: 18px;
+
+    top: 345px;
+
+    width: 205px;
+
+    min-height: 76px;
+
+    padding: 11px 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 20px rgba(74, 45, 24, 0.16);
+
+    animation:
+        mpmdSideFeedbackIn 0.3s ease;
+}
+
+.mpmd-side-feedback-icon {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 21px;
+}
+
+.mpmd-side-feedback-content {
+    min-width: 0;
+}
+
+.mpmd-side-feedback-content strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-size: 12px;
+
+    font-weight: 900;
+}
+
+.mpmd-side-feedback-content p {
+    margin: 0;
+
+    font-size: 9px;
+
+    line-height: 1.35;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   SUCCESS FEEDBACK
+===================================================== */
+
+.mpmd-side-feedback-success {
+    background:
+        linear-gradient(
+            180deg,
+            #f2f9e9,
+            #e1f0d3
+        );
+
+    border: 2px solid #a8cc87;
+
+    color: #4c7136;
+}
+
+.mpmd-side-feedback-success
+.mpmd-side-feedback-icon {
+    background: #fff0b9;
+
+    border: 2px solid #e1b94f;
+}
+
+
+/* =====================================================
+   WRONG FEEDBACK
+===================================================== */
+
+.mpmd-side-feedback-wrong {
+    background:
+        linear-gradient(
+            180deg,
+            #fff4ed,
+            #ffe4d9
+        );
+
+    border: 2px solid #e0aa8d;
+
+    color: #9b4e39;
+}
+
+.mpmd-side-feedback-wrong
+.mpmd-side-feedback-icon {
+    background: #ffe1d8;
+
+    border: 2px solid #db9b7e;
+}
+
+
+/* =====================================================
+   FEEDBACK ANIMATION
+===================================================== */
+
+@keyframes mpmdSideFeedbackIn {
+    from {
+        opacity: 0;
+
+        transform:
+            translateX(15px)
+            scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateX(0)
+            scale(1);
+    }
+}
+
+
+/* =====================================================
+   SCORE
+===================================================== */
+
+.mpmd-score-counter {
+    position: absolute;
+
+    z-index: 45;
+
+    right: 20px;
+
+    bottom: 18px;
+
+    width: 82px;
+
+    height: 91px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 6px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 253, 248, 0.97),
+            rgba(248, 241, 230, 0.97)
+        );
+
+    border: 2px solid rgba(226, 173, 66, 0.75);
+
+    border-radius: 21px;
+
+    box-shadow:
+        0 8px 24px rgba(68, 45, 25, 0.18),
+        inset 0 2px 0 rgba(255, 255, 255, 0.8);
+
+    pointer-events: none;
+}
+
+.mpmd-score-icon {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ffe3a0;
+
+    border: 2px solid #e2ad42;
+
+    font-size: 21px;
+}
+
+.mpmd-score-counter strong {
+    color: #3f2d21;
+
+    font-size: 20px;
+
+    line-height: 1;
+
+    font-weight: 900;
+}
+
+.mpmd-score-counter span {
+    margin-top: 4px;
+
+    color: #765f50;
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   POPUP OVERLAY
+===================================================== */
+
+.mpmd-popup-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(28, 18, 10, 0.48);
+
+    backdrop-filter: blur(7px);
+}
+
+
+/* =====================================================
+   POPUP
+===================================================== */
+
+.mpmd-success-popup {
+    width: min(460px, 88vw);
+
+    padding: 30px 35px;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f8ead5
+        );
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.35);
+
+    animation:
+        mpmdPopupIn 0.35s ease;
+}
+
+@keyframes mpmdPopupIn {
+    from {
+        opacity: 0;
+
+        transform:
+            scale(0.8)
+            translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+.mpmd-popup-plan-icon {
+    width: 78px;
+    height: 78px;
+
+    margin: 0 auto 12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 22px;
+
+    background: #f3dfbd;
+
+    font-size: 42px;
+}
+
+.mpmd-popup-found-label {
+    display: inline-block;
+
+    padding: 6px 14px;
+
+    border-radius: 30px;
+
+    background: #dff0d2;
+
+    color: #557d39;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+.mpmd-success-popup h2 {
+    margin: 14px 0 10px;
+
+    color: #432a19;
+
+    font-size: 28px;
+
+    font-weight: 900;
+}
+
+.mpmd-success-popup p {
+    margin: 0;
+
+    color: #765741;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    font-weight: 600;
+}
+
+.mpmd-popup-sentence {
+    margin-top: 15px;
+
+    padding: 12px 15px;
+
+    border-radius: 14px;
+
+    background: #f0dfbd;
+
+    color: #5a3620;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    font-weight: 800;
+}
+
+.mpmd-popup-bottom {
+    margin-top: 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.mpmd-popup-count {
+    color: #60402a;
+
+    font-weight: 800;
+}
+
+.mpmd-popup-next {
+    border: none;
+
+    padding: 13px 22px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 0 rgba(67, 36, 17, 0.45);
+}
+
+
+/* =====================================================
+   LARGE TABLET
+===================================================== */
+
+@media (max-width: 1150px) {
+
+    .mpmd-main-container {
+        width: 95vw;
+    }
+
+    .mpmd-activity-layout {
+        width: 94%;
+    }
+
+    .mpmd-calendar-content-row {
+        grid-template-columns:
+            minmax(0, 1fr) 185px;
+
+        gap: 10px;
+    }
+
+    .mpmd-options-section {
+        width: calc(100% - 325px);
+
+        margin-left: 325px;
+
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .mpmd-activity-teacher-area {
+        width: 325px;
+
+        height: 155px;
+    }
+
+    .mpmd-activity-teacher-image {
+        width: 108px;
+
+        height: 150px;
+    }
+
+    .mpmd-activity-bubble {
+        width: 210px;
+
+        min-height: 112px;
+
+        padding: 13px 14px;
+    }
+
+    .mpmd-option-card {
+        height: 88px;
+    }
+
+    .mpmd-option-emoji {
+        font-size: 27px;
+    }
+
+    .mpmd-option-name {
+        font-size: 11px;
+    }
+
+    .mpmd-score-counter {
+        right: 15px;
+
+        bottom: 15px;
+    }
+
+    .mpmd-side-feedback {
+        right: 14px;
+
+        top: 335px;
+
+        width: 190px;
+
+        min-height: 70px;
+    }
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .mpmd-main-container {
+        height: 94vh;
+
+        margin: 3vh auto;
+    }
+
+    .mpmd-header {
+        padding-top: 75px;
+    }
+
+    .mpmd-activity-layout {
+        top: 145px;
+
+        height: calc(100% - 160px);
+
+        overflow-y: auto;
+    }
+
+    .mpmd-calendar-card {
+        min-height: 850px;
+
+        height: auto;
+
+        overflow: visible;
+    }
+
+    .mpmd-calendar-board {
+        height: 420px;
+    }
+
+    .mpmd-calendar-content-row {
+        height: 350px;
+
+        grid-template-columns:
+            minmax(0, 1fr) 180px;
+    }
+
+    .mpmd-calendar-content-row
+    .mpmd-calendar-image-wrap {
+
+        height: 350px;
+    }
+
+    .mpmd-calendar-plan-area {
+        height: 350px;
+    }
+
+    .mpmd-options-section {
+        width: 100%;
+
+        margin-left: 0;
+
+        padding: 10px 18px 180px;
+    }
+
+    .mpmd-options-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .mpmd-activity-teacher-area {
+        position: absolute;
+
+        left: 18px;
+
+        bottom: 15px;
+
+        width: 335px;
+
+        height: 155px;
+    }
+
+    .mpmd-activity-teacher-image {
+        width: 110px;
+
+        height: 150px;
+    }
+
+    .mpmd-activity-bubble {
+        width: 215px;
+
+        min-height: 112px;
+
+        padding: 13px 14px;
+    }
+
+    .mpmd-score-counter {
+        right: 15px;
+
+        bottom: 15px;
+
+        width: 78px;
+
+        height: 86px;
+    }
+
+    .mpmd-side-feedback {
+        position: relative;
+
+        top: auto;
+        right: auto;
+
+        width: calc(100% - 36px);
+
+        min-height: 58px;
+
+        margin: 8px auto 0;
+
+        z-index: 35;
+    }
+}
+
+
+/* =====================================================
+   SMALL TABLET
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .mpmd-top-button {
+        top: 18px;
+
+        padding: 10px 15px;
+
+        font-size: 12px;
+    }
+
+    .mpmd-back-button {
+        left: 14px;
+    }
+
+    .mpmd-skip-button {
+        right: 14px;
+    }
+
+    .mpmd-header {
+        padding: 68px 15px 0;
+    }
+
+    .mpmd-header h1 {
+        font-size: 26px;
+    }
+
+    .mpmd-header p {
+        font-size: 12px;
+    }
+
+    .mpmd-activity-layout {
+        top: 130px;
+
+        width: 96%;
+
+        height: calc(100% - 140px);
+    }
+
+    .mpmd-calendar-board {
+        height: 465px;
+
+        padding: 10px 14px 0;
+    }
+
+    .mpmd-calendar-board-title {
+        font-size: 13px;
+
+        height: 30px;
+    }
+
+    .mpmd-calendar-content-row {
+        height: 395px;
+
+        grid-template-columns:
+            minmax(0, 1fr) 145px;
+
+        gap: 8px;
+    }
+
+    .mpmd-calendar-content-row
+    .mpmd-calendar-image-wrap {
+
+        height: 395px;
+
+        padding: 6px;
+    }
+
+    .mpmd-calendar-plan-area {
+        height: 395px;
+
+        gap: 7px;
+    }
+
+    .mpmd-plan-column-title {
+        font-size: 9px;
+
+        padding: 6px;
+    }
+
+    .mpmd-empty-plan {
+        font-size: 8px;
+
+        min-height: 50px;
+    }
+
+    .mpmd-placed-plan {
+        min-height: 56px;
+
+        padding: 6px;
+    }
+
+    .mpmd-placed-plan-emoji {
+        width: 32px;
+        height: 32px;
+
+        font-size: 18px;
+    }
+
+    .mpmd-placed-plan-text strong {
+        font-size: 9px;
+    }
+
+    .mpmd-placed-plan-text span {
+        font-size: 8px;
+    }
+
+    .mpmd-options-section {
+        padding: 10px 14px 175px;
+    }
+
+    .mpmd-option-card {
+        height: 82px;
+    }
+
+    .mpmd-option-emoji {
+        font-size: 25px;
+    }
+
+    .mpmd-option-name {
+        font-size: 10px;
+    }
+
+    .mpmd-activity-teacher-area {
+        width: 305px;
+
+        height: 140px;
+    }
+
+    .mpmd-activity-teacher-image {
+        width: 98px;
+
+        height: 135px;
+    }
+
+    .mpmd-activity-bubble {
+        width: 205px;
+
+        min-height: 105px;
+
+        padding: 12px 13px;
+    }
+
+    .mpmd-round-label {
+        margin-bottom: 5px;
+
+        padding: 4px 9px;
+
+        font-size: 8px;
+    }
+
+    .mpmd-activity-message {
+        font-size: 11px;
+
+        line-height: 1.35;
+    }
+
+    .mpmd-score-counter {
+        bottom: 10px;
+
+        right: 8px;
+
+        width: 70px;
+
+        height: 80px;
+    }
+
+    .mpmd-score-icon {
+        width: 30px;
+        height: 30px;
+
+        font-size: 17px;
+    }
+
+    .mpmd-score-counter strong {
+        font-size: 17px;
+    }
+
+    .mpmd-score-counter span {
+        font-size: 8px;
+    }
+
+    .mpmd-side-feedback {
+        width: calc(100% - 28px);
+
+        min-height: 54px;
+
+        padding: 8px 10px;
+
+        gap: 8px;
+
+        margin-top: 8px;
+    }
+
+    .mpmd-side-feedback-icon {
+        width: 32px;
+        height: 32px;
+
+        font-size: 17px;
+    }
+
+    .mpmd-side-feedback-content strong {
+        font-size: 10px;
+    }
+
+    .mpmd-side-feedback-content p {
+        font-size: 8px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .mpmd-main-container {
+        width: 100vw;
+
+        height: 100vh;
+
+        margin: 0;
+
+        border-radius: 0;
+    }
+
+    .mpmd-header {
+        padding-top: 65px;
+    }
+
+    .mpmd-header h1 {
+        font-size: 23px;
+    }
+
+    .mpmd-header p {
+        font-size: 11px;
+    }
+
+    .mpmd-calendar-card-header {
+        height: 52px;
+
+        padding: 0 12px;
+    }
+
+    .mpmd-calendar-title {
+        font-size: 14px;
+    }
+
+    .mpmd-calendar-title span {
+        font-size: 21px;
+    }
+
+    .mpmd-round-counter {
+        padding: 5px 8px;
+
+        font-size: 9px;
+    }
+
+    .mpmd-calendar-board {
+        height: 405px;
+
+        padding: 8px 10px 0;
+    }
+
+    .mpmd-calendar-board-title {
+        height: 27px;
+
+        font-size: 12px;
+    }
+
+    .mpmd-calendar-content-row {
+        height: 340px;
+
+        grid-template-columns:
+            minmax(0, 1fr) 115px;
+
+        gap: 7px;
+    }
+
+    .mpmd-calendar-content-row
+    .mpmd-calendar-image-wrap {
+
+        height: 340px;
+
+        padding: 5px;
+    }
+
+    .mpmd-calendar-plan-area {
+        height: 340px;
+
+        gap: 6px;
+    }
+
+    .mpmd-plan-column-title {
+        font-size: 8px;
+
+        padding: 5px 3px;
+    }
+
+    .mpmd-empty-plan {
+        padding: 7px;
+
+        min-height: 46px;
+
+        font-size: 7px;
+    }
+
+    .mpmd-placed-plan {
+        min-height: 54px;
+
+        padding: 5px;
+
+        gap: 5px;
+
+        border-radius: 10px;
+    }
+
+    .mpmd-placed-plan-emoji {
+        width: 28px;
+        height: 28px;
+
+        border-radius: 8px;
+
+        font-size: 16px;
+    }
+
+    .mpmd-placed-plan-text {
+        gap: 1px;
+    }
+
+    .mpmd-placed-plan-text strong {
+        font-size: 8px;
+    }
+
+    .mpmd-placed-plan-text span {
+        font-size: 7px;
+
+        line-height: 1.15;
+    }
+
+    .mpmd-options-section {
+        padding: 8px 10px 155px;
+    }
+
+    .mpmd-options-title {
+        font-size: 13px;
+
+        margin-bottom: 7px;
+    }
+
+    .mpmd-options-grid {
+        gap: 8px;
+    }
+
+    .mpmd-option-card {
+        height: 78px;
+
+        border-radius: 14px;
+    }
+
+    .mpmd-option-emoji {
+        font-size: 23px;
+    }
+
+    .mpmd-option-name {
+        font-size: 9px;
+    }
+
+    .mpmd-activity-teacher-area {
+        left: 8px;
+
+        bottom: 8px;
+
+        width: 285px;
+
+        height: 125px;
+    }
+
+    .mpmd-activity-teacher-image {
+        width: 82px;
+
+        height: 120px;
+    }
+
+    .mpmd-activity-bubble {
+        width: 195px;
+
+        min-height: 98px;
+
+        margin-left: -7px;
+
+        margin-bottom: 10px;
+
+        padding: 10px 11px;
+
+        border-radius: 20px;
+    }
+
+    .mpmd-activity-bubble::before {
+        left: -12px;
+
+        bottom: 29px;
+
+        width: 24px;
+        height: 24px;
+    }
+
+    .mpmd-round-label {
+        margin-bottom: 4px;
+
+        padding: 3px 8px;
+
+        font-size: 7px;
+    }
+
+    .mpmd-activity-message {
+        font-size: 10px;
+
+        line-height: 1.3;
+    }
+
+    .mpmd-score-counter {
+        right: 8px;
+
+        bottom: 8px;
+
+        width: 65px;
+
+        height: 75px;
+    }
+
+    .mpmd-score-icon {
+        width: 28px;
+        height: 28px;
+
+        font-size: 16px;
+    }
+
+    .mpmd-score-counter strong {
+        font-size: 16px;
+    }
+
+    .mpmd-score-counter span {
+        font-size: 8px;
+    }
+
+    .mpmd-side-feedback {
+        width: calc(100% - 20px);
+
+        min-height: 50px;
+
+        padding: 7px 9px;
+
+        gap: 7px;
+    }
+
+    .mpmd-side-feedback-icon {
+        width: 28px;
+        height: 28px;
+
+        font-size: 15px;
+    }
+
+    .mpmd-side-feedback-content strong {
+        font-size: 9px;
+    }
+
+    .mpmd-side-feedback-content p {
+        font-size: 7px;
+
+        line-height: 1.3;
+    }
+
+    .mpmd-popup-bottom {
+        flex-direction: column;
+    }
+
+    .mpmd-popup-next {
+        width: 100%;
+    }
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 430px) {
+
+    .mpmd-header h1 {
+        font-size: 20px;
+    }
+
+    .mpmd-header p {
+        font-size: 10px;
+    }
+
+    .mpmd-calendar-board {
+        height: 375px;
+    }
+
+    .mpmd-calendar-content-row {
+        height: 315px;
+
+        grid-template-columns:
+            minmax(0, 1fr) 105px;
+    }
+
+    .mpmd-calendar-content-row
+    .mpmd-calendar-image-wrap {
+
+        height: 315px;
+    }
+
+    .mpmd-calendar-plan-area {
+        height: 315px;
+    }
+
+    .mpmd-placed-plan {
+        min-height: 50px;
+
+        padding: 4px;
+    }
+
+    .mpmd-placed-plan-emoji {
+        width: 25px;
+        height: 25px;
+
+        font-size: 14px;
+    }
+
+    .mpmd-placed-plan-text strong {
+        font-size: 7px;
+    }
+
+    .mpmd-placed-plan-text span {
+        font-size: 6.5px;
+    }
+
+    .mpmd-option-card {
+        height: 72px;
+    }
+
+    .mpmd-option-emoji {
+        font-size: 21px;
+    }
+
+    .mpmd-option-name {
+        font-size: 8px;
+    }
+
+    .mpmd-activity-teacher-area {
+        width: 265px;
+
+        height: 115px;
+    }
+
+    .mpmd-activity-teacher-image {
+        width: 75px;
+
+        height: 110px;
+    }
+
+    .mpmd-activity-bubble {
+        width: 185px;
+
+        min-height: 90px;
+
+        padding: 9px 10px;
+    }
+
+    .mpmd-activity-message {
+        font-size: 9px;
+    }
+
+    .mpmd-score-counter {
+        right: 7px;
+
+        bottom: 7px;
+
+        width: 60px;
+
+        height: 70px;
+    }
+
+    .mpmd-score-icon {
+        width: 25px;
+        height: 25px;
+
+        font-size: 14px;
+    }
+
+    .mpmd-score-counter strong {
+        font-size: 15px;
+    }
+
+    .mpmd-score-counter span {
+        font-size: 7px;
+    }
+
+    .mpmd-side-feedback {
+        width: calc(100% - 14px);
+
+        min-height: 46px;
+
+        padding: 6px 8px;
+    }
+
+    .mpmd-side-feedback-icon {
+        width: 25px;
+        height: 25px;
+
+        font-size: 13px;
+    }
+
+    .mpmd-side-feedback-content strong {
+        font-size: 8px;
+    }
+
+    .mpmd-side-feedback-content p {
+        font-size: 6.5px;
+    }
+}

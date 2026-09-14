@@ -5,6 +5,8 @@ import teacher2 from "./assets/teacher2.png";
 import teacher3 from "./assets/teacher3.png";
 import teacher4 from "./assets/teacher4.png";
 
+import confetti from "canvas-confetti";
+import yaySound from "./assets/yay.mp3";
 
 
 function ConversationActivity({
@@ -57,6 +59,83 @@ function ConversationActivity({
 
     const [teacherRemark,setTeacherRemark]=useState("");
 
+
+    /* ================= CONFETTI ================= */
+
+    const celebrate = () => {
+
+        confetti({
+
+            particleCount: 130,
+
+            spread: 85,
+
+            startVelocity: 35,
+
+            origin: {
+                x: 0.5,
+                y: 0.65
+            }
+
+        });
+
+        setTimeout(() => {
+
+            confetti({
+
+                particleCount: 70,
+
+                spread: 100,
+
+                origin: {
+                    x: 0.15,
+                    y: 0.65
+                }
+
+            });
+
+        }, 150);
+
+        setTimeout(() => {
+
+            confetti({
+
+                particleCount: 70,
+
+                spread: 100,
+
+                origin: {
+                    x: 0.85,
+                    y: 0.65
+                }
+
+            });
+
+        }, 300);
+
+    };
+
+
+    /* ================= YAY SOUND ================= */
+
+    const playYaySound = () => {
+
+        const audio = new Audio(yaySound);
+
+        audio.volume = 1;
+
+        audio.play().catch((err) => {
+
+            console.log(
+                "Yay sound could not play:",
+                err
+            );
+
+        });
+
+    };
+
+
     /* ================= STOP TEACHER ================= */
 
     const stopTeacher=()=>{
@@ -69,6 +148,7 @@ function ConversationActivity({
 
     };
 
+
     /* Stop speech when component closes */
 
     useEffect(()=>{
@@ -80,6 +160,7 @@ function ConversationActivity({
         };
 
     },[]);
+
 
     /* Teacher animation */
 
@@ -106,6 +187,7 @@ function ConversationActivity({
         return ()=>clearInterval(timer);
 
     },[isSpeaking]);
+
 
     /* ================= TEACHER SPEAK ================= */
 
@@ -181,6 +263,7 @@ function ConversationActivity({
 
     };
 
+
     useEffect(()=>{
 
         if(question?.question){
@@ -191,7 +274,8 @@ function ConversationActivity({
 
     },[question]);
 
-        /* ================= MIC ================= */
+
+    /* ================= MIC ================= */
 
     const startListening = () => {
 
@@ -234,7 +318,6 @@ function ConversationActivity({
     };
 
 
-
     /* ================= SUBMIT ================= */
 
     const handleSubmit = async (spokenText) => {
@@ -247,7 +330,7 @@ function ConversationActivity({
 
             const res = await fetch(
 
-                "http://localhost:5000/api/chat",
+                `${import.meta.env.VITE_API_URL}/api/chat`,
 
                 {
 
@@ -278,6 +361,17 @@ function ConversationActivity({
             );
 
             const data = await res.json();
+
+
+            /* ==========================
+               CORRECT ANSWER
+               CONFETTI + YAY
+            ========================== */
+
+            celebrate();
+
+            playYaySound();
+
 
             setHistory(prev => [
 
@@ -369,7 +463,8 @@ function ConversationActivity({
 
     };
 
-        return(
+
+    return(
 
         <div className="conversation-container">
 
@@ -423,6 +518,7 @@ function ConversationActivity({
 
                 </div>
 
+
                 {/* ================= TEACHER ================= */}
 
                 <div className="conversation-teacher">
@@ -467,6 +563,7 @@ function ConversationActivity({
 
                 </div>
 
+
                 {/* ================= MIC ================= */}
 
                 <div className="conversation-buttons">
@@ -498,6 +595,7 @@ function ConversationActivity({
                     </button>
 
                 </div>
+
 
                 {/* ================= FINISH ================= */}
 

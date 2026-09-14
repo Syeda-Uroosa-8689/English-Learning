@@ -1,0 +1,2112 @@
+/* =====================================================
+   CALENDAR ESCAPE ROOM
+===================================================== */
+
+.calendar-escape-page {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    padding: 0;
+
+    font-family: "Poppins", sans-serif;
+
+    background: #5f4637;
+}
+
+
+/* =====================================================
+   PAGE OVERLAY
+===================================================== */
+
+.calendar-escape-page::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(48, 30, 20, 0.28);
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.calendar-escape-card {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(1420px, 92vw);
+    height: min(900px, 92vh);
+
+    margin: 4vh auto;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background-image: url("../../assets/calenderbg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border: 2px solid rgba(255, 255, 255, 0.75);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.4);
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =====================================================
+   DECORATIVE PATTERN
+===================================================== */
+
+.calendar-escape-card::before {
+    content: "✦  ♢  ✦  ♢  ✦  ♢  ✦  ♢";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 8px;
+
+    color: rgba(151, 110, 66, 0.13);
+
+    font-size: 42px;
+
+    letter-spacing: 40px;
+
+    white-space: nowrap;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.escape-header {
+    position: relative;
+
+    z-index: 10;
+
+    min-height: 78px;
+    height: 78px;
+
+    display: grid;
+
+    grid-template-columns:
+        160px
+        1fr
+        160px;
+
+    align-items: center;
+
+    padding: 0 25px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f0dfc4
+        );
+
+    border-bottom: 2px solid rgba(154, 113, 72, 0.3);
+}
+
+
+.escape-title {
+    text-align: center;
+}
+
+
+.escape-title-main {
+    margin: 0;
+
+    color: #382113;
+
+    font-size: clamp(25px, 2.5vw, 38px);
+
+    font-weight: 900;
+
+    letter-spacing: -0.5px;
+
+    text-transform: none;
+
+    text-shadow: none;
+}
+
+
+.escape-title-sub {
+    margin-top: 4px;
+
+    color: #745846;
+
+    font-size: clamp(11px, 1vw, 15px);
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   NAV BUTTONS
+===================================================== */
+
+.escape-nav-btn {
+    border: none;
+
+    border-radius: 16px;
+
+    padding: 13px 22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #704927,
+            #54321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.18),
+        0 6px 0 rgba(58, 31, 13, 0.3);
+
+    transition: 0.2s ease;
+}
+
+
+.escape-nav-btn:hover {
+    transform: translateY(-2px);
+}
+
+
+.escape-nav-btn:active {
+    transform: translateY(2px);
+
+    box-shadow:
+        0 3px 0 rgba(58, 31, 13, 0.3);
+}
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.escape-intro-content {
+    position: relative;
+
+    z-index: 2;
+
+    flex: 1;
+
+    display: grid;
+
+    grid-template-columns: 38% 62%;
+
+    gap: 18px;
+
+    padding: 20px 28px 10px;
+
+    min-height: 0;
+}
+
+
+/* =====================================================
+   TEACHER SECTION
+===================================================== */
+
+.escape-teacher-section {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 0;
+}
+
+
+.escape-teacher {
+    width: 220px;
+
+    height: 330px;
+
+    object-fit: contain;
+
+    object-position: bottom;
+
+    display: block;
+
+    filter:
+        drop-shadow(
+            0 10px 12px
+            rgba(50, 25, 10, 0.2)
+        );
+}
+
+
+/* =====================================================
+   TEACHER NAME
+===================================================== */
+
+.escape-teacher-name {
+    position: relative;
+
+    z-index: 5;
+
+    margin-top: -3px;
+
+    width: 190px;
+
+    padding: 11px 18px;
+
+    box-sizing: border-box;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321c
+        );
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.15),
+        0 7px 18px rgba(72, 41, 20, 0.28);
+}
+
+
+/* =====================================================
+   SPEECH BUBBLE
+===================================================== */
+
+.escape-speech {
+    position: relative;
+
+    width: min(350px, 100%);
+
+    margin-top: 15px;
+
+    padding: 20px 22px;
+
+    box-sizing: border-box;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7ecdc
+        );
+
+    border: 2px solid rgba(154, 113, 72, 0.35);
+
+    border-radius: 28px;
+
+    color: #3f2a1c;
+
+    box-shadow:
+        0 10px 30px rgba(88, 51, 24, 0.15);
+
+    text-align: center;
+}
+
+
+.escape-speech::before {
+    content: "";
+
+    position: absolute;
+
+    left: -17px;
+
+    bottom: 42px;
+
+    width: 30px;
+    height: 30px;
+
+    background: #fbf4e8;
+
+    border-left: 2px solid rgba(154, 113, 72, 0.35);
+
+    border-bottom: 2px solid rgba(154, 113, 72, 0.35);
+
+    transform: rotate(45deg);
+
+    z-index: -1;
+}
+
+
+.escape-speech strong {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #6d4729;
+
+    font-size: 18px;
+
+    font-weight: 900;
+}
+
+
+.escape-speech p {
+    margin: 0;
+
+    color: #432d1e;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    line-height: 1.45;
+}
+
+
+/* =====================================================
+   SPEECH BUTTON
+===================================================== */
+
+.escape-speech-btn {
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    width: 34px;
+    height: 34px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f4dfbf;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    z-index: 3;
+}
+
+
+.escape-speech-btn:hover {
+    transform: scale(1.08);
+}
+
+
+/* =====================================================
+   CLUE LABEL
+===================================================== */
+
+.clue-label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #9b6637;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.8px;
+
+    text-align: left;
+}
+
+
+/* =====================================================
+   ROOM PREVIEW
+===================================================== */
+
+.escape-room-preview {
+    position: relative;
+
+    min-width: 0;
+    min-height: 0;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background: #ead4b0;
+
+    border: 2px solid rgba(166, 120, 75, 0.28);
+
+    box-shadow:
+        0 12px 30px rgba(87, 52, 29, 0.2);
+}
+
+
+/* =====================================================
+   ROOM BACKGROUND
+===================================================== */
+
+.escape-room-bg {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* =====================================================
+   ESCAPE DOOR
+===================================================== */
+
+.escape-door {
+    position: absolute;
+
+    left: 34%;
+    bottom: 7%;
+
+    width: 30%;
+    max-width: 300px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 10px 12px
+            rgba(74, 47, 26, 0.25)
+        );
+
+    transition: 0.25s ease;
+}
+
+
+.escape-door:hover {
+    transform: scale(1.03);
+}
+
+
+/* =====================================================
+   WALL CALENDAR
+===================================================== */
+
+.escape-wall-calendar {
+    position: absolute;
+
+    right: 7%;
+    top: 8%;
+
+    width: 21%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 7px 9px
+            rgba(74, 47, 26, 0.2)
+        );
+
+    transition: 0.2s ease;
+}
+
+
+.escape-wall-calendar:hover {
+    transform: scale(1.05);
+}
+
+
+/* =====================================================
+   CLOCK
+===================================================== */
+
+.escape-clock {
+    position: absolute;
+
+    left: 7%;
+    top: 9%;
+
+    width: 11%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 7px 9px
+            rgba(74, 47, 26, 0.2)
+        );
+}
+
+
+/* =====================================================
+   DESK CALENDAR
+===================================================== */
+
+.escape-desk-calendar {
+    position: absolute;
+
+    right: 17%;
+    bottom: 12%;
+
+    width: 17%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 7px 9px
+            rgba(74, 47, 26, 0.2)
+        );
+}
+
+
+/* =====================================================
+   LOCK GLOW
+===================================================== */
+
+.escape-lock-glow {
+    position: absolute;
+
+    left: 47%;
+    bottom: 26%;
+
+    font-size: 45px;
+
+    filter:
+        drop-shadow(
+            0 0 10px
+            rgba(196, 147, 93, 0.8)
+        );
+
+    animation: lockPulse 1.8s infinite;
+}
+
+
+@keyframes lockPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+
+/* =====================================================
+   ROOM PREVIEW OVERLAY
+===================================================== */
+
+.escape-preview-overlay {
+    position: absolute;
+
+    left: 20px;
+    bottom: 20px;
+
+    padding: 11px 17px;
+
+    background:
+        rgba(63, 39, 24, 0.88);
+
+    color: white;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border: 2px solid #c4935d;
+
+    box-shadow:
+        0 6px 15px rgba(45, 25, 12, 0.18);
+}
+
+
+.escape-preview-overlay span {
+    font-size: 25px;
+}
+
+
+.escape-preview-overlay b {
+    font-size: 16px;
+}
+
+
+.escape-preview-overlay small {
+    color: #f0d5a5;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   INTRO BOTTOM
+===================================================== */
+
+.escape-intro-bottom {
+    position: relative;
+
+    z-index: 5;
+
+    min-height: 92px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 18px;
+
+    padding: 10px 28px 18px;
+}
+
+
+/* =====================================================
+   INTRO STATS
+===================================================== */
+
+.escape-stat {
+    min-width: 130px;
+
+    padding: 13px 18px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffaf0,
+            #f1ddbd
+        );
+
+    color: #4c3020;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border: 2px solid #d9bb91;
+
+    box-shadow:
+        0 6px 15px rgba(92, 59, 31, 0.1);
+}
+
+
+.escape-stat > span {
+    font-size: 28px;
+}
+
+
+.escape-stat b {
+    display: block;
+
+    color: #4c3020;
+
+    font-size: 20px;
+}
+
+
+.escape-stat small {
+    display: block;
+
+    color: #745846;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   START BUTTON
+===================================================== */
+
+.escape-start-btn {
+    min-width: 260px;
+
+    border: none;
+
+    padding: 17px 32px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 22px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.25),
+        0 7px 0 rgba(67, 36, 17, 0.5);
+
+    transition: 0.2s ease;
+}
+
+
+.escape-start-btn:hover {
+    transform: translateY(-3px);
+}
+
+
+.escape-start-btn:active {
+    transform: translateY(2px);
+
+    box-shadow:
+        0 4px 0 rgba(67, 36, 17, 0.5);
+}
+
+
+/* =====================================================
+   ACTIVITY HEADER
+===================================================== */
+
+.activity-card .escape-header {
+    grid-template-columns:
+        150px
+        140px
+        1fr
+        150px;
+}
+
+
+/* =====================================================
+   ROUND BADGE
+===================================================== */
+
+.escape-round {
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321b
+        );
+
+    color: white;
+
+    padding: 10px 14px;
+
+    border-radius: 15px;
+
+    font-weight: 900;
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 0 rgba(67, 36, 17, 0.4);
+}
+
+
+.escape-round span {
+    margin-right: 5px;
+}
+
+
+/* =====================================================
+   GAME LAYOUT
+===================================================== */
+
+.escape-game-layout {
+    position: relative;
+
+    z-index: 2;
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        300px
+        minmax(420px, 1fr)
+        265px;
+
+    gap: 18px;
+
+    padding: 17px 20px 12px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f4e5cb,
+            #e9d0aa
+        );
+}
+
+
+/* =====================================================
+   LEFT SIDE
+===================================================== */
+
+.escape-left {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    min-height: 0;
+}
+
+
+.escape-left .escape-teacher-section {
+    width: 100%;
+
+    justify-content: flex-start;
+}
+
+
+.escape-left .escape-teacher {
+    width: 150px;
+
+    height: 190px;
+}
+
+
+.escape-left .escape-teacher-name {
+    width: auto;
+
+    min-width: 150px;
+
+    padding: 8px 20px;
+
+    font-size: 15px;
+}
+
+
+.escape-left .escape-speech {
+    width: calc(100% - 15px);
+
+    margin-left: 15px;
+
+    padding: 15px 17px;
+}
+
+
+.escape-left .escape-speech p {
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   HINT BOX
+===================================================== */
+
+.escape-hint-box {
+    width: calc(100% - 20px);
+
+    margin-top: 15px;
+
+    padding: 12px 15px;
+
+    box-sizing: border-box;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff4d4,
+            #efd19c
+        );
+
+    border: 2px solid #c29355;
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 6px 14px rgba(92, 59, 31, 0.12);
+}
+
+
+.hint-title {
+    margin-bottom: 4px;
+
+    color: #80552d;
+
+    font-size: 15px;
+
+    font-weight: 900;
+}
+
+
+.escape-hint-box p {
+    margin: 0;
+
+    color: #69441f;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+}
+
+
+/* =====================================================
+   CENTER
+===================================================== */
+
+.escape-center {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 5px 10px;
+}
+
+
+/* =====================================================
+   QUESTION CARD
+===================================================== */
+
+.escape-question-card {
+    width: min(650px, 100%);
+
+    padding: 18px 25px;
+
+    box-sizing: border-box;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffaf0,
+            #f1ddbd
+        );
+
+    border: 2px solid #d1ad7c;
+
+    border-radius: 22px;
+
+    text-align: center;
+
+    color: #4c3020;
+
+    box-shadow:
+        0 10px 25px rgba(92, 59, 31, 0.14);
+}
+
+
+.question-icon {
+    font-size: 32px;
+
+    margin-bottom: 3px;
+}
+
+
+.escape-question-card h2 {
+    margin: 4px 0;
+
+    color: #5a3822;
+
+    font-size: 21px;
+
+    font-weight: 900;
+}
+
+
+.escape-question-card p {
+    margin: 0;
+
+    color: #745846;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   OPTIONS
+===================================================== */
+
+.escape-options {
+    width: min(650px, 100%);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+
+    margin-top: 18px;
+}
+
+
+.escape-option {
+    min-height: 60px;
+
+    border: 2px solid #d0af83;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffaf0,
+            #f0dcbb
+        );
+
+    color: #4c3020;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    padding: 10px 15px;
+
+    box-shadow:
+        0 5px 12px rgba(92, 59, 31, 0.1);
+
+    transition: 0.18s ease;
+}
+
+
+.escape-option:hover:not(:disabled) {
+    transform: translateY(-3px);
+
+    border-color: #a87548;
+
+    box-shadow:
+        0 9px 18px rgba(92, 59, 31, 0.16);
+}
+
+
+.escape-option:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+
+.escape-option:disabled {
+    cursor: default;
+}
+
+
+.option-number {
+    width: 31px;
+    height: 31px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #f0dfbd;
+
+    color: #704927;
+
+    margin-right: 10px;
+
+    font-size: 14px;
+
+    border: 1px solid #d2b281;
+}
+
+
+/* =====================================================
+   CORRECT OPTION
+===================================================== */
+
+.escape-option.correct {
+    background:
+        linear-gradient(
+            180deg,
+            #f1f5dc,
+            #dce8c4
+        );
+
+    border-color: #91a765;
+
+    color: #4d6330;
+
+    box-shadow:
+        0 5px 12px rgba(83, 99, 46, 0.14);
+}
+
+
+/* =====================================================
+   WRONG OPTION
+===================================================== */
+
+.escape-option.wrong {
+    background:
+        linear-gradient(
+            180deg,
+            #ffe8e2,
+            #f4d1c8
+        );
+
+    border-color: #d28d7e;
+
+    color: #9a463b;
+
+    box-shadow:
+        0 5px 12px rgba(150, 70, 55, 0.12);
+}
+
+
+/* =====================================================
+   FEEDBACK
+===================================================== */
+
+.escape-feedback {
+    width: min(650px, 100%);
+
+    box-sizing: border-box;
+
+    margin-top: 13px;
+
+    padding: 10px 14px;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 13px;
+}
+
+
+.escape-feedback > span {
+    font-size: 25px;
+}
+
+
+.correct-feedback {
+    background: #e3f1d8;
+
+    border: 2px solid #c4d8aa;
+
+    color: #4d7c36;
+}
+
+
+.wrong-feedback {
+    background: #ffe5df;
+
+    border: 2px solid #e1b5ad;
+
+    color: #a4473c;
+}
+
+
+/* =====================================================
+   RETRY
+===================================================== */
+
+.escape-retry-btn {
+    display: block;
+
+    margin-top: 7px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 7px 14px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #b47748,
+            #80502e
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 0 rgba(67, 36, 17, 0.3);
+}
+
+
+/* =====================================================
+   RIGHT PANEL
+===================================================== */
+
+.escape-right {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.escape-door-card,
+.rooms-card,
+.progress-card,
+.score-card {
+    background:
+        linear-gradient(
+            180deg,
+            #fffaf0,
+            #f1ddbd
+        );
+
+    border: 2px solid #d1ad7c;
+
+    border-radius: 18px;
+
+    color: #4c3020;
+
+    box-shadow:
+        0 8px 18px rgba(92, 59, 31, 0.12);
+}
+
+
+/* =====================================================
+   DOOR CARD
+===================================================== */
+
+.escape-door-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 11px 13px;
+}
+
+
+.mini-door {
+    width: 48px;
+    height: 58px;
+
+    object-fit: contain;
+}
+
+
+.escape-door-card strong {
+    display: block;
+
+    color: #5a3822;
+
+    font-size: 15px;
+}
+
+
+.escape-door-card small {
+    color: #745846;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   ROOMS
+===================================================== */
+
+.rooms-card {
+    padding: 14px;
+}
+
+
+.rooms-card h3,
+.progress-card h3,
+.score-card h3 {
+    margin: 0 0 10px;
+
+    color: #624029;
+
+    font-size: 13px;
+
+    text-align: center;
+
+    letter-spacing: 0.5px;
+
+    font-weight: 900;
+}
+
+
+.rooms-row {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 5px;
+}
+
+
+.room-item {
+    aspect-ratio: 0.8;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff8eb,
+            #e9d1a9
+        );
+
+    border: 2px solid #d0b084;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    opacity: 0.8;
+}
+
+
+.room-item span {
+    font-size: 23px;
+}
+
+
+.room-item small {
+    font-size: 10px;
+
+    color: #745846;
+
+    font-weight: 700;
+}
+
+
+.room-item.unlocked {
+    border-color: #b48b55;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff5d9,
+            #ead2a7
+        );
+
+    box-shadow:
+        0 0 12px rgba(180, 139, 85, 0.35);
+
+    opacity: 1;
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.progress-card {
+    padding: 14px;
+}
+
+
+.escape-progress {
+    height: 13px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background: #dfcdb1;
+
+    border: 1px solid #c5a77d;
+}
+
+
+.escape-progress-fill {
+    height: 100%;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #c4935d,
+            #80502f
+        );
+
+    transition: width 0.45s ease;
+}
+
+
+.progress-text {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 7px;
+
+    font-size: 11px;
+
+    color: #745846;
+
+    font-weight: 700;
+}
+
+
+.progress-text span:first-child {
+    font-size: 16px;
+
+    font-weight: 900;
+
+    color: #5a3822;
+}
+
+
+/* =====================================================
+   SCORE
+===================================================== */
+
+.score-card {
+    padding: 12px;
+
+    text-align: center;
+}
+
+
+.score-card h3 {
+    margin-bottom: 3px;
+}
+
+
+.score-number {
+    color: #9b6637;
+
+    font-size: 30px;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   MINI LOCK
+===================================================== */
+
+.mini-lock {
+    flex: 1;
+
+    min-height: 80px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.mini-lock img {
+    width: 85px;
+    height: 85px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 0 10px
+            rgba(196, 147, 93, 0.4)
+        );
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.escape-footer {
+    position: relative;
+
+    z-index: 5;
+
+    min-height: 58px;
+
+    display: grid;
+
+    grid-template-columns:
+        150px
+        1fr
+        120px;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 8px 22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #704927,
+            #54321b
+        );
+
+    color: white;
+
+    border-top: 2px solid #93663f;
+}
+
+
+.footer-room {
+    color: #ffe19c;
+
+    font-weight: 900;
+}
+
+
+.footer-progress {
+    text-align: center;
+}
+
+
+.footer-progress > span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #ead7bb;
+
+    font-size: 11px;
+}
+
+
+.footer-bar {
+    width: 100%;
+
+    height: 9px;
+
+    overflow: hidden;
+
+    border-radius: 8px;
+
+    background: #3d281c;
+}
+
+
+.footer-bar div {
+    height: 100%;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #c4935d,
+            #e0b878
+        );
+
+    transition: width 0.4s ease;
+}
+
+
+.footer-stars {
+    color: #ffe08a;
+
+    font-size: 17px;
+
+    font-weight: 900;
+
+    text-align: right;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1150px) {
+
+    .calendar-escape-card {
+        width: 95vw;
+    }
+
+
+    .escape-game-layout {
+        grid-template-columns:
+            240px
+            minmax(350px, 1fr)
+            220px;
+    }
+
+
+    .escape-left .escape-teacher {
+        width: 125px;
+
+        height: 155px;
+    }
+
+
+    .escape-title-main {
+        font-size: 25px;
+    }
+
+
+    .escape-options {
+        gap: 9px;
+    }
+
+
+    .escape-option {
+        font-size: 14px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .calendar-escape-card {
+        height: 94vh;
+
+        margin: 3vh auto;
+    }
+
+
+    .escape-game-layout {
+        grid-template-columns:
+            1fr 1fr;
+
+        overflow-y: auto;
+    }
+
+
+    .escape-left {
+        grid-column: 1;
+    }
+
+
+    .escape-center {
+        grid-column: 2;
+
+        grid-row: 1 / span 2;
+    }
+
+
+    .escape-right {
+        grid-column: 1;
+    }
+
+
+    .escape-intro-content {
+        grid-template-columns: 1fr;
+
+        overflow-y: auto;
+    }
+
+
+    .escape-room-preview {
+        min-height: 330px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .calendar-escape-page {
+        width: 100vw;
+        height: 100vh;
+    }
+
+
+    .calendar-escape-card {
+        width: 100vw;
+
+        height: 100vh;
+
+        margin: 0;
+
+        border-radius: 0;
+    }
+
+
+    .escape-header {
+        height: 68px;
+
+        min-height: 68px;
+
+        grid-template-columns:
+            75px
+            1fr
+            75px;
+
+        padding: 0 8px;
+    }
+
+
+    .activity-card .escape-header {
+        grid-template-columns:
+            75px
+            1fr
+            75px;
+    }
+
+
+    .escape-round {
+        display: none;
+    }
+
+
+    .escape-nav-btn {
+        padding: 9px 10px;
+
+        font-size: 12px;
+    }
+
+
+    .escape-title-main {
+        font-size: 18px;
+    }
+
+
+    .escape-title-sub {
+        font-size: 9px;
+    }
+
+
+    /* INTRO */
+
+    .escape-intro-content {
+        grid-template-columns: 1fr;
+
+        overflow-y: auto;
+
+        padding: 15px;
+    }
+
+
+    .escape-teacher {
+        width: 145px;
+
+        height: 190px;
+    }
+
+
+    .escape-teacher-name {
+        width: 165px;
+
+        padding: 9px 14px;
+
+        font-size: 15px;
+    }
+
+
+    .escape-speech {
+        width: min(350px, 94%);
+
+        padding: 15px 17px;
+    }
+
+
+    .escape-speech p {
+        font-size: 12px;
+    }
+
+
+    .escape-room-preview {
+        min-height: 320px;
+
+        border-radius: 22px;
+    }
+
+
+    .escape-intro-bottom {
+        flex-wrap: wrap;
+
+        min-height: auto;
+
+        padding: 8px 15px 15px;
+    }
+
+
+    .escape-stat {
+        min-width: 105px;
+
+        padding: 10px 13px;
+    }
+
+
+    .escape-stat > span {
+        font-size: 23px;
+    }
+
+
+    .escape-stat b {
+        font-size: 17px;
+    }
+
+
+    .escape-start-btn {
+        width: 100%;
+
+        min-width: 0;
+
+        padding: 14px 22px;
+
+        font-size: 18px;
+    }
+
+
+    /* GAME */
+
+    .escape-game-layout {
+        display: flex;
+
+        flex-direction: column;
+
+        overflow-y: auto;
+
+        padding: 12px;
+    }
+
+
+    .escape-left {
+        order: 1;
+    }
+
+
+    .escape-center {
+        order: 2;
+
+        padding: 5px;
+    }
+
+
+    .escape-right {
+        order: 3;
+    }
+
+
+    .escape-left .escape-teacher {
+        width: 105px;
+
+        height: 125px;
+    }
+
+
+    .escape-left .escape-speech {
+        width: calc(100% - 10px);
+
+        margin-left: 0;
+    }
+
+
+    .escape-options {
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+    }
+
+
+    .escape-question-card {
+        padding: 14px;
+    }
+
+
+    .escape-question-card h2 {
+        font-size: 18px;
+    }
+
+
+    .escape-question-card p {
+        font-size: 12px;
+    }
+
+
+    .escape-option {
+        min-height: 52px;
+
+        font-size: 14px;
+    }
+
+
+    .escape-feedback {
+        font-size: 11px;
+    }
+
+
+    .escape-footer {
+        grid-template-columns:
+            90px
+            1fr
+            70px;
+
+        gap: 8px;
+
+        padding: 7px 10px;
+    }
+
+
+    .footer-room {
+        font-size: 11px;
+    }
+
+
+    .footer-stars {
+        font-size: 13px;
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 450px) {
+
+    .escape-header {
+        grid-template-columns:
+            65px
+            1fr
+            65px;
+    }
+
+
+    .escape-nav-btn {
+        padding: 8px;
+
+        font-size: 11px;
+    }
+
+
+    .escape-title-main {
+        font-size: 16px;
+    }
+
+
+    .escape-title-sub {
+        display: none;
+    }
+
+
+    .escape-room-preview {
+        min-height: 260px;
+    }
+
+
+    .escape-preview-overlay {
+        left: 10px;
+        bottom: 10px;
+
+        padding: 8px 11px;
+    }
+
+
+    .escape-preview-overlay span {
+        font-size: 20px;
+    }
+
+
+    .escape-preview-overlay b {
+        font-size: 12px;
+    }
+
+
+    .escape-preview-overlay small {
+        font-size: 9px;
+    }
+
+
+    .escape-stat {
+        min-width: 95px;
+    }
+
+
+    .escape-start-btn {
+        font-size: 16px;
+    }
+
+}

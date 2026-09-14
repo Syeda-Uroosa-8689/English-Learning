@@ -1,0 +1,1618 @@
+/* =========================================================
+        SENTENCE REPAIR LAB
+        COMPLETE CSS
+        INTRO + ROUND 1 + ROUND 2 + ROUND 3
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+        INTRO SCREEN
+========================================================= */
+
+.sentence-repair-intro-container {
+
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-image: url("../../assets/chatbg.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+        INTRO OVERLAY
+========================================================= */
+
+.sentence-repair-intro-container::before {
+
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.30);
+
+    backdrop-filter: blur(8px);
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+        INTRO POPUP
+========================================================= */
+
+.sentence-repair-popup {
+
+    width: 1000px;
+    height: 420px;
+
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #d8b48a;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.30);
+
+    clip-path: polygon(
+        8% 0%,
+        92% 0%,
+        100% 18%,
+        100% 82%,
+        92% 100%,
+        8% 100%,
+        0% 82%,
+        0% 18%
+    );
+
+    transform: scale(0.5);
+
+    opacity: 0;
+
+    transition:
+        transform 0.5s ease,
+        opacity 0.5s ease;
+}
+
+
+/* =========================================================
+        INTRO POPUP SHOW
+========================================================= */
+
+.sentence-repair-popup.show {
+
+    transform: scale(1);
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+        INTRO TITLE
+========================================================= */
+
+.sentence-repair-popup h1 {
+
+    margin: 0;
+
+    padding: 0 60px;
+
+    text-align: center;
+
+    font-size: 72px;
+
+    font-weight: 800;
+
+    color: #5a3620;
+
+    letter-spacing: 3px;
+}
+
+
+/* =========================================================
+        MAIN ACTIVITY PAGE
+========================================================= */
+
+.sentence-repair-activity-page {
+
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+
+    font-family: "Poppins", sans-serif;
+}
+
+
+/* =========================================================
+        MAIN BACKGROUND OVERLAY
+========================================================= */
+
+.sentence-repair-activity-overlay {
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.38);
+
+    backdrop-filter: blur(7px);
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+        MAIN ACTIVITY CARD
+========================================================= */
+
+.sentence-repair-activity-card {
+
+    position: relative;
+
+    z-index: 1;
+
+    width: calc(100% - 70px);
+    max-width: 1440px;
+
+    height: calc(100% - 48px);
+    max-height: 960px;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    border-radius: 34px;
+
+    border: 2px solid rgba(255, 255, 255, 0.75);
+
+    background:
+        linear-gradient(
+            rgba(255, 250, 237, 0.82),
+            rgba(255, 250, 237, 0.82)
+        ),
+        url("../../assets/chatbg.jpeg");
+
+    background-size: cover;
+    background-position: center;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.30);
+}
+
+
+/* =========================================================
+        HEADER
+========================================================= */
+
+.sentence-repair-header {
+
+    width: 100%;
+
+    min-height: 105px;
+
+    padding: 28px 48px 8px;
+
+    display: grid;
+
+    grid-template-columns: 180px 1fr 180px;
+
+    align-items: start;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+/* =========================================================
+        BACK / SKIP BUTTON
+========================================================= */
+
+.sentence-repair-back-btn,
+.sentence-repair-skip-btn {
+
+    width: 158px;
+    height: 60px;
+
+    border: none;
+
+    border-radius: 17px;
+
+    background: #8b5a35;
+
+    color: #ffffff;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 12px rgba(100, 60, 30, 0.22);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.sentence-repair-back-btn:hover,
+.sentence-repair-skip-btn:hover {
+
+    background: #754725;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 9px 16px rgba(100, 60, 30, 0.28);
+}
+
+
+.sentence-repair-back-btn:disabled,
+.sentence-repair-skip-btn:disabled {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================================
+        HEADER CENTER
+========================================================= */
+
+.sentence-repair-header-center {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-start;
+    align-items: center;
+
+    text-align: center;
+}
+
+
+.sentence-repair-header-center h1 {
+
+    margin: 0;
+
+    color: #60371f;
+
+    font-size: 40px;
+
+    line-height: 1.1;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+}
+
+
+.sentence-repair-header-center span {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: #754726;
+
+    font-size: 21px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+        QUESTION NUMBER
+========================================================= */
+
+.sentence-repair-question-number {
+
+    position: absolute;
+
+    top: 132px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 5;
+
+    color: #754726;
+
+    font-size: 24px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+        MAIN CONTENT
+========================================================= */
+
+.sentence-repair-main {
+
+    flex: 1;
+
+    min-height: 0;
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: 42% 58%;
+
+    align-items: center;
+
+    padding: 45px 55px 45px;
+
+    position: relative;
+}
+
+
+/* =========================================================
+        TEACHER SECTION
+========================================================= */
+
+.sentence-repair-teacher-section {
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    padding-top: 25px;
+}
+
+
+/* =========================================================
+        TEACHER STAGE
+========================================================= */
+
+.sentence-repair-teacher-stage {
+
+    width: 100%;
+
+    height: 300px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-end;
+
+    position: relative;
+}
+
+
+/* =========================================================
+        TEACHER IMAGE
+========================================================= */
+
+.sentence-repair-teacher {
+
+    height: 285px;
+
+    width: auto;
+
+    max-width: 330px;
+
+    object-fit: contain;
+
+    display: block;
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+}
+
+
+.sentence-repair-teacher.speaking {
+
+    animation:
+        teacherSpeaking 0.8s ease-in-out infinite alternate;
+}
+
+
+@keyframes teacherSpeaking {
+
+    from {
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        transform: translateY(-5px) scale(1.015);
+    }
+}
+
+
+/* =========================================================
+        TEACHER SPEECH BUBBLE
+========================================================= */
+
+.sentence-repair-teacher-bubble {
+
+    width: 385px;
+
+    min-height: 145px;
+
+    margin-top: -4px;
+
+    padding: 20px 25px;
+
+    background: #ffffff;
+
+    border: 1px solid #ead9c5;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 7px 20px rgba(100, 65, 35, 0.16);
+
+    position: relative;
+
+    text-align: center;
+
+    z-index: 3;
+}
+
+
+/* =========================================================
+        SPEECH BUBBLE ARROW
+========================================================= */
+
+.sentence-repair-teacher-bubble::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -13px;
+
+    left: 50%;
+
+    width: 25px;
+    height: 25px;
+
+    background: #ffffff;
+
+    border-left: 1px solid #ead9c5;
+    border-top: 1px solid #ead9c5;
+
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+        TEACHER NAME
+========================================================= */
+
+.sentence-repair-teacher-name {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 185px;
+
+    height: 52px;
+
+    padding: 0 25px;
+
+    margin-bottom: 10px;
+
+    border-radius: 28px;
+
+    background: #8b5a35;
+
+    color: #ffffff;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+        TEACHER MESSAGE
+========================================================= */
+
+.sentence-repair-teacher-text {
+
+    color: #5e3b25;
+
+    font-size: 18px;
+
+    line-height: 1.4;
+
+    font-weight: 600;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+        QUESTION SECTION
+========================================================= */
+
+.sentence-repair-question-section {
+
+    width: 100%;
+    height: 100%;
+
+    min-height: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    padding-top: 25px;
+}
+
+
+/* =========================================================
+        TALK TO MISS UROOSA BADGE
+========================================================= */
+
+.sentence-repair-badge {
+
+    align-self: center;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    height: 64px;
+
+    min-width: 330px;
+
+    padding: 0 30px;
+
+    margin-bottom: 25px;
+
+    border-radius: 35px;
+
+    background: rgba(255, 250, 245, 0.96);
+
+    border: 2px solid #ead6c1;
+
+    color: #704526;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 5px 15px rgba(100, 65, 35, 0.08);
+}
+
+
+/* =========================================================
+        QUESTION CARD
+========================================================= */
+
+.sentence-repair-question-card {
+
+    width: 92%;
+
+    max-width: 760px;
+
+    min-height: 405px;
+
+    padding: 27px 40px 30px;
+
+    background:
+        rgba(255, 251, 244, 0.96);
+
+    border: 2px solid #ead8c2;
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 10px 28px rgba(110, 75, 40, 0.13);
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* =========================================================
+        CARD INNER DOTTED BORDER
+========================================================= */
+
+.sentence-repair-question-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 14px;
+
+    border: 1.5px dashed #e8d4b9;
+
+    border-radius: 20px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+        QUESTION LABEL
+========================================================= */
+
+.sentence-repair-question-label {
+
+    position: relative;
+
+    z-index: 2;
+
+    color: #8a5b34;
+
+    font-size: 31px;
+
+    font-weight: 800;
+
+    text-align: center;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+        ROUND 2 QUESTION
+========================================================= */
+
+.sentence-repair-speaking-question {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    max-width: 650px;
+
+    margin: 0 auto 18px;
+
+    color: #55331e;
+
+    font-size: 25px;
+
+    line-height: 1.35;
+
+    font-weight: 700;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+        INSTRUCTION
+========================================================= */
+
+.sentence-repair-instruction {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 620px;
+
+    margin: 0 0 24px;
+
+    color: #633f28;
+
+    font-size: 18px;
+
+    line-height: 1.45;
+
+    font-weight: 600;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+        ROUND 2 MICROPHONE BUTTON
+========================================================= */
+
+.sentence-repair-mic-btn {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 365px;
+
+    height: 66px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    background: #c38a47;
+
+    color: #ffffff;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 14px rgba(140, 90, 35, 0.22);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.sentence-repair-mic-btn:hover {
+
+    background: #ad7337;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 18px rgba(140, 90, 35, 0.27);
+}
+
+
+.sentence-repair-mic-btn:disabled {
+
+    cursor: not-allowed;
+
+    opacity: 0.7;
+
+    transform: none;
+}
+
+
+/* =========================================================
+        LISTENING BUTTON
+========================================================= */
+
+.sentence-repair-mic-btn.listening {
+
+    background: #9b6231;
+
+    animation:
+        micPulse 1s ease-in-out infinite;
+}
+
+
+@keyframes micPulse {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.025);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* =========================================================
+        USER ANSWER
+========================================================= */
+
+.sentence-repair-user-answer {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 90%;
+
+    margin-top: 18px;
+
+    padding: 12px 18px;
+
+    border-radius: 14px;
+
+    background: #fff8ed;
+
+    border: 1px solid #ead5b9;
+
+    color: #5d3b24;
+
+    text-align: center;
+
+    font-size: 15px;
+
+    line-height: 1.4;
+}
+
+
+.sentence-repair-user-answer strong {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-size: 15px;
+}
+
+
+.sentence-repair-user-answer span {
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+        STATUS
+========================================================= */
+
+.sentence-repair-status {
+
+    position: relative;
+
+    z-index: 3;
+
+    margin-top: 15px;
+
+    padding: 10px 20px;
+
+    border-radius: 14px;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    text-align: center;
+}
+
+
+.sentence-repair-status.correct {
+
+    background: #e6f6e8;
+
+    color: #28733b;
+
+    border: 1px solid #b9dfc0;
+}
+
+
+.sentence-repair-status.wrong {
+
+    background: #fff0ed;
+
+    color: #a14335;
+
+    border: 1px solid #edc3bc;
+}
+
+
+/* =========================================================
+        ROUND 1 / ROUND 3 SENTENCE
+========================================================= */
+
+.sentence-repair-sentence {
+
+    position: relative;
+
+    z-index: 2;
+
+    color: #573620;
+
+    font-size: 25px;
+
+    line-height: 1.5;
+
+    font-weight: 700;
+
+    text-align: center;
+
+    margin: 8px 0 15px;
+}
+
+
+/* =========================================================
+        SENTENCE BLANK
+========================================================= */
+
+.sentence-blank {
+
+    display: inline-flex;
+
+    min-width: 95px;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin: 0 7px;
+
+    color: #b28a5e;
+
+    border-bottom: 3px solid #c89c67;
+}
+
+
+.sentence-blank.filled {
+
+    color: #704524;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+        OPTIONS
+========================================================= */
+
+.sentence-repair-options {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 14px;
+
+    flex-wrap: wrap;
+
+    margin-top: 10px;
+}
+
+
+.sentence-option {
+
+    min-width: 150px;
+
+    min-height: 50px;
+
+    padding: 10px 20px;
+
+    border-radius: 14px;
+
+    border: 2px solid #e3c8a7;
+
+    background: #fffaf3;
+
+    color: #654027;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border 0.2s ease;
+}
+
+
+.sentence-option:hover {
+
+    background: #f8ead8;
+
+    transform: translateY(-2px);
+}
+
+
+.sentence-option.selected {
+
+    border-color: #b98245;
+
+    background: #f4dfc3;
+}
+
+
+.sentence-option.correct-option {
+
+    background: #e2f3e5;
+
+    border-color: #69a875;
+
+    color: #2f713c;
+}
+
+
+.sentence-option.wrong-option {
+
+    background: #fde6e1;
+
+    border-color: #c8786a;
+
+    color: #a14235;
+}
+
+
+.sentence-option:disabled {
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+        SMALL LAPTOP / SHORT SCREEN
+========================================================= */
+
+@media (max-height: 850px) {
+
+    .sentence-repair-activity-card {
+
+        height: calc(100% - 32px);
+    }
+
+
+    .sentence-repair-header {
+
+        min-height: 88px;
+
+        padding-top: 20px;
+    }
+
+
+    .sentence-repair-back-btn,
+    .sentence-repair-skip-btn {
+
+        width: 145px;
+
+        height: 52px;
+
+        font-size: 18px;
+    }
+
+
+    .sentence-repair-header-center h1 {
+
+        font-size: 35px;
+    }
+
+
+    .sentence-repair-header-center span {
+
+        font-size: 19px;
+    }
+
+
+    .sentence-repair-question-number {
+
+        top: 110px;
+
+        font-size: 20px;
+    }
+
+
+    .sentence-repair-main {
+
+        padding: 25px 45px 30px;
+    }
+
+
+    .sentence-repair-teacher-stage {
+
+        height: 250px;
+    }
+
+
+    .sentence-repair-teacher {
+
+        height: 235px;
+    }
+
+
+    .sentence-repair-teacher-bubble {
+
+        min-height: 120px;
+
+        padding: 15px 20px;
+    }
+
+
+    .sentence-repair-teacher-name {
+
+        height: 45px;
+
+        font-size: 18px;
+    }
+
+
+    .sentence-repair-teacher-text {
+
+        font-size: 16px;
+    }
+
+
+    .sentence-repair-badge {
+
+        height: 56px;
+
+        margin-bottom: 15px;
+
+        font-size: 18px;
+    }
+
+
+    .sentence-repair-question-card {
+
+        min-height: 345px;
+
+        padding-top: 20px;
+
+        padding-bottom: 20px;
+    }
+
+
+    .sentence-repair-question-label {
+
+        font-size: 27px;
+
+        margin-bottom: 10px;
+    }
+
+
+    .sentence-repair-speaking-question {
+
+        font-size: 22px;
+
+        margin-bottom: 10px;
+    }
+
+
+    .sentence-repair-instruction {
+
+        font-size: 16px;
+
+        margin-bottom: 17px;
+    }
+
+
+    .sentence-repair-mic-btn {
+
+        width: 360px;
+
+        height: 58px;
+
+        font-size: 18px;
+    }
+
+}
+
+
+/* =========================================================
+        1200px
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .sentence-repair-activity-card {
+
+        width: calc(100% - 40px);
+    }
+
+
+    .sentence-repair-main {
+
+        padding-left: 35px;
+
+        padding-right: 35px;
+    }
+
+
+    .sentence-repair-teacher {
+
+        height: 255px;
+    }
+
+
+    .sentence-repair-teacher-stage {
+
+        height: 275px;
+    }
+
+
+    .sentence-repair-teacher-bubble {
+
+        width: 335px;
+    }
+
+
+    .sentence-repair-question-card {
+
+        width: 95%;
+    }
+
+
+    .sentence-repair-header-center h1 {
+
+        font-size: 35px;
+    }
+
+}
+
+
+/* =========================================================
+        TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .sentence-repair-activity-card {
+
+        width: calc(100% - 20px);
+
+        height: calc(100% - 20px);
+
+        border-radius: 25px;
+
+        overflow-y: auto;
+    }
+
+
+    .sentence-repair-header {
+
+        grid-template-columns: 120px 1fr 120px;
+
+        padding: 18px 20px 5px;
+
+        min-height: 90px;
+    }
+
+
+    .sentence-repair-back-btn,
+    .sentence-repair-skip-btn {
+
+        width: 105px;
+
+        height: 47px;
+
+        font-size: 16px;
+    }
+
+
+    .sentence-repair-header-center h1 {
+
+        font-size: 28px;
+    }
+
+
+    .sentence-repair-header-center span {
+
+        font-size: 16px;
+    }
+
+
+    .sentence-repair-question-number {
+
+        top: 105px;
+
+        font-size: 18px;
+    }
+
+
+    .sentence-repair-main {
+
+        grid-template-columns: 1fr;
+
+        padding: 45px 25px 30px;
+
+        gap: 25px;
+    }
+
+
+    .sentence-repair-teacher-section {
+
+        height: auto;
+
+        padding-top: 0;
+    }
+
+
+    .sentence-repair-teacher-stage {
+
+        height: 200px;
+    }
+
+
+    .sentence-repair-teacher {
+
+        height: 190px;
+    }
+
+
+    .sentence-repair-question-section {
+
+        height: auto;
+
+        padding-top: 0;
+    }
+
+
+    .sentence-repair-question-card {
+
+        width: 100%;
+
+        min-height: 330px;
+    }
+
+}
+
+
+/* =========================================================
+        MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .sentence-repair-intro-popup {
+
+        width: 90%;
+    }
+
+
+    .sentence-repair-popup {
+
+        width: 90%;
+
+        height: 180px;
+    }
+
+
+    .sentence-repair-popup h1 {
+
+        padding: 0 25px;
+
+        font-size: 34px;
+
+        letter-spacing: 1px;
+    }
+
+
+    .sentence-repair-header {
+
+        grid-template-columns: 80px 1fr 80px;
+
+        padding: 15px 12px 5px;
+    }
+
+
+    .sentence-repair-back-btn,
+    .sentence-repair-skip-btn {
+
+        width: 72px;
+
+        height: 40px;
+
+        font-size: 13px;
+
+        border-radius: 11px;
+    }
+
+
+    .sentence-repair-header-center h1 {
+
+        font-size: 21px;
+    }
+
+
+    .sentence-repair-header-center span {
+
+        font-size: 13px;
+    }
+
+
+    .sentence-repair-question-number {
+
+        top: 92px;
+
+        font-size: 16px;
+    }
+
+
+    .sentence-repair-main {
+
+        padding: 35px 15px 25px;
+
+        gap: 18px;
+    }
+
+
+    .sentence-repair-teacher-stage {
+
+        height: 175px;
+    }
+
+
+    .sentence-repair-teacher {
+
+        height: 165px;
+    }
+
+
+    .sentence-repair-teacher-bubble {
+
+        width: 95%;
+
+        min-height: 105px;
+
+        padding: 13px 15px;
+
+        border-radius: 20px;
+    }
+
+
+    .sentence-repair-teacher-name {
+
+        min-width: 150px;
+
+        height: 40px;
+
+        font-size: 16px;
+    }
+
+
+    .sentence-repair-teacher-text {
+
+        font-size: 14px;
+    }
+
+
+    .sentence-repair-badge {
+
+        min-width: 240px;
+
+        height: 48px;
+
+        padding: 0 18px;
+
+        font-size: 15px;
+
+        margin-bottom: 12px;
+    }
+
+
+    .sentence-repair-question-card {
+
+        min-height: 300px;
+
+        padding: 22px 15px;
+    }
+
+
+    .sentence-repair-question-card::before {
+
+        inset: 10px;
+
+        border-radius: 15px;
+    }
+
+
+    .sentence-repair-question-label {
+
+        font-size: 23px;
+    }
+
+
+    .sentence-repair-speaking-question {
+
+        font-size: 18px;
+    }
+
+
+    .sentence-repair-instruction {
+
+        font-size: 14px;
+    }
+
+
+    .sentence-repair-mic-btn {
+
+        width: 90%;
+
+        height: 55px;
+
+        font-size: 16px;
+    }
+
+
+    .sentence-repair-user-answer {
+
+        width: 95%;
+
+        font-size: 13px;
+    }
+
+}

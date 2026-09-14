@@ -13,6 +13,7 @@ import ListenRepeatFlow from "./ListenRepeatFlow";
 import RestaurantConversationFlow from "./RestaurantConversationFlow";
 import FinalChallengeFlow from "./FinalChallengeFlow";
 
+
 /* =========================================
    TOPIC 1
 ========================================= */
@@ -21,7 +22,93 @@ import FinalChallengeFlow from "./FinalChallengeFlow";
 import HobbiesFlow from "./Topic 1/Subtopic 1/HobbiesFlow";
 
 /* Subtopic 2 - Favourite Person */
-import FavouritePersonFlow from "./Topic 1/subtopic 2/FavouritePersonFlow.jsx";
+import FavouritePersonFlow
+    from "./Topic 1/subtopic 2/FavouritePersonFlow.jsx";
+
+/* Subtopic 3 - Favourite Place */
+import FavouritePlaceFlow
+    from "./Topic 1/subtopic 3/FavouritePlaceFlow.jsx";
+
+
+/* =========================================
+   TOPIC 1 - SUBTOPIC 4
+   FINAL CHALLENGE 1
+========================================= */
+
+import FinalChallenge1Flow
+    from "./Topic 1/subtopic 4/FinalChallenge1Flow.jsx";
+
+
+/* =========================================
+   TOPIC 2
+   SUBTOPIC 1 - PHYSICAL APPEARANCE
+========================================= */
+
+import PhysicalAppearanceFlow
+    from "./Topic 2/subtopic 1/PhysicalAppearanceFlow.jsx";
+
+
+/* =========================================
+   TOPIC 2
+   SUBTOPIC 2 - PERSONALITY TRAITS
+========================================= */
+
+import PersonalityTraitsFlow
+    from "./Topic 2/subtopic 2/PersonalityTraitsFlow.jsx";
+
+
+/* =========================================
+   TOPIC 2
+   SUBTOPIC 3 - LIKES AND DISLIKES
+========================================= */
+
+import LikesAndDislikesFlow
+    from "./Topic 2/subtopic 3/LikesAndDislikesFlow.jsx";
+
+
+/* =========================================
+   TOPIC 2 - SUBTOPIC 4
+   FINAL CHALLENGE 2
+========================================= */
+
+import FinalChallenge2Flow
+    from "./Topic 2/subtopic 4/FinalChallenge2Flow.jsx";
+
+
+/* =========================================
+   TOPIC 4
+   SUBTOPIC 1 - DAYS AND MONTHS
+========================================= */
+
+import DaysAndMonthsFlow
+    from "./Topic 4/subtopic 1/DaysAndMonthsFlow.jsx";
+
+
+/* =========================================
+   TOPIC 4
+   SUBTOPIC 2 - DAILY ROUTINE
+========================================= */
+
+import RoutineRushFlow
+    from "./Topic 4/subtopic 2/RoutineRushFlow.jsx";
+
+
+/* =========================================
+   TOPIC 4
+   SUBTOPIC 3 - MAKING PLANS
+========================================= */
+
+import MyPlanMyDayFlow
+    from "./Topic 4/subtopic 3/MyPlanMyDayFlow.jsx";
+
+
+/* =========================================
+   TOPIC 4
+   SUBTOPIC 4 - FINAL CHALLENGE 4
+========================================= */
+
+import FinalChallenge4Flow
+    from "./Topic 4/subtopic 4/FinalChallenge4Flow.jsx";
 
 
 import LessonComplete from "./LessonComplete";
@@ -35,7 +122,8 @@ function App() {
        USER NAME
     ========================================= */
 
-    const [userName, setUserName] = useState("");
+    const [userName, setUserName] =
+        useState("");
 
 
     /* =========================================
@@ -142,7 +230,9 @@ function App() {
 
                         setSelectedTopic(topic);
 
-                        setCurrentPage("subtopics");
+                        setCurrentPage(
+                            "subtopics"
+                        );
 
                     }}
 
@@ -171,6 +261,10 @@ function App() {
 
                         setSelectedLesson(lesson);
 
+                        /* =========================
+                           FIRST GO TO CHAT PAGE
+                        ========================= */
+
                         setCurrentPage("chat");
 
                     }}
@@ -181,20 +275,26 @@ function App() {
 
 
             {/* =========================================
-                CHAT PAGE
+                CALLING / CHAT PAGE
             ========================================= */}
 
             {currentPage === "chat" && (
 
                 <ChatPage
 
-                    userName={userName}
+                    userName={
+                        userName
+                    }
 
-                    setUserName={setUserName}
+                    setUserName={
+                        setUserName
+                    }
 
 
                     onBack={() =>
-                        setCurrentPage("subtopics")
+                        setCurrentPage(
+                            "subtopics"
+                        )
                     }
 
 
@@ -202,10 +302,28 @@ function App() {
 
 
                         /* =========================
-                           FOOD LESSON
+                           TOPIC 1
+                           SUBTOPIC 4
+                           FINAL CHALLENGE 1
                         ========================= */
 
                         if (
+                            selectedLesson?.type ===
+                            "finalChallenge1"
+                        ) {
+
+                            setCurrentPage(
+                                "finalChallenge1"
+                            );
+
+                        }
+
+
+                        /* =========================
+                           FOOD LESSON
+                        ========================= */
+
+                        else if (
                             selectedLesson?.type ===
                             "lesson"
                         ) {
@@ -234,7 +352,7 @@ function App() {
 
 
                         /* =========================
-                           FINAL CHALLENGE
+                           OLD FINAL CHALLENGE
                         ========================= */
 
                         else if (
@@ -315,6 +433,218 @@ function App() {
                             );
 
                         }
+
+
+                        /* =========================
+                           TOPIC 1
+                           SUBTOPIC 3
+                           FAVOURITE PLACE
+                        ========================= */
+
+                        else if (
+                            selectedLesson?.type ===
+                            "favouritePlace"
+                        ) {
+
+                            setCurrentPage(
+                                "favouritePlaceFlow"
+                            );
+
+                        }
+
+
+                        /* =========================
+                           TOPIC 2
+                           SUBTOPIC 1
+                           PHYSICAL APPEARANCE
+                        ========================= */
+
+                        else if (
+                            selectedLesson?.type ===
+                            "physicalAppearance"
+                        ) {
+
+                            setCurrentPage(
+                                "physicalAppearanceFlow"
+                            );
+
+                        }
+
+
+                        /* =========================
+                           TOPIC 2
+                           SUBTOPIC 2
+                           PERSONALITY TRAITS
+                        ========================= */
+
+                        else if (
+                            selectedLesson?.type ===
+                            "personalityTraits"
+                        ) {
+
+                            setCurrentPage(
+                                "personalityTraitsFlow"
+                            );
+
+                        }
+
+
+                        /* =========================
+                           TOPIC 2
+                           SUBTOPIC 3
+                           LIKES AND DISLIKES
+                        ========================= */
+
+                        else if (
+                            selectedLesson?.type ===
+                            "likesAndDislikes"
+                        ) {
+
+                            setCurrentPage(
+                                "likesAndDislikesFlow"
+                            );
+
+                        }
+
+
+                        /* =========================
+                           TOPIC 2
+                           SUBTOPIC 4
+                           FINAL CHALLENGE 2
+                        ========================= */
+
+                        else if (
+                            selectedLesson?.type ===
+                            "finalChallenge2"
+                        ) {
+
+                            setCurrentPage(
+                                "finalChallenge2"
+                            );
+
+                        }
+
+
+                        /* =========================
+                           TOPIC 4
+                           SUBTOPIC 1
+                           DAYS AND MONTHS
+                        ========================= */
+
+                        else if (
+                            selectedLesson?.type ===
+                            "daysAndMonths"
+                        ) {
+
+                            setCurrentPage(
+                                "daysAndMonthsFlow"
+                            );
+
+                        }
+
+
+                        /* =========================
+                           TOPIC 4
+                           SUBTOPIC 2
+                           DAILY ROUTINE
+                        ========================= */
+
+                        else if (
+                            selectedLesson?.type ===
+                            "dailyRoutine"
+                        ) {
+
+                            setCurrentPage(
+                                "routineRushFlow"
+                            );
+
+                        }
+
+
+                        /* =========================
+                           TOPIC 4
+                           SUBTOPIC 3
+                           MAKING PLANS
+                        ========================= */
+
+                        else if (
+                            selectedLesson?.type ===
+                            "makingPlans"
+                        ) {
+
+                            setCurrentPage(
+                                "myPlanMyDayFlow"
+                            );
+
+                        }
+
+
+                        /* =========================
+                           TOPIC 4
+                           SUBTOPIC 4
+                           FINAL CHALLENGE 4
+                        ========================= */
+
+                        else if (
+                            selectedLesson?.type ===
+                            "finalChallenge4"
+                        ) {
+
+                            setCurrentPage(
+                                "finalChallenge4"
+                            );
+
+                        }
+
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =========================================
+                TOPIC 1
+                SUBTOPIC 4
+                FINAL CHALLENGE 1
+            ========================================= */}
+
+            {currentPage ===
+                "finalChallenge1" && (
+
+                <FinalChallenge1Flow
+
+                    content={
+                        selectedLesson?.content
+                    }
+
+                    topicId={
+                        selectedTopic?.id
+                    }
+
+                    lessonId={
+                        selectedLesson?.id
+                    }
+
+                    userName={
+                        userName
+                    }
+
+
+                    onFinish={() => {
+
+                        setCurrentPage(
+                            "lessonComplete"
+                        );
+
+                    }}
+
+
+                    onBack={() => {
+
+                        setCurrentPage(
+                            "chat"
+                        );
 
                     }}
 
@@ -419,7 +749,7 @@ function App() {
 
 
             {/* =========================================
-                FINAL CHALLENGE FLOW
+                OLD FINAL CHALLENGE FLOW
             ========================================= */}
 
             {currentPage ===
@@ -549,21 +879,17 @@ function App() {
                         selectedLesson?.content
                     }
 
-
                     topicId={
                         selectedTopic?.id
                     }
-
 
                     lessonId={
                         selectedLesson?.id
                     }
 
-
                     userName={
                         userName
                     }
-
 
                     onFinish={() => {
 
@@ -572,7 +898,6 @@ function App() {
                         );
 
                     }}
-
 
                     onBack={() => {
 
@@ -602,23 +927,420 @@ function App() {
                         selectedLesson?.content
                     }
 
-
                     topicId={
                         selectedTopic?.id
                     }
-
 
                     lessonId={
                         selectedLesson?.id
                     }
 
+                    userName={
+                        userName
+                    }
+
+                    onFinish={() => {
+
+                        setCurrentPage(
+                            "lessonComplete"
+                        );
+
+                    }}
+
+                    onBack={() => {
+
+                        setCurrentPage(
+                            "chat"
+                        );
+
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =========================================
+                TOPIC 1
+                SUBTOPIC 3
+                FAVOURITE PLACE
+            ========================================= */}
+
+            {currentPage ===
+                "favouritePlaceFlow" && (
+
+                <FavouritePlaceFlow
+
+                    content={
+                        selectedLesson?.content
+                    }
+
+                    topicId={
+                        selectedTopic?.id
+                    }
+
+                    lessonId={
+                        selectedLesson?.id
+                    }
+
+                    userName={
+                        userName
+                    }
+
+                    onFinish={() => {
+
+                        setCurrentPage(
+                            "lessonComplete"
+                        );
+
+                    }}
+
+                    onBack={() => {
+
+                        setCurrentPage(
+                            "chat"
+                        );
+
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =========================================
+                TOPIC 2
+                SUBTOPIC 1
+                PHYSICAL APPEARANCE
+            ========================================= */}
+
+            {currentPage ===
+                "physicalAppearanceFlow" && (
+
+                <PhysicalAppearanceFlow
+
+                    content={
+                        selectedLesson?.content
+                    }
+
+                    topicId={
+                        selectedTopic?.id
+                    }
+
+                    lessonId={
+                        selectedLesson?.id
+                    }
+
+                    userName={
+                        userName
+                    }
+
+                    onFinish={() => {
+
+                        setCurrentPage(
+                            "lessonComplete"
+                        );
+
+                    }}
+
+                    onBack={() => {
+
+                        setCurrentPage(
+                            "chat"
+                        );
+
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =========================================
+                TOPIC 2
+                SUBTOPIC 2
+                PERSONALITY TRAITS
+            ========================================= */}
+
+            {currentPage ===
+                "personalityTraitsFlow" && (
+
+                <PersonalityTraitsFlow
+
+                    content={
+                        selectedLesson?.content
+                    }
+
+                    topicId={
+                        selectedTopic?.id
+                    }
+
+                    lessonId={
+                        selectedLesson?.id
+                    }
+
+                    userName={
+                        userName
+                    }
+
+                    onFinish={() => {
+
+                        setCurrentPage(
+                            "lessonComplete"
+                        );
+
+                    }}
+
+                    onBack={() => {
+
+                        setCurrentPage(
+                            "chat"
+                        );
+
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =========================================
+                TOPIC 2
+                SUBTOPIC 3
+                LIKES AND DISLIKES
+            ========================================= */}
+
+            {currentPage ===
+                "likesAndDislikesFlow" && (
+
+                <LikesAndDislikesFlow
+
+                    content={
+                        selectedLesson?.content
+                    }
+
+                    topicId={
+                        selectedTopic?.id
+                    }
+
+                    lessonId={
+                        selectedLesson?.id
+                    }
+
+                    userName={
+                        userName
+                    }
+
+                    onFinish={() => {
+
+                        setCurrentPage(
+                            "lessonComplete"
+                        );
+
+                    }}
+
+                    onBack={() => {
+
+                        setCurrentPage(
+                            "chat"
+                        );
+
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =========================================
+                TOPIC 2
+                SUBTOPIC 4
+                FINAL CHALLENGE 2
+            ========================================= */}
+
+            {currentPage ===
+                "finalChallenge2" && (
+
+                <FinalChallenge2Flow
+
+                    content={
+                        selectedLesson?.content
+                    }
+
+                    topicId={
+                        selectedTopic?.id
+                    }
+
+                    lessonId={
+                        selectedLesson?.id
+                    }
+
+                    userName={
+                        userName
+                    }
+
+                    onFinish={() => {
+
+                        setCurrentPage(
+                            "lessonComplete"
+                        );
+
+                    }}
+
+                    onBack={() => {
+
+                        setCurrentPage(
+                            "chat"
+                        );
+
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =========================================
+                TOPIC 4
+                SUBTOPIC 1
+                DAYS AND MONTHS
+            ========================================= */}
+
+            {currentPage ===
+                "daysAndMonthsFlow" && (
+
+                <DaysAndMonthsFlow
+
+                    onFinish={() => {
+
+                        setCurrentPage(
+                            "lessonComplete"
+                        );
+
+                    }}
+
+                    onBack={() => {
+
+                        setCurrentPage(
+                            "chat"
+                        );
+
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =========================================
+                TOPIC 4
+                SUBTOPIC 2
+                DAILY ROUTINE
+            ========================================= */}
+
+            {currentPage ===
+                "routineRushFlow" && (
+
+                <RoutineRushFlow
+
+                    content={
+                        selectedLesson?.content
+                    }
+
+                    topicId={
+                        selectedTopic?.id
+                    }
+
+                    lessonId={
+                        selectedLesson?.id
+                    }
+
+                    userName={
+                        userName
+                    }
+
+                    onFinish={() => {
+
+                        setCurrentPage(
+                            "lessonComplete"
+                        );
+
+                    }}
+
+                    onBack={() => {
+
+                        setCurrentPage(
+                            "chat"
+                        );
+
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =========================================
+                TOPIC 4
+                SUBTOPIC 3
+                MAKING PLANS
+            ========================================= */}
+
+            {currentPage ===
+                "myPlanMyDayFlow" && (
+
+                <MyPlanMyDayFlow
+
+                    onFinish={() => {
+
+                        setCurrentPage(
+                            "lessonComplete"
+                        );
+
+                    }}
+
+                    onBack={() => {
+
+                        setCurrentPage(
+                            "chat"
+                        );
+
+                    }}
+
+                />
+
+            )}
+
+
+            {/* =========================================
+                TOPIC 4
+                SUBTOPIC 4
+                FINAL CHALLENGE 4
+            ========================================= */}
+
+            {currentPage ===
+                "finalChallenge4" && (
+
+                <FinalChallenge4Flow
+
+                    content={
+                        selectedLesson?.content
+                    }
+
+                    topicId={
+                        selectedTopic?.id
+                    }
+
+                    lessonId={
+                        selectedLesson?.id
+                    }
 
                     userName={
                         userName
                     }
 
 
-                    onFinish={() => {
+                    onNext={() => {
 
                         setCurrentPage(
                             "lessonComplete"

@@ -1,0 +1,1760 @@
+/* =====================================================
+   PERSONALITY TRAITS
+   ACTIVITY 1 - TRAIT DETECTIVE
+   FINAL LAYOUT
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+.trait-detective-activity1-page,
+.trait-detective-activity1-page * {
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.trait-detective-activity1-page {
+
+    width: 100%;
+    min-height: 100vh;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    padding: 24px;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.trait-detective-activity1-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.12);
+
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.trait-detective-activity1-card {
+
+    width: min(1250px, 94vw);
+
+    min-height: 720px;
+
+    max-height: 92vh;
+
+    background-image:
+        url("../../assets/partner.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    border-radius: 30px;
+
+    position: relative;
+
+    z-index: 5;
+
+    padding: 28px 38px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.25);
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.trait-detective-activity1-header {
+
+    display: grid;
+
+    grid-template-columns:
+        130px 1fr 130px;
+
+    align-items: center;
+
+    gap: 20px;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   HEADER CENTER
+===================================================== */
+
+.trait-detective-header-center {
+
+    text-align: center;
+}
+
+
+.trait-detective-header-center h1 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 34px;
+
+    font-weight: 800;
+
+    line-height: 1.15;
+}
+
+
+.trait-detective-header-center span {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color: #8B5E3C;
+
+    font-size: 16px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   HEADER LEFT
+===================================================== */
+
+.trait-detective-header-left {
+
+    display: flex;
+
+    justify-content: flex-start;
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.trait-detective-back-btn {
+
+    width: 120px;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #8B5E3C;
+
+    color: #FFFFFF;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+.trait-detective-back-btn:hover {
+
+    background: #6C452A;
+
+    transform: translateY(-2px);
+}
+
+
+.trait-detective-back-btn:disabled {
+
+    opacity: 0.65;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =====================================================
+   HEADER RIGHT
+===================================================== */
+
+.trait-detective-header-right {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+}
+
+
+/* =====================================================
+   SKIP BUTTON
+===================================================== */
+
+.trait-detective-skip-btn {
+
+    width: 120px;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #8B5E3C;
+
+    color: #FFFFFF;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+.trait-detective-skip-btn:hover {
+
+    background: #6C452A;
+
+    transform: translateY(-2px);
+}
+
+
+.trait-detective-skip-btn:disabled {
+
+    opacity: 0.65;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =====================================================
+   MAIN ACTIVITY CONTENT
+===================================================== */
+
+.trait-detective-activity-content {
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        34% 66%;
+
+    column-gap: 25px;
+
+    padding:
+        12px 25px 10px;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   TEACHER SECTION
+===================================================== */
+
+.trait-detective-teacher-section {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 0;
+
+    height: 100%;
+
+    padding-bottom: 5px;
+}
+
+
+/* =====================================================
+   TEACHER STAGE
+===================================================== */
+
+.trait-detective-teacher-stage {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-end;
+}
+
+
+/* =====================================================
+   TEACHER IMAGE
+===================================================== */
+
+.trait-detective-teacher-img {
+
+    width: 245px;
+
+    max-width: 100%;
+
+    max-height: 320px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    display: block;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.trait-detective-teacher-img.speaking {
+
+    transform:
+        translateY(-4px)
+        scale(1.02);
+}
+
+
+/* =====================================================
+   TEACHER BUBBLE
+===================================================== */
+
+.trait-detective-teacher-bubble {
+
+    position: relative;
+
+    width: 90%;
+
+    max-width: 330px;
+
+    margin-top: -4px;
+
+    padding: 15px 18px;
+
+    background: #FFFFFF;
+
+    border-radius: 18px;
+
+    border:
+        2px solid #E8EEF8;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.12);
+
+    animation:
+        traitTeacherBubbleIn
+        0.35s
+        ease;
+}
+
+
+/* =====================================================
+   BUBBLE ARROW
+===================================================== */
+
+.trait-detective-teacher-bubble::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -10px;
+
+    left: 50%;
+
+    width: 18px;
+
+    height: 18px;
+
+    background: #FFFFFF;
+
+    border-left:
+        2px solid #E8EEF8;
+
+    border-top:
+        2px solid #E8EEF8;
+
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+}
+
+
+/* =====================================================
+   TEACHER NAME
+===================================================== */
+
+.trait-detective-teacher-name {
+
+    position: relative;
+
+    color: #FCBE23;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    text-align: center;
+
+    margin-bottom: 6px;
+}
+
+
+/* =====================================================
+   TEACHER TEXT
+===================================================== */
+
+.trait-detective-teacher-text {
+
+    position: relative;
+
+    color: #374151;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    font-weight: 600;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   TEACHER STATS
+===================================================== */
+
+.trait-detective-teacher-stats {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 15px;
+}
+
+
+/* =====================================================
+   ROUND BADGE
+===================================================== */
+
+.trait-detective-round-badge {
+
+    padding:
+        8px 16px;
+
+    border-radius: 22px;
+
+    background: #FFF3E6;
+
+    border:
+        2px solid #E7D4BF;
+
+    color: #7A4C2C;
+
+    font-size: 14px;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   SCORE BADGE
+===================================================== */
+
+.trait-detective-score-badge {
+
+    padding:
+        8px 16px;
+
+    border-radius: 22px;
+
+    background: #FFF3E6;
+
+    border:
+        2px solid #E7D4BF;
+
+    color: #7A4C2C;
+
+    font-size: 14px;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   MAIN RIGHT SECTION
+===================================================== */
+
+.trait-detective-main-section {
+
+    width: 100%;
+
+    height: 100%;
+
+    min-width: 0;
+
+    min-height: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   QUESTION / CLUE CARD
+===================================================== */
+
+.trait-detective-question-card {
+
+    width: 100%;
+
+    max-width: 720px;
+
+    padding:
+        15px 22px;
+
+    text-align: center;
+
+    background:
+        rgba(255, 248, 239, 0.96);
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 8px 22px
+        rgba(80, 50, 30, 0.08);
+
+    margin-bottom: 12px;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   QUESTION LABEL
+===================================================== */
+
+.trait-detective-question-label {
+
+    color: #8B5E3C;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+    margin-bottom: 5px;
+}
+
+
+/* =====================================================
+   QUESTION
+===================================================== */
+
+.trait-detective-question-card h2 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 25px;
+
+    line-height: 1.25;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   CHARACTER HEADING
+===================================================== */
+
+.trait-detective-character-heading {
+
+    width: 100%;
+
+    max-width: 720px;
+
+    text-align: center;
+
+    color: #7A4C2C;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    margin-bottom: 8px;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   CHARACTER GRID
+===================================================== */
+
+.trait-detective-character-grid {
+
+    width: 100%;
+
+    max-width: 720px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 11px;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   CHARACTER CARD
+===================================================== */
+
+.trait-detective-character-card {
+
+    min-width: 0;
+
+    min-height: 165px;
+
+    border:
+        3px solid transparent;
+
+    padding:
+        12px 8px;
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border-radius: 18px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    box-shadow:
+        0 7px 18px
+        rgba(80, 50, 30, 0.10);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* =====================================================
+   HOVER
+===================================================== */
+
+.trait-detective-character-card:hover:not(:disabled) {
+
+    transform:
+        translateY(-4px);
+
+    border-color:
+        #D8B48A;
+
+    box-shadow:
+        0 12px 25px
+        rgba(80, 50, 30, 0.15);
+}
+
+
+/* =====================================================
+   DISABLED
+===================================================== */
+
+.trait-detective-character-card:disabled {
+
+    cursor: default;
+}
+
+
+/* =====================================================
+   CHARACTER ICON
+===================================================== */
+
+.trait-detective-character-icon {
+
+    width: 76px;
+
+    height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        #FFF3E6;
+
+    border:
+        3px solid #E7D4BF;
+
+    font-size: 40px;
+
+    margin-bottom: 8px;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   CHARACTER NAME
+===================================================== */
+
+.trait-detective-character-name {
+
+    color: #5A3620;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    line-height: 1.15;
+}
+
+
+/* =====================================================
+   CHARACTER TRAIT
+   UPDATED FOR NEW JSX
+===================================================== */
+
+.trait-detective-character-trait {
+
+    margin-top: 4px;
+
+    color: #A06D49;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    line-height: 1.2;
+}
+
+
+/* =====================================================
+   CORRECT
+===================================================== */
+
+.trait-detective-character-card.correct {
+
+    border-color:
+        #65B87A;
+
+    background:
+        #F1FFF4;
+
+    box-shadow:
+        0 8px 22px
+        rgba(70, 150, 90, 0.18);
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =====================================================
+   CORRECT ICON
+===================================================== */
+
+.trait-detective-character-card.correct
+.trait-detective-character-icon {
+
+    border-color:
+        #65B87A;
+
+    background:
+        #E7F8EA;
+}
+
+
+/* =====================================================
+   WRONG
+===================================================== */
+
+.trait-detective-character-card.wrong {
+
+    border-color:
+        #D98282;
+
+    background:
+        #FFF3F3;
+
+    animation:
+        traitWrongShake
+        0.35s
+        ease;
+}
+
+
+/* =====================================================
+   WRONG ICON
+===================================================== */
+
+.trait-detective-character-card.wrong
+.trait-detective-character-icon {
+
+    border-color:
+        #D98282;
+
+    background:
+        #FFE8E5;
+}
+
+
+/* =====================================================
+   TRAIT GUIDE
+===================================================== */
+
+.trait-detective-guide-card {
+
+    width: 100%;
+
+    max-width: 720px;
+
+    margin-top: 12px;
+
+    padding:
+        10px 14px;
+
+    background:
+        rgba(255, 248, 239, 0.96);
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 7px 18px
+        rgba(80, 50, 30, 0.08);
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   TRAIT GUIDE TITLE
+===================================================== */
+
+.trait-detective-guide-title {
+
+    text-align: center;
+
+    color: #7A4C2C;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    margin-bottom: 8px;
+}
+
+
+/* =====================================================
+   TRAIT GUIDE LIST
+===================================================== */
+
+.trait-detective-guide-list {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    column-gap: 22px;
+
+    row-gap: 7px;
+}
+
+
+/* =====================================================
+   TRAIT GUIDE ITEM
+===================================================== */
+
+.trait-detective-guide-item {
+
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    color: #5A3620;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    line-height: 1.25;
+}
+
+
+/* =====================================================
+   GUIDE EMOJI
+===================================================== */
+
+.trait-detective-guide-emoji {
+
+    width: 24px;
+
+    height: 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    font-size: 17px;
+}
+
+
+/* =====================================================
+   GUIDE TRAIT
+===================================================== */
+
+.trait-detective-guide-trait {
+
+    color: #7A4C2C;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   GUIDE ARROW
+===================================================== */
+
+.trait-detective-guide-arrow {
+
+    color: #B17A50;
+
+    font-weight: 800;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   GUIDE MEANING
+===================================================== */
+
+.trait-detective-guide-meaning {
+
+    color: #8B5E3C;
+
+    font-weight: 600;
+
+    min-width: 0;
+}
+
+
+/* =====================================================
+   FEEDBACK
+===================================================== */
+
+.trait-detective-feedback {
+
+    width: 100%;
+
+    max-width: 650px;
+
+    margin-top: 10px;
+
+    padding:
+        10px 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    border-radius: 16px;
+
+    animation:
+        traitFeedbackIn
+        0.3s
+        ease;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   FEEDBACK ICON
+===================================================== */
+
+.feedback-icon {
+
+    font-size: 27px;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   FEEDBACK TEXT
+===================================================== */
+
+.trait-detective-feedback strong {
+
+    font-size: 17px;
+}
+
+
+.trait-detective-feedback p {
+
+    margin:
+        3px 0 0;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   CORRECT FEEDBACK
+===================================================== */
+
+.correct-feedback {
+
+    background:
+        #EFFBF2;
+
+    border:
+        1px solid #BDE5C7;
+
+    color:
+        #28713E;
+}
+
+
+/* =====================================================
+   WRONG FEEDBACK
+===================================================== */
+
+.wrong-feedback {
+
+    background:
+        #FFF5F1;
+
+    border:
+        1px solid #EBCDBF;
+
+    color:
+        #81543E;
+}
+
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes traitTeacherBubbleIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(8px)
+            scale(0.97);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes traitFeedbackIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(8px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes traitWrongShake {
+
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    50% {
+        transform: translateX(4px);
+    }
+
+    75% {
+        transform: translateX(-3px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+/* =====================================================
+   LARGE TABLET
+===================================================== */
+
+@media (max-width: 1050px) {
+
+    .trait-detective-activity1-card {
+
+        max-height: none;
+
+        overflow-y: auto;
+    }
+
+
+    .trait-detective-activity-content {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 20px;
+
+        overflow: visible;
+
+        padding:
+            12px 20px 15px;
+    }
+
+
+    .trait-detective-teacher-section {
+
+        height: auto;
+
+        flex-direction: row;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 18px;
+    }
+
+
+    .trait-detective-teacher-img {
+
+        width: 160px;
+
+        max-height: 230px;
+    }
+
+
+    .trait-detective-teacher-bubble {
+
+        margin-top: 0;
+
+        width: 360px;
+    }
+
+
+    .trait-detective-teacher-stats {
+
+        margin-top: 0;
+
+        flex-direction: column;
+    }
+
+
+    .trait-detective-main-section {
+
+        height: auto;
+
+        overflow: visible;
+    }
+
+
+    .trait-detective-question-card,
+    .trait-detective-character-grid,
+    .trait-detective-guide-card {
+
+        max-width: 760px;
+    }
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .trait-detective-activity1-page {
+
+        padding: 14px;
+    }
+
+
+    .trait-detective-activity1-card {
+
+        width: 96vw;
+
+        min-height: 94vh;
+
+        padding:
+            20px;
+
+        border-radius: 24px;
+    }
+
+
+    .trait-detective-activity1-header {
+
+        grid-template-columns:
+            110px 1fr 110px;
+
+        gap: 10px;
+    }
+
+
+    .trait-detective-header-center h1 {
+
+        font-size: 27px;
+    }
+
+
+    .trait-detective-header-center span {
+
+        font-size: 13px;
+    }
+
+
+    .trait-detective-character-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .trait-detective-character-card {
+
+        min-height: 170px;
+    }
+
+
+    .trait-detective-guide-list {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        column-gap: 14px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .trait-detective-activity1-page {
+
+        padding: 8px;
+
+        align-items: flex-start;
+
+        overflow-y: auto;
+    }
+
+
+    .trait-detective-activity1-card {
+
+        width: 100%;
+
+        min-height: auto;
+
+        max-height: none;
+
+        padding: 16px;
+
+        border-radius: 20px;
+
+        overflow: visible;
+    }
+
+
+    .trait-detective-activity1-header {
+
+        grid-template-columns:
+            1fr 1fr;
+
+        grid-template-rows:
+            auto auto;
+    }
+
+
+    .trait-detective-header-center {
+
+        grid-column:
+            1 / 3;
+
+        grid-row: 1;
+
+        order: 1;
+    }
+
+
+    .trait-detective-header-left {
+
+        grid-column: 1;
+
+        grid-row: 2;
+
+        order: 2;
+    }
+
+
+    .trait-detective-header-right {
+
+        grid-column: 2;
+
+        grid-row: 2;
+
+        order: 3;
+    }
+
+
+    .trait-detective-back-btn,
+    .trait-detective-skip-btn {
+
+        width: 100%;
+
+        height: 42px;
+
+        font-size: 14px;
+    }
+
+
+    .trait-detective-header-center h1 {
+
+        font-size: 23px;
+    }
+
+
+    .trait-detective-header-center span {
+
+        font-size: 12px;
+    }
+
+
+    .trait-detective-activity-content {
+
+        padding:
+            12px 0 5px;
+
+        overflow: visible;
+    }
+
+
+    .trait-detective-teacher-section {
+
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+
+    .trait-detective-teacher-img {
+
+        width: 135px;
+
+        max-height: 185px;
+    }
+
+
+    .trait-detective-teacher-bubble {
+
+        width: 95%;
+
+        max-width: 330px;
+    }
+
+
+    .trait-detective-teacher-stats {
+
+        flex-direction: row;
+
+        margin-top: 4px;
+    }
+
+
+    .trait-detective-question-card {
+
+        padding:
+            14px 12px;
+
+        margin-bottom: 12px;
+    }
+
+
+    .trait-detective-question-label {
+
+        font-size: 11px;
+
+        margin-bottom: 4px;
+    }
+
+
+    .trait-detective-question-card h2 {
+
+        font-size: 20px;
+    }
+
+
+    .trait-detective-character-heading {
+
+        font-size: 12px;
+
+        margin-bottom: 7px;
+    }
+
+
+    .trait-detective-character-grid {
+
+        gap: 8px;
+    }
+
+
+    .trait-detective-character-card {
+
+        min-height: 150px;
+
+        padding:
+            10px 7px;
+
+        border-radius: 15px;
+    }
+
+
+    .trait-detective-character-icon {
+
+        width: 62px;
+
+        height: 62px;
+
+        font-size: 32px;
+
+        margin-bottom: 7px;
+    }
+
+
+    .trait-detective-character-name {
+
+        font-size: 14px;
+    }
+
+
+    .trait-detective-character-trait {
+
+        font-size: 10px;
+
+        margin-top: 3px;
+    }
+
+
+    /* =============================================
+       TRAIT GUIDE - MOBILE
+    ============================================= */
+
+    .trait-detective-guide-card {
+
+        margin-top: 10px;
+
+        padding:
+            10px;
+
+        border-radius: 15px;
+    }
+
+
+    .trait-detective-guide-title {
+
+        font-size: 11px;
+
+        margin-bottom: 7px;
+    }
+
+
+    .trait-detective-guide-list {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 6px;
+    }
+
+
+    .trait-detective-guide-item {
+
+        font-size: 11px;
+
+        gap: 5px;
+    }
+
+
+    .trait-detective-guide-emoji {
+
+        width: 22px;
+
+        height: 22px;
+
+        font-size: 15px;
+    }
+
+
+    .trait-detective-guide-trait {
+
+        white-space: nowrap;
+    }
+
+
+    .trait-detective-feedback {
+
+        margin-top: 10px;
+
+        padding:
+            9px 11px;
+    }
+
+
+    .trait-detective-feedback strong {
+
+        font-size: 15px;
+    }
+
+
+    .trait-detective-feedback p {
+
+        font-size: 11px;
+    }
+
+
+    .feedback-icon {
+
+        font-size: 23px;
+    }
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+    .trait-detective-activity1-card {
+
+        padding: 12px;
+    }
+
+
+    .trait-detective-header-center h1 {
+
+        font-size: 20px;
+    }
+
+
+    .trait-detective-header-center span {
+
+        font-size: 10px;
+    }
+
+
+    .trait-detective-teacher-img {
+
+        width: 115px;
+
+        max-height: 160px;
+    }
+
+
+    .trait-detective-teacher-bubble {
+
+        padding:
+            12px 14px;
+    }
+
+
+    .trait-detective-teacher-text {
+
+        font-size: 12px;
+    }
+
+
+    .trait-detective-round-badge,
+    .trait-detective-score-badge {
+
+        padding:
+            6px 11px;
+
+        font-size: 11px;
+    }
+
+
+    .trait-detective-question-card h2 {
+
+        font-size: 18px;
+    }
+
+
+    .trait-detective-character-card {
+
+        min-height: 135px;
+
+        padding: 8px 5px;
+    }
+
+
+    .trait-detective-character-icon {
+
+        width: 54px;
+
+        height: 54px;
+
+        font-size: 28px;
+    }
+
+
+    .trait-detective-character-name {
+
+        font-size: 13px;
+    }
+
+
+    .trait-detective-character-trait {
+
+        font-size: 9px;
+    }
+
+
+    .trait-detective-guide-item {
+
+        font-size: 10px;
+    }
+}

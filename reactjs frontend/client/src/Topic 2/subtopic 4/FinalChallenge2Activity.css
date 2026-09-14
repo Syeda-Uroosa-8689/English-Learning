@@ -1,0 +1,1004 @@
+/* =========================================
+   FINAL CHALLENGE 2 ACTIVITY PAGE
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.finalchallenge2-activity-container {
+
+    width: 100%;
+    height: 100vh;
+
+    background: url("../../assets/chatbg.jpeg")
+        center center / cover no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   BACKGROUND OVERLAY
+========================================= */
+
+.finalchallenge2-activity-container::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(7px);
+}
+
+
+/* =========================================
+   MAIN CARD
+========================================= */
+
+.finalchallenge2-activity-card {
+
+    position: relative;
+
+    z-index: 10;
+
+    width: 92%;
+
+    max-width: 1450px;
+
+    height: 90vh;
+
+    background-image:
+        url("../../assets/favourite.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    border-radius: 35px;
+
+    padding: 28px 45px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.finalchallenge2-activity-header {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        150px 1fr 150px;
+
+    align-items: center;
+
+    flex-shrink: 0;
+
+    margin-bottom: 10px;
+}
+
+
+/* =========================================
+   BACK BUTTON
+========================================= */
+
+.finalchallenge2-back-btn {
+
+    justify-self: start;
+
+    border: none;
+
+    background: #6B5720;
+
+    color: white;
+
+    padding: 12px 27px;
+
+    border-radius: 30px;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+
+.finalchallenge2-back-btn:hover {
+
+    background: #4F4017;
+
+    transform: translateY(-2px);
+}
+
+
+.finalchallenge2-back-btn:disabled {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.finalchallenge2-activity-title {
+
+    text-align: center;
+}
+
+
+.finalchallenge2-activity-title h1 {
+
+    margin: 0;
+
+    color: #5C3B24;
+
+    font-size: 38px;
+
+    font-weight: 800;
+}
+
+
+.finalchallenge2-activity-title p {
+
+    margin: 3px 0 0;
+
+    color: #806344;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   PROGRESS
+========================================= */
+
+.finalchallenge2-progress {
+
+    justify-self: end;
+
+    background: #6B5720;
+
+    color: white;
+
+    min-width: 75px;
+
+    padding: 10px 15px;
+
+    border-radius: 25px;
+
+    text-align: center;
+
+    font-size: 16px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   CHALLENGE CATEGORY
+========================================= */
+
+.finalchallenge2-category {
+
+    align-self: center;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    background: #EED8B8;
+
+    color: #6B5720;
+
+    border: 1px solid #D8B37C;
+
+    border-radius: 25px;
+
+    padding: 8px 18px;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    margin-bottom: 10px;
+}
+
+
+.finalchallenge2-category span {
+
+    color: #795B3A;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   TEACHER SECTION
+========================================= */
+
+.finalchallenge2-teacher-section {
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+/* =========================================
+   TEACHER IMAGE
+========================================= */
+
+.finalchallenge2-teacher-img {
+
+    width: 180px;
+
+    height: 210px;
+
+    object-fit: contain;
+
+    display: block;
+
+    animation:
+        finalchallenge2TeacherFloat
+        3s ease-in-out infinite;
+}
+
+
+.finalchallenge2-teacher-img.speaking {
+
+    animation:
+        finalchallenge2TeacherFloat
+        3s ease-in-out infinite,
+
+        finalchallenge2TeacherSpeaking
+        0.5s ease-in-out infinite alternate;
+}
+
+
+@keyframes finalchallenge2TeacherFloat {
+
+    0% {
+
+        transform:
+            translateY(0);
+    }
+
+    50% {
+
+        transform:
+            translateY(-6px);
+    }
+
+    100% {
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes finalchallenge2TeacherSpeaking {
+
+    from {
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    to {
+
+        transform:
+            translateY(-2px)
+            scale(1.025);
+    }
+}
+
+
+/* =========================================
+   TEACHER SPEECH BOX
+========================================= */
+
+.finalchallenge2-speech-box {
+
+    width: 80%;
+
+    max-width: 800px;
+
+    min-height: 80px;
+
+    background: #F1DEC5;
+
+    border: 2px solid #D8B37C;
+
+    border-radius: 24px;
+
+    padding: 18px 25px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.08);
+
+    position: relative;
+}
+
+
+/* Speech bubble arrow */
+
+.finalchallenge2-speech-box::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -14px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    border-left:
+        14px solid transparent;
+
+    border-right:
+        14px solid transparent;
+
+    border-bottom:
+        14px solid #D8B37C;
+}
+
+
+.finalchallenge2-speech-box::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: -11px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    border-left:
+        11px solid transparent;
+
+    border-right:
+        11px solid transparent;
+
+    border-bottom:
+        11px solid #F1DEC5;
+}
+
+
+.finalchallenge2-speech-box p {
+
+    margin: 0;
+
+    color: #49382B;
+
+    font-size: 20px;
+
+    line-height: 1.5;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   ANSWER SECTION
+========================================= */
+
+.finalchallenge2-answer-section {
+
+    width: 100%;
+
+    flex-shrink: 0;
+
+    margin-top: 8px;
+}
+
+
+.finalchallenge2-answer-label {
+
+    text-align: center;
+
+    color: #6B5720;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    margin-bottom: 7px;
+}
+
+
+/* =========================================
+   ANSWER BOX
+========================================= */
+
+.finalchallenge2-answer-box {
+
+    width: 80%;
+
+    max-width: 800px;
+
+    height: 75px;
+
+    margin: auto;
+
+    background: #F8EAD9;
+
+    border: 2px dashed #C7A26E;
+
+    border-radius: 20px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 12px 20px;
+
+    text-align: center;
+
+    overflow: hidden;
+}
+
+
+.finalchallenge2-answer-box span {
+
+    color: #927A5D;
+
+    font-size: 16px;
+
+    font-weight: 600;
+}
+
+
+.finalchallenge2-answer-box p {
+
+    margin: 0;
+
+    color: #5C3B24;
+
+    font-size: 18px;
+
+    line-height: 1.4;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   MICROPHONE SECTION
+========================================= */
+
+.finalchallenge2-mic-section {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin-top: 10px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================
+   MICROPHONE BUTTON
+========================================= */
+
+.finalchallenge2-mic-btn {
+
+    border: none;
+
+    background: #6B5720;
+
+    color: white;
+
+    min-width: 220px;
+
+    padding: 13px 28px;
+
+    border-radius: 35px;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        all 0.25s ease;
+
+    box-shadow:
+        0 8px 20px
+        rgba(107, 87, 32, 0.25);
+}
+
+
+.finalchallenge2-mic-btn:hover {
+
+    background: #4F4017;
+
+    transform:
+        translateY(-2px);
+}
+
+
+.finalchallenge2-mic-btn:active {
+
+    transform:
+        scale(0.97);
+}
+
+
+.finalchallenge2-mic-btn:disabled {
+
+    opacity: 0.65;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================
+   LISTENING STATE
+========================================= */
+
+.finalchallenge2-mic-btn.listening {
+
+    background: #8A6A32;
+
+    animation:
+        finalchallenge2MicPulse
+        1s infinite;
+}
+
+
+@keyframes finalchallenge2MicPulse {
+
+    0% {
+
+        box-shadow:
+            0 0 0 0
+            rgba(107, 87, 32, 0.35);
+    }
+
+    70% {
+
+        box-shadow:
+            0 0 0 15px
+            rgba(107, 87, 32, 0);
+    }
+
+    100% {
+
+        box-shadow:
+            0 0 0 0
+            rgba(107, 87, 32, 0);
+    }
+}
+
+
+/* =========================================
+   BOTTOM INFORMATION
+========================================= */
+
+.finalchallenge2-bottom-info {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 10px;
+
+    padding-top: 8px;
+
+    border-top:
+        1px solid #DEC9AC;
+
+    color: #806344;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================
+   COMPLETION SCREEN
+========================================= */
+
+.finalchallenge2-complete-section {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    gap: 12px;
+}
+
+
+.finalchallenge2-complete-section
+.finalchallenge2-teacher-img {
+
+    width: 210px;
+
+    height: 250px;
+}
+
+
+.finalchallenge2-complete-section h1 {
+
+    margin: 0;
+
+    color: #5C3B24;
+
+    font-size: 38px;
+
+    font-weight: 800;
+}
+
+
+.finalchallenge2-complete-section p {
+
+    margin: 0;
+
+    color: #6B5A4A;
+
+    font-size: 18px;
+}
+
+
+/* =========================================
+   SCORE PREVIEW
+========================================= */
+
+.finalchallenge2-score-preview {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: baseline;
+
+    gap: 5px;
+
+    background: #F1DEC5;
+
+    border: 2px solid #D8B37C;
+
+    border-radius: 25px;
+
+    padding: 12px 30px;
+
+    margin: 5px 0;
+}
+
+
+.finalchallenge2-score-preview strong {
+
+    color: #6B5720;
+
+    font-size: 48px;
+
+    font-weight: 800;
+}
+
+
+.finalchallenge2-score-preview span {
+
+    color: #806344;
+
+    font-size: 20px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   VIEW RESULT BUTTON
+========================================= */
+
+.finalchallenge2-view-result-btn {
+
+    border: none;
+
+    background: #6B5720;
+
+    color: white;
+
+    padding: 14px 32px;
+
+    border-radius: 30px;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+
+    margin-top: 5px;
+}
+
+
+.finalchallenge2-view-result-btn:hover {
+
+    background: #4F4017;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .finalchallenge2-activity-card {
+
+        width: 95%;
+
+        height: 94vh;
+
+        padding:
+            22px 25px;
+    }
+
+
+    .finalchallenge2-activity-header {
+
+        grid-template-columns:
+            120px 1fr 100px;
+    }
+
+
+    .finalchallenge2-activity-title h1 {
+
+        font-size: 32px;
+    }
+
+
+    .finalchallenge2-teacher-img {
+
+        width: 155px;
+
+        height: 180px;
+    }
+
+
+    .finalchallenge2-speech-box,
+    .finalchallenge2-answer-box {
+
+        width: 90%;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .finalchallenge2-activity-card {
+
+        width: 96%;
+
+        height: 96vh;
+
+        border-radius: 25px;
+
+        padding:
+            18px 15px;
+    }
+
+
+    .finalchallenge2-activity-header {
+
+        grid-template-columns:
+            80px 1fr 65px;
+
+        margin-bottom: 5px;
+    }
+
+
+    .finalchallenge2-back-btn {
+
+        padding:
+            9px 12px;
+
+        font-size: 13px;
+    }
+
+
+    .finalchallenge2-activity-title h1 {
+
+        font-size: 25px;
+    }
+
+
+    .finalchallenge2-activity-title p {
+
+        font-size: 12px;
+    }
+
+
+    .finalchallenge2-progress {
+
+        min-width: 45px;
+
+        padding: 8px;
+
+        font-size: 13px;
+    }
+
+
+    .finalchallenge2-category {
+
+        font-size: 12px;
+
+        padding:
+            7px 12px;
+
+        gap: 6px;
+    }
+
+
+    .finalchallenge2-teacher-img {
+
+        width: 125px;
+
+        height: 150px;
+    }
+
+
+    .finalchallenge2-speech-box {
+
+        width: 100%;
+
+        min-height: 85px;
+
+        padding: 14px;
+    }
+
+
+    .finalchallenge2-speech-box p {
+
+        font-size: 15px;
+    }
+
+
+    .finalchallenge2-answer-box {
+
+        width: 100%;
+
+        height: 70px;
+    }
+
+
+    .finalchallenge2-answer-box p {
+
+        font-size: 15px;
+    }
+
+
+    .finalchallenge2-mic-btn {
+
+        min-width: 190px;
+
+        padding:
+            12px 20px;
+
+        font-size: 16px;
+    }
+
+
+    .finalchallenge2-bottom-info {
+
+        font-size: 11px;
+    }
+
+
+    .finalchallenge2-complete-section h1 {
+
+        font-size: 28px;
+    }
+
+
+    .finalchallenge2-complete-section
+    .finalchallenge2-teacher-img {
+
+        width: 160px;
+
+        height: 190px;
+    }
+}

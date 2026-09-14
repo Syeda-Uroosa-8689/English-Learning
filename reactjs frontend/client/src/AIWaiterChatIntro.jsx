@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./AIWaiterIntro.css";
 
 function AIWaiterIntro({ onFinish }) {
 
@@ -7,9 +8,7 @@ function AIWaiterIntro({ onFinish }) {
     useEffect(() => {
 
         const showTimer = setTimeout(() => {
-
             setShow(true);
-
         }, 100);
 
         const hideTimer = setTimeout(() => {
@@ -17,18 +16,14 @@ function AIWaiterIntro({ onFinish }) {
             setShow(false);
 
             setTimeout(() => {
-
-                onFinish();
-
+                onFinish?.();
             }, 500);
 
-        }, 4000);
+        }, 1500);
 
         return () => {
-
             clearTimeout(showTimer);
             clearTimeout(hideTimer);
-
         };
 
     }, [onFinish]);
@@ -37,32 +32,27 @@ function AIWaiterIntro({ onFinish }) {
 
         <div className="waiter-intro-container">
 
-            <div className={show ? "waiter-intro-popup show" : "waiter-intro-popup"}>
+            <div
+                className={
+                    show
+                        ? "waiter-intro-popup show"
+                        : "waiter-intro-popup"
+                }
+            >
 
                 <div className="waiter-icon">
-
                     🍽️
-
                 </div>
 
                 <h1>
-
                     AI Waiter
-
                 </h1>
-
-                <p>
-
-                    Practice ordering food politely in English.
-
-                </p>
 
             </div>
 
         </div>
 
     );
-
 }
 
 export default AIWaiterIntro;

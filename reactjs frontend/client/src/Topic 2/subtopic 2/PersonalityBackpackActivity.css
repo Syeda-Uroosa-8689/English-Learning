@@ -1,0 +1,1433 @@
+/* =====================================================
+   PERSONALITY BACKPACK
+   ACTIVITY 2 - DRAG AND PACK
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.personality-backpack-page {
+
+    width: 100%;
+    min-height: 100vh;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    padding: 24px;
+
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.personality-backpack-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(5px);
+
+}
+
+
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.personality-backpack-card {
+
+    width: min(1250px, 94vw);
+
+    min-height: 720px;
+
+    max-height: 92vh;
+
+    background-image:
+        url("../../assets/partner.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    border-radius: 30px;
+
+    position: relative;
+
+    z-index: 5;
+
+    padding: 28px 38px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.25);
+
+    overflow: hidden;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.personality-backpack-header {
+
+    display: grid;
+
+    grid-template-columns:
+        130px 1fr 130px;
+
+    align-items: center;
+
+    gap: 20px;
+
+    flex-shrink: 0;
+
+}
+
+
+.personality-backpack-header-center {
+
+    text-align: center;
+
+}
+
+
+.personality-backpack-header-center h1 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 34px;
+
+    font-weight: 800;
+
+}
+
+
+.personality-backpack-header-center span {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color: #8B5E3C;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+}
+
+
+/* =====================================================
+   HEADER BUTTONS
+===================================================== */
+
+.personality-backpack-header-left {
+
+    display: flex;
+
+    justify-content: flex-start;
+
+}
+
+
+.personality-backpack-header-right {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+}
+
+
+.personality-backpack-back-btn,
+.personality-backpack-skip-btn {
+
+    width: 120px;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #8B5E3C;
+
+    color: #FFFFFF;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+
+}
+
+
+.personality-backpack-back-btn:hover,
+.personality-backpack-skip-btn:hover {
+
+    background: #6C452A;
+
+    transform: translateY(-2px);
+
+}
+
+
+.personality-backpack-back-btn:disabled,
+.personality-backpack-skip-btn:disabled {
+
+    opacity: 0.65;
+
+    cursor: default;
+
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.personality-backpack-activity-content {
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        34% 66%;
+
+    column-gap: 25px;
+
+    padding:
+        12px 25px 10px;
+
+}
+
+
+/* =====================================================
+   TEACHER SECTION
+===================================================== */
+
+.personality-backpack-teacher-section {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 0;
+
+    height: 100%;
+
+}
+
+
+.personality-backpack-teacher-stage {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-end;
+
+}
+
+
+.personality-backpack-teacher-img {
+
+    width: 245px;
+
+    max-width: 100%;
+
+    max-height: 320px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    display: block;
+
+    transition:
+        transform 0.25s ease;
+
+}
+
+
+.personality-backpack-teacher-img.speaking {
+
+    animation:
+        personalityTeacherSpeaking
+        0.8s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
+
+@keyframes personalityTeacherSpeaking {
+
+    from {
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+    to {
+
+        transform:
+            translateY(-5px)
+            scale(1.025);
+
+    }
+
+}
+
+
+/* =====================================================
+   TEACHER BUBBLE
+===================================================== */
+
+.personality-backpack-teacher-bubble {
+
+    position: relative;
+
+    width: 90%;
+
+    max-width: 330px;
+
+    margin-top: -4px;
+
+    padding: 15px 18px;
+
+    background: #FFFFFF;
+
+    border-radius: 18px;
+
+    border:
+        2px solid #E8EEF8;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.12);
+
+}
+
+
+.personality-backpack-teacher-bubble::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -10px;
+
+    left: 50%;
+
+    width: 18px;
+
+    height: 18px;
+
+    background: #FFFFFF;
+
+    border-left:
+        2px solid #E8EEF8;
+
+    border-top:
+        2px solid #E8EEF8;
+
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+
+}
+
+
+.personality-backpack-teacher-name {
+
+    color: #FCBE23;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    text-align: center;
+
+    margin-bottom: 6px;
+
+}
+
+
+.personality-backpack-teacher-text {
+
+    color: #374151;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    font-weight: 600;
+
+    text-align: center;
+
+}
+
+
+/* =====================================================
+   TEACHER STATS
+===================================================== */
+
+.personality-backpack-teacher-stats {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 15px;
+
+}
+
+
+.personality-backpack-round-badge,
+.personality-backpack-score-badge {
+
+    padding:
+        8px 16px;
+
+    border-radius: 22px;
+
+    background: #FFF3E6;
+
+    border:
+        2px solid #E7D4BF;
+
+    color: #7A4C2C;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+}
+
+
+/* =====================================================
+   MAIN RIGHT SECTION
+===================================================== */
+
+.personality-backpack-main-section {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    min-width: 0;
+
+}
+
+
+/* =====================================================
+   SITUATION CARD
+===================================================== */
+
+.personality-backpack-situation-card {
+
+    width: 100%;
+
+    max-width: 720px;
+
+    padding:
+        18px 24px;
+
+    text-align: center;
+
+    background:
+        rgba(255, 248, 239, 0.96);
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 8px 22px rgba(80, 50, 30, 0.08);
+
+    margin-bottom: 14px;
+
+}
+
+
+.personality-backpack-situation-label {
+
+    color: #8B5E3C;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+    margin-bottom: 6px;
+
+}
+
+
+.personality-backpack-situation-card h2 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 23px;
+
+    line-height: 1.35;
+
+    font-weight: 800;
+
+}
+
+
+.personality-backpack-situation-card p {
+
+    margin:
+        7px 0 0;
+
+    color: #7A4C2C;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+}
+
+
+/* =====================================================
+   GAME AREA
+===================================================== */
+
+.personality-backpack-game-area {
+
+    width: 100%;
+
+    max-width: 720px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1.1fr;
+
+    gap: 18px;
+
+    align-items: center;
+
+}
+
+
+/* =====================================================
+   TRAIT GRID
+===================================================== */
+
+.personality-backpack-trait-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 10px;
+
+}
+
+
+.personality-backpack-trait-card {
+
+    min-height: 82px;
+
+    padding:
+        9px 10px;
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border:
+        3px solid transparent;
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 7px 18px
+        rgba(80, 50, 30, 0.10);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 4px;
+
+    cursor: grab;
+
+    user-select: none;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease,
+        opacity 0.2s ease;
+
+}
+
+
+.personality-backpack-trait-card:hover {
+
+    transform:
+        translateY(-4px)
+        rotate(-1deg);
+
+    border-color:
+        #D8B48A;
+
+    box-shadow:
+        0 12px 25px
+        rgba(80, 50, 30, 0.15);
+
+}
+
+
+.personality-backpack-trait-card:active {
+
+    cursor: grabbing;
+
+}
+
+
+.personality-backpack-trait-card.dragging {
+
+    opacity: 0.45;
+
+    transform:
+        scale(0.95);
+
+}
+
+
+.personality-backpack-trait-card.correct-selected {
+
+    border-color: #65B87A;
+
+    background: #F1FFF4;
+
+}
+
+
+.personality-backpack-trait-card.wrong-selected {
+
+    border-color: #D98282;
+
+    background: #FFF3F3;
+
+    animation:
+        wrongTraitShake
+        0.4s ease;
+
+}
+
+
+@keyframes wrongTraitShake {
+
+    0%,
+    100% {
+
+        transform:
+            translateX(0);
+
+    }
+
+    25% {
+
+        transform:
+            translateX(-7px);
+
+    }
+
+    75% {
+
+        transform:
+            translateX(7px);
+
+    }
+
+}
+
+
+.personality-backpack-trait-icon {
+
+    font-size: 29px;
+
+    line-height: 1;
+
+}
+
+
+.personality-backpack-trait-name {
+
+    color: #5A3620;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    text-align: center;
+
+}
+
+
+/* =====================================================
+   BACKPACK DROP ZONE
+===================================================== */
+
+.personality-backpack-drop-zone {
+
+    position: relative;
+
+    min-height: 350px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border-radius: 28px;
+
+    border:
+        3px dashed
+        rgba(216, 180, 138, 0.65);
+
+    background:
+        rgba(255, 248, 239, 0.38);
+
+    transition:
+        0.25s ease;
+
+}
+
+
+.personality-backpack-drop-zone.active {
+
+    transform:
+        scale(1.02);
+
+    border-color:
+        #D08A42;
+
+    background:
+        rgba(255, 243, 226, 0.75);
+
+    box-shadow:
+        0 0 30px
+        rgba(208, 138, 66, 0.25);
+
+}
+
+
+/* =====================================================
+   BAG WRAPPER
+===================================================== */
+
+.personality-backpack-bag-wrapper {
+
+    width: 270px;
+
+    height: 310px;
+
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+/* =====================================================
+   BAG IMAGE
+===================================================== */
+
+.personality-backpack-bag-img {
+
+    width: 100%;
+
+    max-height: 100%;
+
+    object-fit: contain;
+
+    position: relative;
+
+    z-index: 3;
+
+    animation:
+        backpackFloat
+        2.2s
+        ease-in-out
+        infinite;
+
+    transition:
+        transform 0.25s ease;
+
+}
+
+
+.personality-backpack-bag-img.open {
+
+    animation:
+        backpackOpenPulse
+        0.55s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
+
+@keyframes backpackFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-7px);
+
+    }
+
+}
+
+
+@keyframes backpackOpenPulse {
+
+    from {
+
+        transform:
+            scale(1)
+            translateY(0);
+
+    }
+
+    to {
+
+        transform:
+            scale(1.035)
+            translateY(-4px);
+
+    }
+
+}
+
+
+/* =====================================================
+   DROP TEXT
+===================================================== */
+
+.personality-backpack-drop-text {
+
+    position: absolute;
+
+    bottom: 18px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 5;
+
+    padding:
+        8px 14px;
+
+    white-space: nowrap;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255, 255, 255, 0.92);
+
+    color: #7A4C2C;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 5px 15px
+        rgba(80, 50, 30, 0.12);
+
+}
+
+
+/* =====================================================
+   TRAIT ENTERING BAG
+===================================================== */
+
+.personality-backpack-packed-trait {
+
+    position: absolute;
+
+    top: 42%;
+
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index: 6;
+
+    min-width: 110px;
+
+    padding:
+        10px 14px;
+
+    border-radius: 16px;
+
+    background: #FFFFFF;
+
+    border:
+        3px solid #65B87A;
+
+    box-shadow:
+        0 10px 25px
+        rgba(50, 130, 70, 0.25);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 3px;
+
+    color: #28713E;
+
+}
+
+
+.personality-backpack-packed-trait span {
+
+    font-size: 26px;
+
+}
+
+
+.personality-backpack-packed-trait strong {
+
+    font-size: 14px;
+
+}
+
+
+.personality-backpack-packed-trait.packing {
+
+    animation:
+        traitFlyIntoBag
+        1.3s
+        ease-in
+        forwards;
+
+}
+
+
+@keyframes traitFlyIntoBag {
+
+    0% {
+
+        opacity: 1;
+
+        transform:
+            translate(-50%, -160%)
+            scale(1.15);
+
+    }
+
+    60% {
+
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.9);
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translate(-50%, 15%)
+            scale(0.35);
+
+    }
+
+}
+
+
+/* =====================================================
+   SPARKLES
+===================================================== */
+
+.bag-sparkle {
+
+    position: absolute;
+
+    z-index: 8;
+
+    font-size: 24px;
+
+    animation:
+        sparklePop
+        0.9s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
+
+.sparkle-1 {
+
+    top: 35px;
+
+    left: 20px;
+
+}
+
+
+.sparkle-2 {
+
+    top: 60px;
+
+    right: 18px;
+
+    animation-delay: 0.2s;
+
+}
+
+
+.sparkle-3 {
+
+    bottom: 60px;
+
+    right: 30px;
+
+    animation-delay: 0.4s;
+
+}
+
+
+@keyframes sparklePop {
+
+    from {
+
+        transform:
+            scale(0.8)
+            rotate(0deg);
+
+        opacity: 0.6;
+
+    }
+
+    to {
+
+        transform:
+            scale(1.2)
+            rotate(15deg);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* =====================================================
+   DRAG HINT
+===================================================== */
+
+.personality-backpack-drag-hint {
+
+    grid-column:
+        1 / -1;
+
+    text-align: center;
+
+    padding:
+        10px 15px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255, 243, 226, 0.88);
+
+    color: #7A4C2C;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1050px) {
+
+    .personality-backpack-card {
+
+        max-height: none;
+
+    }
+
+
+    .personality-backpack-activity-content {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 20px;
+
+        overflow-y: auto;
+
+    }
+
+
+    .personality-backpack-teacher-section {
+
+        height: auto;
+
+        flex-direction: row;
+
+        gap: 18px;
+
+    }
+
+
+    .personality-backpack-teacher-img {
+
+        width: 160px;
+
+        max-height: 230px;
+
+    }
+
+
+    .personality-backpack-teacher-bubble {
+
+        margin-top: 0;
+
+        width: 360px;
+
+    }
+
+
+    .personality-backpack-teacher-stats {
+
+        margin-top: 0;
+
+        flex-direction: column;
+
+    }
+
+}
+
+
+/* =====================================================
+   SMALL TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .personality-backpack-page {
+
+        padding: 14px;
+
+    }
+
+
+    .personality-backpack-card {
+
+        width: 96vw;
+
+        min-height: 94vh;
+
+        padding: 20px;
+
+        border-radius: 24px;
+
+    }
+
+
+    .personality-backpack-header {
+
+        grid-template-columns:
+            110px 1fr 110px;
+
+        gap: 10px;
+
+    }
+
+
+    .personality-backpack-header-center h1 {
+
+        font-size: 27px;
+
+    }
+
+
+    .personality-backpack-game-area {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .personality-backpack-trait-grid {
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+    }
+
+
+    .personality-backpack-drop-zone {
+
+        min-height: 280px;
+
+    }
+
+
+    .personality-backpack-bag-wrapper {
+
+        width: 230px;
+
+        height: 250px;
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .personality-backpack-card {
+
+        padding: 16px;
+
+        border-radius: 20px;
+
+    }
+
+
+    .personality-backpack-header {
+
+        grid-template-columns:
+            1fr 1fr;
+
+        grid-template-rows:
+            auto auto;
+
+    }
+
+
+    .personality-backpack-header-center {
+
+        grid-column:
+            1 / 3;
+
+        grid-row: 1;
+
+    }
+
+
+    .personality-backpack-header-left {
+
+        grid-column: 1;
+
+        grid-row: 2;
+
+    }
+
+
+    .personality-backpack-header-right {
+
+        grid-column: 2;
+
+        grid-row: 2;
+
+    }
+
+
+    .personality-backpack-back-btn,
+    .personality-backpack-skip-btn {
+
+        width: 100%;
+
+        height: 42px;
+
+        font-size: 14px;
+
+    }
+
+
+    .personality-backpack-header-center h1 {
+
+        font-size: 23px;
+
+    }
+
+
+    .personality-backpack-activity-content {
+
+        padding:
+            12px 0 5px;
+
+    }
+
+
+    .personality-backpack-teacher-section {
+
+        flex-direction: column;
+
+        gap: 8px;
+
+    }
+
+
+    .personality-backpack-teacher-img {
+
+        width: 135px;
+
+        max-height: 185px;
+
+    }
+
+
+    .personality-backpack-teacher-bubble {
+
+        width: 95%;
+
+        max-width: 330px;
+
+    }
+
+
+    .personality-backpack-teacher-stats {
+
+        flex-direction: row;
+
+        margin-top: 4px;
+
+    }
+
+
+    .personality-backpack-situation-card {
+
+        padding:
+            16px 14px;
+
+    }
+
+
+    .personality-backpack-situation-card h2 {
+
+        font-size: 19px;
+
+    }
+
+
+    .personality-backpack-trait-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .personality-backpack-drop-zone {
+
+        min-height: 250px;
+
+    }
+
+
+    .personality-backpack-bag-wrapper {
+
+        width: 205px;
+
+        height: 230px;
+
+    }
+
+}

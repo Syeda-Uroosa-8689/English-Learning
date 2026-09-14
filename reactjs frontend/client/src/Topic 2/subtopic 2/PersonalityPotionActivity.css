@@ -1,0 +1,1558 @@
+/* =====================================================
+   PERSONALITY POTION
+   ACTIVITY 3
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.personality-potion-activity-page {
+    width: 100%;
+    min-height: 100vh;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    padding: 18px;
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.personality-potion-activity-overlay {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.18);
+
+    backdrop-filter: blur(3px);
+}
+
+
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.personality-potion-activity-card {
+    width: min(1500px, 94vw);
+    height: min(930px, 92vh);
+
+    background-image: url("../../assets/partner.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border-radius: 28px;
+
+    position: relative;
+
+    z-index: 5;
+
+    padding: 22px 28px 18px;
+
+    display: flex;
+    flex-direction: column;
+
+    box-shadow:
+        0 18px 55px
+        rgba(0, 0, 0, 0.24);
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.personality-potion-activity-header {
+    display: grid;
+
+    grid-template-columns:
+        140px
+        minmax(0, 1fr)
+        140px;
+
+    align-items: center;
+
+    gap: 16px;
+
+    flex-shrink: 0;
+}
+
+
+.personality-potion-header-center {
+    text-align: center;
+}
+
+
+.personality-potion-header-center h1 {
+    margin: 0;
+
+    color: #4e321f;
+
+    font-size:
+        clamp(32px, 3vw, 52px);
+
+    line-height: 1;
+
+    font-weight: 900;
+}
+
+
+.personality-potion-header-center span {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #7a4c2c;
+
+    font-size:
+        clamp(15px, 1.4vw, 21px);
+
+    font-weight: 700;
+}
+
+
+.personality-potion-header-left {
+    display: flex;
+
+    justify-content: flex-start;
+}
+
+
+.personality-potion-header-right {
+    display: flex;
+
+    justify-content: flex-end;
+}
+
+
+/* =====================================================
+   HEADER BUTTONS
+===================================================== */
+
+.personality-potion-back-btn,
+.personality-potion-skip-btn {
+    width: 130px;
+    height: 54px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #9a6a43,
+            #7a4c2c
+        );
+
+    color: #ffffff;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+
+    box-shadow:
+        0 7px 16px
+        rgba(80, 45, 20, 0.18);
+}
+
+
+.personality-potion-back-btn:hover,
+.personality-potion-skip-btn:hover {
+    transform:
+        translateY(-2px);
+
+    filter:
+        brightness(1.06);
+}
+
+
+.personality-potion-back-btn:disabled,
+.personality-potion-skip-btn:disabled {
+    opacity: 0.7;
+
+    cursor: default;
+}
+
+
+/* =====================================================
+   MOBILE TITLE
+===================================================== */
+
+.personality-potion-mobile-lab-title {
+    display: none;
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.personality-potion-activity-content {
+    flex: 1;
+
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        25%
+        minmax(0, 1fr)
+        22%;
+
+    gap: 22px;
+
+    align-items: center;
+
+    padding:
+        16px 0 0;
+}
+
+
+/* =====================================================
+   TEACHER SECTION
+===================================================== */
+
+.personality-potion-teacher-section {
+    height: 100%;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.personality-potion-teacher-stage {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-end;
+}
+
+
+.personality-potion-teacher-img {
+    width:
+        min(220px, 100%);
+
+    max-height: 315px;
+
+    object-fit: contain;
+
+    display: block;
+
+    transition:
+        0.25s ease;
+}
+
+
+.personality-potion-teacher-img.speaking {
+    transform:
+        translateY(-5px)
+        scale(1.02);
+}
+
+
+/* =====================================================
+   TEACHER BUBBLE
+===================================================== */
+
+.personality-potion-teacher-bubble {
+    position: relative;
+
+    width: 100%;
+
+    max-width: 370px;
+
+    margin-top: -4px;
+
+    padding:
+        17px 18px;
+
+    background:
+        rgba(255, 255, 255, 0.94);
+
+    border-radius: 22px;
+
+    border:
+        2px solid
+        rgba(232, 238, 248, 0.9);
+
+    box-shadow:
+        0 8px 22px
+        rgba(0, 0, 0, 0.12);
+}
+
+
+.personality-potion-teacher-bubble::before {
+    content: "";
+
+    position: absolute;
+
+    top: -9px;
+
+    left: 50%;
+
+    width: 17px;
+    height: 17px;
+
+    background: #ffffff;
+
+    border-left:
+        2px solid #e8eef8;
+
+    border-top:
+        2px solid #e8eef8;
+
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+}
+
+
+.personality-potion-teacher-name {
+    position: relative;
+
+    color: #d89719;
+
+    font-size: 19px;
+
+    font-weight: 900;
+
+    text-align: center;
+
+    margin-bottom: 7px;
+}
+
+
+.personality-potion-teacher-text {
+    position: relative;
+
+    color: #435064;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+
+    font-weight: 700;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.personality-potion-teacher-stats {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    margin-top: 16px;
+}
+
+
+.personality-potion-round-badge,
+.personality-potion-score-badge {
+    min-width: 105px;
+
+    padding:
+        11px 18px;
+
+    border-radius: 24px;
+
+    text-align: center;
+
+    background:
+        rgba(255, 248, 239, 0.92);
+
+    border:
+        2px solid #e7d4bf;
+
+    color: #70472c;
+
+    font-size: 15px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 5px 12px
+        rgba(80, 50, 30, 0.08);
+}
+
+
+/* =====================================================
+   CENTER MAIN
+===================================================== */
+
+.personality-potion-main-section {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =====================================================
+   SITUATION
+===================================================== */
+
+.personality-potion-situation-card {
+    width: 100%;
+
+    max-width: 780px;
+
+    padding:
+        20px 28px;
+
+    text-align: center;
+
+    background:
+        rgba(255, 250, 243, 0.86);
+
+    border:
+        2px solid
+        rgba(222, 197, 166, 0.85);
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 8px 22px
+        rgba(80, 50, 30, 0.08);
+
+    margin-bottom: 14px;
+}
+
+
+.personality-potion-question-label {
+    color: #6f4a30;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+}
+
+
+.personality-potion-situation-card h2 {
+    margin: 0;
+
+    color: #4f3523;
+
+    font-size:
+        clamp(19px, 1.8vw, 29px);
+
+    line-height: 1.35;
+
+    font-weight: 900;
+}
+
+
+.personality-potion-situation-card p {
+    margin:
+        12px 0 0;
+
+    padding-top: 12px;
+
+    border-top:
+        1px solid
+        rgba(183, 145, 104, 0.24);
+
+    color: #725038;
+
+    font-size:
+        clamp(14px, 1.3vw, 20px);
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   TRAIT GRID
+===================================================== */
+
+.personality-potion-trait-grid {
+    width: 100%;
+
+    max-width: 780px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 13px;
+}
+
+
+.personality-potion-trait-card {
+    min-width: 0;
+
+    min-height: 165px;
+
+    border:
+        2px solid
+        rgba(220, 206, 190, 0.75);
+
+    padding:
+        15px 10px;
+
+    background:
+        rgba(255, 255, 255, 0.90);
+
+    border-radius: 19px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    box-shadow:
+        0 7px 18px
+        rgba(80, 50, 30, 0.09);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.personality-potion-trait-card:hover:not(:disabled) {
+    transform:
+        translateY(-4px);
+
+    border-color:
+        #d6b07f;
+
+    box-shadow:
+        0 12px 25px
+        rgba(80, 50, 30, 0.15);
+}
+
+
+.personality-potion-trait-card:disabled {
+    cursor: default;
+}
+
+
+.personality-potion-trait-icon {
+    width: 62px;
+    height: 62px;
+
+    margin:
+        0 auto 8px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 247, 235, 0.95);
+
+    border:
+        2px solid #e7d4bf;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 34px;
+
+    box-shadow:
+        inset 0 2px 7px
+        rgba(255, 255, 255, 0.8);
+}
+
+
+.personality-potion-trait-name {
+    color: #503522;
+
+    font-size: 19px;
+
+    font-weight: 900;
+
+    text-align: center;
+}
+
+
+.personality-potion-trait-description {
+    margin-top: 6px;
+
+    color: #694d38;
+
+    font-size: 13px;
+
+    line-height: 1.42;
+
+    font-weight: 700;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   CORRECT / WRONG
+===================================================== */
+
+.personality-potion-trait-card.correct {
+    border-color:
+        #69b88a;
+
+    background:
+        rgba(238, 255, 242, 0.92);
+}
+
+
+.personality-potion-trait-card.wrong {
+    border-color:
+        #d98282;
+
+    background:
+        rgba(255, 243, 243, 0.95);
+}
+
+
+/* =====================================================
+   POTION LAB
+===================================================== */
+
+.personality-potion-lab-section {
+    min-width: 0;
+
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    padding-top: 22px;
+}
+
+
+.personality-potion-lab-title {
+    position: absolute;
+
+    top: 4px;
+
+    right: 0;
+
+    z-index: 20;
+
+    white-space: nowrap;
+
+    padding:
+        12px 22px;
+
+    border-radius: 24px;
+
+    background:
+        rgba(255, 250, 244, 0.94);
+
+    border:
+        2px solid
+        rgba(231, 212, 191, 0.9);
+
+    color: #69452e;
+
+    font-size: 16px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 6px 16px
+        rgba(80, 50, 30, 0.08);
+}
+
+
+/* =====================================================
+   TEST TUBE STAGE
+===================================================== */
+
+.personality-potion-tube-stage {
+    width: 230px;
+
+    height: 430px;
+
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin-top: 25px;
+}
+
+
+/* =====================================================
+   TEST TUBE INNER MASK
+===================================================== */
+
+.personality-potion-tube-inner-mask {
+    position: absolute;
+
+    width: 80px;
+
+    height: 310px;
+
+    left: 50%;
+
+    bottom: 52px;
+
+    transform:
+        translateX(-50%);
+
+    /*
+       LIQUID LAYER
+    */
+
+    z-index: 3;
+
+    overflow: hidden;
+
+    border-radius:
+        0
+        0
+        56px
+        56px;
+}
+
+
+/* =====================================================
+   POTION LIQUID
+===================================================== */
+
+.personality-potion-liquid {
+    position: absolute;
+
+    left: 0;
+
+    bottom: 0;
+
+    width: 100%;
+
+    min-height: 0;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            to top,
+            #7627d8 0%,
+            #a63deb 38%,
+            #d44cf4 66%,
+            #43d4e6 100%
+        );
+
+    box-shadow:
+        inset 0 0 18px
+        rgba(255, 255, 255, 0.18),
+
+        0 0 18px
+        rgba(149, 56, 237, 0.65);
+
+    /*
+       FAST FILL
+    */
+
+    transition:
+        height
+        0.45s
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        );
+}
+
+
+/* =====================================================
+   LIQUID WAVE
+===================================================== */
+
+.personality-potion-liquid::before {
+    content: "";
+
+    position: absolute;
+
+    top: -9px;
+
+    left: -8px;
+
+    width: 115%;
+
+    height: 18px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.26);
+
+    filter:
+        blur(2px);
+
+    animation:
+        potionWave
+        2s
+        ease-in-out
+        infinite;
+}
+
+
+/* =====================================================
+   LIQUID SHINE
+===================================================== */
+
+.personality-potion-liquid-shine {
+    position: absolute;
+
+    top: 8px;
+
+    left: 15px;
+
+    width: 12px;
+
+    height: 82%;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255, 255, 255, 0.32);
+
+    filter:
+        blur(2px);
+}
+
+
+/* =====================================================
+   LIQUID SPARKLES
+===================================================== */
+
+.personality-potion-liquid-bubbles {
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    top: 28%;
+
+    text-align: center;
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    letter-spacing: 8px;
+
+    animation:
+        liquidSparkles
+        2s
+        ease-in-out
+        infinite;
+}
+
+
+/* =====================================================
+   POTION STREAM
+
+   IMPORTANT:
+   TEST TUBE KE PEECHE
+===================================================== */
+
+.personality-potion-stream {
+    position: absolute;
+
+    width: 135px;
+
+    height: 250px;
+
+    object-fit: contain;
+
+    top: -42px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    /*
+       TEST TUBE Z-INDEX = 8
+       STREAM Z-INDEX = 7
+       ISLIYE STREAM TEST TUBE
+       KE PEECHE RAHEGA
+    */
+
+    z-index: 7;
+
+    pointer-events: none;
+
+    /*
+       ONLY 0.45 SECOND
+    */
+
+    animation:
+        potionPour
+        0.45s
+        ease-out
+        forwards;
+}
+
+
+/* =====================================================
+   TEST TUBE IMAGE
+===================================================== */
+
+.personality-potion-test-tube {
+    position: absolute;
+
+    width: 220px;
+
+    height: auto;
+
+    /*
+       STREAM KE UPAR
+    */
+
+    z-index: 8;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   LEVEL TEXT
+===================================================== */
+
+.personality-potion-level-text {
+    margin-top: -4px;
+
+    z-index: 15;
+
+    white-space: nowrap;
+
+    padding:
+        12px 24px;
+
+    border-radius: 24px;
+
+    background:
+        rgba(255, 250, 244, 0.96);
+
+    border:
+        2px solid
+        rgba(231, 212, 191, 0.9);
+
+    color: #69452e;
+
+    font-size: 18px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 5px 15px
+        rgba(80, 50, 30, 0.08);
+}
+
+
+/* =====================================================
+   FEEDBACK
+===================================================== */
+
+.personality-potion-feedback {
+    width: 100%;
+
+    max-width: 780px;
+
+    margin-top: 14px;
+
+    padding:
+        13px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 7px 18px
+        rgba(80, 50, 30, 0.07);
+}
+
+
+.feedback-icon {
+    font-size: 30px;
+}
+
+
+.personality-potion-feedback strong {
+    display: block;
+
+    font-size: 21px;
+
+    font-weight: 900;
+}
+
+
+.personality-potion-feedback p {
+    margin:
+        4px 0 0;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.correct-feedback {
+    background:
+        rgba(255, 252, 245, 0.94);
+
+    border:
+        2px solid
+        rgba(231, 212, 191, 0.9);
+
+    color:
+        #69452e;
+}
+
+
+.wrong-feedback {
+    background:
+        rgba(255, 245, 241, 0.95);
+
+    border:
+        2px solid #ebcdbf;
+
+    color:
+        #81543e;
+}
+
+
+/* =====================================================
+   ANIMATION
+===================================================== */
+
+@keyframes potionPour {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            translateY(-18px)
+            scaleY(0.75);
+    }
+
+
+    20% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scaleY(1);
+    }
+
+
+    70% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(2px)
+            scaleY(1);
+    }
+
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            translateY(5px)
+            scaleY(0.9);
+    }
+}
+
+
+/* =====================================================
+   LIQUID WAVE
+===================================================== */
+
+@keyframes potionWave {
+
+    0%,
+    100% {
+
+        transform:
+            translateX(-4px)
+            scaleX(1);
+
+    }
+
+
+    50% {
+
+        transform:
+            translateX(5px)
+            scaleX(1.08);
+
+    }
+
+}
+
+
+/* =====================================================
+   SPARKLES
+===================================================== */
+
+@keyframes liquidSparkles {
+
+    0%,
+    100% {
+
+        opacity: 0.4;
+
+        transform:
+            translateY(5px);
+
+    }
+
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            translateY(-8px);
+
+    }
+
+}
+
+
+/* =====================================================
+   LARGE TABLET
+===================================================== */
+
+@media (max-width: 1200px) {
+
+    .personality-potion-activity-content {
+
+        grid-template-columns:
+            24%
+            minmax(0, 1fr)
+            20%;
+
+        gap: 15px;
+
+    }
+
+
+    .personality-potion-tube-stage {
+
+        width: 190px;
+
+        height: 380px;
+
+    }
+
+
+    .personality-potion-test-tube {
+
+        width: 190px;
+
+    }
+
+
+    .personality-potion-tube-inner-mask {
+
+        width: 101px;
+
+        height: 275px;
+
+        bottom: 41px;
+
+        border-radius:
+            0
+            0
+            50px
+            50px;
+
+    }
+
+
+    .personality-potion-lab-title {
+
+        font-size: 14px;
+
+        padding:
+            10px 15px;
+
+    }
+
+
+    .personality-potion-teacher-img {
+
+        width: 185px;
+
+    }
+
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1050px) {
+
+    .personality-potion-activity-card {
+
+        height: auto;
+
+        max-height: none;
+
+    }
+
+
+    .personality-potion-activity-content {
+
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+
+    }
+
+
+    .personality-potion-teacher-section {
+
+        height: auto;
+
+        flex-direction: row;
+
+        gap: 20px;
+
+    }
+
+
+    .personality-potion-teacher-img {
+
+        width: 150px;
+
+        max-height: 220px;
+
+    }
+
+
+    .personality-potion-teacher-bubble {
+
+        max-width: 430px;
+
+    }
+
+
+    .personality-potion-teacher-stats {
+
+        flex-direction: column;
+
+        margin-top: 0;
+
+    }
+
+
+    .personality-potion-lab-section {
+
+        height: auto;
+
+        padding-top: 0;
+
+    }
+
+
+    .personality-potion-lab-title {
+
+        position: relative;
+
+        top: auto;
+
+        right: auto;
+
+        margin-bottom: 10px;
+
+    }
+
+
+    .personality-potion-tube-stage {
+
+        margin-top: 0;
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .personality-potion-activity-page {
+
+        padding: 10px;
+
+    }
+
+
+    .personality-potion-activity-card {
+
+        width: 96vw;
+
+        padding:
+            16px;
+
+        border-radius: 20px;
+
+    }
+
+
+    .personality-potion-activity-header {
+
+        grid-template-columns:
+            1fr
+            1fr;
+
+        grid-template-rows:
+            auto
+            auto;
+
+    }
+
+
+    .personality-potion-header-center {
+
+        grid-column:
+            1 / 3;
+
+        grid-row: 1;
+
+    }
+
+
+    .personality-potion-header-left {
+
+        grid-column: 1;
+
+        grid-row: 2;
+
+    }
+
+
+    .personality-potion-header-right {
+
+        grid-column: 2;
+
+        grid-row: 2;
+
+    }
+
+
+    .personality-potion-back-btn,
+    .personality-potion-skip-btn {
+
+        width: 100%;
+
+        height: 45px;
+
+        font-size: 14px;
+
+    }
+
+
+    .personality-potion-header-center h1 {
+
+        font-size: 28px;
+
+    }
+
+
+    .personality-potion-header-center span {
+
+        font-size: 14px;
+
+    }
+
+
+    .personality-potion-activity-content {
+
+        padding-top: 12px;
+
+    }
+
+
+    .personality-potion-teacher-section {
+
+        flex-direction: column;
+
+        gap: 8px;
+
+    }
+
+
+    .personality-potion-teacher-img {
+
+        width: 135px;
+
+        max-height: 180px;
+
+    }
+
+
+    .personality-potion-teacher-bubble {
+
+        width: 100%;
+
+    }
+
+
+    .personality-potion-teacher-stats {
+
+        flex-direction: row;
+
+    }
+
+
+    .personality-potion-situation-card {
+
+        padding:
+            16px 14px;
+
+    }
+
+
+    .personality-potion-trait-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 10px;
+
+    }
+
+
+    .personality-potion-trait-card {
+
+        min-height: 145px;
+
+    }
+
+
+    .personality-potion-trait-description {
+
+        font-size: 11px;
+
+    }
+
+
+    .personality-potion-tube-stage {
+
+        width: 175px;
+
+        height: 335px;
+
+    }
+
+
+    .personality-potion-test-tube {
+
+        width: 170px;
+
+    }
+
+
+    .personality-potion-tube-inner-mask {
+
+        width: 90px;
+
+        height: 240px;
+
+        bottom: 36px;
+
+        border-radius:
+            0
+            0
+            45px
+            45px;
+
+    }
+
+    .personality-potion-stream {
+
+        width: 105px;
+
+        height: 190px;
+
+        top: -28px;
+
+    }
+
+}

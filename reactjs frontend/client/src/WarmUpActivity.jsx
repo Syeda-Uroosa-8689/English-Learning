@@ -5,6 +5,9 @@ import teacher2 from "./assets/teacher2.png";
 import teacher3 from "./assets/teacher3.png";
 import teacher4 from "./assets/teacher4.png";
 
+import confetti from "canvas-confetti";
+import yaySound from "./assets/yay.mp3";
+
 function WarmUpActivity({
 
     question,
@@ -128,6 +131,81 @@ function WarmUpActivity({
     };
 
     /* ==========================
+       YAY SOUND
+    ========================== */
+
+    const playYaySound = () => {
+
+        const audio = new Audio(yaySound);
+
+        audio.volume = 1;
+
+        audio.play().catch((err) => {
+
+            console.log("Yay sound could not play:", err);
+
+        });
+
+    };
+
+    /* ==========================
+       CONFETTI
+    ========================== */
+
+    const celebrate = () => {
+
+        confetti({
+
+            particleCount: 130,
+
+            spread: 85,
+
+            startVelocity: 35,
+
+            origin: {
+                x: 0.5,
+                y: 0.65
+            }
+
+        });
+
+        setTimeout(() => {
+
+            confetti({
+
+                particleCount: 70,
+
+                spread: 100,
+
+                origin: {
+                    x: 0.15,
+                    y: 0.65
+                }
+
+            });
+
+        }, 150);
+
+        setTimeout(() => {
+
+            confetti({
+
+                particleCount: 70,
+
+                spread: 100,
+
+                origin: {
+                    x: 0.85,
+                    y: 0.65
+                }
+
+            });
+
+        }, 300);
+
+    };
+
+    /* ==========================
        First Question
     ========================== */
 
@@ -183,7 +261,7 @@ function WarmUpActivity({
 
                 const response=await fetch(
 
-                    "http://localhost:5000/api/chat",
+                    `${import.meta.env.VITE_API_URL}/api/chat`,
 
                     {
 
@@ -214,6 +292,19 @@ function WarmUpActivity({
                 );
 
                 const data=await response.json();
+
+                /* ==========================
+                   CORRECT / ACCEPTED ANSWER
+                   CONFETTI + YAY
+                ========================== */
+
+                celebrate();
+
+                playYaySound();
+
+                /* ==========================
+                   TEACHER RESPONSE
+                ========================== */
 
                 speak(data.response);
 
@@ -269,7 +360,7 @@ function WarmUpActivity({
 
     },[]);
 
-        return(
+    return(
 
         <div className="warmup-container">
 

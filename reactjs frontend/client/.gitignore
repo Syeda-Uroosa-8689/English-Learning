@@ -35,3 +35,7 @@ backend/node_modules/
 # Build files
 frontend/dist/
 backend/dist/
+
+.env
+.env.local
+.env.*.local

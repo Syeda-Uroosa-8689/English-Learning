@@ -1,0 +1,4345 @@
+/* =====================================================
+   SPIN CALENDAR — REFERENCE THEME
+   ONLY UI / LAYOUT REDESIGN
+   LOGIC & CONTENT UNCHANGED
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   MAIN PAGE
+===================================================== */
+
+.spin-calendar-page {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    font-family: "Poppins", "Nunito", sans-serif;
+
+    color: #4b2818;
+
+    background: #5f4637;
+}
+
+
+/* =====================================================
+   BLURRED BACKGROUND
+   Same style as Partner Secret Room
+===================================================== */
+
+.spin-calendar-page::before {
+    content: "";
+
+    position: absolute;
+    inset: -20px;
+
+    background-image: url("../../assets/chatbg.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    filter: blur(8px);
+
+    transform: scale(1.08);
+
+    z-index: 0;
+}
+
+
+.spin-calendar-page::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(48, 30, 20, 0.28);
+
+    z-index: 1;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   MAIN OVERLAY
+===================================================== */
+
+.spin-calendar-overlay {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+   Same format as reference card
+===================================================== */
+
+.spin-calendar-game-container {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(1420px, 92vw);
+    height: min(900px, 92vh);
+
+    margin: 4vh auto;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background-image: url("../../assets/calenderbg.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border: 2px solid rgba(255, 255, 255, 0.75);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.40);
+}
+
+
+/* =====================================================
+   SOFT CARD OVERLAY
+===================================================== */
+
+.spin-calendar-game-container::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 248, 232, 0.10),
+            rgba(255, 239, 205, 0.16)
+        );
+
+    z-index: 0;
+}
+
+
+/* =====================================================
+   TOP BUTTONS
+===================================================== */
+
+.spin-calendar-topbar {
+    position: absolute;
+
+    top: 30px;
+    left: 38px;
+    right: 38px;
+
+    z-index: 50;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    pointer-events: none;
+}
+
+
+.spin-calendar-back-btn,
+.spin-calendar-skip-top-btn {
+    pointer-events: auto;
+
+    border: none;
+
+    border-radius: 16px;
+
+    padding: 15px 25px;
+
+    min-width: 120px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #704927,
+            #54321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 17px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.18),
+        0 6px 0 rgba(58, 31, 13, 0.30);
+
+    transition: 0.2s ease;
+}
+
+
+.spin-calendar-back-btn:hover,
+.spin-calendar-skip-top-btn:hover {
+    transform: translateY(-2px);
+}
+
+
+.spin-calendar-back-btn:active,
+.spin-calendar-skip-top-btn:active {
+    transform: translateY(2px);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 3px 0 rgba(58, 31, 13, 0.30);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.spin-calendar-header {
+    position: relative;
+
+    z-index: 5;
+
+    width: 100%;
+
+    text-align: center;
+
+    padding:
+        42px
+        180px
+        18px;
+}
+
+
+.spin-calendar-header-left {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 15px;
+}
+
+
+.spin-calendar-game-icon {
+    width: 62px;
+    height: 62px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff7dc,
+            #edca82
+        );
+
+    border: 2px solid #c9954d;
+
+    box-shadow:
+        0 5px 0 #a86f31,
+        0 8px 16px rgba(76, 42, 20, 0.18);
+
+    font-size: 34px;
+}
+
+
+.spin-calendar-header h1 {
+    margin: 0;
+
+    color: #382113;
+
+    font-size:
+        clamp(30px, 3.2vw, 52px);
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    letter-spacing: -1px;
+}
+
+
+.spin-calendar-header p {
+    margin: 8px 0 0;
+
+    color: #5d4637;
+
+    font-size:
+        clamp(15px, 1.45vw, 23px);
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.spin-calendar-stats {
+    position: absolute;
+
+    top: 40px;
+    right: 155px;
+
+    display: flex;
+
+    gap: 10px;
+}
+
+
+.spin-calendar-stat {
+    min-width: 115px;
+
+    padding: 10px 14px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(255, 252, 245, 0.88);
+
+    border:
+        2px solid rgba(159, 116, 69, 0.24);
+
+    box-shadow:
+        0 7px 18px rgba(101, 61, 31, 0.10);
+}
+
+
+.spin-calendar-stat .stat-icon {
+    font-size: 28px;
+}
+
+
+.spin-calendar-stat div {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+}
+
+
+.spin-calendar-stat small {
+    color: #745846;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+.spin-calendar-stat strong {
+    color: #3f291b;
+
+    font-size: 20px;
+
+    line-height: 1.1;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   OLD PROGRESS
+===================================================== */
+
+.spin-calendar-progress-area {
+    display: none !important;
+}
+
+
+/* =====================================================
+   MAIN GAME BODY
+===================================================== */
+
+.spin-calendar-game-body {
+    position: relative;
+
+    z-index: 4;
+
+    width: calc(100% - 36px);
+
+    height: calc(100% - 175px);
+
+    margin: 0 auto 15px;
+
+    display: grid;
+
+    grid-template-columns:
+        29%
+        43%
+        28%;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background:
+        rgba(255, 252, 245, 0.86);
+
+    border:
+        2px solid rgba(159, 116, 69, 0.25);
+
+    box-shadow:
+        0 12px 30px rgba(87, 52, 29, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+
+/* =====================================================
+   LEFT TEACHER SECTION
+===================================================== */
+
+.spin-calendar-teacher-section {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: center;
+
+    padding:
+        15px
+        5px
+        0;
+
+    background:
+        rgba(255, 248, 232, 0.28);
+
+    border-right:
+        2px solid rgba(159, 116, 69, 0.16);
+}
+
+
+.spin-calendar-teacher-image-wrap {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: center;
+}
+
+
+.spin-calendar-teacher {
+    position: relative;
+
+    z-index: 3;
+
+    width: auto;
+
+    height: 88%;
+
+    max-width: 100%;
+
+    object-fit: contain;
+
+    object-position: bottom center;
+
+    display: block;
+
+    filter:
+        drop-shadow(
+            0 9px 8px
+            rgba(75, 39, 19, 0.18)
+        );
+}
+
+
+/* =====================================================
+   TEACHER SPEECH
+===================================================== */
+
+.spin-calendar-speech {
+    position: absolute;
+
+    z-index: 10;
+
+    top: 70px;
+    right: -28px;
+
+    width: 205px;
+
+    min-height: 135px;
+
+    padding: 18px 16px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7ecdc
+        );
+
+    border:
+        2px solid rgba(154, 113, 72, 0.35);
+
+    border-radius: 25px;
+
+    color: #3f2a1c;
+
+    box-shadow:
+        0 10px 30px rgba(88, 51, 24, 0.15);
+}
+
+
+.spin-calendar-speech::before {
+    content: "";
+
+    position: absolute;
+
+    left: -18px;
+    bottom: 42px;
+
+    width: 32px;
+    height: 32px;
+
+    background: #fbf4e8;
+
+    border-left:
+        2px solid rgba(154, 113, 72, 0.35);
+
+    border-bottom:
+        2px solid rgba(154, 113, 72, 0.35);
+
+    transform: rotate(45deg);
+
+    z-index: -1;
+}
+
+
+.spin-calendar-speech p {
+    margin: 0;
+
+    color: #3f2a1c;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    font-weight: 700;
+}
+
+
+.spin-calendar-speech strong {
+    color: #4d8a49;
+
+    font-size: 20px;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   SPEAKER BUTTON
+===================================================== */
+
+.spin-calendar-speech-speaker {
+    position: absolute;
+
+    top: -17px;
+    right: -9px;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    border:
+        2px solid #c49a68;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf4,
+            #f0d7a6
+        );
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 0 #a8753c,
+        0 7px 12px rgba(91, 45, 14, 0.15);
+
+    transition: 0.2s ease;
+}
+
+
+.spin-calendar-speech-speaker:hover {
+    transform: scale(1.06);
+}
+
+
+/* =====================================================
+   TEACHER NAME
+===================================================== */
+
+.spin-calendar-teacher-name {
+    position: absolute;
+
+    z-index: 15;
+
+    left: 50%;
+    bottom: 18px;
+
+    transform: translateX(-50%);
+
+    width: 190px;
+
+    padding: 12px 15px;
+
+    text-align: center;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321c
+        );
+
+    color: white;
+
+    border:
+        2px solid rgba(255, 255, 255, 0.12);
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.15),
+        0 7px 18px rgba(72, 41, 20, 0.28);
+}
+
+
+/* =====================================================
+   CENTER GAME AREA
+===================================================== */
+
+.spin-calendar-game-area {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+
+    padding:
+        15px
+        17px
+        12px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 253, 246, 0.94),
+            rgba(248, 237, 216, 0.94)
+        );
+
+    border-right:
+        2px solid rgba(159, 116, 69, 0.18);
+
+    overflow: visible;
+}
+
+
+/* =====================================================
+   GAME HEADING
+===================================================== */
+
+.spin-calendar-game-heading {
+    width: 100%;
+
+    text-align: center;
+
+    margin-bottom: 4px;
+}
+
+
+.spin-calendar-heading-ribbon {
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 8px 24px;
+
+    min-width: 290px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321c
+        );
+
+    color: white;
+
+    border:
+        2px solid rgba(255, 255, 255, 0.12);
+
+    box-shadow:
+        0 5px 0 rgba(67, 36, 17, 0.40);
+}
+
+
+.spin-calendar-heading-ribbon span {
+    font-size: 20px;
+}
+
+
+.spin-calendar-game-heading h2 {
+    margin: 0;
+
+    color: #432a19;
+
+    font-size:
+        clamp(21px, 2vw, 29px);
+
+    font-weight: 900;
+}
+
+
+.spin-calendar-game-heading p {
+    margin: 7px 0 0;
+
+    color: #745846;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   WHEEL STAGE
+===================================================== */
+
+.spin-calendar-wheel-stage {
+    position: relative;
+
+    width:
+        min(
+            390px,
+            34vh,
+            90%
+        );
+
+    aspect-ratio: 1;
+
+    margin:
+        5px auto 9px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =====================================================
+   POINTER
+===================================================== */
+
+.spin-calendar-pointer {
+    position: absolute;
+
+    top: -4px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 0;
+    height: 0;
+
+    border-left: 19px solid transparent;
+    border-right: 19px solid transparent;
+
+    border-bottom: 35px solid #e95a4d;
+
+    z-index: 25;
+
+    filter:
+        drop-shadow(
+            0 4px 3px
+            rgba(78, 32, 12, 0.30)
+        );
+}
+
+
+.spin-calendar-pointer::after {
+    content: "";
+
+    position: absolute;
+
+    top: 22px;
+    left: -6px;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: #ffb36b;
+
+    border: 2px solid #b94a24;
+}
+
+
+/* =====================================================
+   WHEEL
+===================================================== */
+
+.spin-calendar-wheel {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            #f2ae35 0deg 16.36deg,
+            #ec7840 16.36deg 32.72deg,
+            #e9554f 32.72deg 49.08deg,
+            #dc4e68 49.08deg 65.44deg,
+            #ca4d87 65.44deg 81.8deg,
+            #a94eae 81.8deg 98.16deg,
+            #8054be 98.16deg 114.52deg,
+            #5867c5 114.52deg 130.88deg,
+            #4295cf 130.88deg 147.24deg,
+            #43adad 147.24deg 163.6deg,
+            #4fb57a 163.6deg 179.96deg,
+            #71b94e 179.96deg 196.32deg,
+            #98bc3e 196.32deg 212.68deg,
+            #e7ad39 212.68deg 229.04deg,
+            #ed7840 229.04deg 245.4deg,
+            #e75554 245.4deg 261.76deg,
+            #d95079 261.76deg 278.12deg,
+            #a84faf 278.12deg 294.48deg,
+            #7655ba 294.48deg 310.84deg,
+            #5c64c4 310.84deg 327.2deg,
+            #4296ca 327.2deg 343.56deg,
+            #44aeaa 343.56deg 360deg
+        );
+
+    border:
+        8px solid #c99343;
+
+    box-shadow:
+        0 0 0 4px #fff1d2,
+        0 10px 22px rgba(84, 43, 16, 0.25);
+
+    transition:
+        transform 2.2s
+        cubic-bezier(
+            0.12,
+            0.75,
+            0.15,
+            1
+        );
+}
+
+
+.spin-calendar-wheel.spinning {
+    transform: rotate(1080deg);
+}
+
+
+/* =====================================================
+   WHEEL RING
+===================================================== */
+
+.spin-calendar-wheel-ring {
+    position: absolute;
+
+    inset: 6px;
+
+    border-radius: 50%;
+
+    border:
+        2px solid rgba(255, 246, 205, 0.78);
+
+    box-shadow:
+        inset 0 0 0 2px
+        rgba(119, 66, 20, 0.15);
+
+    pointer-events: none;
+
+    z-index: 5;
+}
+
+
+.spin-calendar-wheel-inner {
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   WHEEL LABELS
+===================================================== */
+
+.spin-calendar-wheel-item {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 50%;
+    height: 50%;
+
+    transform-origin: 0 0;
+
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: flex-end;
+
+    padding:
+        12px
+        10px
+        0
+        0;
+
+    color: white;
+
+    font-size:
+        clamp(10px, 1vw, 15px);
+
+    font-weight: 800;
+
+    text-shadow:
+        0 2px 3px
+        rgba(50, 20, 5, 0.38);
+
+    pointer-events: none;
+
+    z-index: 6;
+}
+
+
+.spin-calendar-wheel-item span {
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   WHEEL CENTER
+===================================================== */
+
+.spin-calendar-wheel-center {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width:
+        clamp(72px, 7.5vw, 96px);
+
+    height:
+        clamp(72px, 7.5vw, 96px);
+
+    transform:
+        translate(-50%, -50%);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #fff9df,
+            #f0c764
+        );
+
+    border:
+        4px solid #bd7b29;
+
+    color: #4c2916;
+
+    font-size:
+        clamp(21px, 2vw, 29px);
+
+    font-weight: 900;
+
+    box-shadow:
+        0 5px 0 #8e531d,
+        0 7px 13px rgba(79, 39, 12, 0.22);
+
+    z-index: 12;
+}
+
+
+/* =====================================================
+   SPIN BUTTON
+===================================================== */
+
+.spin-calendar-spin-btn {
+    width:
+        min(340px, 88%);
+
+    min-height: 52px;
+
+    margin:
+        1px auto 4px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321c
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 18px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.18),
+        0 6px 0 rgba(67, 36, 17, 0.45);
+
+    transition: 0.2s ease;
+}
+
+
+.spin-calendar-spin-btn:hover {
+    transform: translateY(-2px);
+}
+
+
+.spin-calendar-spin-btn:active {
+    transform: translateY(2px);
+
+    box-shadow:
+        0 3px 0 rgba(67, 36, 17, 0.45);
+}
+
+
+.spin-calendar-spin-btn:disabled {
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+.wheel-button-icon {
+    margin-right: 8px;
+
+    font-size: 20px;
+}
+
+
+/* =====================================================
+   SPIN AGAIN
+===================================================== */
+
+.spin-calendar-center-again {
+    margin-top: 4px !important;
+
+    min-width: 145px;
+}
+
+
+/* =====================================================
+   RIGHT CHALLENGE PANEL
+===================================================== */
+
+.spin-calendar-challenge-panel {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+
+    padding: 17px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 13px;
+
+    overflow-y: auto;
+
+    background:
+        rgba(255, 250, 239, 0.58);
+}
+
+
+/* =====================================================
+   WORD CARD
+===================================================== */
+
+.spin-calendar-word-card {
+    width: 100%;
+
+    padding:
+        14px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7ecdc
+        );
+
+    border:
+        2px solid rgba(154, 113, 72, 0.25);
+
+    box-shadow:
+        0 8px 22px rgba(88, 51, 24, 0.10);
+}
+
+
+.spin-calendar-word-card-title {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    color: #60402a;
+
+    font-size: 15px;
+
+    font-weight: 900;
+
+    text-align: center;
+}
+
+
+.spin-calendar-word-card-title span {
+    color: #c76c59;
+
+    font-size: 15px;
+}
+
+
+.spin-calendar-word-value {
+    min-height: 72px;
+
+    margin-top: 9px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border-radius: 14px;
+
+    background: #fffdf8;
+
+    border:
+        2px solid #ead7bd;
+
+    color: #4d8a49;
+
+    font-size:
+        clamp(23px, 2.2vw, 34px);
+
+    font-weight: 900;
+
+    padding: 9px;
+}
+
+
+/* =====================================================
+   ANSWER SECTION
+===================================================== */
+
+.spin-calendar-answer-section {
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7ecdc
+        );
+
+    border:
+        2px solid rgba(154, 113, 72, 0.25);
+
+    box-shadow:
+        0 8px 22px rgba(88, 51, 24, 0.10);
+}
+
+
+.spin-calendar-answer-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #60402a;
+
+    font-size: 16px;
+
+    font-weight: 900;
+}
+
+
+.spin-calendar-answer-title span {
+    font-size: 19px;
+}
+
+
+.spin-calendar-answer-instruction {
+    margin:
+        7px 0 9px;
+
+    color: #5f4637;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+    font-weight: 600;
+}
+
+
+.spin-calendar-answer-instruction strong {
+    color: #4d8a49;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   TEXTAREA
+===================================================== */
+
+.spin-calendar-answer-input-wrap {
+    position: relative;
+
+    width: 100%;
+}
+
+
+.spin-calendar-answer-input {
+    width: 100%;
+
+    min-height: 105px;
+
+    padding:
+        12px
+        55px
+        12px
+        13px;
+
+    resize: none;
+
+    border-radius: 15px;
+
+    border:
+        2px solid #dcc5a0;
+
+    outline: none;
+
+    background: #fffdf8;
+
+    color: #4d2a18;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+.spin-calendar-answer-input:focus {
+    border-color: #b8894f;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(184, 137, 79, 0.12);
+}
+
+
+.spin-calendar-answer-input::placeholder {
+    color: #9d9389;
+
+    opacity: 1;
+}
+
+
+/* =====================================================
+   MIC
+===================================================== */
+
+.spin-calendar-mic-btn {
+    position: absolute;
+
+    right: 9px;
+    bottom: 9px;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    border:
+        2px solid #c48735;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff1c1,
+            #e7b652
+        );
+
+    color: #5d3119;
+
+    font-size: 19px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 3px 0 #a36825;
+
+    transition: transform 0.18s ease;
+}
+
+
+.spin-calendar-mic-btn:hover {
+    transform: scale(1.06);
+}
+
+
+.spin-calendar-mic-btn.listening {
+    background:
+        linear-gradient(
+            145deg,
+            #ffd1b7,
+            #e87942
+        );
+
+    color: white;
+
+    border-color: #bd5c2d;
+
+    animation:
+        spin-calendar-mic-pulse 1s infinite;
+}
+
+
+@keyframes spin-calendar-mic-pulse {
+
+    0% {
+        box-shadow:
+            0 0 0 0
+            rgba(224, 105, 48, 0.45);
+    }
+
+    70% {
+        box-shadow:
+            0 0 0 10px
+            rgba(224, 105, 48, 0);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 0
+            rgba(224, 105, 48, 0);
+    }
+}
+
+
+/* =====================================================
+   MIC STATUS
+===================================================== */
+
+.spin-calendar-mic-status {
+    margin-top: 5px;
+
+    color: #85502c;
+
+    font-size: 10px;
+
+    line-height: 1.35;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   CHECK BUTTON
+===================================================== */
+
+.spin-calendar-check-btn {
+    width: 100%;
+
+    min-height: 48px;
+
+    margin-top: 9px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #6ea83f,
+            #4d7f2e
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 0 #355d22;
+
+    transition: 0.2s ease;
+}
+
+
+.spin-calendar-check-btn:hover {
+    transform: translateY(-1px);
+}
+
+
+.spin-calendar-check-btn:active {
+    transform: translateY(2px);
+
+    box-shadow:
+        0 2px 0 #355d22;
+}
+
+
+/* =====================================================
+   EMPTY CHALLENGE
+===================================================== */
+
+.spin-calendar-empty-challenge {
+    min-height: 170px;
+
+    padding: 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    border:
+        2px dashed #cbaa78;
+
+    background:
+        rgba(255, 253, 246, 0.70);
+
+    color: #704225;
+}
+
+
+.spin-calendar-empty-challenge > div {
+    font-size: 35px;
+
+    margin-bottom: 6px;
+}
+
+
+.spin-calendar-empty-challenge strong {
+    font-size: 17px;
+
+    font-weight: 900;
+}
+
+
+.spin-calendar-empty-challenge p {
+    margin: 5px 0 0;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+}
+
+
+/* =====================================================
+   RESULT CARD
+===================================================== */
+
+.spin-calendar-result-card {
+    width: 100%;
+
+    min-height: 250px;
+
+    padding: 25px 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7ecdc
+        );
+
+    border:
+        2px solid rgba(154, 113, 72, 0.35);
+
+    box-shadow:
+        0 12px 30px rgba(88, 51, 24, 0.15);
+}
+
+
+.spin-calendar-result-card .result-icon {
+    font-size: 50px;
+
+    margin-bottom: 5px;
+}
+
+
+.spin-calendar-result-card h2 {
+    margin:
+        0 0 8px;
+
+    color: #432a19;
+
+    font-size: 27px;
+
+    font-weight: 900;
+}
+
+
+.spin-calendar-result-card p {
+    margin:
+        0 0 17px;
+
+    color: #765741;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    font-weight: 600;
+}
+
+
+.spin-calendar-result-card button {
+    min-width: 170px;
+
+    padding:
+        12px 22px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321c
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 0 rgba(67, 36, 17, 0.45);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.spin-calendar-footer {
+    position: relative;
+
+    z-index: 6;
+
+    min-height: 50px;
+
+    margin:
+        0 34px 13px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 17px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(255, 252, 245, 0.82);
+
+    border:
+        2px solid rgba(159, 116, 69, 0.20);
+
+    box-shadow:
+        0 5px 15px rgba(101, 61, 31, 0.08);
+}
+
+
+.spin-calendar-footer span {
+    color: #68401f;
+
+    font-size: 14px;
+
+    font-weight: 900;
+}
+
+
+.spin-calendar-footer-divider {
+    width: 2px;
+    height: 25px;
+
+    background: #d6ae69;
+}
+
+
+.spin-calendar-footer p {
+    margin: 0;
+
+    color: #795033;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    .spin-calendar-game-container {
+        width: 95vw;
+    }
+
+
+    .spin-calendar-stats {
+        right: 120px;
+    }
+
+
+    .spin-calendar-game-body {
+        grid-template-columns:
+            27%
+            45%
+            28%;
+    }
+
+
+    .spin-calendar-speech {
+        width: 180px;
+
+        right: -20px;
+
+        min-height: 125px;
+    }
+
+
+    .spin-calendar-teacher-name {
+        width: 175px;
+
+        font-size: 16px;
+    }
+
+
+    .spin-calendar-wheel-stage {
+        width:
+            min(
+                350px,
+                33vh,
+                90%
+            );
+    }
+
+}
+
+
+/* =====================================================
+   SMALL TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .spin-calendar-game-container {
+        width: 95vw;
+
+        height: 94vh;
+
+        margin: 3vh auto;
+    }
+
+
+    .spin-calendar-header {
+        padding-top: 75px;
+    }
+
+
+    .spin-calendar-stats {
+        top: 18px;
+
+        right: 20px;
+    }
+
+
+    .spin-calendar-game-body {
+        height: calc(100% - 175px);
+
+        grid-template-columns:
+            25%
+            47%
+            28%;
+    }
+
+
+    .spin-calendar-teacher {
+        height: 84%;
+    }
+
+
+    .spin-calendar-speech {
+        width: 160px;
+
+        right: -25px;
+
+        padding: 14px;
+    }
+
+
+    .spin-calendar-speech p {
+        font-size: 12px;
+    }
+
+
+    .spin-calendar-wheel-stage {
+        width:
+            min(
+                310px,
+                31vh,
+                92%
+            );
+    }
+
+
+    .spin-calendar-word-card-value {
+        font-size: 24px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .spin-calendar-page {
+        overflow-y: auto;
+    }
+
+
+    .spin-calendar-overlay {
+        min-height: 100vh;
+
+        height: auto;
+    }
+
+
+    .spin-calendar-game-container {
+        width: 100vw;
+        min-height: 100vh;
+
+        height: auto;
+
+        margin: 0;
+
+        border-radius: 0;
+
+        border: none;
+
+        overflow: visible;
+    }
+
+
+    .spin-calendar-topbar {
+        top: 18px;
+
+        left: 14px;
+        right: 14px;
+    }
+
+
+    .spin-calendar-back-btn,
+    .spin-calendar-skip-top-btn {
+        min-width: auto;
+
+        padding:
+            10px 14px;
+
+        font-size: 12px;
+
+        border-radius: 11px;
+    }
+
+
+    .spin-calendar-header {
+        padding:
+            68px
+            15px
+            18px;
+    }
+
+
+    .spin-calendar-header-left {
+        gap: 9px;
+    }
+
+
+    .spin-calendar-game-icon {
+        width: 47px;
+        height: 47px;
+
+        font-size: 26px;
+
+        border-radius: 12px;
+    }
+
+
+    .spin-calendar-header h1 {
+        font-size: 25px;
+    }
+
+
+    .spin-calendar-header p {
+        font-size: 11px;
+    }
+
+
+    .spin-calendar-stats {
+        position: static;
+
+        margin-top: 12px;
+
+        justify-content: center;
+    }
+
+
+    .spin-calendar-stat {
+        min-width: 85px;
+
+        padding: 7px 9px;
+    }
+
+
+    .spin-calendar-game-body {
+        width: calc(100% - 10px);
+
+        height: auto;
+
+        margin:
+            0 5px 7px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        overflow: visible;
+
+        border-radius: 20px;
+    }
+
+
+    .spin-calendar-teacher-section {
+        height: 250px;
+
+        flex-shrink: 0;
+
+        border-right: none;
+
+        border-bottom:
+            2px solid rgba(159, 116, 69, 0.16);
+    }
+
+
+    .spin-calendar-teacher {
+        height: 94%;
+    }
+
+
+    .spin-calendar-speech {
+        top: 25px;
+
+        right: 7%;
+
+        width: 170px;
+
+        min-height: 105px;
+    }
+
+
+    .spin-calendar-teacher-name {
+        bottom: 8px;
+
+        width: 175px;
+
+        padding: 9px;
+
+        font-size: 15px;
+    }
+
+
+    .spin-calendar-game-area {
+        min-height: 475px;
+
+        border-right: none;
+
+        border-bottom:
+            2px solid rgba(159, 116, 69, 0.16);
+    }
+
+
+    .spin-calendar-wheel-stage {
+        width:
+            min(
+                285px,
+                75vw
+            );
+    }
+
+
+    .spin-calendar-challenge-panel {
+        min-height: 390px;
+
+        overflow: visible;
+    }
+
+
+    .spin-calendar-footer {
+        margin:
+            0 10px 7px;
+
+        min-height: 45px;
+
+        gap: 8px;
+    }
+
+
+    .spin-calendar-footer span {
+        font-size: 11px;
+    }
+
+
+    .spin-calendar-footer p {
+        font-size: 9px;
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 450px) {
+
+    .spin-calendar-header {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+
+    .spin-calendar-header h1 {
+        font-size: 21px;
+    }
+
+
+    .spin-calendar-header p {
+        display: none;
+    }
+
+
+    .spin-calendar-game-icon {
+        width: 42px;
+        height: 42px;
+
+        font-size: 22px;
+    }
+
+
+    .spin-calendar-stat {
+        min-width: 70px;
+    }
+
+
+    .spin-calendar-stat .stat-icon {
+        font-size: 20px;
+    }
+
+
+    .spin-calendar-stat small {
+        font-size: 8px;
+    }
+
+
+    .spin-calendar-stat strong {
+        font-size: 13px;
+    }
+
+
+    .spin-calendar-speech {
+        right: 2%;
+
+        width: 155px;
+    }
+
+
+    .spin-calendar-wheel-stage {
+        width: 255px;
+    }
+
+
+    .spin-calendar-heading-ribbon {
+        min-width: 220px;
+
+        padding:
+            7px 14px;
+    }
+
+
+    .spin-calendar-heading-ribbon span {
+        font-size: 17px;
+    }
+
+
+    .spin-calendar-game-heading h2 {
+        font-size: 19px;
+    }
+
+}/* =====================================================
+   SPIN CALENDAR — REFERENCE THEME
+   ONLY UI / LAYOUT REDESIGN
+   LOGIC & CONTENT UNCHANGED
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   MAIN PAGE
+===================================================== */
+
+.spin-calendar-page {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    font-family: "Poppins", "Nunito", sans-serif;
+
+    color: #4b2818;
+
+    background: #5f4637;
+}
+
+
+/* =====================================================
+   BLURRED BACKGROUND
+   Same style as Partner Secret Room
+===================================================== */
+
+.spin-calendar-page::before {
+    content: "";
+
+    position: absolute;
+    inset: -20px;
+
+    background-image: url("../../assets/chatbg.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    filter: blur(8px);
+
+    transform: scale(1.08);
+
+    z-index: 0;
+}
+
+
+.spin-calendar-page::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(48, 30, 20, 0.28);
+
+    z-index: 1;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   MAIN OVERLAY
+===================================================== */
+
+.spin-calendar-overlay {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+   Same format as reference card
+===================================================== */
+
+.spin-calendar-game-container {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(1420px, 92vw);
+    height: min(900px, 92vh);
+
+    margin: 4vh auto;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background-image: url("../../assets/calenderbg.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border: 2px solid rgba(255, 255, 255, 0.75);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.40);
+}
+
+
+/* =====================================================
+   SOFT CARD OVERLAY
+===================================================== */
+
+.spin-calendar-game-container::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 248, 232, 0.10),
+            rgba(255, 239, 205, 0.16)
+        );
+
+    z-index: 0;
+}
+
+
+/* =====================================================
+   TOP BUTTONS
+===================================================== */
+
+.spin-calendar-topbar {
+    position: absolute;
+
+    top: 30px;
+    left: 38px;
+    right: 38px;
+
+    z-index: 50;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    pointer-events: none;
+}
+
+
+.spin-calendar-back-btn,
+.spin-calendar-skip-top-btn {
+    pointer-events: auto;
+
+    border: none;
+
+    border-radius: 16px;
+
+    padding: 15px 25px;
+
+    min-width: 120px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #704927,
+            #54321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 17px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.18),
+        0 6px 0 rgba(58, 31, 13, 0.30);
+
+    transition: 0.2s ease;
+}
+
+
+.spin-calendar-back-btn:hover,
+.spin-calendar-skip-top-btn:hover {
+    transform: translateY(-2px);
+}
+
+
+.spin-calendar-back-btn:active,
+.spin-calendar-skip-top-btn:active {
+    transform: translateY(2px);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 3px 0 rgba(58, 31, 13, 0.30);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.spin-calendar-header {
+    position: relative;
+
+    z-index: 5;
+
+    width: 100%;
+
+    text-align: center;
+
+    padding:
+        42px
+        180px
+        18px;
+}
+
+
+.spin-calendar-header-left {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 15px;
+}
+
+
+.spin-calendar-game-icon {
+    width: 62px;
+    height: 62px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff7dc,
+            #edca82
+        );
+
+    border: 2px solid #c9954d;
+
+    box-shadow:
+        0 5px 0 #a86f31,
+        0 8px 16px rgba(76, 42, 20, 0.18);
+
+    font-size: 34px;
+}
+
+
+.spin-calendar-header h1 {
+    margin: 0;
+
+    color: #382113;
+
+    font-size:
+        clamp(30px, 3.2vw, 52px);
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    letter-spacing: -1px;
+}
+
+
+.spin-calendar-header p {
+    margin: 8px 0 0;
+
+    color: #5d4637;
+
+    font-size:
+        clamp(15px, 1.45vw, 23px);
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.spin-calendar-stats {
+    position: absolute;
+
+    top: 40px;
+    right: 155px;
+
+    display: flex;
+
+    gap: 10px;
+}
+
+
+.spin-calendar-stat {
+    min-width: 115px;
+
+    padding: 10px 14px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(255, 252, 245, 0.88);
+
+    border:
+        2px solid rgba(159, 116, 69, 0.24);
+
+    box-shadow:
+        0 7px 18px rgba(101, 61, 31, 0.10);
+}
+
+
+.spin-calendar-stat .stat-icon {
+    font-size: 28px;
+}
+
+
+.spin-calendar-stat div {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+}
+
+
+.spin-calendar-stat small {
+    color: #745846;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+.spin-calendar-stat strong {
+    color: #3f291b;
+
+    font-size: 20px;
+
+    line-height: 1.1;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   OLD PROGRESS
+===================================================== */
+
+.spin-calendar-progress-area {
+    display: none !important;
+}
+
+
+/* =====================================================
+   MAIN GAME BODY
+===================================================== */
+
+.spin-calendar-game-body {
+    position: relative;
+
+    z-index: 4;
+
+    width: calc(100% - 36px);
+
+    height: calc(100% - 175px);
+
+    margin: 0 auto 15px;
+
+    display: grid;
+
+    grid-template-columns:
+        29%
+        43%
+        28%;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background:
+        rgba(255, 252, 245, 0.86);
+
+    border:
+        2px solid rgba(159, 116, 69, 0.25);
+
+    box-shadow:
+        0 12px 30px rgba(87, 52, 29, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+
+/* =====================================================
+   LEFT TEACHER SECTION
+===================================================== */
+
+.spin-calendar-teacher-section {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: center;
+
+    padding:
+        15px
+        5px
+        0;
+
+    background:
+        rgba(255, 248, 232, 0.28);
+
+    border-right:
+        2px solid rgba(159, 116, 69, 0.16);
+}
+
+
+.spin-calendar-teacher-image-wrap {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: center;
+}
+
+
+.spin-calendar-teacher {
+    position: relative;
+
+    z-index: 3;
+
+    width: auto;
+
+    height: 88%;
+
+    max-width: 100%;
+
+    object-fit: contain;
+
+    object-position: bottom center;
+
+    display: block;
+
+    filter:
+        drop-shadow(
+            0 9px 8px
+            rgba(75, 39, 19, 0.18)
+        );
+}
+
+
+/* =====================================================
+   TEACHER SPEECH
+===================================================== */
+
+.spin-calendar-speech {
+    position: absolute;
+
+    z-index: 10;
+
+    top: 70px;
+    right: -28px;
+
+    width: 205px;
+
+    min-height: 135px;
+
+    padding: 18px 16px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7ecdc
+        );
+
+    border:
+        2px solid rgba(154, 113, 72, 0.35);
+
+    border-radius: 25px;
+
+    color: #3f2a1c;
+
+    box-shadow:
+        0 10px 30px rgba(88, 51, 24, 0.15);
+}
+
+
+.spin-calendar-speech::before {
+    content: "";
+
+    position: absolute;
+
+    left: -18px;
+    bottom: 42px;
+
+    width: 32px;
+    height: 32px;
+
+    background: #fbf4e8;
+
+    border-left:
+        2px solid rgba(154, 113, 72, 0.35);
+
+    border-bottom:
+        2px solid rgba(154, 113, 72, 0.35);
+
+    transform: rotate(45deg);
+
+    z-index: -1;
+}
+
+
+.spin-calendar-speech p {
+    margin: 0;
+
+    color: #3f2a1c;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    font-weight: 700;
+}
+
+
+.spin-calendar-speech strong {
+    color: #4d8a49;
+
+    font-size: 20px;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   SPEAKER BUTTON
+===================================================== */
+
+.spin-calendar-speech-speaker {
+    position: absolute;
+
+    top: -17px;
+    right: -9px;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    border:
+        2px solid #c49a68;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf4,
+            #f0d7a6
+        );
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 0 #a8753c,
+        0 7px 12px rgba(91, 45, 14, 0.15);
+
+    transition: 0.2s ease;
+}
+
+
+.spin-calendar-speech-speaker:hover {
+    transform: scale(1.06);
+}
+
+
+/* =====================================================
+   TEACHER NAME
+===================================================== */
+
+.spin-calendar-teacher-name {
+    position: absolute;
+
+    z-index: 15;
+
+    left: 50%;
+    bottom: 18px;
+
+    transform: translateX(-50%);
+
+    width: 190px;
+
+    padding: 12px 15px;
+
+    text-align: center;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321c
+        );
+
+    color: white;
+
+    border:
+        2px solid rgba(255, 255, 255, 0.12);
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.15),
+        0 7px 18px rgba(72, 41, 20, 0.28);
+}
+
+
+/* =====================================================
+   CENTER GAME AREA
+===================================================== */
+
+.spin-calendar-game-area {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+
+    padding:
+        15px
+        17px
+        12px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 253, 246, 0.94),
+            rgba(248, 237, 216, 0.94)
+        );
+
+    border-right:
+        2px solid rgba(159, 116, 69, 0.18);
+
+    overflow: visible;
+}
+
+
+/* =====================================================
+   GAME HEADING
+===================================================== */
+
+.spin-calendar-game-heading {
+    width: 100%;
+
+    text-align: center;
+
+    margin-bottom: 4px;
+}
+
+
+.spin-calendar-heading-ribbon {
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 8px 24px;
+
+    min-width: 290px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321c
+        );
+
+    color: white;
+
+    border:
+        2px solid rgba(255, 255, 255, 0.12);
+
+    box-shadow:
+        0 5px 0 rgba(67, 36, 17, 0.40);
+}
+
+
+.spin-calendar-heading-ribbon span {
+    font-size: 20px;
+}
+
+
+.spin-calendar-game-heading h2 {
+    margin: 0;
+
+    color: #432a19;
+
+    font-size:
+        clamp(21px, 2vw, 29px);
+
+    font-weight: 900;
+}
+
+
+.spin-calendar-game-heading p {
+    margin: 7px 0 0;
+
+    color: #745846;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   WHEEL STAGE
+===================================================== */
+
+.spin-calendar-wheel-stage {
+    position: relative;
+
+    width:
+        min(
+            390px,
+            34vh,
+            90%
+        );
+
+    aspect-ratio: 1;
+
+    margin:
+        5px auto 9px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =====================================================
+   POINTER
+===================================================== */
+
+.spin-calendar-pointer {
+    position: absolute;
+
+    top: -4px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 0;
+    height: 0;
+
+    border-left: 19px solid transparent;
+    border-right: 19px solid transparent;
+
+    border-bottom: 35px solid #e95a4d;
+
+    z-index: 25;
+
+    filter:
+        drop-shadow(
+            0 4px 3px
+            rgba(78, 32, 12, 0.30)
+        );
+}
+
+
+.spin-calendar-pointer::after {
+    content: "";
+
+    position: absolute;
+
+    top: 22px;
+    left: -6px;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: #ffb36b;
+
+    border: 2px solid #b94a24;
+}
+
+
+/* =====================================================
+   WHEEL
+===================================================== */
+
+.spin-calendar-wheel {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            #f2ae35 0deg 16.36deg,
+            #ec7840 16.36deg 32.72deg,
+            #e9554f 32.72deg 49.08deg,
+            #dc4e68 49.08deg 65.44deg,
+            #ca4d87 65.44deg 81.8deg,
+            #a94eae 81.8deg 98.16deg,
+            #8054be 98.16deg 114.52deg,
+            #5867c5 114.52deg 130.88deg,
+            #4295cf 130.88deg 147.24deg,
+            #43adad 147.24deg 163.6deg,
+            #4fb57a 163.6deg 179.96deg,
+            #71b94e 179.96deg 196.32deg,
+            #98bc3e 196.32deg 212.68deg,
+            #e7ad39 212.68deg 229.04deg,
+            #ed7840 229.04deg 245.4deg,
+            #e75554 245.4deg 261.76deg,
+            #d95079 261.76deg 278.12deg,
+            #a84faf 278.12deg 294.48deg,
+            #7655ba 294.48deg 310.84deg,
+            #5c64c4 310.84deg 327.2deg,
+            #4296ca 327.2deg 343.56deg,
+            #44aeaa 343.56deg 360deg
+        );
+
+    border:
+        8px solid #c99343;
+
+    box-shadow:
+        0 0 0 4px #fff1d2,
+        0 10px 22px rgba(84, 43, 16, 0.25);
+
+    transition:
+        transform 2.2s
+        cubic-bezier(
+            0.12,
+            0.75,
+            0.15,
+            1
+        );
+}
+
+
+.spin-calendar-wheel.spinning {
+    transform: rotate(1080deg);
+}
+
+
+/* =====================================================
+   WHEEL RING
+===================================================== */
+
+.spin-calendar-wheel-ring {
+    position: absolute;
+
+    inset: 6px;
+
+    border-radius: 50%;
+
+    border:
+        2px solid rgba(255, 246, 205, 0.78);
+
+    box-shadow:
+        inset 0 0 0 2px
+        rgba(119, 66, 20, 0.15);
+
+    pointer-events: none;
+
+    z-index: 5;
+}
+
+
+.spin-calendar-wheel-inner {
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   WHEEL LABELS
+===================================================== */
+
+.spin-calendar-wheel-item {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 50%;
+    height: 50%;
+
+    transform-origin: 0 0;
+
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: flex-end;
+
+    padding:
+        12px
+        10px
+        0
+        0;
+
+    color: white;
+
+    font-size:
+        clamp(10px, 1vw, 15px);
+
+    font-weight: 800;
+
+    text-shadow:
+        0 2px 3px
+        rgba(50, 20, 5, 0.38);
+
+    pointer-events: none;
+
+    z-index: 6;
+}
+
+
+.spin-calendar-wheel-item span {
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   WHEEL CENTER
+===================================================== */
+
+.spin-calendar-wheel-center {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width:
+        clamp(72px, 7.5vw, 96px);
+
+    height:
+        clamp(72px, 7.5vw, 96px);
+
+    transform:
+        translate(-50%, -50%);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #fff9df,
+            #f0c764
+        );
+
+    border:
+        4px solid #bd7b29;
+
+    color: #4c2916;
+
+    font-size:
+        clamp(21px, 2vw, 29px);
+
+    font-weight: 900;
+
+    box-shadow:
+        0 5px 0 #8e531d,
+        0 7px 13px rgba(79, 39, 12, 0.22);
+
+    z-index: 12;
+}
+
+
+/* =====================================================
+   SPIN BUTTON
+===================================================== */
+
+.spin-calendar-spin-btn {
+    width:
+        min(340px, 88%);
+
+    min-height: 52px;
+
+    margin:
+        1px auto 4px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321c
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 18px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.18),
+        0 6px 0 rgba(67, 36, 17, 0.45);
+
+    transition: 0.2s ease;
+}
+
+
+.spin-calendar-spin-btn:hover {
+    transform: translateY(-2px);
+}
+
+
+.spin-calendar-spin-btn:active {
+    transform: translateY(2px);
+
+    box-shadow:
+        0 3px 0 rgba(67, 36, 17, 0.45);
+}
+
+
+.spin-calendar-spin-btn:disabled {
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+.wheel-button-icon {
+    margin-right: 8px;
+
+    font-size: 20px;
+}
+
+
+/* =====================================================
+   SPIN AGAIN
+===================================================== */
+
+.spin-calendar-center-again {
+    margin-top: 4px !important;
+
+    min-width: 145px;
+}
+
+
+/* =====================================================
+   RIGHT CHALLENGE PANEL
+===================================================== */
+
+.spin-calendar-challenge-panel {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+
+    padding: 17px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 13px;
+
+    overflow-y: auto;
+
+    background:
+        rgba(255, 250, 239, 0.58);
+}
+
+
+/* =====================================================
+   WORD CARD
+===================================================== */
+
+.spin-calendar-word-card {
+    width: 100%;
+
+    padding:
+        14px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7ecdc
+        );
+
+    border:
+        2px solid rgba(154, 113, 72, 0.25);
+
+    box-shadow:
+        0 8px 22px rgba(88, 51, 24, 0.10);
+}
+
+
+.spin-calendar-word-card-title {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    color: #60402a;
+
+    font-size: 15px;
+
+    font-weight: 900;
+
+    text-align: center;
+}
+
+
+.spin-calendar-word-card-title span {
+    color: #c76c59;
+
+    font-size: 15px;
+}
+
+
+.spin-calendar-word-value {
+    min-height: 72px;
+
+    margin-top: 9px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border-radius: 14px;
+
+    background: #fffdf8;
+
+    border:
+        2px solid #ead7bd;
+
+    color: #4d8a49;
+
+    font-size:
+        clamp(23px, 2.2vw, 34px);
+
+    font-weight: 900;
+
+    padding: 9px;
+}
+
+
+/* =====================================================
+   ANSWER SECTION
+===================================================== */
+
+.spin-calendar-answer-section {
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7ecdc
+        );
+
+    border:
+        2px solid rgba(154, 113, 72, 0.25);
+
+    box-shadow:
+        0 8px 22px rgba(88, 51, 24, 0.10);
+}
+
+
+.spin-calendar-answer-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #60402a;
+
+    font-size: 16px;
+
+    font-weight: 900;
+}
+
+
+.spin-calendar-answer-title span {
+    font-size: 19px;
+}
+
+
+.spin-calendar-answer-instruction {
+    margin:
+        7px 0 9px;
+
+    color: #5f4637;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+    font-weight: 600;
+}
+
+
+.spin-calendar-answer-instruction strong {
+    color: #4d8a49;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   TEXTAREA
+===================================================== */
+
+.spin-calendar-answer-input-wrap {
+    position: relative;
+
+    width: 100%;
+}
+
+
+.spin-calendar-answer-input {
+    width: 100%;
+
+    min-height: 105px;
+
+    padding:
+        12px
+        55px
+        12px
+        13px;
+
+    resize: none;
+
+    border-radius: 15px;
+
+    border:
+        2px solid #dcc5a0;
+
+    outline: none;
+
+    background: #fffdf8;
+
+    color: #4d2a18;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+.spin-calendar-answer-input:focus {
+    border-color: #b8894f;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(184, 137, 79, 0.12);
+}
+
+
+.spin-calendar-answer-input::placeholder {
+    color: #9d9389;
+
+    opacity: 1;
+}
+
+
+/* =====================================================
+   MIC
+===================================================== */
+
+.spin-calendar-mic-btn {
+    position: absolute;
+
+    right: 9px;
+    bottom: 9px;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    border:
+        2px solid #c48735;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff1c1,
+            #e7b652
+        );
+
+    color: #5d3119;
+
+    font-size: 19px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 3px 0 #a36825;
+
+    transition: transform 0.18s ease;
+}
+
+
+.spin-calendar-mic-btn:hover {
+    transform: scale(1.06);
+}
+
+
+.spin-calendar-mic-btn.listening {
+    background:
+        linear-gradient(
+            145deg,
+            #ffd1b7,
+            #e87942
+        );
+
+    color: white;
+
+    border-color: #bd5c2d;
+
+    animation:
+        spin-calendar-mic-pulse 1s infinite;
+}
+
+
+@keyframes spin-calendar-mic-pulse {
+
+    0% {
+        box-shadow:
+            0 0 0 0
+            rgba(224, 105, 48, 0.45);
+    }
+
+    70% {
+        box-shadow:
+            0 0 0 10px
+            rgba(224, 105, 48, 0);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 0
+            rgba(224, 105, 48, 0);
+    }
+}
+
+
+/* =====================================================
+   MIC STATUS
+===================================================== */
+
+.spin-calendar-mic-status {
+    margin-top: 5px;
+
+    color: #85502c;
+
+    font-size: 10px;
+
+    line-height: 1.35;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   CHECK BUTTON
+===================================================== */
+
+.spin-calendar-check-btn {
+    width: 100%;
+
+    min-height: 48px;
+
+    margin-top: 9px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #6ea83f,
+            #4d7f2e
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 0 #355d22;
+
+    transition: 0.2s ease;
+}
+
+
+.spin-calendar-check-btn:hover {
+    transform: translateY(-1px);
+}
+
+
+.spin-calendar-check-btn:active {
+    transform: translateY(2px);
+
+    box-shadow:
+        0 2px 0 #355d22;
+}
+
+
+/* =====================================================
+   EMPTY CHALLENGE
+===================================================== */
+
+.spin-calendar-empty-challenge {
+    min-height: 170px;
+
+    padding: 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    border:
+        2px dashed #cbaa78;
+
+    background:
+        rgba(255, 253, 246, 0.70);
+
+    color: #704225;
+}
+
+
+.spin-calendar-empty-challenge > div {
+    font-size: 35px;
+
+    margin-bottom: 6px;
+}
+
+
+.spin-calendar-empty-challenge strong {
+    font-size: 17px;
+
+    font-weight: 900;
+}
+
+
+.spin-calendar-empty-challenge p {
+    margin: 5px 0 0;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+}
+
+
+/* =====================================================
+   RESULT CARD
+===================================================== */
+
+.spin-calendar-result-card {
+    width: 100%;
+
+    min-height: 250px;
+
+    padding: 25px 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7ecdc
+        );
+
+    border:
+        2px solid rgba(154, 113, 72, 0.35);
+
+    box-shadow:
+        0 12px 30px rgba(88, 51, 24, 0.15);
+}
+
+
+.spin-calendar-result-card .result-icon {
+    font-size: 50px;
+
+    margin-bottom: 5px;
+}
+
+
+.spin-calendar-result-card h2 {
+    margin:
+        0 0 8px;
+
+    color: #432a19;
+
+    font-size: 27px;
+
+    font-weight: 900;
+}
+
+
+.spin-calendar-result-card p {
+    margin:
+        0 0 17px;
+
+    color: #765741;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    font-weight: 600;
+}
+
+
+.spin-calendar-result-card button {
+    min-width: 170px;
+
+    padding:
+        12px 22px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321c
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 0 rgba(67, 36, 17, 0.45);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.spin-calendar-footer {
+    position: relative;
+
+    z-index: 6;
+
+    min-height: 50px;
+
+    margin:
+        0 34px 13px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 17px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(255, 252, 245, 0.82);
+
+    border:
+        2px solid rgba(159, 116, 69, 0.20);
+
+    box-shadow:
+        0 5px 15px rgba(101, 61, 31, 0.08);
+}
+
+
+.spin-calendar-footer span {
+    color: #68401f;
+
+    font-size: 14px;
+
+    font-weight: 900;
+}
+
+
+.spin-calendar-footer-divider {
+    width: 2px;
+    height: 25px;
+
+    background: #d6ae69;
+}
+
+
+.spin-calendar-footer p {
+    margin: 0;
+
+    color: #795033;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    .spin-calendar-game-container {
+        width: 95vw;
+    }
+
+
+    .spin-calendar-stats {
+        right: 120px;
+    }
+
+
+    .spin-calendar-game-body {
+        grid-template-columns:
+            27%
+            45%
+            28%;
+    }
+
+
+    .spin-calendar-speech {
+        width: 180px;
+
+        right: -20px;
+
+        min-height: 125px;
+    }
+
+
+    .spin-calendar-teacher-name {
+        width: 175px;
+
+        font-size: 16px;
+    }
+
+
+    .spin-calendar-wheel-stage {
+        width:
+            min(
+                350px,
+                33vh,
+                90%
+            );
+    }
+
+}
+
+
+/* =====================================================
+   SMALL TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .spin-calendar-game-container {
+        width: 95vw;
+
+        height: 94vh;
+
+        margin: 3vh auto;
+    }
+
+
+    .spin-calendar-header {
+        padding-top: 75px;
+    }
+
+
+    .spin-calendar-stats {
+        top: 18px;
+
+        right: 20px;
+    }
+
+
+    .spin-calendar-game-body {
+        height: calc(100% - 175px);
+
+        grid-template-columns:
+            25%
+            47%
+            28%;
+    }
+
+
+    .spin-calendar-teacher {
+        height: 84%;
+    }
+
+
+    .spin-calendar-speech {
+        width: 160px;
+
+        right: -25px;
+
+        padding: 14px;
+    }
+
+
+    .spin-calendar-speech p {
+        font-size: 12px;
+    }
+
+
+    .spin-calendar-wheel-stage {
+        width:
+            min(
+                310px,
+                31vh,
+                92%
+            );
+    }
+
+
+    .spin-calendar-word-card-value {
+        font-size: 24px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .spin-calendar-page {
+        overflow-y: auto;
+    }
+
+
+    .spin-calendar-overlay {
+        min-height: 100vh;
+
+        height: auto;
+    }
+
+
+    .spin-calendar-game-container {
+        width: 100vw;
+        min-height: 100vh;
+
+        height: auto;
+
+        margin: 0;
+
+        border-radius: 0;
+
+        border: none;
+
+        overflow: visible;
+    }
+
+
+    .spin-calendar-topbar {
+        top: 18px;
+
+        left: 14px;
+        right: 14px;
+    }
+
+
+    .spin-calendar-back-btn,
+    .spin-calendar-skip-top-btn {
+        min-width: auto;
+
+        padding:
+            10px 14px;
+
+        font-size: 12px;
+
+        border-radius: 11px;
+    }
+
+
+    .spin-calendar-header {
+        padding:
+            68px
+            15px
+            18px;
+    }
+
+
+    .spin-calendar-header-left {
+        gap: 9px;
+    }
+
+
+    .spin-calendar-game-icon {
+        width: 47px;
+        height: 47px;
+
+        font-size: 26px;
+
+        border-radius: 12px;
+    }
+
+
+    .spin-calendar-header h1 {
+        font-size: 25px;
+    }
+
+
+    .spin-calendar-header p {
+        font-size: 11px;
+    }
+
+
+    .spin-calendar-stats {
+        position: static;
+
+        margin-top: 12px;
+
+        justify-content: center;
+    }
+
+
+    .spin-calendar-stat {
+        min-width: 85px;
+
+        padding: 7px 9px;
+    }
+
+
+    .spin-calendar-game-body {
+        width: calc(100% - 10px);
+
+        height: auto;
+
+        margin:
+            0 5px 7px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        overflow: visible;
+
+        border-radius: 20px;
+    }
+
+
+    .spin-calendar-teacher-section {
+        height: 250px;
+
+        flex-shrink: 0;
+
+        border-right: none;
+
+        border-bottom:
+            2px solid rgba(159, 116, 69, 0.16);
+    }
+
+
+    .spin-calendar-teacher {
+        height: 94%;
+    }
+
+
+    .spin-calendar-speech {
+        top: 25px;
+
+        right: 7%;
+
+        width: 170px;
+
+        min-height: 105px;
+    }
+
+
+    .spin-calendar-teacher-name {
+        bottom: 8px;
+
+        width: 175px;
+
+        padding: 9px;
+
+        font-size: 15px;
+    }
+
+
+    .spin-calendar-game-area {
+        min-height: 475px;
+
+        border-right: none;
+
+        border-bottom:
+            2px solid rgba(159, 116, 69, 0.16);
+    }
+
+
+    .spin-calendar-wheel-stage {
+        width:
+            min(
+                285px,
+                75vw
+            );
+    }
+
+
+    .spin-calendar-challenge-panel {
+        min-height: 390px;
+
+        overflow: visible;
+    }
+
+
+    .spin-calendar-footer {
+        margin:
+            0 10px 7px;
+
+        min-height: 45px;
+
+        gap: 8px;
+    }
+
+
+    .spin-calendar-footer span {
+        font-size: 11px;
+    }
+
+
+    .spin-calendar-footer p {
+        font-size: 9px;
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 450px) {
+
+    .spin-calendar-header {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+
+    .spin-calendar-header h1 {
+        font-size: 21px;
+    }
+
+
+    .spin-calendar-header p {
+        display: none;
+    }
+
+
+    .spin-calendar-game-icon {
+        width: 42px;
+        height: 42px;
+
+        font-size: 22px;
+    }
+
+
+    .spin-calendar-stat {
+        min-width: 70px;
+    }
+
+
+    .spin-calendar-stat .stat-icon {
+        font-size: 20px;
+    }
+
+
+    .spin-calendar-stat small {
+        font-size: 8px;
+    }
+
+
+    .spin-calendar-stat strong {
+        font-size: 13px;
+    }
+
+
+    .spin-calendar-speech {
+        right: 2%;
+
+        width: 155px;
+    }
+
+
+    .spin-calendar-wheel-stage {
+        width: 255px;
+    }
+
+
+    .spin-calendar-heading-ribbon {
+        min-width: 220px;
+
+        padding:
+            7px 14px;
+    }
+
+
+    .spin-calendar-heading-ribbon span {
+        font-size: 17px;
+    }
+
+
+    .spin-calendar-game-heading h2 {
+        font-size: 19px;
+    }
+
+}

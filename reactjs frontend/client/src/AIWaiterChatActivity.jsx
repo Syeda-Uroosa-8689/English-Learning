@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 
 import waiter from "./assets/waiter.png";
-
-
 import chatBg from "./assets/chatbg.jpeg";
 
-function AIWaiterChatActivity({
+import confetti from "canvas-confetti";
+import yaySound from "./assets/yay.mp3";
 
+function AIWaiterChatActivity({
     topicId,
     lessonId,
     userName,
     onNext,
     onBack
-
 }) {
 
     /* ==============================
@@ -20,10 +19,8 @@ function AIWaiterChatActivity({
     ============================== */
 
     const waiterFrames = [
-
-    waiter
-
-];
+        waiter
+    ];
 
     /* ==============================
             Restaurant Conversation
@@ -32,58 +29,38 @@ function AIWaiterChatActivity({
     const conversation = [
 
         {
-
             waiter:
                 "Welcome to our restaurant. May I take your order?",
 
             answers: [
-
                 "I would like a pizza please",
-
                 "Can I have a pizza please",
-
                 "Pizza please",
-
                 "I want pizza"
-
             ]
-
         },
 
         {
-
             waiter:
                 "What would you like to drink?",
 
             answers: [
-
                 "Water please",
-
                 "Orange juice please",
-
                 "Juice please",
-
                 "Coke please"
-
             ]
-
         },
 
         {
-
             waiter:
                 "Would you like anything else?",
 
             answers: [
-
                 "No thank you",
-
                 "That's all",
-
                 "Nothing else"
-
             ]
-
         }
 
     ];
@@ -108,7 +85,59 @@ function AIWaiterChatActivity({
 
     const [loading, setLoading] = useState(false);
 
-    const [conversationFinished, setConversationFinished] = useState(false);
+    const [conversationFinished, setConversationFinished] =
+        useState(false);
+
+    /* ==============================
+        WAIT / YAY SOUND
+    ============================== */
+
+    const playSuccessEffect = () => {
+
+        /* =========================
+           CONFETTI
+        ========================= */
+
+        confetti({
+            particleCount: 120,
+            spread: 80,
+            origin: {
+                y: 0.65
+            }
+        });
+
+        /* =========================
+           YAY SOUND
+        ========================= */
+
+        try {
+
+            const sound = new Audio(yaySound);
+
+            sound.volume = 1;
+
+            sound.currentTime = 0;
+
+            sound.play().catch(err => {
+
+                console.log(
+                    "Yay sound could not play:",
+                    err
+                );
+
+            });
+
+        }
+        catch (error) {
+
+            console.log(
+                "Yay sound error:",
+                error
+            );
+
+        }
+
+    };
 
     /* ==============================
         Waiter Talking Animation
@@ -145,14 +174,12 @@ function AIWaiterChatActivity({
     useEffect(() => {
 
         setTeacherMessage(
-
             conversation[0].waiter
-
         );
 
     }, []);
 
-        /* ==============================
+    /* ==============================
             Teacher Voice
     ============================== */
 
@@ -164,22 +191,41 @@ function AIWaiterChatActivity({
 
         setIsSpeaking(true);
 
-        const speech = new SpeechSynthesisUtterance(text);
+        const speech =
+            new SpeechSynthesisUtterance(text);
 
         speech.rate = 0.9;
 
         speech.pitch = 1.1;
 
         speech.volume = 1;
-const voices = window.speechSynthesis.getVoices();
 
-const maleVoice =
-    voices.find(v => v.name.includes("Google UK English Male")) ||
-    voices.find(v => v.name.includes("David")) ||
-    voices.find(v => v.name.includes("Alex")) ||
-    voices[0];
+        const voices =
+            window.speechSynthesis.getVoices();
 
-speech.voice = maleVoice;
+        const maleVoice =
+
+            voices.find(v =>
+                v.name.includes("Google UK English Male")
+            )
+
+            ||
+
+            voices.find(v =>
+                v.name.includes("David")
+            )
+
+            ||
+
+            voices.find(v =>
+                v.name.includes("Alex")
+            )
+
+            ||
+
+            voices[0];
+
+        speech.voice = maleVoice;
 
         speech.onend = () => {
 
@@ -194,7 +240,7 @@ speech.voice = maleVoice;
     };
 
     /* ==============================
-            Start First Question
+        Start First Question
     ============================== */
 
     useEffect(() => {
@@ -217,13 +263,16 @@ speech.voice = maleVoice;
 
         if (!SpeechRecognition) {
 
-            alert("Speech Recognition is not supported.");
+            alert(
+                "Speech Recognition is not supported."
+            );
 
             return;
 
         }
 
-        const recognition = new SpeechRecognition();
+        const recognition =
+            new SpeechRecognition();
 
         recognition.lang = "en-US";
 
@@ -237,7 +286,8 @@ speech.voice = maleVoice;
 
         recognition.onresult = async (event) => {
 
-            const answer = event.results[0][0].transcript;
+            const answer =
+                event.results[0][0].transcript;
 
             setStudentText(answer);
 
@@ -245,9 +295,8 @@ speech.voice = maleVoice;
 
             try {
 
-                const response = await fetch(
-
-                    "http://localhost:5000/api/chat",
+            const response = await fetch(
+    `${import.meta.env.VITE_API_URL}/api/chat`,
 
                     {
 
@@ -255,7 +304,8 @@ speech.voice = maleVoice;
 
                         headers: {
 
-                            "Content-Type": "application/json"
+                            "Content-Type":
+                                "application/json"
 
                         },
 
@@ -270,7 +320,9 @@ speech.voice = maleVoice;
                             lessonId,
 
                             userName,
-                            activity: "restaurant-ai",
+
+                            activity:
+                                "restaurant-ai"
 
                         })
 
@@ -278,7 +330,8 @@ speech.voice = maleVoice;
 
                 );
 
-                const data = await response.json();
+                const data =
+                    await response.json();
 
                 const updatedHistory = [
 
@@ -304,7 +357,10 @@ speech.voice = maleVoice;
 
                 setHistory(updatedHistory);
 
-                checkAnswer(answer, data.response);
+                checkAnswer(
+                    answer,
+                    data.response
+                );
 
             }
 
@@ -338,37 +394,68 @@ speech.voice = maleVoice;
         Check Conversation
     ============================== */
 
-    const checkAnswer = (answer, aiReply) => {
+    const checkAnswer = (
+        answer,
+        aiReply
+    ) => {
 
-        const current = conversation[step];
+        const current =
+            conversation[step];
 
-        const lower = answer.toLowerCase();
+        const lower =
+            answer.toLowerCase();
 
-        const correct = current.answers.some(item =>
+        const correct =
+            current.answers.some(item =>
 
-            lower.includes(item.toLowerCase())
+                lower.includes(
+                    item.toLowerCase()
+                )
 
-        );
+            );
+
+        /* =================================
+           CORRECT ANSWER
+           CONFETTI + YAY SOUND
+        ================================= */
 
         if (correct) {
 
-            if (step < conversation.length - 1) {
+            /* =========================
+               PLAY SUCCESS EFFECT
+            ========================= */
 
-                const nextStep = step + 1;
+            playSuccessEffect();
+
+            /* =========================
+               NEXT QUESTION
+            ========================= */
+
+            if (
+                step <
+                conversation.length - 1
+            ) {
+
+                const nextStep =
+                    step + 1;
 
                 setStep(nextStep);
 
                 setTimeout(() => {
 
                     speak(
-
-                        conversation[nextStep].waiter
-
+                        conversation[
+                            nextStep
+                        ].waiter
                     );
 
                 }, 1000);
 
             }
+
+            /* =========================
+               CONVERSATION COMPLETE
+            ========================= */
 
             else {
 
@@ -377,9 +464,7 @@ speech.voice = maleVoice;
                 setTimeout(() => {
 
                     speak(
-
                         "Excellent! You completed the restaurant conversation."
-
                     );
 
                 }, 800);
@@ -387,6 +472,11 @@ speech.voice = maleVoice;
             }
 
         }
+
+        /* =================================
+           WRONG ANSWER
+           NO CONFETTI / NO YAY
+        ================================= */
 
         else {
 
@@ -410,240 +500,226 @@ speech.voice = maleVoice;
 
     }, []);
 
+    /* ==============================
+            UI
+    ============================== */
+
     return (
 
-<div
-className="restaurant-chat-page"
-style={{
-backgroundImage:`url(${chatBg})`
-}}
->
+        <div
+            className="restaurant-chat-page"
+            style={{
+                backgroundImage:
+                    `url(${chatBg})`
+            }}
+        >
 
-<div className="restaurant-overlay"></div>
+            <div className="restaurant-overlay"></div>
 
-<div className="restaurant-card">
+            <div className="restaurant-card">
 
-{/* ================= Header ================= */}
+                {/* ================= Header ================= */}
 
-<div className="restaurant-header">
+                <div className="restaurant-header">
 
-<button
-className="restaurant-back-btn"
-onClick={onBack}
->
-← Back
-</button>
+                    <button
+                        className="restaurant-back-btn"
+                        onClick={onBack}
+                    >
+                        ← Back
+                    </button>
 
-<div className="restaurant-header-right">
+                    <div className="restaurant-header-right">
 
-<button
-    className="restaurant-skip-btn"
-    onClick={() => {
-        window.speechSynthesis.cancel();
-        onNext();
-    }}
->
-    Skip →
-</button>
+                        <button
+                            className="restaurant-skip-btn"
+                            onClick={() => {
 
-{
-conversationFinished && (
+                                window
+                                    .speechSynthesis
+                                    .cancel();
 
-<button
+                                onNext();
 
-className="restaurant-next-btn"
+                            }}
+                        >
+                            Skip →
+                        </button>
 
-onClick={onNext}
+                        {
+                            conversationFinished && (
 
->
+                                <button
+                                    className="restaurant-next-btn"
+                                    onClick={onNext}
+                                >
+                                    Next →
+                                </button>
 
-Next →
+                            )
+                        }
 
-</button>
+                    </div>
 
-)
+                </div>
+
+                {/* ================= Content ================= */}
+
+                <div className="restaurant-content">
+
+                    {/* ================= LEFT ================= */}
+
+                    <div className="waiter-panel">
+
+                        <div className="waiter-frame">
+
+                            <img
+                                src={
+                                    waiterFrames[frame]
+                                }
+                                alt="AI Waiter"
+                                className={
+                                    isSpeaking
+                                        ? "waiter-img speaking"
+                                        : "waiter-img"
+                                }
+                            />
+
+                        </div>
+
+                        <div className="waiter-badge">
+
+                            AI WAITER
+
+                        </div>
+
+                    </div>
+
+                    {/* ================= RIGHT ================= */}
+
+                    <div className="conversation-panel">
+
+                        <div className="assistant-info">
+
+                            <div className="assistant-avatar">
+
+                                <img
+                                    src={waiter}
+                                    alt="AI Waiter"
+                                />
+
+                            </div>
+
+                            <div>
+
+                                <h2>
+                                    AI Waiter
+                                </h2>
+
+                                <p>
+                                    Restaurant Assistant
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div className="speech-card">
+
+                            <div className="speaker-icon">
+                                🔊
+                            </div>
+
+                            <p>
+
+                                {
+                                    teacherMessage ||
+
+                                    conversation[
+                                        step
+                                    ]?.waiter
+
+                                }
+
+                            </p>
+
+                        </div>
+
+                        <div className="student-card">
+
+                            <strong>
+                                👤 You
+                            </strong>
+
+                            <p>
+
+                                {
+                                    history.length === 0
+
+                                        ?
+
+                                        "Tap the microphone and answer."
+
+                                        :
+
+                                        history[
+                                            history.length - 2
+                                        ]?.text
+
+                                }
+
+                            </p>
+
+                        </div>
+
+                        <div className="mic-section">
+
+                            {
+                                !conversationFinished &&
+                                showMic && (
+
+                                    <button
+                                        className="restaurant-mic-btn"
+                                        onClick={
+                                            startListening
+                                        }
+                                    >
+                                        🎙️
+                                    </button>
+
+                                )
+                            }
+
+                        </div>
+
+                        {
+                            conversationFinished && (
+
+                                <div className="finish-card">
+
+                                    <h2>
+                                        🎉 Excellent!
+                                    </h2>
+
+                                    <p>
+                                        You completed this conversation.
+                                    </p>
+
+                                </div>
+
+                            )
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    );
 
 }
 
-</div>
-
-</div>
-
-{/* ================= Content ================= */}
-
-<div className="restaurant-content">
-
-{/* LEFT */}
-
-<div className="waiter-panel">
-
-<div className="waiter-frame">
-
-<img
-
-src={waiterFrames[frame]}
-
-alt="AI Waiter"
-
-className={
-isSpeaking
-?
-"waiter-img speaking"
-:
-"waiter-img"
-}
-
-/>
-
-</div>
-
-<div className="waiter-badge">
-
-AI WAITER
-
-</div>
-
-</div>
-
-{/* RIGHT */}
-
-<div className="conversation-panel">
-
-<div className="assistant-info">
-
-<div className="assistant-avatar">
-    <img
-        src={waiter}
-        alt="AI Waiter"
-    />
-</div>
-
-<div>
-
-<h2>
-
-AI Waiter
-
-</h2>
-
-<p>
-
-Restaurant Assistant
-
-</p>
-
-</div>
-
-</div>
-
-<div className="speech-card">
-
-<div className="speaker-icon">
-
-🔊
-
-</div>
-
-<p>
-
-{
-
-teacherMessage ||
-
-conversation[step]?.waiter
-
-}
-
-</p>
-
-</div>
-
-<div className="student-card">
-
-<strong>
-
-👤 You
-
-</strong>
-
-<p>
-
-{
-
-history.length===0
-
-?
-
-"Tap the microphone and answer."
-
-:
-
-history[history.length-2]?.text
-
-}
-
-</p>
-
-</div>
-
-<div className="mic-section">
-
-{
-
-!conversationFinished &&
-
-showMic && (
-
-<button
-
-className="restaurant-mic-btn"
-
-onClick={startListening}
-
->
-
-   🎙️
-
-</button>
-
-)
-
-}
-
-</div>
-
-{
-
-conversationFinished && (
-
-<div className="finish-card">
-
-<h2>
-
-🎉 Excellent!
-
-</h2>
-
-<p>
-
-You completed this conversation.
-
-</p>
-
-</div>
-
-)
-
-}
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-);
-}
 export default AIWaiterChatActivity;

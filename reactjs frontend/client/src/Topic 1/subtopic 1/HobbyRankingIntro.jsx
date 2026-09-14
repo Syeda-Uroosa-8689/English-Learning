@@ -11,19 +11,19 @@ function HobbyRankingIntro({ onStart }) {
             setShow(true);
         }, 100);
 
-        const timer = setTimeout(() => {
+        const hideTimer = setTimeout(() => {
 
             setShow(false);
 
             setTimeout(() => {
-                onStart();
-            }, 500);
+                onStart?.();
+            }, 300);
 
-        }, 4000);
+        }, 1500);
 
         return () => {
             clearTimeout(showTimer);
-            clearTimeout(timer);
+            clearTimeout(hideTimer);
         };
 
     }, [onStart]);
@@ -40,8 +40,12 @@ function HobbyRankingIntro({ onStart }) {
                 }
             >
 
+            
+
                 <h1>
-                    Hobby Ranking Challenge
+                    Hobby Ranking
+                    <br />
+                    Challenge
                 </h1>
 
             </div>

@@ -1,0 +1,1624 @@
+/* =====================================================
+   MAIN PAGE
+===================================================== */
+
+.preference-theme-park-page {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    font-family: "Poppins", sans-serif;
+
+    background: #5f4637;
+}
+
+
+/* =====================================================
+   BLURRED BACKGROUND
+===================================================== */
+
+.ptp-background {
+    position: absolute;
+    inset: -20px;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    filter: blur(8px);
+
+    transform: scale(1.08);
+}
+
+.ptp-background::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(48, 30, 20, 0.30);
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+
+.ptp-main-container {
+    position: relative;
+    z-index: 2;
+
+    width: min(1680px, 96vw);
+    height: min(920px, 96vh);
+
+    margin: 2vh auto;
+
+    overflow: hidden;
+
+    border-radius: 32px;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border: 2px solid rgba(255, 255, 255, 0.78);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.40);
+}
+
+
+/* =====================================================
+   TOP BUTTONS
+===================================================== */
+
+.ptp-top-button {
+    position: absolute;
+    top: 24px;
+
+    z-index: 50;
+
+    border: none;
+    border-radius: 20px;
+
+    padding: 17px 31px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #704927,
+            #54321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.18),
+        0 6px 0 rgba(58, 31, 13, 0.30);
+
+    transition: 0.2s ease;
+}
+
+.ptp-top-button:hover {
+    transform: translateY(-2px);
+}
+
+.ptp-back-button {
+    left: 32px;
+}
+
+.ptp-skip-button {
+    right: 32px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.ptp-header {
+    position: relative;
+
+    z-index: 5;
+
+    text-align: center;
+
+    padding-top: 24px;
+
+    pointer-events: none;
+}
+
+.ptp-header h1 {
+    margin: 0;
+
+    color: #382113;
+
+    font-size:
+        clamp(32px, 3.4vw, 60px);
+
+    font-weight: 900;
+}
+
+.ptp-header p {
+    margin: 3px 0 0;
+
+    color: #5d4637;
+
+    font-size:
+        clamp(15px, 1.45vw, 24px);
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   SPEECH BUBBLE
+===================================================== */
+
+.ptp-speech-bubble {
+    position: relative;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7ecdc
+        );
+
+    border:
+        2px solid rgba(154, 113, 72, 0.35);
+
+    border-radius: 28px;
+
+    color: #3f2a1c;
+
+    box-shadow:
+        0 10px 30px
+        rgba(88, 51, 24, 0.15);
+}
+
+
+/* =====================================================
+   REPEAT BUTTON
+===================================================== */
+
+.ptp-repeat-button {
+    position: absolute;
+
+    top: 10px;
+    right: 12px;
+
+    width: 34px;
+    height: 34px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f4dfbf;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    z-index: 5;
+}
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.ptp-intro-layout {
+    position: absolute;
+
+    top: 135px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 94%;
+
+    height: calc(100% - 155px);
+
+    display: grid;
+
+    grid-template-columns: 35% 65%;
+
+    gap: 20px;
+}
+
+.ptp-intro-teacher-side {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.ptp-intro-teacher-row {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.ptp-teacher-box {
+    position: relative;
+
+    width: 48%;
+
+    padding-bottom: 32px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+}
+
+.ptp-teacher-image {
+    width: 100%;
+
+    max-height: 500px;
+
+    object-fit: contain;
+}
+
+.ptp-teacher-name {
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+
+    transform: translateX(-50%);
+
+    width: 180px;
+
+    padding: 11px 16px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321c
+        );
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+.ptp-intro-bubble {
+    width: 49%;
+
+    min-width: 240px;
+
+    margin-left: -10px;
+
+    padding: 26px 24px;
+}
+
+.ptp-intro-bubble p {
+    margin: 0 0 14px;
+
+    text-align: center;
+
+    font-size:
+        clamp(14px, 1.1vw, 19px);
+
+    line-height: 1.5;
+
+    font-weight: 700;
+}
+
+.ptp-intro-bubble p:last-child {
+    margin-bottom: 0;
+}
+
+.ptp-highlight-text {
+    color: #a6548a;
+}
+
+
+/* =====================================================
+   INTRO STATS
+===================================================== */
+
+.ptp-intro-stats {
+    width: min(370px, 92%);
+
+    margin-top: 20px;
+
+    padding: 18px 24px;
+
+    display: flex;
+
+    justify-content: space-around;
+
+    align-items: center;
+
+    background:
+        rgba(255, 252, 245, 0.88);
+
+    border-radius: 25px;
+}
+
+.ptp-stat {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+.ptp-stat-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f3dfbd;
+
+    font-size: 29px;
+}
+
+.ptp-stat strong {
+    color: #3f291b;
+
+    font-size: 26px;
+}
+
+.ptp-stat span {
+    color: #745846;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.ptp-stat-divider {
+    width: 1px;
+    height: 75px;
+
+    background: #d9c7b2;
+}
+
+
+/* =====================================================
+   INTRO PARK
+===================================================== */
+
+.ptp-intro-park-side {
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.ptp-intro-park-wrap {
+    width: 100%;
+
+    height: calc(100% - 95px);
+
+    padding: 10px;
+
+    box-sizing: border-box;
+
+    border-radius: 28px;
+
+    background: #fffaf1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.ptp-intro-park-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    border-radius: 20px;
+
+    display: block;
+}
+
+
+/* =====================================================
+   START BUTTON
+===================================================== */
+
+.ptp-start-button {
+    position: absolute;
+
+    bottom: 8px;
+
+    border: none;
+
+    min-width: 390px;
+
+    padding: 19px 42px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size:
+        clamp(18px, 2vw, 30px);
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 0
+        rgba(67, 36, 17, 0.55);
+}
+
+
+/* =====================================================
+   CHARACTER SELECT
+===================================================== */
+
+.ptp-select-layout {
+    position: absolute;
+
+    top: 135px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 94%;
+
+    height:
+        calc(100% - 155px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 30px;
+}
+
+
+/* TEACHER THODA UPAR */
+
+.ptp-select-teacher {
+    position: relative;
+
+    width: 25%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+    transform: translateY(-190px);
+}
+
+.ptp-select-teacher-image {
+    width: 100%;
+
+    max-height: 520px;
+
+    object-fit: contain;
+}
+
+.ptp-select-teacher .ptp-teacher-name {
+    bottom: -10px;
+}
+
+
+/* =====================================================
+   CHARACTER CARD
+===================================================== */
+
+.ptp-character-select-card {
+    position: relative;
+
+    width: min(780px, 65vw);
+
+    padding: 32px 40px;
+
+    box-sizing: border-box;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 253, 248, 0.97),
+            rgba(248, 235, 216, 0.97)
+        );
+
+    box-shadow:
+        0 20px 50px
+        rgba(70, 40, 20, 0.18);
+}
+
+.ptp-select-title {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    text-align: center;
+}
+
+.ptp-select-title > span {
+    font-size: 48px;
+}
+
+.ptp-select-title h2 {
+    margin: 0;
+
+    color: #442919;
+
+    font-size: 32px;
+
+    font-weight: 900;
+}
+
+.ptp-select-title p {
+    margin: 5px 0 0;
+
+    color: #765741;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+.ptp-select-repeat {
+    top: 18px;
+    right: 20px;
+}
+
+.ptp-character-options {
+    margin-top: 25px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 24px;
+}
+
+.ptp-character-card {
+    position: relative;
+
+    border:
+        3px solid transparent;
+
+    border-radius: 25px;
+
+    padding: 15px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f4e5ce
+        );
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    transition: 0.25s ease;
+}
+
+.ptp-character-card:hover {
+    transform:
+        translateY(-6px)
+        scale(1.02);
+}
+
+.ptp-character-selected {
+    border-color: #a7659a;
+}
+
+.ptp-character-image-wrap {
+    height: 270px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.ptp-character-image-wrap img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+.ptp-character-card strong {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #4b3020;
+
+    font-size: 18px;
+}
+
+.ptp-selected-badge {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    padding: 6px 11px;
+
+    border-radius: 20px;
+
+    background: #dff0d2;
+
+    color: #4f7c39;
+
+    font-size: 11px;
+
+    font-weight: 900;
+}
+
+.ptp-begin-button {
+    width: 100%;
+
+    margin-top: 25px;
+
+    border: none;
+
+    padding: 17px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 20px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+}
+
+.ptp-begin-button:disabled {
+    opacity: 0.45;
+
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   GAME LAYOUT
+===================================================== */
+
+.ptp-game-layout {
+    position: absolute;
+
+    top: 125px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 96%;
+
+    height:
+        calc(100% - 145px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =====================================================
+   PARK CARD
+===================================================== */
+
+.ptp-park-card {
+    position: relative;
+
+    width: 100%;
+
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 30px;
+
+    background: #dcecf2;
+
+    box-shadow:
+        0 18px 45px
+        rgba(64, 35, 16, 0.30);
+}
+
+
+/* =====================================================
+   PARK IMAGE
+===================================================== */
+
+.ptp-park-image-wrap {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+}
+
+.ptp-park-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    display: block;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+}
+
+
+/* =====================================================
+   WALKING PATHS
+===================================================== */
+
+.ptp-walking-paths {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 8;
+
+    pointer-events: none;
+
+    overflow: visible;
+}
+
+.ptp-walking-paths path {
+    fill: none;
+
+    stroke:
+        rgba(255, 255, 255, 0.95);
+
+    stroke-width: 3;
+
+    stroke-linecap: round;
+
+    stroke-dasharray:
+        3 10;
+
+    filter:
+        drop-shadow(
+            0 2px 2px
+            rgba(71, 53, 37, 0.18)
+        );
+}
+
+
+/* =====================================================
+   TOP GAME INFO
+===================================================== */
+
+.ptp-game-top-info {
+    position: absolute;
+
+    top: 18px;
+
+    right: 8px;
+
+    z-index: 35;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    gap: 12px;
+}
+
+.ptp-round-counter,
+.ptp-ticket-counter {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 14px 20px;
+
+    border-radius: 22px;
+
+    background:
+        rgba(255, 253, 248, 0.96);
+
+    border:
+        2px solid rgba(151, 109, 73, 0.28);
+
+    box-shadow:
+        0 7px 20px
+        rgba(59, 35, 20, 0.15);
+}
+
+.ptp-round-counter {
+    min-width: 215px;
+}
+
+.ptp-ticket-counter {
+    min-width: 150px;
+}
+
+.ptp-round-counter > span,
+.ptp-ticket-icon {
+    font-size: 28px;
+}
+
+.ptp-round-counter div,
+.ptp-ticket-counter div {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.ptp-round-counter strong,
+.ptp-ticket-counter strong {
+    color: #49301f;
+
+    font-size: 16px;
+
+    font-weight: 900;
+}
+
+.ptp-round-counter small,
+.ptp-ticket-counter small {
+    color: #80614d;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   ZONE BUTTONS
+===================================================== */
+
+.ptp-zone-button {
+    position: absolute;
+
+    z-index: 20;
+
+    transform:
+        translate(-50%, -50%);
+
+    border:
+        2px solid rgba(255, 255, 255, 0.90);
+
+    border-radius: 24px;
+
+    padding: 11px 19px;
+
+    background:
+        rgba(255, 253, 248, 0.96);
+
+    color: #4d3120;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    box-shadow:
+        0 7px 18px
+        rgba(61, 37, 22, 0.20);
+
+    transition: 0.2s ease;
+}
+
+.ptp-zone-button:hover:not(:disabled) {
+    transform:
+        translate(-50%, -50%)
+        scale(1.07);
+}
+
+.ptp-zone-button:disabled {
+    cursor: default;
+}
+
+.ptp-zone-button span {
+    font-size: 22px;
+}
+
+.ptp-zone-button strong {
+    font-size: 13px;
+
+    white-space: nowrap;
+}
+
+.ptp-zone-active {
+    background: #fff0c7;
+
+    border-color: #d99d4d;
+}
+
+
+/* =====================================================
+   MOVING CHARACTER
+===================================================== */
+
+.ptp-moving-character {
+    position: absolute;
+
+    z-index: 25;
+
+    width:
+        clamp(75px, 7vw, 120px);
+
+    height:
+        clamp(105px, 10vw, 175px);
+
+    transform:
+        translate(-50%, -50%);
+
+    pointer-events: none;
+
+    transition:
+        left 0.4s linear,
+        top 0.4s linear;
+}
+
+.ptp-moving-character img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 8px 5px
+            rgba(0, 0, 0, 0.22)
+        );
+}
+
+.ptp-character-moving {
+    animation:
+        ptpWalkBounce
+        0.24s infinite alternate;
+}
+
+@keyframes ptpWalkBounce {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            translateY(0);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            translateY(-6px);
+    }
+
+}
+
+
+/* =====================================================
+   GAME CLUE BUBBLE ONLY
+   TEACHER REMOVED
+===================================================== */
+
+.ptp-game-clue-area {
+    position: absolute;
+
+    z-index: 40;
+
+    left: 22px;
+
+    bottom: 22px;
+
+    width:
+        min(400px, 32%);
+
+    pointer-events: none;
+}
+
+.ptp-game-bubble {
+    width: 100%;
+
+    margin: 0;
+
+    padding: 18px 20px;
+
+    box-sizing: border-box;
+
+    pointer-events: auto;
+
+    border-radius: 22px;
+}
+
+.ptp-clue-label {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-bottom: 7px;
+
+    padding: 6px 10px;
+
+    border-radius: 30px;
+
+    background: #f0dfbd;
+
+    color: #75512e;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.6px;
+}
+
+.ptp-game-message {
+    margin: 0;
+
+    padding-right: 8px;
+
+    color: #432d1e;
+
+    font-size:
+        clamp(11px, 0.9vw, 15px);
+
+    line-height: 1.45;
+
+    font-weight: 700;
+}
+
+.ptp-wrong-feedback {
+    margin-top: 8px;
+
+    padding: 7px 9px;
+
+    border-radius: 10px;
+
+    background: #ffe0dc;
+
+    color: #a4473c;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+.ptp-success-feedback {
+    margin-top: 8px;
+
+    padding: 7px 9px;
+
+    border-radius: 10px;
+
+    background: #e3f1d8;
+
+    color: #4d7c36;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   SUCCESS POPUP
+===================================================== */
+
+.ptp-popup-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(28, 18, 10, 0.48);
+
+    backdrop-filter:
+        blur(7px);
+}
+
+.ptp-success-popup {
+    width:
+        min(470px, 88vw);
+
+    padding: 30px 35px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f8ead5
+        );
+
+    box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.35);
+
+    animation:
+        ptpPopupIn
+        0.35s ease;
+}
+
+@keyframes ptpPopupIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(0.8)
+            translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+
+}
+
+.ptp-popup-icon {
+    width: 78px;
+    height: 78px;
+
+    margin:
+        0 auto 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 22px;
+
+    background: #f3dfbd;
+
+    font-size: 42px;
+}
+
+.ptp-popup-label {
+    display: inline-block;
+
+    padding: 6px 14px;
+
+    border-radius: 30px;
+
+    background: #dff0d2;
+
+    color: #557d39;
+
+    font-size: 11px;
+
+    font-weight: 900;
+}
+
+.ptp-success-popup h2 {
+    margin: 14px 0 10px;
+
+    color: #432a19;
+
+    font-size: 28px;
+
+    font-weight: 900;
+}
+
+.ptp-success-popup p {
+    margin: 0;
+
+    color: #765741;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    font-weight: 600;
+}
+
+.ptp-popup-bottom {
+    margin-top: 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.ptp-popup-progress {
+    color: #60402a;
+
+    font-weight: 800;
+}
+
+.ptp-popup-bottom button {
+    border: none;
+
+    padding: 13px 20px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   GAME OVER
+===================================================== */
+
+.ptp-game-over-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 60;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(48, 25, 15, 0.52);
+
+    backdrop-filter:
+        blur(5px);
+}
+
+.ptp-game-over-card {
+    width: min(400px, 80%);
+
+    padding: 30px;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffdf8,
+            #f7e6d1
+        );
+}
+
+.ptp-game-over-icon {
+    font-size: 60px;
+}
+
+.ptp-game-over-card h2 {
+    color: #4a2c1d;
+
+    font-size: 27px;
+
+    margin:
+        12px 0;
+}
+
+.ptp-game-over-card p {
+    color: #765741;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+.ptp-game-over-card button {
+    margin-top: 15px;
+
+    border: none;
+
+    padding: 14px 24px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8a5a32,
+            #59321b
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    .ptp-main-container {
+        width: 98vw;
+        height: 98vh;
+
+        margin: 1vh auto;
+    }
+
+    .ptp-zone-button {
+        padding: 8px 12px;
+    }
+
+    .ptp-zone-button strong {
+        font-size: 10px;
+    }
+
+    .ptp-game-clue-area {
+        width: 38%;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .ptp-main-container {
+        width: 100vw;
+        height: 100vh;
+
+        margin: 0;
+
+        border-radius: 0;
+    }
+
+    .ptp-top-button {
+        top: 15px;
+
+        padding: 10px 14px;
+
+        font-size: 12px;
+    }
+
+    .ptp-back-button {
+        left: 12px;
+    }
+
+    .ptp-skip-button {
+        right: 12px;
+    }
+
+    .ptp-header {
+        padding:
+            65px 15px 0;
+    }
+
+    .ptp-header h1 {
+        font-size: 25px;
+    }
+
+    .ptp-header p {
+        font-size: 12px;
+    }
+
+    .ptp-select-layout {
+        top: 135px;
+
+        flex-direction: column;
+    }
+
+    .ptp-select-teacher {
+        display: none;
+    }
+
+    .ptp-character-select-card {
+        width: 96%;
+
+        padding: 25px 18px;
+    }
+
+    .ptp-character-image-wrap {
+        height: 180px;
+    }
+
+    .ptp-game-layout {
+        top: 125px;
+
+        width: 98%;
+
+        height:
+            calc(100% - 140px);
+    }
+
+    .ptp-game-top-info {
+        top: 7px;
+
+        right: 7px;
+
+        gap: 6px;
+    }
+
+    .ptp-round-counter,
+    .ptp-ticket-counter {
+        padding: 7px 9px;
+
+        min-width: auto;
+    }
+
+    .ptp-game-clue-area {
+        width: calc(100% - 24px);
+
+        left: 12px;
+
+        bottom: 12px;
+    }
+
+    .ptp-game-bubble {
+        padding: 11px 13px;
+    }
+
+    .ptp-game-message {
+        font-size: 9px;
+    }
+
+    .ptp-moving-character {
+        width: 58px;
+        height: 85px;
+    }
+
+    .ptp-zone-button {
+        padding: 4px 7px;
+    }
+
+    .ptp-zone-button strong {
+        font-size: 6px;
+    }
+
+    .ptp-zone-button span {
+        font-size: 12px;
+    }
+
+    .ptp-popup-bottom {
+        flex-direction: column;
+    }
+
+    .ptp-popup-bottom button {
+        width: 100%;
+    }
+
+}

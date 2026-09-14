@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./RestaurantIntro.css";
 
 function RestaurantIntro({ onFinish }) {
 
@@ -7,9 +8,7 @@ function RestaurantIntro({ onFinish }) {
     useEffect(() => {
 
         const showTimer = setTimeout(() => {
-
             setShow(true);
-
         }, 100);
 
         const hideTimer = setTimeout(() => {
@@ -17,18 +16,14 @@ function RestaurantIntro({ onFinish }) {
             setShow(false);
 
             setTimeout(() => {
+                onFinish?.();
+            }, 300);
 
-                onFinish();
-
-            }, 500);
-
-        }, 4500);
+        }, 1500);
 
         return () => {
-
             clearTimeout(showTimer);
             clearTimeout(hideTimer);
-
         };
 
     }, [onFinish]);
@@ -46,32 +41,20 @@ function RestaurantIntro({ onFinish }) {
             >
 
                 <div className="restaurant-icon">
-
                     🍽️
-
                 </div>
 
                 <h1>
-
-                    Restaurant Conversation
-
+                    Restaurant
+                    <br />
+                    Conversation
                 </h1>
-
-                <p>
-
-                    Welcome to the Restaurant Conversation lesson.
-                    Practice speaking with an AI waiter,
-                    order your favourite food,
-                    and improve your English communication skills.
-
-                </p>
 
             </div>
 
         </div>
 
     );
-
 }
 
 export default RestaurantIntro;

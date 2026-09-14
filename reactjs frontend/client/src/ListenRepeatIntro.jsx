@@ -20,9 +20,9 @@ function ListenRepeatIntro({ onNext }) {
             // Exit animation ke baad next page
             setTimeout(() => {
                 onNext();
-            }, 500);
+            }, 300);
 
-        }, 4000);
+        }, 1500);
 
         return () => {
             clearTimeout(enterTimer);

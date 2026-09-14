@@ -19,9 +19,9 @@ function PracticeExerciseIntro({ onNext }) {
             // Exit animation ke baad Teacher Intro
             setTimeout(() => {
                 onNext();
-            }, 500);
+            }, 300);
 
-        }, 4000);
+        }, 1500);
 
         return () => {
             clearTimeout(enterTimer);

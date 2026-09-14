@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from "react";
 
 import teacher1 from "./assets/teacher1.png";
@@ -6,7 +7,9 @@ import teacher3 from "./assets/teacher3.png";
 import teacher4 from "./assets/teacher4.png";
 
 import chatBg from "./assets/chatbg.jpeg";
+import yaySound from "./assets/yay.mp3";
 
+import confetti from "canvas-confetti";
 
 function MoodConversationActivity({
     onNext,
@@ -21,7 +24,6 @@ function MoodConversationActivity({
 
         {
             id: 1,
-
             teacher: teacher1,
 
             waiter:
@@ -49,7 +51,6 @@ function MoodConversationActivity({
 
         {
             id: 2,
-
             teacher: teacher2,
 
             waiter:
@@ -77,7 +78,6 @@ function MoodConversationActivity({
 
         {
             id: 3,
-
             teacher: teacher3,
 
             waiter:
@@ -105,7 +105,6 @@ function MoodConversationActivity({
 
         {
             id: 4,
-
             teacher: teacher4,
 
             waiter:
@@ -133,7 +132,6 @@ function MoodConversationActivity({
 
         {
             id: 5,
-
             teacher: teacher1,
 
             waiter:
@@ -161,7 +159,6 @@ function MoodConversationActivity({
 
         {
             id: 6,
-
             teacher: teacher2,
 
             waiter:
@@ -208,14 +205,20 @@ function MoodConversationActivity({
 
     const [isSpeaking, setIsSpeaking] = useState(false);
 
+    const [celebrating, setCelebrating] = useState(false);
+
 
     /* ==========================================
-                SPEECH CONTROL REF
+                REFS
     ========================================== */
 
     const speechSequenceRef = useRef(null);
 
     const isMountedRef = useRef(true);
+
+    const yayAudioRef = useRef(null);
+
+    const confettiFrameRef = useRef(null);
 
 
     /* ==========================================
@@ -226,6 +229,10 @@ function MoodConversationActivity({
 
         isMountedRef.current = true;
 
+        yayAudioRef.current = new Audio(yaySound);
+
+        yayAudioRef.current.preload = "auto";
+
         return () => {
 
             isMountedRef.current = false;
@@ -234,7 +241,25 @@ function MoodConversationActivity({
 
             if (speechSequenceRef.current) {
 
-                clearTimeout(speechSequenceRef.current);
+                clearTimeout(
+                    speechSequenceRef.current
+                );
+
+            }
+
+            if (confettiFrameRef.current) {
+
+                cancelAnimationFrame(
+                    confettiFrameRef.current
+                );
+
+            }
+
+            if (yayAudioRef.current) {
+
+                yayAudioRef.current.pause();
+
+                yayAudioRef.current.currentTime = 0;
 
             }
 
@@ -271,7 +296,8 @@ function MoodConversationActivity({
 
     }, []);
 
-        /* ==========================================
+
+    /* ==========================================
                 FIND MALE WAITER VOICE
     ========================================== */
 
@@ -347,22 +373,12 @@ function MoodConversationActivity({
 
     /* ==========================================
                 FIND CUSTOMER VOICE
-                CHILD-LIKE SETTINGS
     ========================================== */
 
     const getCustomerVoice = () => {
 
         const voices =
             window.speechSynthesis.getVoices();
-
-        /*
-            Browser mein actual child voice
-            har system par available nahi hoti.
-
-            Isliye ek suitable English voice
-            ko higher pitch + slightly faster
-            rate ke saath child-like banayenge.
-        */
 
         return (
 
@@ -505,20 +521,10 @@ function MoodConversationActivity({
 
         }
 
-
-        /*
-            Previous speech ko completely stop
-            karna important hai.
-
-            Isse duplicate dialogue nahi chalega.
-        */
-
         window.speechSynthesis.cancel();
-
 
         const speech =
             new SpeechSynthesisUtterance(text);
-
 
         speech.lang = "en-US";
 
@@ -536,11 +542,6 @@ function MoodConversationActivity({
                 speech.voice = voice;
 
             }
-
-            /*
-                Male waiter:
-                normal adult voice
-            */
 
             speech.rate = 0.88;
 
@@ -561,11 +562,6 @@ function MoodConversationActivity({
 
             }
 
-            /*
-                Child-like customer:
-                higher pitch + slightly faster
-            */
-
             speech.rate = 0.98;
 
             speech.pitch = 1.35;
@@ -585,11 +581,6 @@ function MoodConversationActivity({
 
             }
 
-            /*
-                Female teacher:
-                clear and slightly slower
-            */
-
             speech.rate = 0.88;
 
             speech.pitch = 1.08;
@@ -599,10 +590,6 @@ function MoodConversationActivity({
         }
 
 
-        /* ======================================
-                    SPEECH START
-        ====================================== */
-
         speech.onstart = () => {
 
             if (!isMountedRef.current) return;
@@ -611,10 +598,6 @@ function MoodConversationActivity({
 
         };
 
-
-        /* ======================================
-                    SPEECH END
-        ====================================== */
 
         speech.onend = () => {
 
@@ -630,10 +613,6 @@ function MoodConversationActivity({
 
         };
 
-
-        /* ======================================
-                    SPEECH ERROR
-        ====================================== */
 
         speech.onerror = () => {
 
@@ -708,7 +687,236 @@ function MoodConversationActivity({
 
     };
 
-        /* ==========================================
+
+    /* ==========================================
+                    CONFETTI
+    ========================================== */
+
+    const playConfetti = () => {
+
+        if (!isMountedRef.current) return;
+
+        const duration = 1800;
+
+        const end = Date.now() + duration;
+
+        const frame = () => {
+
+            if (!isMountedRef.current) return;
+
+            confetti({
+                particleCount: 5,
+                spread: 70,
+                startVelocity: 35,
+                origin: {
+                    x: Math.random(),
+                    y: Math.random() * 0.5
+                }
+            });
+
+            if (Date.now() < end) {
+
+                confettiFrameRef.current =
+                    requestAnimationFrame(frame);
+
+            }
+
+        };
+
+        frame();
+
+    };
+
+
+    /* ==========================================
+                YAY SOUND
+                SOUND COMPLETE CALLBACK
+    ========================================== */
+
+    const playYaySound = (callback) => {
+
+        if (!isMountedRef.current) return;
+
+
+        const audio = yayAudioRef.current;
+
+
+        /*
+            Agar audio load nahi hua to
+            teacher ko block nahi karenge.
+        */
+
+        if (!audio) {
+
+            if (callback) callback();
+
+            return;
+
+        }
+
+
+        /* ==============================
+                RESET AUDIO
+        ============================== */
+
+        audio.pause();
+
+        audio.currentTime = 0;
+
+
+        let finished = false;
+
+
+        const finishSound = () => {
+
+            if (finished) return;
+
+            finished = true;
+
+            audio.onended = null;
+
+            audio.onerror = null;
+
+            if (callback) {
+
+                callback();
+
+            }
+
+        };
+
+
+        /*
+            IMPORTANT:
+            Teacher voice tabhi chalegi
+            jab yay sound completely end ho.
+        */
+
+        audio.onended = finishSound;
+
+        audio.onerror = finishSound;
+
+
+        const playPromise =
+            audio.play();
+
+
+        if (playPromise !== undefined) {
+
+            playPromise.catch(() => {
+
+                finishSound();
+
+            });
+
+        }
+
+    };
+
+
+    /* ==========================================
+            CORRECT ANSWER CELEBRATION
+    ========================================== */
+
+    const celebrateCorrectAnswer = (
+        conversation,
+        isLast
+    ) => {
+
+        if (!isMountedRef.current) return;
+
+
+        /*
+            Celebration state lock.
+
+            Jab tak yay + teacher feedback
+            complete nahi hota, user kuch
+            select nahi kar sakta.
+        */
+
+        setCelebrating(true);
+
+
+        /*
+            1. CONFETTI START
+        */
+
+        playConfetti();
+
+
+        /*
+            2. YAY SOUND START
+        */
+
+        playYaySound(() => {
+
+            if (!isMountedRef.current) return;
+
+
+            /*
+                YAY SOUND COMPLETELY FINISHED.
+
+                AB teacher ki feedback voice
+                start hogi.
+            */
+
+            speakTeacher(
+                conversation.feedback,
+                () => {
+
+                    if (!isMountedRef.current)
+                        return;
+
+
+                    /*
+                        Teacher feedback complete.
+
+                        Ab next conversation/question
+                        start ho sakta hai.
+                    */
+
+                    speechSequenceRef.current =
+                        setTimeout(() => {
+
+                            if (!isMountedRef.current)
+                                return;
+
+
+                            setCelebrating(false);
+
+
+                            /* ==========================
+                                LAST CONVERSATION
+                            ========================== */
+
+                            if (isLast) {
+
+                                setCompleted(true);
+
+                                return;
+
+                            }
+
+
+                            /* ==========================
+                                NEXT CONVERSATION
+                            ========================== */
+
+                            setCurrent(
+                                prev => prev + 1
+                            );
+
+                        }, 300);
+
+                }
+            );
+
+        });
+
+    };
+
+
+    /* ==========================================
             PLAY FULL CONVERSATION
     ========================================== */
 
@@ -716,17 +924,9 @@ function MoodConversationActivity({
 
         if (!isMountedRef.current) return;
 
-        /*
-            Kisi bhi previous speech ko stop karo.
-            Isse "Good evening" multiple times nahi chalega.
-        */
 
         window.speechSynthesis.cancel();
 
-
-        /*
-            Previous timeout bhi clear karo.
-        */
 
         if (speechSequenceRef.current) {
 
@@ -734,16 +934,19 @@ function MoodConversationActivity({
                 speechSequenceRef.current
             );
 
+            speechSequenceRef.current = null;
+
         }
 
 
-        const conversation =
-            conversations[current];
+        if (yayAudioRef.current) {
 
+            yayAudioRef.current.pause();
 
-        /* ======================================
-                RESET SCREEN
-        ====================================== */
+            yayAudioRef.current.currentTime = 0;
+
+        }
+
 
         setShowCustomer(false);
 
@@ -753,12 +956,17 @@ function MoodConversationActivity({
 
         setFeedback("");
 
+        setCelebrating(false);
+
         setIsSpeaking(false);
+
+
+        const conversation =
+            conversations[current];
 
 
         /* ======================================
                 STEP 1 — WAITER
-                MALE VOICE
         ====================================== */
 
         speakWaiter(
@@ -770,11 +978,6 @@ function MoodConversationActivity({
                 if (!isMountedRef.current) return;
 
 
-                /*
-                    Small gap between waiter
-                    and customer.
-                */
-
                 speechSequenceRef.current =
                     setTimeout(() => {
 
@@ -782,16 +985,11 @@ function MoodConversationActivity({
                             return;
 
 
-                        /* ==========================
-                            SHOW CUSTOMER
-                        ========================== */
-
                         setShowCustomer(true);
 
 
                         /* ==========================
                             STEP 2 — CUSTOMER
-                            CHILD-LIKE VOICE
                         ========================== */
 
                         speakCustomer(
@@ -805,11 +1003,6 @@ function MoodConversationActivity({
                                 ) return;
 
 
-                                /*
-                                    Small pause before
-                                    teacher question.
-                                */
-
                                 speechSequenceRef.current =
                                     setTimeout(() => {
 
@@ -818,10 +1011,6 @@ function MoodConversationActivity({
                                         ) return;
 
 
-                                        /* ==================
-                                            SHOW QUESTION
-                                        ================== */
-
                                         setShowQuestion(
                                             true
                                         );
@@ -829,7 +1018,6 @@ function MoodConversationActivity({
 
                                         /* ==================
                                             STEP 3 — TEACHER
-                                            FEMALE VOICE
                                         ================== */
 
                                         speechSequenceRef.current =
@@ -841,20 +1029,16 @@ function MoodConversationActivity({
 
 
                                                 speakTeacher(
-
                                                     conversation.question
-
                                                 );
 
                                             }, 400);
-
 
                                     }, 500);
 
                             }
 
                         );
-
 
                     }, 700);
 
@@ -866,7 +1050,7 @@ function MoodConversationActivity({
 
 
     /* ==========================================
-                FIRST LOAD / NEXT QUESTION
+                FIRST LOAD / NEXT
     ========================================== */
 
     useEffect(() => {
@@ -900,15 +1084,7 @@ function MoodConversationActivity({
 
     const handleListenAgain = () => {
 
-        /*
-            Same complete sequence:
-            
-            Waiter
-                ↓
-            Customer
-                ↓
-            Teacher Question
-        */
+        if (celebrating) return;
 
         playConversation();
 
@@ -916,7 +1092,7 @@ function MoodConversationActivity({
 
 
     /* ==========================================
-                STOP ALL SPEECH
+                STOP ALL SPEECH + SOUND
     ========================================== */
 
     const stopAllSpeech = () => {
@@ -937,26 +1113,52 @@ function MoodConversationActivity({
         }
 
 
-        if (isMountedRef.current) {
+        if (yayAudioRef.current) {
 
-            setIsSpeaking(false);
+            yayAudioRef.current.pause();
+
+            yayAudioRef.current.currentTime = 0;
 
         }
 
+
+        if (confettiFrameRef.current) {
+
+            cancelAnimationFrame(
+                confettiFrameRef.current
+            );
+
+            confettiFrameRef.current = null;
+
+        }
+
+
+        setIsSpeaking(false);
+
+        setCelebrating(false);
+
     };
 
-        /* ==========================================
+
+    /* ==========================================
                     HANDLE ANSWER
     ========================================== */
 
     const handleAnswer = (option) => {
 
         /*
-            Ek baar answer select hone ke baad
-            dobara click nahi karne dena.
+            Celebration ke time koi
+            option select nahi hoga.
         */
 
-        if (selected !== "") return;
+        if (
+            selected !== "" ||
+            celebrating
+        ) {
+
+            return;
+
+        }
 
 
         const conversation =
@@ -970,56 +1172,39 @@ function MoodConversationActivity({
                     CORRECT ANSWER
         ====================================== */
 
-        if (option === conversation.answer) {
+        if (
+            option ===
+            conversation.answer
+        ) {
 
             setFeedback("correct");
 
 
+            const isLast =
+                current ===
+                conversations.length - 1;
+
+
             /*
-                Teacher female voice
+                FLOW:
+
+                CORRECT
+                   ↓
+                CONFETTI + YAY
+                   ↓
+                YAY COMPLETE
+                   ↓
+                TEACHER FEEDBACK
+                   ↓
+                FEEDBACK COMPLETE
+                   ↓
+                NEXT QUESTION
             */
 
-            speakTeacher(
-                conversation.feedback
+            celebrateCorrectAnswer(
+                conversation,
+                isLast
             );
-
-
-            /*
-                Teacher ke feedback ke baad
-                next conversation.
-            */
-
-            speechSequenceRef.current =
-                setTimeout(() => {
-
-                    if (!isMountedRef.current)
-                        return;
-
-
-                    if (
-                        current <
-                        conversations.length - 1
-                    ) {
-
-                        setCurrent(
-                            (prev) => prev + 1
-                        );
-
-                    }
-
-                    else {
-
-                        /*
-                            Last question complete
-                        */
-
-                        stopAllSpeech();
-
-                        setCompleted(true);
-
-                    }
-
-                }, 2200);
 
         }
 
@@ -1033,35 +1218,30 @@ function MoodConversationActivity({
             setFeedback("wrong");
 
 
-            /*
-                Teacher female voice
-            */
-
             speakTeacher(
-                "Not quite! Try again."
-            );
-
-
-            /*
-                User ko khud correct answer
-                choose karne dena hai.
-
-                Question automatically
-                dobara nahi chalega.
-            */
-
-            speechSequenceRef.current =
-                setTimeout(() => {
+                "Not quite! Try again.",
+                () => {
 
                     if (!isMountedRef.current)
                         return;
 
 
-                    setSelected("");
+                    speechSequenceRef.current =
+                        setTimeout(() => {
 
-                    setFeedback("");
+                            if (
+                                !isMountedRef.current
+                            ) return;
 
-                }, 1800);
+
+                            setSelected("");
+
+                            setFeedback("");
+
+                        }, 200);
+
+                }
+            );
 
         }
 
@@ -1078,22 +1258,12 @@ function MoodConversationActivity({
             "mood-option-btn";
 
 
-        /*
-            Normal state
-        */
-
         if (selected === "") {
 
             return className;
 
         }
 
-
-        /*
-            Correct answer
-            sirf correct hone ke baad
-            green hoga.
-        */
 
         if (
             option ===
@@ -1104,10 +1274,6 @@ function MoodConversationActivity({
 
         }
 
-
-        /*
-            User ka selected wrong answer
-        */
 
         else if (
             option === selected
@@ -1154,6 +1320,8 @@ function MoodConversationActivity({
 
     const handleBack = () => {
 
+        if (celebrating) return;
+
         stopAllSpeech();
 
         onBack();
@@ -1167,12 +1335,7 @@ function MoodConversationActivity({
 
     const handleSkip = () => {
 
-        /*
-            IMPORTANT:
-            Skip karte hi waiter/customer/
-            teacher ki pending speech aur
-            timeout sab stop honge.
-        */
+        if (celebrating) return;
 
         stopAllSpeech();
 
@@ -1180,7 +1343,8 @@ function MoodConversationActivity({
 
     };
 
-        /* ==========================================
+
+    /* ==========================================
                     COMPLETION SCREEN
     ========================================== */
 
@@ -1191,12 +1355,12 @@ function MoodConversationActivity({
             <div
                 className="mood-page"
                 style={{
-                    backgroundImage: `url(${chatBg})`
+                    backgroundImage:
+                        `url(${chatBg})`
                 }}
             >
 
                 <div className="mood-overlay"></div>
-
 
                 <div className="mood-card">
 
@@ -1208,13 +1372,11 @@ function MoodConversationActivity({
 
                         </div>
 
-
                         <h2>
 
                             Excellent!
 
                         </h2>
-
 
                         <p>
 
@@ -1222,7 +1384,6 @@ function MoodConversationActivity({
                             customer moods correctly.
 
                         </p>
-
 
                         <button
                             className="mood-next-btn"
@@ -1259,12 +1420,12 @@ function MoodConversationActivity({
         <div
             className="mood-page"
             style={{
-                backgroundImage: `url(${chatBg})`
+                backgroundImage:
+                    `url(${chatBg})`
             }}
         >
 
             <div className="mood-overlay"></div>
-
 
             <div className="mood-card">
 
@@ -1275,10 +1436,10 @@ function MoodConversationActivity({
 
                 <div className="mood-header">
 
-
                     <button
                         className="mood-back-btn"
                         onClick={handleBack}
+                        disabled={celebrating}
                     >
 
                         ← Back
@@ -1296,6 +1457,7 @@ function MoodConversationActivity({
                     <button
                         className="mood-skip-btn"
                         onClick={handleSkip}
+                        disabled={celebrating}
                     >
 
                         Skip →
@@ -1332,7 +1494,8 @@ function MoodConversationActivity({
 
                         <img
                             src={
-                                conversations[current].teacher
+                                conversations[current]
+                                    .teacher
                             }
                             alt="Teacher"
                             className={
@@ -1364,7 +1527,6 @@ function MoodConversationActivity({
 
                             </div>
 
-
                             <p>
 
                                 {
@@ -1385,13 +1547,11 @@ function MoodConversationActivity({
 
                                     <div className="mood-divider"></div>
 
-
                                     <div className="mood-speaker">
 
                                         🧒 Customer
 
                                     </div>
-
 
                                     <p>
 
@@ -1422,9 +1582,13 @@ function MoodConversationActivity({
                     <button
                         className="listen-btn"
                         onClick={handleListenAgain}
+                        disabled={
+                            isSpeaking ||
+                            celebrating
+                        }
                     >
 
-                         Listen Again
+                        Listen Again
 
                     </button>
 
@@ -1443,10 +1607,9 @@ function MoodConversationActivity({
 
                             <h3>
 
-                                 Listen Carefully
+                                Listen Carefully
 
                             </h3>
-
 
                             <h2>
 
@@ -1486,7 +1649,8 @@ function MoodConversationActivity({
                                                 )
                                             }
                                             disabled={
-                                                selected !== ""
+                                                selected !== "" ||
+                                                celebrating
                                             }
                                         >
 
@@ -1533,5 +1697,5 @@ function MoodConversationActivity({
 
 }
 
-
 export default MoodConversationActivity;
+

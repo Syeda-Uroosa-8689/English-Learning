@@ -16,7 +16,7 @@ function PictureDescriptionIntro({ onFinish }) {
 
             onFinish();
 
-        }, 4500);
+        }, 1500);
 
         return () => clearTimeout(timer);
 

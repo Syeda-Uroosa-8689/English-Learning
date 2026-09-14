@@ -1,0 +1,2382 @@
+/* =====================================================
+   PHYSICAL APPEARANCE
+   ACTIVITY 2 - BUILD & DESCRIBE
+   MATCHED EXACTLY WITH PROVIDED JSX
+   CONTENT / LOGIC NOT CHANGED
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.physical-appearance-activity2-page {
+
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   BACKGROUND OVERLAY
+===================================================== */
+
+.physical-appearance-activity2-overlay {
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, 0.22);
+
+    backdrop-filter: blur(4px);
+
+    z-index: 1;
+}
+
+
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.physical-appearance-activity2-card {
+
+    width: min(1280px, 95vw);
+    height: min(900px, 94vh);
+
+    position: relative;
+    z-index: 5;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 24px 32px;
+
+    border-radius: 30px;
+
+    background-image:
+        url("../../assets/partner.jpeg");
+
+    background-size: cover;
+    background-position: center;
+
+    box-shadow:
+        0 22px 60px rgba(70, 42, 25, 0.25);
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.physical-appearance-activity2-header {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        130px 1fr 130px;
+
+    align-items: center;
+
+    gap: 15px;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   HEADER LEFT
+===================================================== */
+
+.physical-appearance-activity2-header-left {
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+/* =====================================================
+   HEADER CENTER
+===================================================== */
+
+.physical-appearance-activity2-header-center {
+
+    text-align: center;
+}
+
+
+.physical-appearance-activity2-header-center h1 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 32px;
+    line-height: 1.15;
+
+    font-weight: 900;
+}
+
+
+.physical-appearance-activity2-header-center span {
+
+    display: block;
+
+    margin-top: 6px;
+
+    color: #8B5E3C;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   HEADER RIGHT
+===================================================== */
+
+.physical-appearance-activity2-header-right {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: flex-end;
+}
+
+
+/* =====================================================
+   BACK + SKIP BUTTONS
+===================================================== */
+
+.physical-appearance-activity2-back-btn,
+.physical-appearance-activity2-skip-btn {
+
+    width: 116px;
+    height: 42px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #8B5E3C;
+
+    color: #FFFFFF;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 12px rgba(100, 65, 40, 0.18);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.physical-appearance-activity2-back-btn:hover:not(:disabled),
+.physical-appearance-activity2-skip-btn:hover:not(:disabled) {
+
+    background: #6C452A;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 17px rgba(100, 65, 40, 0.22);
+}
+
+
+.physical-appearance-activity2-back-btn:disabled,
+.physical-appearance-activity2-skip-btn:disabled {
+
+    opacity: 0.55;
+
+    cursor: default;
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.physical-appearance-activity2-content {
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        32% 68%;
+
+    gap: 20px;
+
+    padding:
+        12px 12px 5px;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   TEACHER SECTION
+===================================================== */
+
+.physical-appearance-activity2-teacher-section {
+
+    min-width: 0;
+    min-height: 0;
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =====================================================
+   TEACHER STAGE
+===================================================== */
+
+.physical-appearance-activity2-teacher-stage {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: center;
+}
+
+
+/* =====================================================
+   TEACHER IMAGE
+===================================================== */
+
+.physical-appearance-activity2-teacher-img {
+
+    width: 230px;
+
+    max-width: 90%;
+
+    max-height: 330px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    display: block;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+/* =====================================================
+   TEACHER SPEAKING
+===================================================== */
+
+.physical-appearance-activity2-teacher-img.speaking {
+
+    animation:
+        teacherSpeakingActivity2
+        0.65s
+        ease-in-out
+        infinite alternate;
+}
+
+
+@keyframes teacherSpeakingActivity2 {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-5px);
+    }
+}
+
+
+/* =====================================================
+   TEACHER BUBBLE
+===================================================== */
+
+.physical-appearance-activity2-teacher-bubble {
+
+    position: relative;
+
+    width: 92%;
+
+    max-width: 340px;
+
+    margin-top: -2px;
+
+    padding: 14px 17px;
+
+    background: #FFFFFF;
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 22px rgba(80, 50, 30, 0.12);
+
+    animation:
+        physicalTeacherBubbleIn2
+        0.35s
+        ease;
+}
+
+
+/* =====================================================
+   BUBBLE ARROW
+===================================================== */
+
+.physical-appearance-activity2-teacher-bubble::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -9px;
+    left: 50%;
+
+    width: 16px;
+    height: 16px;
+
+    background: #FFFFFF;
+
+    border-left:
+        2px solid #E7D4BF;
+
+    border-top:
+        2px solid #E7D4BF;
+
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+}
+
+
+/* =====================================================
+   TEACHER NAME
+===================================================== */
+
+.physical-appearance-activity2-teacher-name {
+
+    position: relative;
+
+    margin-bottom: 5px;
+
+    color: #FCBE23;
+
+    text-align: center;
+
+    font-size: 15px;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   TEACHER TEXT
+===================================================== */
+
+.physical-appearance-activity2-teacher-text {
+
+    position: relative;
+
+    color: #374151;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    line-height: 1.45;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   ROUND
+===================================================== */
+
+.physical-appearance-activity2-round {
+
+    margin-top: 12px;
+
+    padding:
+        7px 15px;
+
+    border-radius: 20px;
+
+    background: #FFF3E6;
+
+    border:
+        2px solid #E7D4BF;
+
+    color: #7A4C2C;
+
+    font-size: 13px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 4px 10px rgba(80, 50, 30, 0.07);
+}
+
+
+/* =====================================================
+   RIGHT MAIN SECTION
+===================================================== */
+
+.physical-appearance-activity2-main-section {
+
+    min-width: 0;
+    min-height: 0;
+
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   QUESTION CARD
+===================================================== */
+
+.physical-appearance-activity2-question-card {
+
+    width: 100%;
+
+    max-width: 720px;
+
+    padding:
+        16px 22px;
+
+    margin-bottom: 10px;
+
+    text-align: center;
+
+    background:
+        rgba(255, 248, 239, 0.97);
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 21px;
+
+    box-shadow:
+        0 8px 22px rgba(80, 50, 30, 0.09);
+}
+
+
+/* =====================================================
+   QUESTION LABEL
+===================================================== */
+
+.physical-appearance-activity2-question-label {
+
+    margin-bottom: 5px;
+
+    color: #8B5E3C;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.5px;
+}
+
+
+/* =====================================================
+   QUESTION
+===================================================== */
+
+.physical-appearance-activity2-question-card h2 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 25px;
+
+    line-height: 1.25;
+
+    font-weight: 900;
+}
+
+
+.physical-appearance-activity2-question-card p {
+
+    margin:
+        5px 0 0;
+
+    color: #8A6348;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.physical-appearance-activity2-progress {
+
+    width: 100%;
+
+    max-width: 560px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    margin:
+        5px 0 12px;
+}
+
+
+/* =====================================================
+   PROGRESS DOT
+===================================================== */
+
+.activity2-progress-dot {
+
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: #E3D2C0;
+
+    border:
+        2px solid #D4BDA7;
+
+    transition:
+        all 0.25s ease;
+}
+
+
+/* ACTIVE */
+
+.activity2-progress-dot.active {
+
+    width: 13px;
+    height: 13px;
+
+    background: #8B5E3C;
+
+    border-color: #8B5E3C;
+
+    box-shadow:
+        0 0 0 4px rgba(139, 94, 60, 0.13);
+}
+
+
+/* COMPLETED */
+
+.activity2-progress-dot.completed {
+
+    background: #65B87A;
+
+    border-color: #65B87A;
+}
+
+
+/* =====================================================
+   OPTIONS
+===================================================== */
+
+.physical-appearance-activity2-options {
+
+    width: 100%;
+
+    max-width: 720px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+
+    margin-top: 2px;
+}
+
+
+/* THREE OPTIONS */
+
+.physical-appearance-activity2-options.three {
+
+    grid-template-columns:
+        repeat(3, 1fr);
+}
+
+
+/* =====================================================
+   OPTION BUTTON
+===================================================== */
+
+.physical-appearance-activity2-option {
+
+    min-height: 82px;
+
+    padding:
+        12px 14px;
+
+    border:
+        3px solid transparent;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255, 255, 255, 0.97);
+
+    color: #5A3620;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px rgba(80, 50, 30, 0.10);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =====================================================
+   OPTION HOVER
+===================================================== */
+
+.physical-appearance-activity2-option:hover:not(:disabled) {
+
+    transform:
+        translateY(-3px);
+
+    border-color:
+        #D8B48A;
+
+    background:
+        #FFFCF8;
+
+    box-shadow:
+        0 11px 23px rgba(80, 50, 30, 0.15);
+}
+
+
+/* =====================================================
+   OPTION SELECTED
+===================================================== */
+
+.physical-appearance-activity2-option.selected {
+
+    border-color:
+        #8B5E3C;
+
+    background:
+        #FFF3E6;
+
+    color:
+        #6C452A;
+
+    box-shadow:
+        0 9px 22px rgba(139, 94, 60, 0.18);
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =====================================================
+   OPTION ICON
+===================================================== */
+
+.activity2-option-icon {
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #FFF3E6;
+
+    border:
+        2px solid #E7D4BF;
+
+    font-size: 20px;
+
+    line-height: 1;
+}
+
+
+/* SELECTED ICON */
+
+.physical-appearance-activity2-option.selected
+.activity2-option-icon {
+
+    background: #FFFFFF;
+
+    border-color: #D5B08B;
+}
+
+
+/* =====================================================
+   SENTENCE PREVIEW
+===================================================== */
+
+.physical-appearance-activity2-sentence-preview {
+
+    width: 100%;
+
+    max-width: 720px;
+
+    margin-top: 13px;
+
+    padding:
+        11px 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    background:
+        rgba(255, 250, 244, 0.97);
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 6px 15px rgba(80, 50, 30, 0.07);
+
+    animation:
+        sentencePreviewIn
+        0.3s
+        ease;
+}
+
+
+.physical-appearance-activity2-sentence-preview > span {
+
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #FFF3E6;
+
+    font-size: 19px;
+}
+
+
+.physical-appearance-activity2-sentence-preview small {
+
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: #A07858;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+
+.physical-appearance-activity2-sentence-preview strong {
+
+    display: block;
+
+    color: #5A3620;
+
+    font-size: 14px;
+
+    line-height: 1.35;
+
+    font-weight: 800;
+}
+
+
+@keyframes sentencePreviewIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =====================================================
+   FINAL SECTION
+===================================================== */
+
+.physical-appearance-activity2-final-section {
+
+    width: 100%;
+    max-width: 760px;
+
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 11px;
+
+    overflow-y: auto;
+
+    padding:
+        4px 8px;
+}
+
+
+/* =====================================================
+   FINAL TITLE
+===================================================== */
+
+.physical-appearance-activity2-final-title {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding:
+        11px 15px;
+
+    background:
+        rgba(255, 248, 239, 0.97);
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 18px;
+}
+
+
+.physical-appearance-activity2-final-title > span {
+
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #FFF3E6;
+
+    font-size: 22px;
+}
+
+
+.physical-appearance-activity2-final-title h2 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 21px;
+
+    font-weight: 900;
+}
+
+
+.physical-appearance-activity2-final-title p {
+
+    margin:
+        3px 0 0;
+
+    color: #8A6348;
+
+    font-size: 12px;
+
+    line-height: 1.35;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   CHARACTER PREVIEW
+===================================================== */
+
+.physical-appearance-activity2-character-preview {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        180px 1fr;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding:
+        12px 16px;
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 19px;
+
+    box-shadow:
+        0 7px 18px rgba(80, 50, 30, 0.08);
+}
+
+
+/* =====================================================
+   AVATAR
+===================================================== */
+
+.activity2-avatar {
+
+    width: 150px;
+    height: 170px;
+
+    position: relative;
+
+    margin: auto;
+}
+
+
+/* =====================================================
+   AVATAR FACE
+===================================================== */
+
+.activity2-face {
+
+    position: absolute;
+
+    left: 50%;
+    top: 32px;
+
+    width: 82px;
+    height: 92px;
+
+    transform: translateX(-50%);
+
+    border-radius:
+        46% 46% 45% 45%;
+
+    background: #F3C7A7;
+
+    border:
+        2px solid rgba(150, 90, 55, 0.15);
+
+    z-index: 3;
+}
+
+
+/* =====================================================
+   HAIR
+===================================================== */
+
+.activity2-hair {
+
+    position: absolute;
+
+    left: 50%;
+    top: 20px;
+
+    width: 91px;
+    height: 58px;
+
+    transform:
+        translateX(-50%);
+
+    background: #3A2418;
+
+    border-radius:
+        52% 52% 38% 38%;
+
+    z-index: 5;
+}
+
+
+/* HAIR COLORS */
+
+.activity2-hair.black {
+    background: #201812;
+}
+
+
+.activity2-hair.brown {
+    background: #6B3F24;
+}
+
+
+.activity2-hair.blonde {
+    background: #D9B45F;
+}
+
+
+/* HAIR TYPES */
+
+.activity2-hair.curly {
+
+    border-radius:
+        45% 55% 45% 50%;
+
+    box-shadow:
+        -7px 5px 0 #3A2418,
+        7px 4px 0 #3A2418;
+}
+
+
+.activity2-hair.wavy {
+
+    border-radius:
+        55% 45% 50% 42%;
+}
+
+
+/* LONG HAIR */
+
+.activity2-hair.long {
+
+    height: 92px;
+
+    border-radius:
+        45% 45% 25% 25%;
+}
+
+
+/* =====================================================
+   EYES
+===================================================== */
+
+.activity2-eyes {
+
+    position: absolute;
+
+    top: 35px;
+    left: 0;
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 25px;
+}
+
+
+.activity2-eyes span {
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #5A3620;
+
+    border:
+        2px solid #FFFFFF;
+
+    box-shadow:
+        0 0 0 1px rgba(0,0,0,0.1);
+}
+
+
+/* EYE COLORS */
+
+.activity2-eyes span.brown {
+    background: #5A3620;
+}
+
+
+.activity2-eyes span.blue {
+    background: #4C86C5;
+}
+
+
+.activity2-eyes span.green {
+    background: #4C8B62;
+}
+
+
+/* =====================================================
+   MOUTH
+===================================================== */
+
+.activity2-mouth {
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 20px;
+
+    width: 20px;
+    height: 8px;
+
+    transform:
+        translateX(-50%);
+
+    border-bottom:
+        2px solid #8B4C4C;
+
+    border-radius: 0 0 50% 50%;
+}
+
+
+/* =====================================================
+   GLASSES
+===================================================== */
+
+.activity2-glasses {
+
+    position: absolute;
+
+    top: 62px;
+    left: 50%;
+
+    width: 78px;
+
+    transform:
+        translateX(-50%);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    z-index: 8;
+}
+
+
+.activity2-glasses span {
+
+    width: 29px;
+    height: 21px;
+
+    border:
+        3px solid #4A3A31;
+
+    border-radius: 7px;
+
+    background:
+        rgba(255,255,255,0.18);
+}
+
+
+.activity2-glasses::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 8px;
+
+    width: 14px;
+    height: 3px;
+
+    transform:
+        translateX(-50%);
+
+    background: #4A3A31;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+.activity2-body {
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+
+    width: 112px;
+    height: 68px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        45px 45px 10px 10px;
+
+    background:
+        #7B9FC4;
+}
+
+
+/* =====================================================
+   SHIRT
+===================================================== */
+
+.activity2-shirt {
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 29px;
+}
+
+
+/* =====================================================
+   FEATURE SUMMARY
+===================================================== */
+
+.activity2-feature-summary {
+
+    min-width: 0;
+}
+
+
+.activity2-feature-summary h3 {
+
+    margin:
+        0 0 8px;
+
+    color: #5A3620;
+
+    font-size: 18px;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   SUMMARY TAGS
+===================================================== */
+
+.activity2-summary-tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
+
+.activity2-summary-tags span {
+
+    padding:
+        6px 9px;
+
+    border-radius: 12px;
+
+    background: #FFF3E6;
+
+    border:
+        1px solid #E7D4BF;
+
+    color: #7A4C2C;
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   SPEAKING CARD
+===================================================== */
+
+.physical-appearance-activity2-speaking-card {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding:
+        11px 14px;
+
+    background:
+        rgba(255, 248, 239, 0.98);
+
+    border:
+        2px solid #E7D4BF;
+
+    border-radius: 17px;
+}
+
+
+.activity2-speaking-icon {
+
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #FFF3E6;
+
+    font-size: 21px;
+}
+
+
+.physical-appearance-activity2-speaking-card h3 {
+
+    margin: 0;
+
+    color: #5A3620;
+
+    font-size: 15px;
+
+    font-weight: 900;
+}
+
+
+.physical-appearance-activity2-speaking-card p {
+
+    margin:
+        2px 0 4px;
+
+    color: #8A6348;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   EXAMPLE SENTENCE
+===================================================== */
+
+.activity2-example {
+
+    padding:
+        6px 9px;
+
+    background: #FFFFFF;
+
+    border:
+        1px solid #E7D4BF;
+
+    border-radius: 9px;
+
+    color: #6C452A;
+
+    font-size: 11px;
+
+    line-height: 1.35;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   MICROPHONE
+===================================================== */
+
+.physical-appearance-activity2-mic {
+
+    width: 100%;
+
+    min-height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    padding:
+        9px 16px;
+
+    border:
+        3px solid #D6B38F;
+
+    border-radius: 17px;
+
+    background:
+        #FFFFFF;
+
+    color: #5A3620;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px rgba(80, 50, 30, 0.10);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.physical-appearance-activity2-mic:hover:not(:disabled) {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        #FFF8EF;
+
+    border-color:
+        #B98D68;
+
+    box-shadow:
+        0 10px 22px rgba(80, 50, 30, 0.14);
+}
+
+
+.physical-appearance-activity2-mic > span {
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #FFF3E6;
+
+    font-size: 20px;
+}
+
+
+.physical-appearance-activity2-mic div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+}
+
+
+.physical-appearance-activity2-mic strong {
+
+    color: #5A3620;
+
+    font-size: 14px;
+
+    font-weight: 900;
+}
+
+
+.physical-appearance-activity2-mic small {
+
+    margin-top: 2px;
+
+    color: #8A6348;
+
+    font-size: 10px;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   MIC LISTENING
+===================================================== */
+
+.physical-appearance-activity2-mic.listening {
+
+    background: #FFF3E6;
+
+    border-color:
+        #C98768;
+
+    animation:
+        micPulseActivity2
+        1.1s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes micPulseActivity2 {
+
+    0%,
+    100% {
+        box-shadow:
+            0 7px 18px rgba(80, 50, 30, 0.10);
+    }
+
+    50% {
+        box-shadow:
+            0 0 0 7px rgba(201, 135, 104, 0.13),
+            0 10px 25px rgba(80, 50, 30, 0.14);
+    }
+}
+
+
+/* =====================================================
+   SPEECH RESULT
+===================================================== */
+
+.physical-appearance-activity2-speech-result {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
+        8px 12px;
+
+    background:
+        rgba(255,255,255,0.96);
+
+    border:
+        1px solid #E7D4BF;
+
+    border-radius: 13px;
+}
+
+
+.physical-appearance-activity2-speech-result > span {
+
+    font-size: 18px;
+}
+
+
+.physical-appearance-activity2-speech-result small {
+
+    display: block;
+
+    color: #A07858;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+
+.physical-appearance-activity2-speech-result strong {
+
+    display: block;
+
+    color: #5A3620;
+
+    font-size: 12px;
+
+    line-height: 1.35;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   SPEECH STATUS
+===================================================== */
+
+.physical-appearance-activity2-speech-status {
+
+    width: 100%;
+
+    padding:
+        6px 10px;
+
+    text-align: center;
+
+    color: #7A4C2C;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   BUBBLE ANIMATION
+===================================================== */
+
+@keyframes physicalTeacherBubbleIn2 {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(8px)
+            scale(0.97);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* =====================================================
+   TABLET / LARGE
+===================================================== */
+
+@media (max-width: 1050px) {
+
+    .physical-appearance-activity2-card {
+
+        height: auto;
+
+        min-height: 94vh;
+
+        max-height: none;
+    }
+
+
+    .physical-appearance-activity2-content {
+
+        grid-template-columns: 1fr;
+
+        overflow-y: auto;
+
+        gap: 18px;
+    }
+
+
+    .physical-appearance-activity2-teacher-section {
+
+        height: auto;
+
+        flex-direction: row;
+
+        justify-content: center;
+
+        gap: 18px;
+    }
+
+
+    .physical-appearance-activity2-teacher-img {
+
+        width: 150px;
+
+        max-height: 220px;
+    }
+
+
+    .physical-appearance-activity2-teacher-bubble {
+
+        width: 350px;
+
+        margin-top: 0;
+    }
+
+
+    .physical-appearance-activity2-round {
+
+        margin-top: 0;
+    }
+
+
+    .physical-appearance-activity2-main-section {
+
+        overflow: visible;
+    }
+
+
+    .physical-appearance-activity2-final-section {
+
+        height: auto;
+
+        overflow: visible;
+    }
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .physical-appearance-activity2-page {
+
+        padding: 12px;
+    }
+
+
+    .physical-appearance-activity2-card {
+
+        width: 96vw;
+
+        padding:
+            20px;
+
+        border-radius: 25px;
+    }
+
+
+    .physical-appearance-activity2-header {
+
+        grid-template-columns:
+            105px 1fr 105px;
+    }
+
+
+    .physical-appearance-activity2-header-center h1 {
+
+        font-size: 27px;
+    }
+
+
+    .physical-appearance-activity2-header-center span {
+
+        font-size: 12px;
+    }
+
+
+    .physical-appearance-activity2-options.three {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+
+    .physical-appearance-activity2-character-preview {
+
+        grid-template-columns:
+            150px 1fr;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .physical-appearance-activity2-page {
+
+        padding: 8px;
+
+        align-items: flex-start;
+    }
+
+
+    .physical-appearance-activity2-card {
+
+        width: 100%;
+
+        min-height: 98vh;
+
+        padding: 15px;
+
+        border-radius: 20px;
+    }
+
+
+    /* HEADER */
+
+    .physical-appearance-activity2-header {
+
+        grid-template-columns:
+            1fr 1fr;
+
+        grid-template-rows:
+            auto auto;
+
+        gap: 8px;
+    }
+
+
+    .physical-appearance-activity2-header-center {
+
+        grid-column:
+            1 / 3;
+
+        grid-row: 1;
+    }
+
+
+    .physical-appearance-activity2-header-left {
+
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+
+    .physical-appearance-activity2-header-right {
+
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+
+    .physical-appearance-activity2-back-btn,
+    .physical-appearance-activity2-skip-btn {
+
+        width: 100%;
+
+        height: 39px;
+
+        font-size: 13px;
+    }
+
+
+    .physical-appearance-activity2-header-center h1 {
+
+        font-size: 23px;
+    }
+
+
+    .physical-appearance-activity2-header-center span {
+
+        font-size: 11px;
+    }
+
+
+    /* CONTENT */
+
+    .physical-appearance-activity2-content {
+
+        padding:
+            10px 0 5px;
+
+        gap: 14px;
+    }
+
+
+    /* TEACHER */
+
+    .physical-appearance-activity2-teacher-section {
+
+        flex-direction: column;
+
+        gap: 6px;
+    }
+
+
+    .physical-appearance-activity2-teacher-img {
+
+        width: 125px;
+
+        max-height: 165px;
+    }
+
+
+    .physical-appearance-activity2-teacher-bubble {
+
+        width: 94%;
+
+        max-width: 330px;
+
+        padding:
+            11px 13px;
+    }
+
+
+    .physical-appearance-activity2-teacher-name {
+
+        font-size: 13px;
+    }
+
+
+    .physical-appearance-activity2-teacher-text {
+
+        font-size: 11px;
+    }
+
+
+    .physical-appearance-activity2-round {
+
+        margin-top: 3px;
+
+        padding:
+            5px 12px;
+
+        font-size: 11px;
+    }
+
+
+    /* QUESTION */
+
+    .physical-appearance-activity2-question-card {
+
+        padding:
+            13px 12px;
+
+        margin-bottom: 8px;
+    }
+
+
+    .physical-appearance-activity2-question-card h2 {
+
+        font-size: 20px;
+    }
+
+
+    .physical-appearance-activity2-question-card p {
+
+        font-size: 11px;
+    }
+
+
+    /* PROGRESS */
+
+    .physical-appearance-activity2-progress {
+
+        gap: 7px;
+
+        margin-bottom: 9px;
+    }
+
+
+    .activity2-progress-dot {
+
+        width: 8px;
+        height: 8px;
+    }
+
+
+    .activity2-progress-dot.active {
+
+        width: 11px;
+        height: 11px;
+    }
+
+
+    /* OPTIONS */
+
+    .physical-appearance-activity2-options,
+    .physical-appearance-activity2-options.three {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 8px;
+    }
+
+
+    .physical-appearance-activity2-option {
+
+        min-height: 67px;
+
+        padding:
+            8px 6px;
+
+        border-radius: 14px;
+
+        font-size: 12px;
+    }
+
+
+    .activity2-option-icon {
+
+        width: 31px;
+        height: 31px;
+
+        font-size: 16px;
+    }
+
+
+    /* SENTENCE */
+
+    .physical-appearance-activity2-sentence-preview {
+
+        margin-top: 9px;
+
+        padding:
+            8px 10px;
+
+        gap: 8px;
+    }
+
+
+    .physical-appearance-activity2-sentence-preview > span {
+
+        width: 32px;
+        height: 32px;
+
+        font-size: 16px;
+    }
+
+
+    .physical-appearance-activity2-sentence-preview strong {
+
+        font-size: 11px;
+    }
+
+
+    /* FINAL */
+
+    .physical-appearance-activity2-final-section {
+
+        padding: 0;
+
+        gap: 8px;
+    }
+
+
+    .physical-appearance-activity2-final-title {
+
+        padding:
+            9px 11px;
+
+        gap: 8px;
+    }
+
+
+    .physical-appearance-activity2-final-title > span {
+
+        width: 34px;
+        height: 34px;
+
+        font-size: 18px;
+    }
+
+
+    .physical-appearance-activity2-final-title h2 {
+
+        font-size: 17px;
+    }
+
+
+    .physical-appearance-activity2-final-title p {
+
+        font-size: 10px;
+    }
+
+
+    /* CHARACTER */
+
+    .physical-appearance-activity2-character-preview {
+
+        grid-template-columns:
+            120px 1fr;
+
+        gap: 8px;
+
+        padding:
+            8px 10px;
+    }
+
+
+    .activity2-avatar {
+
+        width: 105px;
+        height: 125px;
+    }
+
+
+    .activity2-face {
+
+        width: 64px;
+        height: 72px;
+
+        top: 27px;
+    }
+
+
+    .activity2-hair {
+
+        width: 72px;
+        height: 46px;
+
+        top: 17px;
+    }
+
+
+    .activity2-hair.long {
+
+        height: 70px;
+    }
+
+
+    .activity2-body {
+
+        width: 80px;
+        height: 50px;
+    }
+
+
+    .activity2-shirt {
+
+        font-size: 21px;
+    }
+
+
+    .activity2-eyes {
+
+        top: 28px;
+
+        gap: 19px;
+    }
+
+
+    .activity2-eyes span {
+
+        width: 7px;
+        height: 7px;
+    }
+
+
+    .activity2-glasses {
+
+        top: 48px;
+
+        width: 61px;
+    }
+
+
+    .activity2-glasses span {
+
+        width: 23px;
+        height: 17px;
+
+        border-width: 2px;
+    }
+
+
+    .activity2-feature-summary h3 {
+
+        font-size: 15px;
+
+        margin-bottom: 5px;
+    }
+
+
+    .activity2-summary-tags {
+
+        gap: 4px;
+    }
+
+
+    .activity2-summary-tags span {
+
+        padding:
+            4px 6px;
+
+        font-size: 9px;
+    }
+
+
+    /* SPEAKING */
+
+    .physical-appearance-activity2-speaking-card {
+
+        padding:
+            8px 10px;
+
+        gap: 8px;
+    }
+
+
+    .activity2-speaking-icon {
+
+        width: 34px;
+        height: 34px;
+
+        font-size: 17px;
+    }
+
+
+    .physical-appearance-activity2-speaking-card h3 {
+
+        font-size: 13px;
+    }
+
+
+    .physical-appearance-activity2-speaking-card p {
+
+        font-size: 9px;
+    }
+
+
+    .activity2-example {
+
+        font-size: 9px;
+
+        padding:
+            5px 7px;
+    }
+
+
+    /* MIC */
+
+    .physical-appearance-activity2-mic {
+
+        min-height: 50px;
+
+        padding:
+            7px 10px;
+
+        gap: 8px;
+
+        border-radius: 14px;
+    }
+
+
+    .physical-appearance-activity2-mic > span {
+
+        width: 32px;
+        height: 32px;
+
+        font-size: 17px;
+    }
+
+
+    .physical-appearance-activity2-mic strong {
+
+        font-size: 12px;
+    }
+
+
+    .physical-appearance-activity2-mic small {
+
+        font-size: 9px;
+    }
+
+
+    /* SPEECH */
+
+    .physical-appearance-activity2-speech-result {
+
+        padding:
+            6px 9px;
+    }
+
+
+    .physical-appearance-activity2-speech-result strong {
+
+        font-size: 10px;
+    }
+
+
+    .physical-appearance-activity2-speech-status {
+
+        font-size: 9px;
+    }
+}

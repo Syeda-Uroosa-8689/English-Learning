@@ -1,0 +1,176 @@
+/* ===================================
+      PHYSICAL APPEARANCE
+      ACTIVITY 2 INTRO
+=================================== */
+
+.physical-appearance-activity2-intro-container {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background-image: url("../../assets/chatbg.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+}
+
+
+/* ===================================
+      DARK OVERLAY
+=================================== */
+
+.physical-appearance-activity2-intro-container::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.30);
+
+    backdrop-filter: blur(8px);
+
+}
+
+
+/* ===================================
+      INTRO POPUP
+=================================== */
+
+.physical-appearance-activity2-popup {
+
+    width: 1000px;
+
+    height: 420px;
+
+    background: #D8B48A;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+
+    z-index: 2;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.30);
+
+    clip-path: polygon(
+        8% 0%,
+        92% 0%,
+        100% 18%,
+        100% 82%,
+        92% 100%,
+        8% 100%,
+        0% 82%,
+        0% 18%
+    );
+
+    transform: scale(0.5);
+
+    opacity: 0;
+
+    transition: 0.5s ease;
+
+}
+
+
+/* ===================================
+      SHOW ANIMATION
+=================================== */
+
+.physical-appearance-activity2-popup.show {
+
+    transform: scale(1);
+
+    opacity: 1;
+
+}
+
+
+/* ===================================
+      ICON
+=================================== */
+
+.physical-appearance-activity2-icon {
+
+    font-size: 82px;
+
+    margin-bottom: 18px;
+
+}
+
+
+/* ===================================
+      TITLE
+=================================== */
+
+.physical-appearance-activity2-popup h1 {
+
+    margin: 0;
+
+    font-size: 64px;
+
+    font-weight: 800;
+
+    color: #5A3620;
+
+    letter-spacing: 2px;
+
+    text-align: center;
+
+    line-height: 1.15;
+
+}
+
+
+/* ===================================
+      RESPONSIVE
+=================================== */
+
+@media (max-width: 768px) {
+
+    .physical-appearance-activity2-popup {
+
+        width: 90%;
+
+        height: 260px;
+
+    }
+
+
+    .physical-appearance-activity2-icon {
+
+        font-size: 48px;
+
+    }
+
+
+    .physical-appearance-activity2-popup h1 {
+
+        font-size: 36px;
+
+        letter-spacing: 1px;
+
+    }
+
+}
